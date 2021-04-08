@@ -1,13 +1,97 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Identity</title>
-    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>@ViewData["Title"] - Intex2</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <title>Heroic Features - Start Bootstrap Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/heroic-features.css" rel="stylesheet">
+
 </head>
+
 <body>
-    <div class="m-2">
-        <h5 class="bg-secondary text-white text-center p-2">Role Administration</h5>
+
+    <!-- Navigation -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Intex2</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Burials">Burials</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administrator</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" asp-page="/Users/List">List Users</a>
+                            <a class="dropdown-item" asp-page="/Users/Create">Create New Account</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" asp-page="/Roles/List">List Roles</a>
+                            <a class="dropdown-item" asp-page="/Roles/Editor/dc0f1ebe-2c82-4381-ac47-324878fd3373">Add Researchers</a>
+                        </div>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="container">
+
         @RenderBody()
+
     </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - Intex2 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+
+
+
+
+    <footer class="py-5 footer bg-dark">
+        <div class="container">
+            <h6 class="m-0 text-white"> &copy; 2021 - Intex2 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></h6>
+        </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 </body>
+
 </html>
