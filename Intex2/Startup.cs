@@ -97,6 +97,11 @@ namespace Intex2
                 endpoints.MapControllerRoute(
                     name: "create",
                     pattern: "{controller=BurialCrud}/{action=Create}/{id?}");
+
+                endpoints.MapControllerRoute(
+                   "pagination",
+                   "BurialCrud/{pageNum}",
+                   new { Controller = "BurialCrud", action = "Index", pageNum = 1 });
             });
 
            // IdentitySeedData.CreateAdminAccount(app.ApplicationServices, Configuration);
