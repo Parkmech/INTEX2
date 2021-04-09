@@ -7,9 +7,13 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+.navbar-custom {
+    color: #002E5D;
+}
+
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 .btn-primary {
@@ -17,6 +21,8 @@ a {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
+
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     color: #fff;
