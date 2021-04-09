@@ -86,7 +86,7 @@ namespace Intex2
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            IdentitySeedData.CreateAdminAccount(app.ApplicationServices, Configuration);
+           // IdentitySeedData.CreateAdminAccount(app.ApplicationServices, Configuration);
         }
     }
 }
