@@ -37,7 +37,7 @@ namespace Intex2.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Server=aa16xgpayfb2xja.c1okjvee6ouq.us-east-1.rds.amazonaws.com,1433;Database=FagElGamous;User=admin;Password=adminadmin; MultipleActiveResultSets=True");
             }
         }
