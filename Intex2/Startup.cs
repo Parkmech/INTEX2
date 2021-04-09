@@ -35,7 +35,7 @@ namespace Intex2
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("RequireAdministratorRole",
-                     policy => policy.RequireRole("Administrator"));
+                     policy => policy.RequireRole("Admins"));
             });
 
             services.AddDbContext<IdentityContext>(opts =>
@@ -85,6 +85,8 @@ namespace Intex2
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            IdentitySeedData.CreateAdminAccount(app.ApplicationServices, Configuration);
         }
     }
 }
