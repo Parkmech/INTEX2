@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 namespace Intex2.Pages
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Admins")]
     public class AdminPageModel : PageModel
     {
     }
