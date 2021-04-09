@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-// Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
-// If you have enabled NRTs for your project, then un-comment the following line:
-// #nullable disable
+#nullable disable
 
 namespace Intex2.Models
 {
-    public partial class OracleGis
+    public partial class OracleGi
     {
         public string BurialId { get; set; }
         public double? Gamous { get; set; }

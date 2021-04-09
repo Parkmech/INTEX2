@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-// Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
-// If you have enabled NRTs for your project, then un-comment the following line:
-// #nullable disable
+#nullable disable
 
 namespace Intex2.Models
 {
@@ -11,13 +9,13 @@ namespace Intex2.Models
     {
         public BurialWrapping()
         {
-            Burials = new HashSet<Burials>();
+            Burials = new HashSet<Burial>();
         }
 
         public string BurialWrapping1 { get; set; }
         public string Description { get; set; }
         public int Id { get; set; }
 
-        public virtual ICollection<Burials> Burials { get; set; }
+        public virtual ICollection<Burial> Burials { get; set; }
     }
 }

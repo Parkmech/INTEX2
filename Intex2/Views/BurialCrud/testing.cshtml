@@ -1,5 +1,5 @@
 ﻿Index Page! Here!
-@model IEnumerable<Intex2.Models.Burials>
+@model IEnumerable<Intex2.Models.Burial>
 
 
 @{
@@ -366,9 +366,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.EpiphysealUnion)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.SsmaTimeStamp)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.AgeCodeSingleNavigation)
             </th>
@@ -735,9 +735,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.EpiphysealUnion)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.SsmaTimeStamp)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.AgeCodeSingleNavigation.AgeCode1)
             </td>

@@ -83,6 +83,17 @@
     {
         <a class="text-center btn btn-warning col-5" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>
     }
+    <br />
+    @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+    {
+        <a class="text-center btn btn-success col-5" asp-controller="BurialCrud" asp-action="Create" asp-route-id="@mummy.BurialId">Create</a>
+    }
+    <br />
+    @*//Don't add in the delete button till the day of!'*@
+    @*@if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+    {
+        <a class="text-center btn btn-danger col-5" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@mummy.BurialId">Delete</a>
+    }*@
 
 </div>
        @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
