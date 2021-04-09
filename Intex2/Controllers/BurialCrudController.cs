@@ -28,7 +28,8 @@ namespace Intex2.Controllers
         // GET: BurialCrud/Details/5
         public async Task<IActionResult> Details(string id)
         {
-            if (id == null)
+            string newid = id.Replace("%2F", "/");
+            if (newid == null)
             {
                 return NotFound();
             }
@@ -37,7 +38,7 @@ namespace Intex2.Controllers
                 .Include(b => b.AgeCodeSingleNavigation)
                 .Include(b => b.BurialAdultChildNavigation)
                 .Include(b => b.BurialWrappingNavigation)
-                .FirstOrDefaultAsync(m => m.BurialId == id);
+                .FirstOrDefaultAsync(m => m.BurialId == newid);
             if (burials == null)
             {
                 return NotFound();
