@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Intex2.Migrations
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20210408222820_Initial")]
+    [Migration("20210409040918_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
