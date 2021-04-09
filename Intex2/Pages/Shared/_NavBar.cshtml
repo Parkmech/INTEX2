@@ -28,6 +28,17 @@
             @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
             {
                 <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Researcher</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Add Burial</a>
+                        <a class="dropdown-item" href="#">Upload Photo</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something Special</a>
+
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administrator</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" asp-page="/Users/List">List Users</a>
@@ -35,6 +46,20 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" asp-page="/Roles/List">List Roles</a>
                         <a class="dropdown-item" asp-page="/Roles/Editor/dc0f1ebe-2c82-4381-ac47-324878fd3373">Add Researchers</a>
+                    </div>
+                </li>
+            }
+
+            else if ((await AuthorizationService.AuthorizeAsync(User, "RequireResearcherRole")).Succeeded)
+            {
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Researcher</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Add Burial</a>
+                        <a class="dropdown-item" href="#">Upload Photo</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something Special</a>
+
                     </div>
                 </li>
             }
