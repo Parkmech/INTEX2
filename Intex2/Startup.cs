@@ -38,6 +38,10 @@ namespace Intex2
                      policy => policy.RequireRole("Admins"));
             });
 
+            services.AddDbContext<EgyptContext>(opts =>
+               opts.UseSqlServer(Configuration[
+                   "ConnectionStrings:EgyptConnection"]));
+
             services.AddDbContext<IdentityContext>(opts =>
                opts.UseSqlServer(Configuration[
                    "ConnectionStrings:IdentityConnection"]));
