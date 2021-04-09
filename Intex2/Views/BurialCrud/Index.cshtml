@@ -54,37 +54,42 @@
 
 @foreach (var mummy in Model.Burials)
 {
-    <div class="card mb-3" style="max-width: auto">
-        <div class="row g-0">
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h2 class="card-title">@mummy.BurialId</h2>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item ">South to Head: @mummy.BurialSouthToHead</li>
-                        <li class="list-group-item ">South to Feet: @mummy.BurialSouthToFeet</li>
-                        <li class="list-group-item ">West to Head: @mummy.BurialWestToHead</li>
-                        <li class="list-group-item ">West to Feet: @mummy.BurialWestToFeet</li>
-                        <li class="list-group-item ">Length: @mummy.LengthM</li>
-                        <li class="list-group-item ">Depth: @mummy.BurialDepth</li>
-                        <li class="list-group-item ">Burial Goods (Y/N): @mummy.Goods</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <img src="https://mdbootstrap.com/wp-content/uploads/2020/06/vertical.jpg"
-                     alt="..."
-                     class="img-fluid" />
+<div class="card mb-3" style="max-width: auto">
+    <div class="row g-0">
+        <div class="col-md-8">
+            <div class="card-body">
+                <h2 class="card-title">@mummy.BurialId</h2>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item ">South to Head: @mummy.BurialSouthToHead</li>
+                    <li class="list-group-item ">South to Feet: @mummy.BurialSouthToFeet</li>
+                    <li class="list-group-item ">West to Head: @mummy.BurialWestToHead</li>
+                    <li class="list-group-item ">West to Feet: @mummy.BurialWestToFeet</li>
+                    <li class="list-group-item ">Length: @mummy.LengthM</li>
+                    <li class="list-group-item ">Depth: @mummy.BurialDepth</li>
+                    <li class="list-group-item ">Burial Goods (Y/N): @mummy.Goods</li>
+                </ul>
             </div>
         </div>
-
-        <a class="text-center btn btn-info col-5" asp-area="" asp-route-id="@mummy.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
-
+        <div class="col-md-4">
+            <img src="https://mdbootstrap.com/wp-content/uploads/2020/06/vertical.jpg"
+                 alt="..."
+                 class="img-fluid" />
+        </div>
     </div>
+
+    <a class="text-center btn btn-info col-5" asp-area="" asp-route-id="@mummy.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
+    <br />
+    @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+    {
+        <a class="text-center btn btn-warning col-5" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>
+    }
+
+</div>
        @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
                         {
                             <a asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>
                         }
-                    <a asp-action="Details" asp-route-id="@mummy.BurialId">Details</a>
+                    @*<a asp-action="Details" asp-route-id="@mummy.BurialId">Details</a>*@
                     @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
                     {
                         <a asp-action="Delete" asp-route-id="@mummy.BurialId">Delete</a>
