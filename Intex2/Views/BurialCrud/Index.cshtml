@@ -1,27 +1,44 @@
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
 @model BurialListViewModel
 
-    <div class="container m-5">
-        <table class="table table-striped table-bordered">
-            <thead>
+<div class="container m-5">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>BurialId</th>
+                <th>Sex</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var mummy in Model.Burials)
+            {
                 <tr>
-                    <th>BurialId</th>
-                    <th>Sex</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var mummy in Model.Burials)
-                {
-                    <tr>
-                        <td>@mummy.BurialId</td>
-                        <td>@mummy.Sex</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+                    <td>@mummy.BurialId</td>
+                    <td>@mummy.Sex</td>
+                    <td>
+                        @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                        {
+                            <a asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>
+                        }
+                    <a asp-action="Details" asp-route-id="@mummy.BurialId">Details</a>
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                    {
+                        <a asp-action="Delete" asp-route-id="@mummy.BurialId">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
 
-        <div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true" page-class="btn"
-             page-class-normal="btn-outline-dark"
-             page-class-selected="btn-info"
-             class="btn-group pull-right m-1">
-        </div>
+    <div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true" page-class="btn"
+         page-class-normal="btn-outline-dark"
+         page-class-selected="btn-info"
+         class="btn-group pull-right m-1">
     </div>
+</div>
