@@ -30,6 +30,8 @@ namespace Intex2
 
             services.AddRazorPages();
 
+            services.AddRazorPages().AddRazorRuntimeCompilation();
+
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("RequireAdministratorRole",
