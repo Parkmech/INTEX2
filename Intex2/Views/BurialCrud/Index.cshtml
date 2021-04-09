@@ -1,3 +1,8 @@
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
 @model BurialListViewModel
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -71,9 +76,20 @@
                      class="img-fluid" />
             </div>
         </div>
+
         <a class="text-center btn btn-info col-5" asp-area="" asp-route-id="@mummy.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
 
     </div>
+       @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                        {
+                            <a asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>
+                        }
+                    <a asp-action="Details" asp-route-id="@mummy.BurialId">Details</a>
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                    {
+                        <a asp-action="Delete" asp-route-id="@mummy.BurialId">Delete</a>
+                    }
+
 }
 
 <div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true" page-class="btn"
