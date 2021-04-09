@@ -22,7 +22,7 @@ namespace Intex2.Controllers
         }
 
         // GET: BurialCrud
-        public IActionResult Index(int pageNum = 1)
+        public IActionResult Index(int pageNum = 2)
         {
             int pageSize = 20;
 
@@ -32,13 +32,16 @@ namespace Intex2.Controllers
                     .OrderBy(b => b.BurialId)
                     .Skip((pageNum - 1) * pageSize)
                     .Take(pageSize)
+                    //FOR THE PRESENTATION TO PRESENT CLEAN DATA .Where(x => x.BurialSouthToFeet != null)
                     .ToList()),
 
                 PagingInfo = new PagingInfo
                 {
                     ItemsPerPage = pageSize,
                     CurrentPage = pageNum,
-                    TotalNumItems = _context.Burials.Count()
+                    TotalNumItems = _context.Burials
+                    //FOR THE PRESENTATION TO PRESENT CLEAN DATA .Where(x=> x.BurialSouthToFeet != null)
+                    .Count()
                 },
 
             });
