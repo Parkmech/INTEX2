@@ -6,23 +6,48 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Intex2.Models;
+using Intex2.Models.ViewModels;
 
 namespace Intex2.Controllers
 {
     public class BurialCrudController : Controller
     {
         private readonly FagElGamousContext _context;
+        public int pageNum { get; set; } = 1;
 
         public BurialCrudController(FagElGamousContext context)
         {
             _context = context;
         }
 
+        //// GET: BurialCrud
+        //public async Task<IActionResult> Index()
+        //{
+        //    var fagElGamousContext = _context.Burials.Include(b => b.AgeCodeSingleNavigation).Include(b => b.BurialAdultChildNavigation).Include(b => b.BurialWrappingNavigation);
+        //    return View(await fagElGamousContext.ToListAsync());
+        //}
+
         // GET: BurialCrud
-        public async Task<IActionResult> Index()
+        public IActionResult Index(int pageNum = 1)
         {
-            var fagElGamousContext = _context.Burials.Include(b => b.AgeCodeSingleNavigation).Include(b => b.BurialAdultChildNavigation).Include(b => b.BurialWrappingNavigation);
-            return View(await fagElGamousContext.ToListAsync());
+            int pageSize = 20;
+
+            return View(new BurialListViewModel
+            {
+                Burials = (_context.Burials
+                    .OrderBy(b => b.BurialId)
+                    .Skip((pageNum - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList()),
+
+                PagingInfo = new PagingInfo
+                {
+                    ItemsPerPage = pageSize,
+                    CurrentPage = pageNum,
+                    TotalNumItems = _context.Burials.Count()
+                },
+
+            });
         }
 
         // GET: BurialCrud/Details/5
