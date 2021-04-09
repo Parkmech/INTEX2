@@ -20,14 +20,7 @@ namespace Intex2.Controllers
             _context = context;
         }
 
-        //// GET: BurialCrud
-        //public async Task<IActionResult> Index()
-        //{
-        //    var fagElGamousContext = _context.Burials.Include(b => b.AgeCodeSingleNavigation).Include(b => b.BurialAdultChildNavigation).Include(b => b.BurialWrappingNavigation);
-        //    return View(await fagElGamousContext.ToListAsync());
-        //}
 
-        // GET: BurialCrud
         public IActionResult Index(int pageNum = 1)
         {
             int pageSize = 20;
