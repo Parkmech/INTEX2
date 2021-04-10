@@ -1,13 +1,204 @@
 @model Intex2.Models.Burial
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
 
-@*@model BurialListViewModel*@
+
+@{ ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+<!--NEW VIEW-->
+<style>
+
+    body {
+        background-color: #E9ECEF;
+    }
+</style>
+
+<div class="tabs shadow">
+    <input type="radio" name="tabs" id="tabone" checked="checked">
+    <label for="tabone">Exhumation Data Entry</label>
+    <div class="tab">
+
+        <h1>Burial Record Details for @Model.BurialId</h1>
+
+        <p><i>This section contains the main data from the initial exhumation</i></p>
+
+        <h2>Burial ID</h2>
+
+        <div class="row">
+
+            <div class="col-md-4">
+                <!--North or South-->
+                <h5>North or South: @Model.NorthOrSouth</h5>
+            </div>
+
+            <div class="col-md-4">
+                <!--This is the NS Low ID (i.e. the 140 in 140/150-->
+                <h5>NS Low Position: @Model.NsLowPosition</h5>
+            </div>
+
+            <div class="col-md-4">
+                <!--This is the NS High ID (i.e. the 150 in 140/150) this field will be hidden-->
+                <h5>NS High Position: @Model.NsHighPosition</h5>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-4">
+                <!-- East or West -->
+                <h5>East or West: @Model.EastOrWest</h5>
+            </div>
+
+            <div class="col-md-4">
+                <!--This is the EW Low ID (i.e. the 40 in 40/50)-->
+                <h5>EW Low Position: @Model.EwLowPosition</h5>
+            </div>
+
+            <div class="col-md-4">
+                <!--This is the EW High ID (i.e. the 50 in 40/50)-->
+                <h5>EW High Position: @Model.EwHighPosition</h5>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-4">
+                <!-- Area (NW, NE, SW, SE) -->
+                <h5>Area: @Model.Square</h5>
+            </div>
 
 
-@{
-    ViewData["Title"] = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+            <div class="col-md-6">
+                <!-- Burial Number -->
+                <h5>Burial Number: @Model.BurialNumber</h5>
+            </div>
 
+        </div>
+
+        <br />
+
+        <h2>Metrics</h2>
+
+        <div class="row">
+
+            <div class="col-md-4">
+                <h5>Burial South to Head: @Model.BurialSouthToHead</h5>
+            </div>
+
+            <div class="col-md-4">
+                <h5>Burial South to Feet: @Model.BurialSouthToFeet</h5>
+            </div>
+
+            <div class="col-md-4">
+                <h5>Burial Length (Meters): @Model.LengthM</h5>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-4">
+                <h5>Burial West to Head: @Model.BurialWestToHead </h5>
+            </div>
+
+            <div class="col-md-4">
+                <h5>Burial West to Feet: @Model.BurialWestToFeet</h5>
+            </div>
+
+
+            <div class="col-md-4">
+                <h5>Burial Depth: @Model.BurialDepth</h5>
+            </div>
+
+        </div>
+
+        <br />
+
+        <h2>Observations</h2>
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <h5>General Notes: <br /> <i>@Model.OtherNotes</i> </h5>
+                <br />
+                <h5>Osteology Notes: @Model.OsteologyNotes</h5>
+            </div>
+        </div>
+
+        <div class="form-group text-right">
+
+            <a class="btn btn-primary" asp-controller="BurialCrud" asp-action="Index">Back to List</a>
+
+            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+            {
+                <a class="btn btn-secondary col-sm-1" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@Model.BurialId">Edit</a>}
+            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+            {
+                <a class="text-center btn btn-danger col-sm-1" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@Model.BurialId">Delete</a>}
+
+        </div>
+    </div>
+
+    <input type="radio" name="tabs" id="tabtwo">
+    <label for="tabtwo">Tab Two</label>
+    <div class="tab">
+        <h1>Tab Two Content</h1>
+        <p>Some more stuffffff</p>
+
+        <div class="form-group text-right">
+
+            <a class="btn btn-primary" asp-controller="BurialCrud" asp-action="Index">Back to List</a>
+
+            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+            {
+                <a class="btn btn-secondary col-sm-1" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@Model.BurialId">Edit</a>}
+            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+            {
+                <a class="text-center btn btn-danger col-sm-1" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@Model.BurialId">Delete</a>}
+
+        </div>
+    </div>
+
+    <input type="radio" name="tabs" id="tabthree">
+    <label for="tabthree">Tab Three</label>
+    <div class="tab">
+        <h1>Tab Three Content</h1>
+        <p>Ain't this neat?</p>
+
+        <div class="form-group text-right">
+
+            <a class="btn btn-primary" asp-controller="BurialCrud" asp-action="Index">Back to List</a>
+
+            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+            {
+                <a class="btn btn-secondary col-sm-1" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@Model.BurialId">Edit</a>}
+            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+            {
+                <a class="text-center btn btn-danger col-sm-1" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@Model.BurialId">Delete</a>}
+
+        </div>
+    </div>
+</div>
+
+<br />
+
+
+
+<br />
+
+
+
+
+
+
+
+
+
+
+<!--OLD VIEW -->
 <h1>Details</h1>
 
 <div>
@@ -717,11 +908,11 @@
             @Html.DisplayFor(model => model.EpiphysealUnion)
         </dd>
         @*<dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.SsmaTimeStamp)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.SsmaTimeStamp)
-        </dd>*@
+                @Html.DisplayNameFor(model => model.SsmaTimeStamp)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.SsmaTimeStamp)
+            </dd>*@
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.AgeCodeSingleNavigation)
         </dt>

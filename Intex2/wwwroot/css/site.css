@@ -63,8 +63,8 @@ html {
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
+    background-color: #E9ECEF
 }
-
 .footer {
     position: absolute;
     bottom: 0;

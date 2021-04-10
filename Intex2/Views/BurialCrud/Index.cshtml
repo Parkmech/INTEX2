@@ -29,11 +29,11 @@
                     </ul>
 
                     <div class="row">
-                        <a class="text-center btn btn-info col-md-2 m-2" asp-area="" asp-route-id="@mummy.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
+                        <a class="text-center btn btn-primary col-md-2 m-2" asp-area="" asp-route-id="@mummy.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
 
                         @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
                         {
-                            <a class="text-center btn btn-warning col-md-2 m-2" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>
+                            <a class="text-center btn btn-secondary col-md-2 m-2" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>
                         }
 
                         @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
