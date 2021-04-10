@@ -67,7 +67,10 @@
                 <div class="col-md-4">
                     <!--North or South-->
                     <div class="form-group shadow-sm">
-                        <input asp-for="NorthOrSouth" class="form-control" placeholder="North or South" />
+                        <select asp-for="NorthOrSouth" class="form-control" placeholder="North or South">
+                            <option value="N">N - North</option>
+                            <option value="S">S - South</option>
+                        </select>
                         <span asp-validation-for="NorthOrSouth" class="text-danger"></span>
                     </div>
                 </div>
@@ -95,7 +98,10 @@
                 <div class="col-md-4">
                     <!-- East or West -->
                     <div class="form-group shadow-sm">
-                        <input asp-for="EastOrWest" class="form-control" placeholder="East or West" />
+                        <select asp-for="EastOrWest" class="form-control" placeholder="East or West">
+                            <option value="E">E - East</option>
+                            <option value="W">W - West</option>
+                        </select>
                         <span asp-validation-for="EastOrWest" class="text-danger"></span>
                     </div>
                 </div>
@@ -123,7 +129,12 @@
                 <div class="col-md-6">
                     <!-- Area (NW, NE, SW, SE) -->
                     <div class="form-group shadow-sm">
-                        <input asp-for="Square" class="form-control" placeholder="Area" />
+                        <select asp-for="Square" class="form-control" placeholder="Area">
+                            <option value="NE">NE - Northeast</option>
+                            <option value="NW">NW - Northwest</option>
+                            <option value="SE">SE - Southeast</option>
+                            <option value="SW">SW - Southwest</option>
+                        </select>
                         <span asp-validation-for="Square" class="text-danger"></span>
                     </div>
                 </div>

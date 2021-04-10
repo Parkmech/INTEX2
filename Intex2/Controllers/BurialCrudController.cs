@@ -87,11 +87,18 @@ namespace Intex2.Controllers
         [Authorize(Roles = "Admins")]
         public async Task<IActionResult> Create([Bind("BurialId,BurialId2018,YearOnSkull,MonthOnSkull,DateOnSkull,InitialsOfDataEntryExpert,InitialsOfDataEntryChecker,ByuSample,BodyAnalysis,SkullAtMagazine,PostcraniaAtMagazine,AgeSkull2018,RackAndShelf,ToBeConfirmed,SkullTrauma,PostcraniaTrauma,CribraOrbitala,PoroticHyperostosis,PoroticHyperostosisLocations,MetopicSuture,ButtonOsteoma,PostcraniaTrauma1,OsteologyUnknownComment,TemporalMandibularJointOsteoarthritisTmjOa,LinearHypoplasiaEnamel,AreaHillBurials,Tomb,NsLowPosition,NsHighPosition,NorthOrSouth,EwLowPosition,EwHighPosition,EastOrWest,Square,BurialNumber,BurialWestToHead,BurialWestToFeet,BurialSouthToHead,BurialSouthToFeet,BurialDepth,YearExcav,MonthExcavated,DateExcavated,BurialDirection,BurialPreservation,BurialWrapping,BurialAdultChild,Sex,GenderCode,BurialGenderMethod,AgeCodeSingle,BurialDirection1,NumericMinAge,NumericMaxAge,BurialAgeMethod,HairColorCode,BurialSampleTaken,LengthM,LengthCm,Goods,Cluster,FaceBundle,OsteologyNotes,OtherNotes,SampleNumber,GenderGe,GeFunctionTotal,GenderBodyCol,BasilarSuture,VentralArc,SubpubicAngle,SciaticNotch,PubicBone,PreaurSulcus,MedialIpRamus,DorsalPitting,ForemanMagnum,FemurHead,HumerusHead,Osteophytosis,PubicSymphysis,BoneLength,MedialClavicle,IliacCrest,FemurDiameter,Humerus,FemurLength,HumerusLength,TibiaLength,Robust,SupraorbitalRidges,OrbitEdge,ParietalBossing,Gonian,NuchalCrest,ZygomaticCrest,CranialSuture,MaximumCranialLength,MaximumCranialBreadth,BasionBregmaHeight,BasionNasion,BasionProsthionLength,BizygomaticDiameter,NasionProsthion,MaximumNasalBreadth,InterorbitalBreadth,ArtifactsDescription,PreservationIndex,HairTaken,SoftTissueTaken,BoneTaken,ToothTaken,TextileTaken,DescriptionOfTaken,ArtifactFound,EstimateLivingStature,ToothAttrition,ToothEruption,PathologyAnomalies,EpiphysealUnion,SsmaTimeStamp")] Burial burials)
         {
+            burials.BurialId = burials.NorthOrSouth + " " + burials.NsLowPosition + "/" +
+                         burials.NsHighPosition + " " + burials.EastOrWest + " " +
+                         burials.EwLowPosition + "/" + burials.EwHighPosition + " " +
+                         burials.Square + " #" + burials.BurialNumber;
+
+
             if (ModelState.IsValid)
             {
-                _context.Add(burials);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //_context.Add(burials);
+                //await _context.SaveChangesAsync();
+                string referenceId = burials.BurialId;
+                return View("Details", burials);
             }
             ViewData["AgeCodeSingle"] = new SelectList(_context.AgeCodes, "AgeCode1", "AgeCode1", burials.AgeCodeSingle);
             ViewData["BurialAdultChild"] = new SelectList(_context.BurialAdultChildren, "BurialAdultChild1", "BurialAdultChild1", burials.BurialAdultChild);
@@ -164,7 +171,9 @@ namespace Intex2.Controllers
         [Authorize(Roles = "Admins")]
         public async Task<IActionResult> Delete(string id)
         {
-            if (id == null)
+            string newid = id.Replace("%2F", "/");
+
+            if (newid == null)
             {
                 return NotFound();
             }
@@ -173,7 +182,7 @@ namespace Intex2.Controllers
                 .Include(b => b.AgeCodeSingleNavigation)
                 .Include(b => b.BurialAdultChildNavigation)
                 .Include(b => b.BurialWrappingNavigation)
-                .FirstOrDefaultAsync(m => m.BurialId == id);
+                .FirstOrDefaultAsync(m => m.BurialId == newid);
             if (burials == null)
             {
                 return NotFound();
@@ -188,6 +197,7 @@ namespace Intex2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
+
             var burials = await _context.Burials.FindAsync(id);
             _context.Burials.Remove(burials);
             await _context.SaveChangesAsync();
