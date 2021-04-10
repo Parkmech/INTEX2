@@ -362,8 +362,278 @@
         <input type="radio" name="tabs" id="tabthree">
         <label for="tabthree">Osteological Information</label>
         <div class="tab">
-            <h1>Os</h1>
-            <p>Ain't this neat?</p>
+            <h1>Osteology Records</h1>
+
+            <p><i>This is where we can write a short page description about stuff and such</i></p>
+
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="shadow-sm form-group">
+                        <textarea asp-for="OsteologyNotes" class="form-control" placeholder="Enter osteology notes here..."></textarea>
+                        <span asp-validation-for="OsteologyNotes" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        <input asp-for="BasilarSuture" class="form-control" placeholder="Basilar Suture"/>
+                        <span asp-validation-for="BasilarSuture" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        <input asp-for="VentralArc" class="form-control" placeholder="Ventral Arc"/>
+                        <span asp-validation-for="VentralArc" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input asp-for="SubpubicAngle" class="form-control" placeholder="Subpubic Angle"/>
+                        <span asp-validation-for="SubpubicAngle" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        <input asp-for="SciaticNotch" class="form-control" placeholder="Sciatic Notch"/>
+                        <span asp-validation-for="SciaticNotch" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        <input asp-for="PubicBone" class="form-control" placeholder="Pubic Bone" />
+                        <span asp-validation-for="PubicBone" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        <input asp-for="PreaurSulcus" class="form-control" placeholder="Preaur Sulcus"/>
+                        <span asp-validation-for="PreaurSulcus" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        <input asp-for="MedialIpRamus" class="form-control" placeholder="Medial IP Ramus" />
+                        <span asp-validation-for="MedialIpRamus" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        <input asp-for="DorsalPitting" class="form-control" placeholder="Dorsal Pitting"/>
+                        <span asp-validation-for="DorsalPitting" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        <input asp-for="ForemanMagnum" class="form-control" placeholder="Foreman Magnum"/>
+                        <span asp-validation-for="ForemanMagnum" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        <input asp-for="FemurHead" class="form-control" placeholder="Femur Head"/>
+                        <span asp-validation-for="FemurHead" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        <input asp-for="HumerusHead" class="form-control" placeholder="Humerus Head"/>
+                        <span asp-validation-for="HumerusHead" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        <input asp-for="Osteophytosis" class="form-control" placeholder="Osteophystosis"/>
+                        <span asp-validation-for="Osteophytosis" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        <input asp-for="PubicSymphysis" class="form-control" placeholder="Pubic Symphysis"/>
+                        <span asp-validation-for="PubicSymphysis" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        <input asp-for="FemurLength" class="form-control" placeholder="Femur Length"/>
+                        <span asp-validation-for="FemurLength" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input asp-for="HumerusLength" class="form-control" placeholder="Humerus Length"/>
+                        <span asp-validation-for="HumerusLength" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        <input asp-for="TibiaLength" class="form-control" placeholder="Tibial Length"/>
+                        <span asp-validation-for="TibiaLength" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        <input asp-for="Robust" class="form-control" placeholder="Robust"/>
+                        <span asp-validation-for="Robust" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        <input asp-for="SupraorbitalRidges" class="form-control" placeholder="Supraorbital Ridges"/>
+                        <span asp-validation-for="SupraorbitalRidges" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        <input asp-for="OrbitEdge" class="form-control" placeholder="Orbit Edge"/>
+                        <span asp-validation-for="OrbitEdge" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        <input asp-for="ParietalBossing" class="form-control" placeholder="Parietal Bossing"/>
+                        <span asp-validation-for="ParietalBossing" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        <input asp-for="Gonian" class="form-control" placeholder="Gonian"/>
+                        <span asp-validation-for="Gonian" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        <input asp-for="NuchalCrest" class="form-control" placeholder="Nuchal Crest"/>
+                        <span asp-validation-for="NuchalCrest" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        <input asp-for="ZygomaticCrest" class="form-control" placeholder="Zygomatic Crest"/>
+                        <span asp-validation-for="ZygomaticCrest" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        <input asp-for="CranialSuture" class="form-control" placeholder="Cranial Suture" />
+                        <span asp-validation-for="CranialSuture" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        <input asp-for="MaximumCranialLength" class="form-control" placeholder="Maximum Cranial Length"/>
+                        <span asp-validation-for="MaximumCranialLength" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        <input asp-for="MaximumCranialBreadth" class="form-control" placeholder="Maximum Cranial Breadth"/>
+                        <span asp-validation-for="MaximumCranialBreadth" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        <input asp-for="BasionBregmaHeight" class="form-control" placeholder="Basion Bregma Height" />
+                        <span asp-validation-for="BasionBregmaHeight" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        <input asp-for="BasionNasion" class="form-control" placeholder="Basion Nasion"/>
+                        <span asp-validation-for="BasionNasion" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        <input asp-for="BasionProsthionLength" class="form-control" placeholder="Basion Prosthion Length"/>
+                        <span asp-validation-for="BasionProsthionLength" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input asp-for="BizygomaticDiameter" class="form-control" placeholder="Bizygomatic Diamter"/>
+                        <span asp-validation-for="BizygomaticDiameter" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        <input asp-for="NasionProsthion" class="form-control" placeholder="Nasion Prosthion" />
+                        <span asp-validation-for="NasionProsthion" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
 
             <div class="form-group text-right">
                 <input type="submit" value="Create Burial" class="btn btn-primary" />
