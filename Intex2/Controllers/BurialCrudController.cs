@@ -22,7 +22,7 @@ namespace Intex2.Controllers
         }
 
         // GET: BurialCrud
-        public IActionResult Index(int pageNum = 2)
+        public IActionResult Index(int pageNum = 6)
         {
             int pageSize = 20;
 

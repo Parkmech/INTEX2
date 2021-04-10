@@ -24,6 +24,26 @@
 
         <p><i>This section contains the main data from the initial exhumation</i></p>
 
+        <div class="row">
+     
+            <div class="col-md-6">
+                <h2>Record Created By: @Model.InitialsOfDataEntryChecker</h2>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <h2>Date of Excavation</h2>
+                <h5>Year: @Model.YearExcav</h5>
+                <h5>Month: @Model.MonthExcavated</h5>
+                <h5>Day: @Model.DateExcavated</h5>
+            </div>
+
+        </div>
+
+        <br />
         <h2>Burial ID</h2>
 
         <div class="row">
@@ -70,7 +90,6 @@
                 <!-- Area (NW, NE, SW, SE) -->
                 <h5>Area: @Model.Square</h5>
             </div>
-
 
             <div class="col-md-6">
                 <!-- Burial Number -->
@@ -127,17 +146,27 @@
                 <h5>Osteology Notes: @Model.OsteologyNotes</h5>
             </div>
         </div>
+        <div class="form-group text-left">
 
+            <a class="text-center btn btn-primary col-md-2 m-2" asp-area="" asp-route-id="@Model.BurialId" asp-controller="BioSampleCrud" asp-action="RecordSpecificIndex">View Biological Samples</a>
+
+
+            @*<form asp-controller="BioSampleCrud" asp-action="Index">
+            <input type="hidden" asp-for="@Model.BurialId" />
+            <input type="submit" value="View Biological Samples" class="btn btn-warning col-sm-1" />
+        </form>
+            *@
+        </div>
         <div class="form-group text-right">
 
             <a class="btn btn-primary" asp-controller="BurialCrud" asp-action="Index">Back to List</a>
 
             @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
             {
-                <a class="btn btn-secondary col-sm-1" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@Model.BurialId">Edit</a>}
+    <a class="btn btn-secondary col-sm-1" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@Model.BurialId">Edit</a>}
             @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
             {
-                <a class="text-center btn btn-danger col-sm-1" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@Model.BurialId">Delete</a>}
+    <a class="text-center btn btn-danger col-sm-1" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@Model.BurialId">Delete</a>}
 
         </div>
     </div>
