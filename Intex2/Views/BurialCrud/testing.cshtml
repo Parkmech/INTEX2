@@ -9,6 +9,53 @@
 
 <h1>Index</h1>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Burial Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="tabs">
+                    <input type="radio" name="tabs" id="tabone" checked="checked">
+                    <label for="tabone">Primary Data</label>
+                    <div class="tab">
+                        <h1>Primary Data</h1>
+                        <h4>Burial Id: BurialId</h4>
+
+                    </div>
+
+                    <input type="radio" name="tabs" id="tabtwo">
+                    <label for="tabtwo">Tab Two</label>
+                    <div class="tab">
+                        <h1>Tab Two Content</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+
+                    <input type="radio" name="tabs" id="tabthree">
+                    <label for="tabthree">Tab Three</label>
+                    <div class="tab">
+                        <h1>Tab Three Content</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Details
+</button>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -382,377 +429,378 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialId2018)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.YearOnSkull)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MonthOnSkull)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateOnSkull)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InitialsOfDataEntryExpert)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InitialsOfDataEntryChecker)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ByuSample)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BodyAnalysis)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SkullAtMagazine)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PostcraniaAtMagazine)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AgeSkull2018)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RackAndShelf)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ToBeConfirmed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SkullTrauma)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PostcraniaTrauma)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CribraOrbitala)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PoroticHyperostosis)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PoroticHyperostosisLocations)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MetopicSuture)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ButtonOsteoma)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PostcraniaTrauma1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OsteologyUnknownComment)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TemporalMandibularJointOsteoarthritisTmjOa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LinearHypoplasiaEnamel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AreaHillBurials)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tomb)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NsLowPosition)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NsHighPosition)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NorthOrSouth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EwLowPosition)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EwHighPosition)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EastOrWest)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Square)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialWestToHead)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialWestToFeet)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialSouthToHead)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialSouthToFeet)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialDepth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.YearExcav)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MonthExcavated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateExcavated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialDirection)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialPreservation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sex)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GenderCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialGenderMethod)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialDirection1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumericMinAge)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumericMaxAge)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialAgeMethod)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HairColorCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialSampleTaken)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LengthM)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LengthCm)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Goods)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cluster)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FaceBundle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OsteologyNotes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OtherNotes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SampleNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GenderGe)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GeFunctionTotal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GenderBodyCol)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BasilarSuture)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VentralArc)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SubpubicAngle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SciaticNotch)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PubicBone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PreaurSulcus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MedialIpRamus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DorsalPitting)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ForemanMagnum)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FemurHead)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HumerusHead)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Osteophytosis)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PubicSymphysis)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BoneLength)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MedialClavicle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IliacCrest)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FemurDiameter)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Humerus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FemurLength)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HumerusLength)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TibiaLength)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Robust)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SupraorbitalRidges)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrbitEdge)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ParietalBossing)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Gonian)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NuchalCrest)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ZygomaticCrest)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CranialSuture)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaximumCranialLength)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaximumCranialBreadth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BasionBregmaHeight)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BasionNasion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BasionProsthionLength)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BizygomaticDiameter)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NasionProsthion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaximumNasalBreadth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InterorbitalBreadth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ArtifactsDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PreservationIndex)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HairTaken)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoftTissueTaken)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BoneTaken)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ToothTaken)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TextileTaken)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DescriptionOfTaken)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ArtifactFound)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EstimateLivingStature)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ToothAttrition)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ToothEruption)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PathologyAnomalies)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EpiphysealUnion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SsmaTimeStamp)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AgeCodeSingleNavigation.AgeCode1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialAdultChildNavigation.BurialAdultChild1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialWrappingNavigation.BurialWrapping1)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.BurialId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.BurialId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.BurialId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialId2018)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YearOnSkull)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MonthOnSkull)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOnSkull)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InitialsOfDataEntryExpert)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InitialsOfDataEntryChecker)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ByuSample)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BodyAnalysis)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SkullAtMagazine)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostcraniaAtMagazine)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AgeSkull2018)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RackAndShelf)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ToBeConfirmed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SkullTrauma)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostcraniaTrauma)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CribraOrbitala)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PoroticHyperostosis)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PoroticHyperostosisLocations)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MetopicSuture)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ButtonOsteoma)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostcraniaTrauma1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OsteologyUnknownComment)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TemporalMandibularJointOsteoarthritisTmjOa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LinearHypoplasiaEnamel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AreaHillBurials)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tomb)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NsLowPosition)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NsHighPosition)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NorthOrSouth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EwLowPosition)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EwHighPosition)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EastOrWest)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Square)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialWestToHead)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialWestToFeet)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialSouthToHead)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialSouthToFeet)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialDepth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YearExcav)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MonthExcavated)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateExcavated)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialDirection)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialPreservation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sex)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GenderCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialGenderMethod)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialDirection1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumericMinAge)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumericMaxAge)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialAgeMethod)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HairColorCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialSampleTaken)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LengthM)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LengthCm)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Goods)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cluster)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FaceBundle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OsteologyNotes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OtherNotes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SampleNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GenderGe)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GeFunctionTotal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GenderBodyCol)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BasilarSuture)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VentralArc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubpubicAngle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SciaticNotch)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PubicBone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PreaurSulcus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MedialIpRamus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DorsalPitting)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ForemanMagnum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FemurHead)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HumerusHead)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Osteophytosis)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PubicSymphysis)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BoneLength)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MedialClavicle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IliacCrest)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FemurDiameter)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Humerus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FemurLength)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HumerusLength)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TibiaLength)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Robust)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SupraorbitalRidges)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrbitEdge)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ParietalBossing)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gonian)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NuchalCrest)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ZygomaticCrest)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CranialSuture)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaximumCranialLength)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaximumCranialBreadth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BasionBregmaHeight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BasionNasion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BasionProsthionLength)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BizygomaticDiameter)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NasionProsthion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaximumNasalBreadth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InterorbitalBreadth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ArtifactsDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PreservationIndex)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HairTaken)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoftTissueTaken)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BoneTaken)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ToothTaken)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TextileTaken)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescriptionOfTaken)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ArtifactFound)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstimateLivingStature)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ToothAttrition)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ToothEruption)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PathologyAnomalies)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EpiphysealUnion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SsmaTimeStamp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AgeCodeSingleNavigation.AgeCode1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialAdultChildNavigation.BurialAdultChild1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialWrappingNavigation.BurialWrapping1)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.BurialId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.BurialId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.BurialId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
