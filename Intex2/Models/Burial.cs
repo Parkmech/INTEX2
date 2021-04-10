@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 
-// Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
-// If you have enabled NRTs for your project, then un-comment the following line:
-// #nullable disable
+#nullable disable
 
 namespace Intex2.Models
 {
-    public partial class Burials
+    public partial class Burial
     {
-        public Burials()
+        public Burial()
         {
-            BiologicalSample = new HashSet<BiologicalSample>();
-            C14 = new HashSet<C14>();
-            FieldBook = new HashSet<FieldBook>();
-            Photo = new HashSet<Photo>();
+            BiologicalSamples = new HashSet<BiologicalSample>();
+            C14s = new HashSet<C14>();
+            FieldBooks = new HashSet<FieldBook>();
+            Photos = new HashSet<Photo>();
         }
 
         public string BurialId { get; set; }
@@ -137,14 +135,15 @@ namespace Intex2.Models
         public string ToothEruption { get; set; }
         public string PathologyAnomalies { get; set; }
         public string EpiphysealUnion { get; set; }
-        public byte[] SsmaTimeStamp { get; set; }
+        //public byte[] SsmaTimeStamp { get; set; }
+        public bool? PhotoTaken { get; set; }
 
         public virtual AgeCode AgeCodeSingleNavigation { get; set; }
         public virtual BurialAdultChild BurialAdultChildNavigation { get; set; }
         public virtual BurialWrapping BurialWrappingNavigation { get; set; }
-        public virtual ICollection<BiologicalSample> BiologicalSample { get; set; }
-        public virtual ICollection<C14> C14 { get; set; }
-        public virtual ICollection<FieldBook> FieldBook { get; set; }
-        public virtual ICollection<Photo> Photo { get; set; }
+        public virtual ICollection<BiologicalSample> BiologicalSamples { get; set; }
+        public virtual ICollection<C14> C14s { get; set; }
+        public virtual ICollection<FieldBook> FieldBooks { get; set; }
+        public virtual ICollection<Photo> Photos { get; set; }
     }
 }

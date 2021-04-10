@@ -1,5 +1,5 @@
 ﻿Index Page! Here!
-@model IEnumerable<Intex2.Models.Burials>
+@model IEnumerable<Intex2.Models.Burial>
 
 
 @{
@@ -9,6 +9,53 @@
 
 <h1>Index</h1>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Burial Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="tabs">
+                    <input type="radio" name="tabs" id="tabone" checked="checked">
+                    <label for="tabone">Primary Data</label>
+                    <div class="tab">
+                        <h1>Primary Data</h1>
+                        <h4>Burial Id: BurialId</h4>
+
+                    </div>
+
+                    <input type="radio" name="tabs" id="tabtwo">
+                    <label for="tabtwo">Tab Two</label>
+                    <div class="tab">
+                        <h1>Tab Two Content</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+
+                    <input type="radio" name="tabs" id="tabthree">
+                    <label for="tabthree">Tab Three</label>
+                    <div class="tab">
+                        <h1>Tab Three Content</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Details
+</button>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -366,9 +413,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.EpiphysealUnion)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.SsmaTimeStamp)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.AgeCodeSingleNavigation)
             </th>
@@ -735,9 +782,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.EpiphysealUnion)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.SsmaTimeStamp)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.AgeCodeSingleNavigation.AgeCode1)
             </td>
