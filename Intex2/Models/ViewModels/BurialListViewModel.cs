@@ -8,7 +8,7 @@ namespace Intex2.Models
 {
     public class BurialListViewModel
     {
-        public IEnumerable<Burials> Burials { get; set; }
+        public IEnumerable<Burial> Burials { get; set; }
         public PagingInfo PagingInfo { get; set; }
     }
 }
