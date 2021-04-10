@@ -5,128 +5,127 @@
 
 @model BurialListViewModel
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Launch demo modal
-</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Launch demo modal
+    </button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Burial Details</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="tabs">
-                    <input type="radio" name="tabs" id="tabone" checked="checked">
-                    <label for="tabone">Tab One</label>
-                    <div class="tab">
-                        <h1>Tab One Content</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Burial Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="tabs">
+                        <input type="radio" name="tabs" id="tabone" checked="checked">
+                        <label for="tabone">Tab One</label>
+                        <div class="tab">
+                            <h1>Tab One Content</h1>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </div>
 
-                    <input type="radio" name="tabs" id="tabtwo">
-                    <label for="tabtwo">Tab Two</label>
-                    <div class="tab">
-                        <h1>Tab Two Content</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    </div>
+                        <input type="radio" name="tabs" id="tabtwo">
+                        <label for="tabtwo">Tab Two</label>
+                        <div class="tab">
+                            <h1>Tab Two Content</h1>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </div>
 
-                    <input type="radio" name="tabs" id="tabthree">
-                    <label for="tabthree">Tab Three</label>
-                    <div class="tab">
-                        <h1>Tab Three Content</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        <input type="radio" name="tabs" id="tabthree">
+                        <label for="tabthree">Tab Three</label>
+                        <div class="tab">
+                            <h1>Tab Three Content</h1>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!--
-    <div class="container m-5">
-        <table class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th>BurialId</th>
-                    <th>Sex</th>
-                </tr>
-            </thead>
-            <tbody>
+    <!--
+        <div class="container m-5">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>BurialId</th>
+                        <th>Sex</th>
+                    </tr>
+                </thead>
+                <tbody>
 
 
-                <tr>
-                    <td>@*@mummy.BurialId</td>
-                    <td>@mummy.Sex*@</td>
-                </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-
-    -->
-
-@foreach (var mummy in Model.Burials)
-{
-<div class="card mb-3" style="max-width: auto">
-    <div class="row g-0">
-        <div class="col-md-8">
-            <div class="card-body">
-                <h2 class="card-title">@mummy.BurialId</h2>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item ">South to Head: @mummy.BurialSouthToHead</li>
-                    <li class="list-group-item ">South to Feet: @mummy.BurialSouthToFeet</li>
-                    <li class="list-group-item ">West to Head: @mummy.BurialWestToHead</li>
-                    <li class="list-group-item ">West to Feet: @mummy.BurialWestToFeet</li>
-                    <li class="list-group-item ">Length: @mummy.LengthM</li>
-                    <li class="list-group-item ">Depth: @mummy.BurialDepth</li>
-                    <li class="list-group-item ">Burial Goods (Y/N): @mummy.Goods</li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <img src="https://mdbootstrap.com/wp-content/uploads/2020/06/vertical.jpg"
-                 alt="..."
-                 class="img-fluid" />
-        </div>
-    </div>
-
-    <a class="text-center btn btn-info col-5" asp-area="" asp-route-id="@mummy.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
-    <br />
-    @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-    {
-        <a class="text-center btn btn-warning col-5" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>
-    }
-    <br />
-    @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-    {
-        <a class="text-center btn btn-success col-5" asp-controller="BurialCrud" asp-action="Create" asp-route-id="@mummy.BurialId">Create</a>
-    }
-    <br />
-    @*//Don't add in the delete button till the day of!'*@
-    @*@if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-    {
-        <a class="text-center btn btn-danger col-5" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@mummy.BurialId">Delete</a>
-    }*@
-
-</div>
-       @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-                        {
-                            <a asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>
-                        }
-                    @*<a asp-action="Details" asp-route-id="@mummy.BurialId">Details</a>*@
-                    @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-                    {
-                        <a asp-action="Delete" asp-route-id="@mummy.BurialId">Delete</a>
+                    <tr>
+                        <td>@*@mummy.BurialId</td>
+                        <td>@mummy.Sex*@</td>
+                    </tr>
                     }
+                </tbody>
+            </table>
+        </div>
+
+        -->
+    @foreach (var mummy in Model.Burials)
+    {
+    <div class="card mb-3" style="max-width: auto">
+        <div class="row g-0">
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h2 class="card-title">@mummy.BurialId</h2>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item ">South to Head: @mummy.BurialSouthToHead</li>
+                        <li class="list-group-item ">South to Feet: @mummy.BurialSouthToFeet</li>
+                        <li class="list-group-item ">West to Head: @mummy.BurialWestToHead</li>
+                        <li class="list-group-item ">West to Feet: @mummy.BurialWestToFeet</li>
+                        <li class="list-group-item ">Length: @mummy.LengthM</li>
+                        <li class="list-group-item ">Depth: @mummy.BurialDepth</li>
+                        <li class="list-group-item ">Burial Goods (Y/N): @mummy.Goods</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <img src="https://mdbootstrap.com/wp-content/uploads/2020/06/vertical.jpg"
+                     alt="..."
+                     class="img-fluid" />
+            </div>
+        </div>
+
+        <a class="text-center btn btn-info col-5" asp-area="" asp-route-id="@mummy.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
+        <br />
+        @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+        {
+            <a class="text-center btn btn-warning col-5" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>
+        }
+        <br />
+        @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+        {
+            <a class="text-center btn btn-success col-5" asp-controller="BurialCrud" asp-action="Create" asp-route-id="@mummy.BurialId">Create</a>
+        }
+        <br />
+        @*//Don't add in the delete button till the day of!'*@
+        @*@if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+            {
+                <a class="text-center btn btn-danger col-5" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@mummy.BurialId">Delete</a>
+            }*@
+
+    </div>
+    @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+    {
+        <a asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>
+    }
+    @*<a asp-action="Details" asp-route-id="@mummy.BurialId">Details</a>*@
+    @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+    {
+        <a asp-action="Delete" asp-route-id="@mummy.BurialId">Delete</a>
+    }
 
 }
 
