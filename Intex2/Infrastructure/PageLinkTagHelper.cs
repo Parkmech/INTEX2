@@ -33,6 +33,8 @@ namespace Intex2.Infrastructure
         public string PageClassNormal { get; set; }
         public string PageClassSelected { get; set; }
 
+        //public Fil
+
         //Overriding 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
