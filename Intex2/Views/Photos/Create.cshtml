@@ -5,17 +5,36 @@
 @using Amazon.S3.Model;
 @using System.Threading;
 @using System.Threading.Tasks;
-
+@using Amazon.Runtime;
+@using Amazon.Auth; 
+@using Amazon.Runtime.CredentialManagement; 
 
 @{
     ViewData["Title"] = "Create";
     string bucketName = "elasticbeanstalk-us-east-1-503379183917/Photos";
-    string awsAccessKey = "ASIAXKM54ZEWRNJRLWX4";
-    string awsSecretKey = "OVwpXO3t4m7CqMohoRTGwFOmK+f5zxoZOKSONXmD";
-    IAmazonS3 client = new AmazonS3Client(awsAccessKey, awsSecretKey, Amazon.RegionEndpoint.USEast1);
+    string profileName = "[default]";
+    string AWSAccessKey = "ASIAXKM54ZEW2MFOK5WL";
+    string AWSSecretKey = "3mxTtn90lxTy7+QyA2e3m+2dGOe8dxdM1U/T2tXy";
+    string AWSToken = "aws_session_token=IQoJb3JpZ2luX2VjEDoaCXVzLXdlc3QtMiJHMEUCIQDd8ED4xuxLFeJyYy4yQd+uteMQo5t/Welzvp6WAY4K1QIgS8vrQaQbzSY7Z6G2BuXr4tonGBQaa9Qs4PaYmh3IGA0qtAIIk///////////ARAAGgw1MDMzNzkxODM5MTciDMcfpfn1r2kZ4s6oPSqIAouFtfgetQi+PDY6BaUxgfV5mWmv+okqv7K5TBjTeC1Bi7EasDGO6fufzbHI5J9xWdmcpPBHU7f6LMoEf9OBVI84MW2m3dS628GiEJDRVF774TnMkfJLROSHKQkMeP86LyunIQPEBlYXb6wakiAZXQdvY8Pz6d34fTB04ZjYOBe5ueYmfDHabtzaiOoNNf6ssbLI23W3jF1+CxxkZzLu6QqLqpIsNR0oYIG2+1c4Xufz/IDnuKf4disUGeeGwuOOIdkYlVHWIhLbDgFEJJLcW6qkdFgLwbhP54gfem0wcNzdHTKT/GKVNTpEingK/axva2R4KpSWmkD+pnBMJaTfOGlDQCXRPoSSejChxMeDBjqdAYe0SZhg2TMdEmamAOCIyd0Oc25TI7n1HspXLsFiRUhnyNORJY175xGro1cJN/Q7H2MHF9IFEuRTgYGsQkhN1FKLy3FXtQamPx6/sBAdqhAiE+SbZy73vuNtfm0fVJoVIWu/KIDQvngZbrWUxFGnlZVtEhTM0UlCW5swu7vz4tl+Sz1hCvP4CWtvaSDp0k1Oz3jVDvnKaaDsgR1RJBQ=";
+
+    SessionAWSCredentials tempcredentials = new SessionAWSCredentials(AWSAccessKey, AWSSecretKey, AWSToken);
+
 
     FileInfo file = new FileInfo(@"C:/Users/Jeffrey/Downloads/IMG_0431.JPG");
     string path = "Photos/testing_IMG_0431.JPG";
+
+    var options = new CredentialProfileOptions
+    {
+        AccessKey = AWSAccessKey,
+        SecretKey = AWSSecretKey,
+        Token = AWSToken
+    };
+
+    SessionAWSCredentials creds = new SessionAWSCredentials(AWSAccessKey, AWSSecretKey, AWSToken);
+    
+
+    IAmazonS3 client = new AmazonS3Client(creds, Amazon.RegionEndpoint.USEast1);
+
 
     Amazon.S3.Model.PutObjectRequest request = new Amazon.S3.Model.PutObjectRequest()
     {
@@ -27,10 +46,9 @@
     CancellationTokenSource source = new CancellationTokenSource();
     CancellationToken token = source.Token;
 
-    PutObjectRequest realRequest = PutObjectRequest request;
 
-    PutObjectResponse response = client.PutObjectAsync(realRequest, token);
-}   
+    PutObjectResponse response = client.PutObjectAsync(request, token).Result;
+}
 
 <h1>Create</h1>
 
