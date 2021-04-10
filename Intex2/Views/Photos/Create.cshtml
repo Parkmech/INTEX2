@@ -27,7 +27,7 @@
     CancellationTokenSource source = new CancellationTokenSource();
     CancellationToken token = source.Token;
 
-    PutObjectRequest realRequest = PutObjectRequest request;
+    Amazon.S3.Model.PutObjectRequest realRequest = new Amazon.S3.Model.PutObjectRequest();
 
     PutObjectResponse response = client.PutObjectAsync(realRequest, token);
 }   
