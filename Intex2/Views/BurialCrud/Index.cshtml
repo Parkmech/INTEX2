@@ -5,10 +5,16 @@
 
 @model BurialListViewModel
 
+<style>
+    body {
+
+        background-color: #E9ECEF;
+    }
+</style>
 <br />
 @foreach (var mummy in Model.Burials)
 {
-    <div class="card mb-3" style="max-width: auto">
+    <div class="card shadow mb-3" style="max-width: auto">
         <div class="row g-0">
             <div class="col-md-8">
                 <div class="card-body">
@@ -38,7 +44,7 @@
                 </div>
             </div>
 
-            <div class="m-2 p-1 mx-auto">
+            <div class=" mx-auto m-2 p-1">
                 <img
                      src="https://elasticbeanstalk-us-east-1-503379183917.s3.amazonaws.com/Photos/DSCN0004.JPG"
                      alt="..."

@@ -38,12 +38,9 @@ namespace Intex2
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("RequireAdministratorRole",
-                     policy => policy.RequireRole("Admins"));
+                options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Admins"));
 
-                options.AddPolicy("RequireResearcherRole",
-                    policy => policy.RequireRole("Admins, Researcher"));
-
+                options.AddPolicy("RequireResearcherRole", policy => policy.RequireRole("Researcher"));
             });
 
             services.AddDbContext<EgyptContext>(opts =>
