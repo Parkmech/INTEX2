@@ -2,7 +2,7 @@
 
 <form asp-action="Create">
 
-    <div class="tabs">
+    <div class="shadow tabs">
         <input type="radio" name="tabs" id="tabone" checked="checked">
         <label for="tabone">Exhumation Data Entry</label>
         <div class="tab">
@@ -10,6 +10,50 @@
             <h1>Create Burial Record</h1>
 
             <p><i>This is where we can write a short page description about stuff and such</i></p>
+
+            <br />
+
+            <div class="row">
+                <div class="col-md-2">
+                    <span>Record Created By: </span>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input asp-for="InitialsOfDataEntryChecker" class="form-control" placeholder="Your Name Here" />
+                        <span asp-validation-for="InitialsOfDataEntryChecker" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-2">
+                    <span>Date of Excavation: </span>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input asp-for="YearExcav" class="form-control" placeholder="Year" />
+                        <span asp-validation-for="YearExcav" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input asp-for="MonthExcavated" class="form-control" placeholder="Month" />
+                        <span asp-validation-for="MonthExcavated" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input asp-for="DateExcavated" class="form-control" placeholder="Day" />
+                        <span asp-validation-for="DateExcavated" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
 
             <h2>Burial ID</h2>
 
@@ -167,13 +211,152 @@
 
             </div>
 
+            <div class="row">
+                <!-- Additional burial information (opitonal when form is submitted) -->
+                <!--This is on a scale of i-4 (preservation index on sheet) -->
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input asp-for="BurialPreservation" class="form-control" placeholder="Burial preservation" />
+                        <span asp-validation-for="BurialPreservation" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Head direction (e/w) -->
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input asp-for="BurialDirection" class="form-control" placeholder="Burial head direction" />
+                        <span asp-validation-for="BurialDirection" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="form-group text-right">
+                <input type="submit" value="Create Burial" class="btn btn-primary" />
+            </div>
+
         </div>
 
         <input type="radio" name="tabs" id="tabtwo">
-        <label for="tabtwo">Tab Two</label>
+        <label for="tabtwo">Body Details</label>
         <div class="tab">
             <h1>Tab Two Content</h1>
-            <p>Some more stuffffff</p>
+
+            <p><i>This is where we can write a short page description about stuff and such</i></p>
+
+            <h2>General Information</h2>
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <!-- Gender code (aka the sex) -->
+                    <div class="shadow-sm form-group">
+                        <input asp-for="GenderCode" class="form-control" placeholder="Gender" />
+                        <span asp-validation-for="GenderCode" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <!-- Hair Color -->
+                    <div class="shadow-sm form-group">
+                        <input asp-for="HairColorCode" class="form-control" placeholder="Hair color" />
+                        <span asp-validation-for="HairColorCode" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <!-- Age code (i.e. Adult, child, infant) -->
+
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        age code
+                        <select asp-for="AgeCodeSingle" class="form-control" asp-items="ViewBag.AgeCodeSingle"></select>
+                    </div>
+                </div>
+
+                <!-- Estimate of age range of da mummy -->
+
+                <div class="col-md-4">
+                    <div class="shadow-sm form-group">
+                        <input asp-for="NumericMinAge" class="form-control" placeholder="Minimum estimate of age" />
+                        <span asp-validation-for="NumericMinAge" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input asp-for="NumericMaxAge" class="form-control" placeholder="Maximum estimate of age" />
+                        <span asp-validation-for="NumericMaxAge" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+            <!-- Second section of data on form -->
+
+            <h2>Samples Taken</h2>
+
+            <div class="row">
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input asp-for="HairTaken" class="form-control" placeholder="Hair taken?" />
+                        <span asp-validation-for="HairTaken" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input asp-for="SoftTissueTaken" class="form-control" placeholder="Soft tissue taken?" />
+                        <span asp-validation-for="SoftTissueTaken" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input asp-for="BoneTaken" class="form-control" placeholder="Bone taken?" />
+                        <span asp-validation-for="BoneTaken" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input asp-for="ToothTaken" class="form-control" placeholder="Tooth taken?" />
+                        <span asp-validation-for="ToothTaken" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input asp-for="TextileTaken" class="form-control" placeholder="Textile taken?" />
+                        <span asp-validation-for="TextileTaken" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <textarea asp-for="DescriptionOfTaken" class="form-control" placeholder="Enter description of samples taken here..."></textarea>
+                        <span asp-validation-for="DescriptionOfTaken" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group text-right">
+                <input type="submit" value="Create Burial" class="btn btn-primary" />
+            </div>
+
         </div>
 
         <input type="radio" name="tabs" id="tabthree">
@@ -181,15 +364,17 @@
         <div class="tab">
             <h1>Tab Three Content</h1>
             <p>Ain't this neat?</p>
+
+            <div class="form-group text-right">
+                <input type="submit" value="Create Burial" class="btn btn-primary" />
+            </div>
         </div>
+
+       
+
     </div>
 
-    <br />
+    <br /> <br /> <br /> <br />
 
-    <div class="form-group text-right">
-        <input type="submit" value="Create Burial" class="btn btn-primary" />
-    </div>
-
-    <br />
 
 </form>
