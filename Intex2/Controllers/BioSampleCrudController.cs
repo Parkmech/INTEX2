@@ -81,15 +81,20 @@ namespace Intex2.Controllers
         }
 
         // GET: BioSampleCrud/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(string id, string initials, string notes)
         {
             string newid = id.Replace("%2F", "/");
+            string newNotes = notes.Replace("%2F", " ");
             if (newid == null)
             {
                 return NotFound();
             }
 
-            var biologicalSample = _context.BiologicalSamples.Where(x => x.BurialId == newid);
+            var biologicalSample = _context.BiologicalSamples
+                .Where(x => x.BurialId == newid)
+                .Where(n => n.Notes == notes)
+                .Where(i => i.Initials == initials);
+
             if (biologicalSample == null)
             {
                 return NotFound();
