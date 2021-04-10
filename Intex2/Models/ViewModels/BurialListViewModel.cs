@@ -1,4 +1,5 @@
 ﻿using Intex2.Models.ViewModels;
+using Intex2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace Intex2.Models
     public class BurialListViewModel
     {
         public IEnumerable<Burial> Burials { get; set; }
+        public IEnumerable<FilterItems> FilterItems { get; set; }
         public PagingInfo PagingInfo { get; set; }
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Intex2.Models;
 using Intex2.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Intex2.Controllers
 {
@@ -194,7 +195,143 @@ namespace Intex2.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool BurialsExists(string id)
+        public async Task<IActionResult> Display(string sortOrder, string searchString)
+        {
+            ViewData["IdSortParm"] = String.IsNullOrEmpty(sortOrder) ? "BurialId_Desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
+            ViewData["CurrentFilter"] = searchString;
+            var mummies = from s in _context.Burials
+                           select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                mummies = mummies.Where(s => s.BurialId.Contains(searchString)
+                                       || s.Sex.Contains(searchString)
+                                        || s.DateExcavated.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "BurialId_Desc":
+                    mummies = mummies.OrderByDescending(s => s.BurialId);
+                    break;
+                case "Date":
+                    mummies = mummies.OrderBy(s => s.DateExcavated);
+                    break;
+                case "date_desc":
+                    mummies = mummies.OrderByDescending(s => s.DateExcavated);
+                    break;
+                default:
+                    mummies = mummies.OrderBy(s => s.BurialId);
+                    break;
+            }
+            return View(await mummies.AsNoTracking().ToListAsync());
+        }
+
+        //public IActionResult JeffsWay(string id)
+        //{
+        //    var filters = new Filters(id);
+        //    ViewBag.Filters = filters;
+        //    ViewBag.Burials = _context.Burials.ToList();
+        //    ViewBag.Statuses = _context.Statuses.ToList();
+        //    ViewBag.DueFilters = Filters.DueFilterValues;
+
+        //    IQueryable<Burial> query = _context.Burials
+        //        .Include(t => t.Sex).Include(t => t.Square).Include(t => t.LengthM).Include(t => t.BurialDepth);
+
+        //    if (filters.HasSex)
+        //    {
+        //        query = query.Where(t => t.Sex == filters.Sex);
+        //    }
+
+        //    if (filters.HasArea)
+        //    {
+        //        query = query.Where(t => t.Square == filters.Area);
+        //    }
+
+        //    //if (filters.HasLength)
+        //    //{
+        //    //    query = query.Where(t => t.LengthM == filters.Length);
+        //    //}
+
+        //    //if (filters.HasDepth)
+        //    //{
+        //    //    query = query.Where(t => t.BurialDepth == filters.Depth);
+        //    //}
+
+        //    var tasks = query.OrderBy(t => t.BurialId).ToList();
+
+        //    return View(tasks);
+        //}
+
+        [HttpGet]
+        public IActionResult JeffsWay()
+        {
+            return View(new BurialListViewModel
+            {
+                Burials = (_context.Burials
+                    .OrderBy(b => b.BurialId)
+                    //FOR THE PRESENTATION TO PRESENT CLEAN DATA .Where(x => x.BurialSouthToFeet != null)
+                    .ToList())
+            });
+        }
+
+
+        [HttpPost]
+        public IActionResult JeffsWay(FilterItems filterAtr)
+        {
+
+            string sex = filterAtr.Sex;
+            string area = filterAtr.Area;
+            double length = filterAtr.Length;
+            double depth = filterAtr.Depth;
+            int pageSize = 10;
+
+            BurialListViewModel burialFilters = new BurialListViewModel
+            {
+                Burials = _context.Burials
+                    .FromSqlInterpolated($"SELECT * FROM Burials WHERE Sex = {sex}")
+                    .ToList(),
+
+                PagingInfo = new PagingInfo
+                {
+                    ItemsPerPage = pageSize,
+                    CurrentPage = pageNum,
+                    TotalNumItems = _context.Burials
+                    //FOR THE PRESENTATION TO PRESENT CLEAN DATA .Where(x=> x.BurialSouthToFeet != null)
+                    .Count()
+                },
+            };
+
+            return RedirectToAction("Filtered", burialFilters);
+        }
+
+        [HttpGet]
+        public IActionResult Filtered(FilterItems filterAtr)
+        {
+            string sex = filterAtr.Sex;
+            string area = filterAtr.Area;
+            double length = filterAtr.Length;
+            double depth = filterAtr.Depth;
+            int pageSize = 10;
+
+            return View(new BurialListViewModel
+            {
+                Burials = _context.Burials
+                    //IS NOT NULL
+                    .FromSqlInterpolated($"SELECT * FROM Burials WHERE Sex LIKE {sex}")
+                    .ToList(),
+
+                PagingInfo = new PagingInfo
+                {
+                    ItemsPerPage = pageSize,
+                    CurrentPage = pageNum,
+                    TotalNumItems = _context.Burials
+                    //FOR THE PRESENTATION TO PRESENT CLEAN DATA .Where(x=> x.BurialSouthToFeet != null)
+                    .Count()
+                }
+            });
+        }
+
+            private bool BurialsExists(string id)
         {
             return _context.Burials.Any(e => e.BurialId == id);
         }
