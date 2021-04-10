@@ -7,50 +7,7 @@
 
 <div class="row">
     <div class="col-sm-2">
-
-        <form asp-action="JeffsWay" method="post">
-
-            <div class="form-group">
-                <label asp-for="@Model.FilterItems.Sex">Sex:</label>
-                <select name="filter" class="form-control" asp-for="Sex">
-                    <option value="M">Male</option>
-                    <option value="F">Female</option>
-                    <option value="all">All</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Area">Area:</label>
-                <select name="filter" class="form-control" asp-for="Area">
-                    <option value="NE">NE</option>
-                    <option value="NW">NW</option>
-                    <option value="SE">SE</option>
-                    <option value="SW">SW</option>
-                    <option value="all">All</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Length">Length:</label>
-                <select name="Length" class="form-control" asp-for="Length">
-                    <option value="0.00">Lets See</option>
-                    <option value="all">All</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Depth">Depth:</label>
-                <select name="filter" class="form-control" asp-for="Depth">
-                    <option value="0.00">Lets See</option>
-                    <option value="all">All</option>
-                </select>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Filter</button>
-
-            <a asp-action="JeffsWay" asp-route-id="" class="btn btn-primary">Clear</a>
-
-        </form>
+        <partial name="FilterPartialView" />
     </div>
 
     <div class="col-sm-10">
