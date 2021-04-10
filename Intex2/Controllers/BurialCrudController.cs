@@ -15,6 +15,7 @@ namespace Intex2.Controllers
     public class BurialCrudController : Controller
     {
         private readonly FagElGamousContext _context;
+        private readonly FagElGamousContext _contextFiltered;
         public int pageNum { get; set; } = 1;
 
         public string sex { get; set; }
@@ -22,8 +23,10 @@ namespace Intex2.Controllers
         public BurialCrudController(FagElGamousContext context)
         {
             _context = context;
+            _contextFiltered = _context;
         }
 
+        [HttpGet]
         // GET: BurialCrud
         public IActionResult Index(int pageNum = 2)
         {
@@ -31,7 +34,7 @@ namespace Intex2.Controllers
 
             return View(new BurialListViewModel
             {
-                Burials = (_context.Burials
+                Burials = (_contextFiltered.Burials
                     .OrderBy(b => b.BurialId)
                     .Skip((pageNum - 1) * pageSize)
                     .Take(pageSize)
@@ -42,7 +45,42 @@ namespace Intex2.Controllers
                 {
                     ItemsPerPage = pageSize,
                     CurrentPage = pageNum,
-                    TotalNumItems = _context.Burials
+                    TotalNumItems = _contextFiltered.Burials
+                    //FOR THE PRESENTATION TO PRESENT CLEAN DATA .Where(x=> x.BurialSouthToFeet != null)
+                    .Count()
+                },
+
+            });
+        }
+
+        [HttpPost]
+        public IActionResult Index(BurialListViewModel filterAtr, int pageNum = 2)
+        {
+            string sex = filterAtr.FilterItems.Sex;
+            string area = filterAtr.FilterItems.Area;
+            double length = filterAtr.FilterItems.Length;
+            double depth = filterAtr.FilterItems.Depth;
+            int pageSize = 10;
+
+            return View(new BurialListViewModel
+            {
+                Burials = (_contextFiltered.Burials
+                    .Where(b => b.GenderCode == sex || b.Sex == sex)
+                    .Where(b => b.Square == area)
+                    .OrderBy(b => b.BurialId)
+                    .Skip((pageNum - 1) * pageSize)
+                    .Take(pageSize)
+                    
+                    //FOR THE PRESENTATION TO PRESENT CLEAN DATA .Where(x => x.BurialSouthToFeet != null)
+                    .ToList()),
+
+                PagingInfo = new PagingInfo
+                {
+                    ItemsPerPage = pageSize,
+                    CurrentPage = pageNum,
+                    TotalNumItems = _contextFiltered.Burials
+                    .Where(b => b.Sex == sex || b.Sex == sex)
+                    .Where(b => b.Square == area)
                     //FOR THE PRESENTATION TO PRESENT CLEAN DATA .Where(x=> x.BurialSouthToFeet != null)
                     .Count()
                 },
@@ -294,22 +332,6 @@ namespace Intex2.Controllers
                 Length = length,
                 Depth = depth
             };
-
-            //BurialListViewModel burialFilters = new BurialListViewModel
-            //{
-            //    Burials = _context.Burials
-            //        .FromSqlInterpolated($"SELECT * FROM Burials WHERE Sex = {sex}")
-            //        .ToList(),
-
-            //    PagingInfo = new PagingInfo
-            //    {
-            //        ItemsPerPage = pageSize,
-            //        CurrentPage = pageNum,
-            //        TotalNumItems = _context.Burials
-            //        //FOR THE PRESENTATION TO PRESENT CLEAN DATA .Where(x=> x.BurialSouthToFeet != null)
-            //        .Count()
-            //    },
-            //};
 
             return RedirectToAction("Filtered", filtered);
         }
