@@ -1,0 +1,116 @@
+@model Intex2.Models.BiologicalSample
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>BiologicalSample</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="BurialId" class="control-label"></label>
+                <select asp-for="BurialId" class="form-control" asp-items="ViewBag.BurialId"></select>
+                <span asp-validation-for="BurialId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rack" class="control-label"></label>
+                <input asp-for="Rack" class="form-control" />
+                <span asp-validation-for="Rack" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="F3" class="control-label"></label>
+                <input asp-for="F3" class="form-control" />
+                <span asp-validation-for="F3" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Bag" class="control-label"></label>
+                <input asp-for="Bag" class="form-control" />
+                <span asp-validation-for="Bag" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LowNs" class="control-label"></label>
+                <input asp-for="LowNs" class="form-control" />
+                <span asp-validation-for="LowNs" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HighNs" class="control-label"></label>
+                <input asp-for="HighNs" class="form-control" />
+                <span asp-validation-for="HighNs" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NorthOrSouth" class="control-label"></label>
+                <input asp-for="NorthOrSouth" class="form-control" />
+                <span asp-validation-for="NorthOrSouth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LowEw" class="control-label"></label>
+                <input asp-for="LowEw" class="form-control" />
+                <span asp-validation-for="LowEw" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HighEw" class="control-label"></label>
+                <input asp-for="HighEw" class="form-control" />
+                <span asp-validation-for="HighEw" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EastOrWest" class="control-label"></label>
+                <input asp-for="EastOrWest" class="form-control" />
+                <span asp-validation-for="EastOrWest" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Area" class="control-label"></label>
+                <input asp-for="Area" class="form-control" />
+                <span asp-validation-for="Area" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BurialNumber" class="control-label"></label>
+                <input asp-for="BurialNumber" class="form-control" />
+                <span asp-validation-for="BurialNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClusterNumber" class="control-label"></label>
+                <input asp-for="ClusterNumber" class="form-control" />
+                <span asp-validation-for="ClusterNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PreviouslySampled" class="control-label"></label>
+                <input asp-for="PreviouslySampled" class="form-control" />
+                <span asp-validation-for="PreviouslySampled" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Notes" class="control-label"></label>
+                <input asp-for="Notes" class="form-control" />
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Initials" class="control-label"></label>
+                <input asp-for="Initials" class="form-control" />
+                <span asp-validation-for="Initials" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Id" />
+  
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
