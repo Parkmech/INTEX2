@@ -35,6 +35,8 @@ namespace Intex2.Controllers
                     //FOR THE PRESENTATION TO PRESENT CLEAN DATA .Where(x => x.BurialSouthToFeet != null)
                     .ToList()),
 
+                Photos = _context.Photos,
+
                 PagingInfo = new PagingInfo
                 {
                     ItemsPerPage = pageSize,

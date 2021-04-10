@@ -3,7 +3,13 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 
+
 @model BurialListViewModel
+
+@{ 
+    ViewBag.Photo = "https://elasticbeanstalk-us-east-1-503379183917.s3.amazonaws.com/Photos/notfound.png";
+}
+
 
 <style>
     body {
@@ -14,6 +20,19 @@
 <br />
 @foreach (var mummy in Model.Burials)
 {
+
+
+    foreach(var x in Model.Photos)
+    {
+        if(mummy.BurialId == x.BurialId)
+        {
+            ViewBag.Photo ="https://elasticbeanstalk-us-east-1-503379183917.s3.amazonaws.com/Photos/" + x.PhotoId;
+            break;
+        }
+    }
+
+
+
     <div class="card shadow mb-3" style="max-width: auto">
         <div class="row g-0">
             <div class="col-md-8">
@@ -46,15 +65,20 @@
 
             <div class=" mx-auto m-2 p-1">
                 <img
-                     src="https://elasticbeanstalk-us-east-1-503379183917.s3.amazonaws.com/Photos/DSCN0004.JPG"
+                     
+                     src= "@ViewBag.Photo"; 
                      alt="..."
                      class="img-fluid"
                      width="300"
+                    
                 />
+                @{ 
+                    ViewBag.Photo = "https://elasticbeanstalk-us-east-1-503379183917.s3.amazonaws.com/Photos/notfound.png";
+                }
             </div>
         </div>
     </div>
-}
+                    }
 
 <div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true" page-class="btn"
      page-class-normal="btn-outline-dark"

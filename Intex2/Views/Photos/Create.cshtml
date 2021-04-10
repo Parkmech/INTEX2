@@ -1,0 +1,65 @@
+﻿@model Intex2.Models.Photo
+@using Amazon.S3; 
+@using System;
+@using System.IO;
+@using Amazon.S3.Model;
+@using System.Threading;
+@using System.Threading.Tasks;
+
+
+@{
+    ViewData["Title"] = "Create";
+    string bucketName = "elasticbeanstalk-us-east-1-503379183917/Photos";
+    string awsAccessKey = "ASIAXKM54ZEWRNJRLWX4";
+    string awsSecretKey = "OVwpXO3t4m7CqMohoRTGwFOmK+f5zxoZOKSONXmD";
+    IAmazonS3 client = new AmazonS3Client(awsAccessKey, awsSecretKey, Amazon.RegionEndpoint.USEast1);
+
+    FileInfo file = new FileInfo(@"C:/Users/Jeffrey/Downloads/IMG_0431.JPG");
+    string path = "Photos/testing_IMG_0431.JPG";
+
+    Amazon.S3.Model.PutObjectRequest request = new Amazon.S3.Model.PutObjectRequest()
+    {
+        InputStream = file.OpenRead(),
+        BucketName = bucketName,
+        Key = path
+    };
+
+    CancellationTokenSource source = new CancellationTokenSource();
+    CancellationToken token = source.Token;
+
+    PutObjectRequest realRequest = PutObjectRequest request;
+
+    PutObjectResponse response = client.PutObjectAsync(realRequest, token);
+}   
+
+<h1>Create</h1>
+
+<h4>Photo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="BurialId" class="control-label"></label>
+                <select asp-for="BurialId" class ="form-control" asp-items="ViewBag.BurialId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhotoId" class="control-label"></label>
+                <input asp-for="PhotoId" class="form-control" />
+                <span asp-validation-for="PhotoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
