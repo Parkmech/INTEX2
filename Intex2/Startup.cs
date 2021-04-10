@@ -32,11 +32,20 @@ namespace Intex2
 
             services.AddRazorPages().AddRazorRuntimeCompilation();
 
+            services.AddDbContext<FagElGamousContext>(opts =>
+                opts.UseSqlServer(Configuration[
+                    "ConnectionStrings:EgyptConnection"]));
+
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("RequireAdministratorRole",
-                     policy => policy.RequireRole("Admins"));
+                options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Admins"));
+
+                options.AddPolicy("RequireResearcherRole", policy => policy.RequireRole("Researcher"));
             });
+
+            services.AddDbContext<EgyptContext>(opts =>
+               opts.UseSqlServer(Configuration[
+                   "ConnectionStrings:EgyptConnection"]));
 
             services.AddDbContext<IdentityContext>(opts =>
                opts.UseSqlServer(Configuration[
@@ -84,9 +93,18 @@ namespace Intex2
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "create",
+                    pattern: "{controller=BurialCrud}/{action=Create}/{id?}");
+
+                endpoints.MapControllerRoute(
+                   "pagination",
+                   "BurialCrud/{pageNum}",
+                   new { Controller = "BurialCrud", action = "Index", pageNum = 1 });
             });
 
-            IdentitySeedData.CreateAdminAccount(app.ApplicationServices, Configuration);
+           // IdentitySeedData.CreateAdminAccount(app.ApplicationServices, Configuration);
         }
     }
 }

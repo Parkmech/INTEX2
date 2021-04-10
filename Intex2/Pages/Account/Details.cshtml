@@ -1,6 +1,7 @@
 ﻿@page
 @model DetailsModel
 <table class="table table-sm table-bordered">
+
     <tbody>
         @if (Model.IdentityUser == null)
         {
@@ -12,16 +13,23 @@
             <tr><th>Email</th><td>@Model.IdentityUser.Email</td></tr>
         }
     </tbody>
+
 </table>
+
 @functions {
+
     public class DetailsModel : PageModel
     {
+
         private UserManager<IdentityUser> userManager;
+
         public DetailsModel(UserManager<IdentityUser> manager)
         {
             userManager = manager;
         }
+
         public IdentityUser IdentityUser { get; set; }
+
         public async Task OnGetAsync()
         {
             if (User.Identity.IsAuthenticated)
