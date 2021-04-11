@@ -360,14 +360,14 @@ namespace Intex2.Controllers
             return RedirectToAction("Filtered", filtered);
         }
 
-        [HttpGet]
-        public IActionResult Filtered(FilterItems filterAtr)
+        [HttpPost]
+        public IActionResult Filtered(BurialListViewModel filterAtr)
         {
-            string sex = filterAtr.Sex;
-            string area = filterAtr.Area;
-            double length = filterAtr.Length;
-            double depth = filterAtr.Depth;
-
+            string sex = filterAtr.FilterItems.Sex;
+            string area = filterAtr.FilterItems.Area;
+            double length = filterAtr.FilterItems.Length;
+            double depth = filterAtr.FilterItems.Depth;
+            
 
 
             return View(new BurialListViewModel
@@ -375,13 +375,14 @@ namespace Intex2.Controllers
                 Burials = _context.Burials
                     //IS NOT NULL
                     //.FromSqlInterpolated($"SELECT * FROM Burials WHERE Sex LIKE {sex} AND Square LIKE {area}")
-                    .Where(b => b.GenderCode == sex || b.GenderCode != null)
-                    .Where(b => b.Square == area || b.Square != null)
+                    .Where(b => b.GenderCode == sex)
+                    .Where(b => b.Square == area)
                     .Where(b => b.LengthM >= length)
                     .Where(b => b.BurialDepth >= depth)
                     .ToList()
             });
         }
+
 
         //[HttpPost]
         //public IActionResult Filtered(FilterItems filterAtr)
