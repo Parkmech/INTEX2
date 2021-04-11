@@ -1,0 +1,30 @@
+@model IEnumerable<Intex2.Models.BiologicalSample>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<div class="row">
+    @foreach (var sample in Model)
+    {
+<div class="card text-center shadow-sm col-md-3 m-1 p-1">
+    <div class="card-header">
+        <h5 class="card-title"><i>@sample.BurialId</i></h5>
+    </div>
+    <div class="card-body">
+        <h5>Sample Rack: @sample.Rack</h5>
+        <h5 class="card-title">
+            @sample.Notes
+        </h5>
+        <p class="card-text">
+            Initials: @sample.Initials
+        </p>
+        <a class="btn btn-secondary" asp-controller="BioSampleCrud" asp-action="Edit" asp-route-id="@sample.BurialId" asp-route-notes="@sample.Notes" asp-route-initials="@sample.Initials">Edit</a>
+    </div>
+    <div class="card-footer text-muted">Date: @sample.Date </div>
+</div>
+                <br />}
+</div>

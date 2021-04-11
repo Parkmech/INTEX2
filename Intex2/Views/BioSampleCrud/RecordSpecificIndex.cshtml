@@ -1,0 +1,49 @@
+﻿@model BioSampleViewModel
+
+@{ ViewData["Title"] = "Index";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string printId;
+    if (Model.biologicalSamples.Count() > 0)
+    {
+         printId = "Biological Samples for " + Model.burial.BurialId;
+
+    }
+    else
+    {
+         printId = "There are no samples for " + Model.burial.BurialId;
+    }
+}
+
+<h1>@printId </h1>
+
+<div class="row">
+    @foreach (var sample in Model.biologicalSamples)
+    {
+<div class="card text-center shadow-sm col-md-3 m-1 p-1">
+    <div class="card-header">
+        <h5>Sample Rack: @sample.Rack</h5>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">
+            @sample.Notes
+        </h5>
+        <p class="card-text">
+            Initials: @sample.Initials
+        </p>
+        <div class="row text-center">
+            <a class="text-center btn btn-secondary" asp-controller="BioSampleCrud" asp-action="Edit" asp-route-id="@sample.BurialId" asp-route-notes="@sample.Notes" asp-route-initials="@sample.Initials">Edit</a>
+            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+            {
+                <a class="text-center btn btn-danger " asp-controller="BioSampleCrud" asp-action="Delete" asp-route-id="@sample.BurialId" asp-route-notes="@sample.Notes" asp-route-initials="@sample.Initials" >Delete</a>}
+        </div>
+    </div>
+    <div class="card-footer text-muted">Date: @sample.Date </div>
+</div>
+                <br />}
+</div>
+
+<a class="btn btn-primary" asp-action="create" asp-route-id="@Model.burial.BurialId">Create a Sample</a>
+
+<br /><br /><br /><br />

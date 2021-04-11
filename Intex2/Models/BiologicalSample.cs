@@ -25,7 +25,7 @@ namespace Intex2.Models
         public string Notes { get; set; }
         public string Initials { get; set; }
         public int Id { get; set; }
-        public byte[] SsmaTimeStamp { get; set; }
+        //public byte[] SsmaTimeStamp { get; set; }
 
         public virtual Burial Burial { get; set; }
     }
