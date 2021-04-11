@@ -71,16 +71,16 @@ namespace Intex2.Controllers
 
             string newid = id.Replace("%2F", "/");
 
-            Burial burial = _context.Burials.Where(x => x.BurialId == newid).FirstOrDefault();
+            //Burial burial = _context.Burials.Where(x => x.BurialId == newid).FirstOrDefault();
 
             if (newid == null)
             {
                 return NotFound();
             }
-            return View(new BioSampleViewModel()
-            {
-                burial = burial
-            });
+
+            ViewBag.id = newid;
+
+            return View();
 
         }
         
@@ -101,6 +101,21 @@ namespace Intex2.Controllers
             }
             ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId", biologicalSample.BurialId);
             return View(biologicalSample);
+        }
+
+        [HttpPost]
+        public IActionResult CustomCreate(BiologicalSample bio)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(bio);
+                _context.SaveChanges();
+                return View("RecordSpecificIndex", _context.Burials.Where(x => x.BurialId == bio.BurialId).FirstOrDefault());
+            }
+
+            ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId", bio.BurialId);
+            return View(bio);
+
         }
 
         // GET: BioSampleCrud/Edit/5
