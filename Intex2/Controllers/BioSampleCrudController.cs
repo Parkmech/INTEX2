@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Intex2.Models;
+using Intex2.Models.ViewModels;
 
 namespace Intex2.Controllers
 {
@@ -21,14 +22,22 @@ namespace Intex2.Controllers
         // GET: BioSampleCrud
         public IActionResult RecordSpecificIndex(string id)
         {
+
             string newid = id.Replace("%2F", "/");
-            if (newid == null)
+            if(newid == null)
             {
                 return NotFound();
             }
-            var samples = _context.BiologicalSamples.Where(x => x.BurialId == newid);
+            Burial burial = _context.Burials.Where(x => x.BurialId == newid).FirstOrDefault();
 
-            return View(samples);
+            var bioSamples = _context.BiologicalSamples.Where(x => x.BurialId == burial.BurialId);
+
+
+            return View(new BioSampleViewModel()
+            {
+                biologicalSamples = bioSamples,
+                burial = burial
+            });   
         }
 
             public async Task<IActionResult> Index()
@@ -57,11 +66,24 @@ namespace Intex2.Controllers
         }
 
         // GET: BioSampleCrud/Create
-        public IActionResult Create()
+        public IActionResult Create(string id)
         {
-            ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId");
-            return View();
+
+            string newid = id.Replace("%2F", "/");
+
+            Burial burial = _context.Burials.Where(x => x.BurialId == newid).FirstOrDefault();
+
+            if (newid == null)
+            {
+                return NotFound();
+            }
+            return View(new BioSampleViewModel()
+            {
+                burial = burial
+            });
+
         }
+        
 
         // POST: BioSampleCrud/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
@@ -70,30 +92,37 @@ namespace Intex2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("BurialId,Rack,F3,Bag,LowNs,HighNs,NorthOrSouth,LowEw,HighEw,EastOrWest,Area,BurialNumber,ClusterNumber,Date,PreviouslySampled,Notes,Initials,Id,SsmaTimeStamp")] BiologicalSample biologicalSample)
         {
+
             if (ModelState.IsValid)
             {
                 _context.Add(biologicalSample);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return View("RecordSpecificIndex", _context.Burials.Where(x => x.BurialId == biologicalSample.BurialId).FirstOrDefaultAsync());
             }
             ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId", biologicalSample.BurialId);
             return View(biologicalSample);
         }
 
         // GET: BioSampleCrud/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(string id, string initials, string notes)
         {
-            if (id == null)
+            string newid = id.Replace("%2F", "/");
+            string newNotes = notes.Replace("%2F", " ");
+            if (newid == null)
             {
                 return NotFound();
             }
 
-            var biologicalSample = await _context.BiologicalSamples.FindAsync(id);
+            var biologicalSample = _context.BiologicalSamples
+                .Where(x => x.BurialId == newid)
+                .Where(n => n.Notes == notes)
+                .Where(i => i.Initials == initials);
+
             if (biologicalSample == null)
             {
                 return NotFound();
             }
-            ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId", biologicalSample.BurialId);
+
             return View(biologicalSample);
         }
 

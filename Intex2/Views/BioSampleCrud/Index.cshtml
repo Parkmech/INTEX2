@@ -7,131 +7,24 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.BurialId) </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rack)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.F3)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Bag)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LowNs)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HighNs)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NorthOrSouth)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LowEw)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HighEw)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EastOrWest)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Area)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BurialNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClusterNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PreviouslySampled)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Notes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Initials)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Burial)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rack)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.F3)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Bag)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LowNs)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HighNs)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NorthOrSouth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LowEw)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HighEw)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EastOrWest)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Area)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClusterNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PreviouslySampled)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Notes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Initials)
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.Burial.BurialId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="row">
+    @foreach (var sample in Model)
+    {
+<div class="card text-center shadow-sm col-md-3 m-1 p-1">
+    <div class="card-header">
+        <h5 class="card-title"><i>@sample.BurialId</i></h5>
+    </div>
+    <div class="card-body">
+        <h5>Sample Rack: @sample.Rack</h5>
+        <h5 class="card-title">
+            @sample.Notes
+        </h5>
+        <p class="card-text">
+            Initials: @sample.Initials
+        </p>
+        <a class="btn btn-secondary" asp-controller="BioSampleCrud" asp-action="Edit" asp-route-id="@sample.BurialId" asp-route-notes="@sample.Notes" asp-route-initials="@sample.Initials">Edit</a>
+    </div>
+    <div class="card-footer text-muted">Date: @sample.Date </div>
+</div>
+                <br />}
+</div>

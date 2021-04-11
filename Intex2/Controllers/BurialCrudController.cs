@@ -197,8 +197,14 @@ namespace Intex2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
+            string newid = id.Replace("%2F", "/");
 
-            var burials = await _context.Burials.FindAsync(id);
+            if (newid == null)
+            {
+                return NotFound();
+            }
+
+            var burials = await _context.Burials.FindAsync(newid);
             _context.Burials.Remove(burials);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
