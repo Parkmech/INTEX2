@@ -6,6 +6,8 @@
 
   <ItemGroup>
     <Content Remove="mono_crash.11a6748113.0.json" />
+    <Content Remove="Views\BurialCrud\ScaffoldCreate.cshtml" />
+    <Content Remove="Views\BurialCrud\Success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\" />

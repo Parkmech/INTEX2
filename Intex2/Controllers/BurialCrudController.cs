@@ -95,8 +95,8 @@ namespace Intex2.Controllers
 
             if (ModelState.IsValid)
             {
-                //_context.Add(burials);
-                //await _context.SaveChangesAsync();
+                _context.Add(burials);
+                await _context.SaveChangesAsync();
                 string referenceId = burials.BurialId;
                 return View("Details", burials);
             }
