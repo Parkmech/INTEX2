@@ -3,17 +3,28 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 
+@{
+    ViewBag.Photo = "https://elasticbeanstalk-us-east-1-503379183917.s3.amazonaws.com/Photos/notfound.png";
+}
+
 @model BurialListViewModel
 
 <style>
     body {
-
         background-color: #E9ECEF;
     }
 </style>
 <br />
 @foreach (var mummy in Model.Burials)
 {
+    foreach (var x in Model.Photos)
+    {
+        if (mummy.BurialId == x.BurialId)
+        {
+            ViewBag.Photo = "https://elasticbeanstalk-us-east-1-503379183917.s3.amazonaws.com/Photos/" + x.PhotoId;
+            break;
+        }
+    }
     <div class="card shadow mb-3" style="max-width: auto">
         <div class="row g-0">
             <div class="col-md-8">
@@ -45,13 +56,14 @@
             </div>
 
             <div class=" mx-auto m-2 p-1">
-                <img
-                     src="https://elasticbeanstalk-us-east-1-503379183917.s3.amazonaws.com/Photos/DSCN0004.JPG"
+                <img src="@ViewBag.Photo" ;
                      alt="..."
                      class="img-fluid"
-                     width="300"
-                />
+                     width="300" />
             </div>
+            @{
+                ViewBag.Photo = "https://elasticbeanstalk-us-east-1-503379183917.s3.amazonaws.com/Photos/notfound.png";
+            }
         </div>
     </div>
 }
@@ -63,22 +75,22 @@
 </div>
 <div>
 
-    
+
     <form asp-action="Filtered" method="post">
 
         <div class="form-group">
             <label asp-for="@Model.FilterItems.Sex">Sex:</label>
-            <input type="text"asp-for="@Model.FilterItems.Sex"/>
+            <input type="text" asp-for="@Model.FilterItems.Sex" />
             @*<select name="filter" class="form-control" asp-for="@x.Sex">
-                <option value="M">Male</option>
-                <option value="F">Female</option>
-                <option value="all">All</option>
-            </select>*@
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                    <option value="all">All</option>
+                </select>*@
         </div>
 
         <div class="form-group">
             <label asp-for="@Model.FilterItems.Area">Area:</label>
-            <input type="text" asp-for="@Model.FilterItems.Area" >
+            <input type="text" asp-for="@Model.FilterItems.Area">
         </div>
 
         <div class="form-group">
@@ -93,4 +105,5 @@
 
         <button type="submit" class="btn btn-primary">Filter</button>
         <a asp-action="Index" asp-route-id="" asp-controller="BurialCrud" class="btn btn-primary">Reset</a>
-    </form></div>
+    </form>
+</div>

@@ -12,5 +12,6 @@ namespace Intex2.Models
         public IEnumerable<Burial> Burials { get; set; }
         public FilterItems FilterItems { get; set; }
         public PagingInfo PagingInfo { get; set; }
+        public IEnumerable<Photo> Photos{ get; set; }
     }
 }

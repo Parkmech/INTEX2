@@ -49,8 +49,9 @@ namespace Intex2.Controllers
                     //FOR THE PRESENTATION TO PRESENT CLEAN DATA .Where(x=> x.BurialSouthToFeet != null)
                     .Count()
                 },
+                Photos = _context.Photos
 
-            });
+            }) ;
         }
 
         //[HttpPost]
