@@ -100,7 +100,7 @@ namespace Intex2.Controllers
                 return View("RecordSpecificIndex", _context.Burials.Where(x => x.BurialId == biologicalSample.BurialId).FirstOrDefaultAsync());
             }
             ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId", biologicalSample.BurialId);
-            return View(biologicalSample);
+            return View("Index");
         }
 
         [HttpPost]
@@ -110,7 +110,14 @@ namespace Intex2.Controllers
             {
                 _context.Add(bio);
                 _context.SaveChanges();
-                return View("RecordSpecificIndex", _context.Burials.Where(x => x.BurialId == bio.BurialId).FirstOrDefault());
+                return View("RecordSpecificIndex", new BioSampleViewModel
+                {
+                    biologicalSamples = _context.BiologicalSamples.Where(x => x.BurialId == bio.BurialId),
+
+                    burial = _context.Burials.Where(x => x.BurialId == bio.BurialId).FirstOrDefault(),
+
+                    bioSample = bio
+                });
             }
 
             ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId", bio.BurialId);
@@ -178,16 +185,20 @@ namespace Intex2.Controllers
         }
 
         // GET: BioSampleCrud/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(string id, string initials, string notes)
         {
-            if (id == null)
+            string newid = id.Replace("%2F", "/");
+            if (newid == null)
             {
                 return NotFound();
             }
 
             var biologicalSample = await _context.BiologicalSamples
                 .Include(b => b.Burial)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .Where(n => n.Notes == notes)
+                .Where(i => i.Initials == initials)
+                .FirstOrDefaultAsync(m => m.BurialId == newid);
+                
             if (biologicalSample == null)
             {
                 return NotFound();
@@ -199,12 +210,24 @@ namespace Intex2.Controllers
         // POST: BioSampleCrud/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string burialId, string Notes, string Initials )
         {
-            var biologicalSample = await _context.BiologicalSamples.FindAsync(id);
+            var biologicalSample = await _context.BiologicalSamples
+                .Where(b => b.BurialId == burialId)
+                .Where(n => n.Notes == Notes)
+                .Where(i => i.Initials == Initials)
+                .FirstOrDefaultAsync();
+
             _context.BiologicalSamples.Remove(biologicalSample);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return View("RecordSpecificIndex", new BioSampleViewModel()
+            {
+                biologicalSamples = _context.BiologicalSamples
+                .Where(x => x.BurialId == burialId),
+
+                burial = _context.Burials
+                .Where(x => x.BurialId == burialId).FirstOrDefault()
+            });
         }
 
         private bool BiologicalSampleExists(int id)

@@ -4,11 +4,10 @@
 
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    var fakeModel = Model.biologicalSamples.ToList();
     string printId;
-    if (fakeModel.Count() > 0)
+    if (Model.biologicalSamples.Count() > 0)
     {
-         printId = "Biological Samples for " + fakeModel[0].BurialId;
+         printId = "Biological Samples for " + Model.burial.BurialId;
 
     }
     else
@@ -33,7 +32,12 @@
         <p class="card-text">
             Initials: @sample.Initials
         </p>
-        <a class="btn btn-secondary" asp-controller="BioSampleCrud" asp-action="Edit" asp-route-id="@sample.BurialId" asp-route-notes="@sample.Notes" asp-route-initials="@sample.Initials" >Edit</a>
+        <div class="row text-center">
+            <a class="text-center btn btn-secondary" asp-controller="BioSampleCrud" asp-action="Edit" asp-route-id="@sample.BurialId" asp-route-notes="@sample.Notes" asp-route-initials="@sample.Initials">Edit</a>
+            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+            {
+                <a class="text-center btn btn-danger " asp-controller="BioSampleCrud" asp-action="Delete" asp-route-id="@sample.BurialId" asp-route-notes="@sample.Notes" asp-route-initials="@sample.Initials" >Delete</a>}
+        </div>
     </div>
     <div class="card-footer text-muted">Date: @sample.Date </div>
 </div>
