@@ -34,7 +34,7 @@
             <div class="row">
 
                 <div class="col-md-2">
-                    <span>Date of Excavation: </span>
+                    <label asp-for="YearExcav" class="control-label">Date of Excavation:</label>
                 </div>
 
                 <div class="col-md-2">
@@ -67,7 +67,7 @@
                 <div class="col-md-4">
                     <!--North or South-->
                     <div class="form-group shadow-sm">
-                        <label asp-for="NorthOrSouth" class="control-label">Select North or South Position</label>
+                        <label asp-for="NorthOrSouth" class="control-label">North or South Position:</label>
                         <select asp-for="NorthOrSouth" class="form-control" placeholder="North or South">
                             <option disabled selected> -- Select an option -- </option>
                             <option value="N">N - North</option>
@@ -80,7 +80,7 @@
                 <div class="col-md-4">
                     <!--This is the NS Low ID (i.e. the 140 in 140/150-->
                     <div class="form-group shadow-sm">
-                        <label asp-for="NsLowPosition" class="control-label">N/S Low Position</label>
+                        <label asp-for="NsLowPosition" class="control-label">N/S Low Position:</label>
                         <input asp-for="NsLowPosition" class="form-control" placeholder="Low Position (N/S)" />
                         <span asp-validation-for="NsLowPosition" class="text-danger"></span>
                     </div>
@@ -102,7 +102,7 @@
                 <div class="col-md-4">
                     <!-- East or West -->
                     <div class="form-group shadow-sm">
-                        <label asp-for="EastOrWest" class="control-label">Select East or West Position</label>
+                        <label asp-for="EastOrWest" class="control-label">East or West Position:</label>
                         <select asp-for="EastOrWest" class="form-control" placeholder="East or West">
                             <option class="text-muted" disabled selected> -- Select an option -- </option>
                             <option value="E">E - East</option>
@@ -115,7 +115,7 @@
                 <div class="col-md-4">
                     <!--This is the EW Low ID (i.e. the 40 in 40/50)-->
                     <div class="form-group shadow-sm">
-                        <label asp-for="EwLowPosition" class="control-label">E/W Low Position</label>
+                        <label asp-for="EwLowPosition" class="control-label">E/W Low Position:</label>
                         <input asp-for="EwLowPosition" class="form-control" placeholder="Low Position (E/W)" />
                         <span asp-validation-for="EwLowPosition" class="text-danger"></span>
                     </div>
@@ -124,7 +124,7 @@
                 <div class="col-md-4">
                     <!--This is the EW High ID (i.e. the 50 in 40/50)-->
                     <div class="form-group shadow-sm">
-                        <label asp-for="NorthOrSouth" class="control-label">E/W High Position</label>
+                        <label asp-for="NorthOrSouth" class="control-label">E/W High Position:</label>
                         <input asp-for="EwHighPosition" class="form-control" placeholder="High Position (E/W)" />
                         <span asp-validation-for="EwHighPosition" class="text-danger"></span>
                     </div>
@@ -137,7 +137,7 @@
                 <div class="col-md-6">
                     <!-- Area (NW, NE, SW, SE) -->
                     <div class="form-group shadow-sm">
-                        <label asp-for="Square" class="control-label">Burial Area</label>
+                        <label asp-for="Square" class="control-label">Burial Area:</label>
                         <select asp-for="Square" class="form-control" placeholder="Area">
                             <option class="text-muted" disabled selected> -- Select an option -- </option>
                             <option value="NE">NE - Northeast</option>
@@ -152,7 +152,7 @@
                 <div class="col-md-6">
                     <!-- Burial Number -->
                     <div class="form-group shadow-sm">
-                        <label asp-for="BurialNumber" class="control-label">Burial Number</label>
+                        <label asp-for="BurialNumber" class="control-label">Burial Number:</label>
                         <input asp-for="BurialNumber" class="form-control" placeholder="Burial Number" />
                         <span asp-validation-for="BurialNumber" class="text-danger"></span>
                     </div>
@@ -168,7 +168,7 @@
 
                 <div class="col-md-6">
                     <div class="form-group shadow-sm">
-                        <label asp-for="BurialSouthToHead" class="control-label text-muted">Burial: South to Head</label>
+                        <label asp-for="BurialSouthToHead" class="control-label">Burial: South to Head</label>
                         <input asp-for="BurialSouthToHead" class="form-control" placeholder="Enter in meters" />
                         <span asp-validation-for="BurialSouthToHead" class="text-danger"></span>
                     </div>
@@ -176,7 +176,7 @@
 
                 <div class="col-md-6">
                     <div class="form-group shadow-sm">
-                        <label asp-for="BurialSouthToFeet" class="control-label text-muted">Burial: South to Feet</label>
+                        <label asp-for="BurialSouthToFeet" class="control-label">Burial: South to Feet</label>
                         <input asp-for="BurialSouthToFeet" class="form-control" placeholder="Enter in meters" />
                         <span asp-validation-for="BurialSouthToFeet" class="text-danger"></span>
                     </div>
@@ -188,14 +188,16 @@
 
                 <div class="col-md-6">
                     <div class="form-group shadow-sm">
-                        <input asp-for="BurialWestToHead" class="form-control" placeholder="Burial West to Head" />
+                        <label asp-for="BurialWestToHead" class="control-label">Burial: West to Head</label>
+                        <input asp-for="BurialWestToHead" class="form-control" placeholder="Enter in meters" />
                         <span asp-validation-for="BurialWestToHead" class="text-danger"></span>
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="form-group shadow-sm">
-                        <input asp-for="BurialWestToFeet" class="form-control" placeholder="Burial West to Feet" />
+                        <label asp-for="BurialWestToFeet" class="control-label">Burial: West to Feet</label>
+                        <input asp-for="BurialWestToFeet" class="form-control" placeholder="Enter in meters" />
                         <span asp-validation-for="BurialWestToFeet" class="text-danger"></span>
                     </div>
                 </div>
@@ -206,14 +208,16 @@
 
                 <div class="col-md-6">
                     <div class="form-group shadow-sm">
-                        <input asp-for="LengthM" class="form-control" placeholder="Burial Length (in Meters)" />
+                        <label asp-for="LengthM" class="control-label">Burial Length:</label>
+                        <input asp-for="LengthM" class="form-control" placeholder="Enter in meters" />
                         <span asp-validation-for="LengthM" class="text-danger"></span>
                     </div>
                 </div>
 
                 <div class="col-md-6 ">
                     <div class="form-group shadow-sm">
-                        <input asp-for="BurialDepth" class="form-control" placeholder="Burial Depth (in Meters)" />
+                        <label asp-for="BurialDepth" class="control-label">Burial Depth:</label>
+                        <input asp-for="BurialDepth" class="form-control" placeholder="Enter in meters" />
                         <span asp-validation-for="BurialDepth" class="text-danger"></span>
                     </div>
                 </div>
@@ -232,7 +236,12 @@
 
                 <div class="col-md-6">
                     <div class="form-group shadow-sm">
-                        <input asp-for="Goods" class="form-control" placeholder="Burial Goods" />
+                        <label asp-for="Goods" class="control-label">Artifacts found with Burial?:</label>
+                        <select asp-for="Goods" class="form-control" placeholder="Burial Goods">
+                            <option class="text-muted" disabled selected>--Select an option--</option>
+                            <option value="Y">Y - Yes</option>
+                            <option value="N">N - No</option>
+                        </select>
                         <span asp-validation-for="Goods" class="text-danger"></span>
                     </div>
                 </div>
@@ -246,7 +255,14 @@
 
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input asp-for="BurialPreservation" class="form-control" placeholder="Burial preservation" />
+                        <label asp-for="BurialPreservation" class="control-label">Condition of Burial:</label>
+                        <select asp-for="BurialPreservation" class="form-control" placeholder="Burial preservation">
+                            <option class="text-muted" selected disabled>--Select an option--</option>
+                            <option value="1">1 - Only Bones</option>
+                            <option value="2">2 - 5-25% tissue and/or textiles</option>
+                            <option value="3">3 - 50% or less tissue and/or textiles</option>
+                            <option value="4">4 - 75% or less tissue and/or textiles</option>
+                        </select>
                         <span asp-validation-for="BurialPreservation" class="text-danger"></span>
                     </div>
                 </div>
@@ -255,11 +271,26 @@
 
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input asp-for="BurialDirection" class="form-control" placeholder="Burial head direction" />
+                        <label asp-for="BurialDirection" class="control-label">Burial Direction:</label>
+                        <select asp-for="BurialDirection" class="form-control" placeholder="Burial direction:">
+                            <option class="text-muted" selected disabled>--Select an option--</option>
+                            <option value="E">E - Eastward Head Direction</option>
+                            <option value="W">W - Westward Head Direction</option>
+                        </select>
                         <span asp-validation-for="BurialDirection" class="text-danger"></span>
                     </div>
                 </div>
 
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-10">
+                    <label asp-for="OtherNotes" class="control-label">Burial Notes:</label>
+                    <textarea asp-for="OtherNotes" class="form-control" placeholder="Enter notes here..."></textarea>
+                    <span asp-validation-for="OtherNotes" class="text-danger"></span>
+
+                </div>
 
             </div>
 
