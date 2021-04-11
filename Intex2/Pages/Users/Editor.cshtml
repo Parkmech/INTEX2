@@ -1,28 +1,59 @@
 ﻿@page "{id}"
 @model EditorModel
-<h5 class="bg-warning text-white text-center p-2">Edit User</h5>
-<form method="post">
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="form-group">
-        <label>ID</label>
-        <input name="Id" class="form-control" value="@Model.Id" disabled />
-        <input name="Id" type="hidden" value="@Model.Id" />
-    </div>
-    <div class="form-group">
-        <label>User Name</label>
-        <input name="UserName" class="form-control" value="@Model.UserName" />
-    </div>
-    <div class="form-group">
-        <label>Email</label>
-        <input name="Email" class="form-control" value="@Model.Email" />
-    </div>
-    <div class="form-group">
-        <label>New Password</label>
-        <input name="Password" class="form-control" value="@Model.Password" />
-    </div>
-    <button type="submit" class="btn btn-warning">Submit</button>
-    <a class="btn btn-secondary" asp-page="list">Back</a>
-</form>
+
+<header class="jumbotron my-4 bg-white shadow-sm">
+
+    <h1 class="display-3">Update User "@Model.UserName"</h1>
+
+    <form method="post">
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>ID</label>
+                    <input name="Id" class="shadow-sm form-control" value="@Model.Id" disabled />
+                    <input name="Id" type="hidden" value="@Model.Id" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>User Name</label>
+                    <input name="UserName" class="shadow-sm form-control" value="@Model.UserName" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input name="Email" class="shadow-sm form-control" value="@Model.Email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>New Password</label>
+                    <input name="Password" class="shadow-sm form-control" value="@Model.Password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-warning">Submit</button>
+        <a class="btn btn-secondary" asp-page="list">Back</a>
+
+    </form>
+
+</header>
+
 @functions {
     public class EditorModel : AdminPageModel
     {
@@ -35,10 +66,10 @@
         [Required]
         public string Id { get; set; }
         [BindProperty]
-        [Required]
+        [Required(ErrorMessage = "Enter a username")]
         public string UserName { get; set; }
         [BindProperty]
-        [Required]
+        [Required(ErrorMessage = "Enter a email")]
         [EmailAddress]
         public string Email { get; set; }
         [BindProperty]

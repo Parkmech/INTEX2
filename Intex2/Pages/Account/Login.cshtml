@@ -1,66 +1,79 @@
 ﻿@page
 @model LoginModel
-<div class="bg-secondary text-center text-white p-2"><h4>Log In</h4></div>
 <div class="m-1 text-danger" asp-validation-summary="All"></div>
 
-<form method="post">
+<header class="jumbotron my-4 bg-white shadow-sm">
 
-    <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+    <h1 class="display-3">Login</h1>
 
-    <div class="form-group">
-        <label>UserName</label>
-        <input class="form-control" asp-for="UserName" />
-    </div>
+    <form method="post">
 
-    <div class="form-group">
-        <label>Password</label>
-        <input asp-for="Password" type="password" class="form-control" />
-    </div>
+        <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
 
-    <button class="btn btn-primary" type="submit">Log In</button>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>UserName:</label>
+                    <input class="form-control" asp-for="UserName" />
+                </div>
+            </div>
+        </div>
 
-</form>
-      
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Password:</label>
+                    <input asp-for="Password" type="password" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Log In</button>
+
+    </form>
+ 
+</header>
 
 
-    @functions {
-        public class LoginModel : PageModel
+
+@functions {
+    public class LoginModel : PageModel
+    {
+        private SignInManager<IdentityUser> signInManager;
+
+        public LoginModel(SignInManager<IdentityUser> signinMgr)
         {
-            private SignInManager<IdentityUser> signInManager;
+            signInManager = signinMgr;
+        }
 
-            public LoginModel(SignInManager<IdentityUser> signinMgr)
+        [BindProperty]
+        [Required]
+        public string UserName { get; set; }
+
+        [BindProperty]
+        [Required]
+        public string Password { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+
+        public string ReturnUrl { get; set; }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+
+            if (ModelState.IsValid)
             {
-                signInManager = signinMgr;
-            }
-
-            [BindProperty]
-            [Required]
-            public string UserName { get; set; }
-
-            [BindProperty]
-            [Required]
-            public string Password { get; set; }
-
-            [BindProperty(SupportsGet = true)]
-
-            public string ReturnUrl { get; set; }
-
-            public async Task<IActionResult> OnPostAsync()
-            {
-
-                if (ModelState.IsValid)
+                Microsoft.AspNetCore.Identity.SignInResult result =
+                    await signInManager.PasswordSignInAsync(UserName, Password,
+                        false, false);
+                if (result.Succeeded)
                 {
-                    Microsoft.AspNetCore.Identity.SignInResult result =
-                        await signInManager.PasswordSignInAsync(UserName, Password,
-                            false, false);
-                    if (result.Succeeded)
-                    {
-                        return Redirect(ReturnUrl ?? "/");
-                    }
-                    ModelState.AddModelError("", "Invalid username or password");
+                    return Redirect(ReturnUrl ?? "/");
                 }
-
-                return Page();
+                ModelState.AddModelError("", "Invalid username or password");
             }
+
+            return Page();
         }
     }
+}
