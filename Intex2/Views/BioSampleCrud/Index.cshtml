@@ -7,18 +7,24 @@
 
 <h1>Index</h1>
 
-@foreach (var sample in Model)
-{
- @sample.Rack
-    <div class="card text-center">
-        <div class="card-header">Sample Rack: @sample.Rack</div>
-        <div class="card-body">
-            <h5 class="card-title">Notes</h5>
-            <p class="card-text">
-                @sample.Notes
-            </p>
-            <a class="btn btn-secondary" asp-controller="BioSampleCrud" asp-action="Edit" asp-route="@sample.BurialId">Edit</a>
-        </div>
-        <div class="card-footer text-muted">Sample Date: @sample.Date  Initials: @sample.Initials</div>
+<div class="row">
+    @foreach (var sample in Model)
+    {
+<div class="card text-center shadow-sm col-md-3 m-1 p-1">
+    <div class="card-header">
+        <h5 class="card-title"><i>@sample.BurialId</i></h5>
     </div>
-}
+    <div class="card-body">
+        <h5>Sample Rack: @sample.Rack</h5>
+        <h5 class="card-title">
+            @sample.Notes
+        </h5>
+        <p class="card-text">
+            Initials: @sample.Initials
+        </p>
+        <a class="btn btn-secondary" asp-controller="BioSampleCrud" asp-action="Edit" asp-route-id="@sample.BurialId" asp-route-notes="@sample.Notes" asp-route-initials="@sample.Initials">Edit</a>
+    </div>
+    <div class="card-footer text-muted">Date: @sample.Date </div>
+</div>
+                <br />}
+</div>

@@ -1,9 +1,10 @@
-﻿@model IEnumerable<Intex2.Models.BiologicalSample>
+﻿@model BioSampleViewModel
 
 @{ ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    var fakeModel = Model.ToList();
 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var fakeModel = Model.biologicalSamples.ToList();
     string printId;
     if (fakeModel.Count() > 0)
     {
@@ -12,14 +13,14 @@
     }
     else
     {
-         printId = "There are no samples for this burial.";
+         printId = "There are no samples for " + Model.burial.BurialId;
     }
-
 }
+
 <h1>@printId </h1>
 
 <div class="row">
-    @foreach (var sample in Model)
+    @foreach (var sample in Model.biologicalSamples)
     {
 <div class="card text-center shadow-sm col-md-3 m-1 p-1">
     <div class="card-header">
@@ -38,3 +39,5 @@
 </div>
                 <br />}
 </div>
+
+<a class="btn btn-primary" asp-action="create" asp-route-id="@Model.burial.BurialId">Create a Sample</a>

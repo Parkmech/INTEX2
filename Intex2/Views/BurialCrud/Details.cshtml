@@ -148,7 +148,8 @@
         </div>
         <div class="form-group text-left">
 
-            <a class="text-center btn btn-primary col-md-2 m-2" asp-area="" asp-route-id="@Model.BurialId" asp-controller="BioSampleCrud" asp-action="RecordSpecificIndex">View Biological Samples</a>
+                <a  class="text-center btn btn-primary col-md-2 m-2" asp-controller="BioSampleCrud" asp-action="RecordSpecificIndex" asp-route-id="@Model.BurialId">View Biological Samples</a>
+            
 
 
             @*<form asp-controller="BioSampleCrud" asp-action="Index">
