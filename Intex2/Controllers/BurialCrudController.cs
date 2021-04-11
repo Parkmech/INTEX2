@@ -360,6 +360,34 @@ namespace Intex2.Controllers
             return RedirectToAction("Filtered", filtered);
         }
 
+        //[HttpPost]
+        //public IActionResult Filtered(BurialListViewModel filterAtr)
+        //{
+        //    string sex = filterAtr.FilterItems.Sex;
+        //    string area = filterAtr.FilterItems.Area;
+        //    double length = filterAtr.FilterItems.Length;
+        //    double depth = filterAtr.FilterItems.Depth;
+
+
+
+        //    return View(new BurialListViewModel
+        //    {
+        //        Burials = _context.Burials
+        //            //IS NOT NULL
+        //            //.FromSqlInterpolated($"SELECT * FROM Burials WHERE Sex LIKE {sex} AND Square LIKE {area}")
+        //            //x => empId == "" ? x.Id == empId : true
+        //            //.Where(b => sex == "ALL" ? "%" : b.Sex == sex)
+        //            .Where(b => b.GenderCode == sex)
+        //            .Where(b => b.Square == area)
+        //            .Where(b => b.LengthM >= length)
+        //            .Where(b => b.BurialDepth >= depth)
+        //            .ToList()
+
+
+
+        //    });
+        //}
+
         [HttpPost]
         public IActionResult Filtered(BurialListViewModel filterAtr)
         {
@@ -367,16 +395,22 @@ namespace Intex2.Controllers
             string area = filterAtr.FilterItems.Area;
             double length = filterAtr.FilterItems.Length;
             double depth = filterAtr.FilterItems.Depth;
-            
 
+            if (sex == "ALL")
+            {
+                sex = "%";
+            }
+            if (area == "ALL")
+            {
+                area = "%";
+            }
 
             return View(new BurialListViewModel
             {
                 Burials = _context.Burials
+                    //.Where(b => b.Sex == (string.IsNullOrEmpty(sex)))
                     //IS NOT NULL
-                    //.FromSqlInterpolated($"SELECT * FROM Burials WHERE Sex LIKE {sex} AND Square LIKE {area}")
-                    .Where(b => b.GenderCode == sex)
-                    .Where(b => b.Square == area)
+                    .FromSqlInterpolated($"SELECT * FROM Burials WHERE Sex LIKE {sex} AND Square LIKE {area}")
                     .Where(b => b.LengthM >= length)
                     .Where(b => b.BurialDepth >= depth)
                     .ToList()
