@@ -30,6 +30,6 @@ namespace Intex2.Models
         public string GilesGender { get; set; }
         public string BodyGender { get; set; }
         public int Id { get; set; }
-        public byte[] SsmaTimeStamp { get; set; }
+        //public byte[] SsmaTimeStamp { get; set; }
     }
 }

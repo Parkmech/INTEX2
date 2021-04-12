@@ -6,7 +6,10 @@
 
 
 @{ ViewData["Title"] = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml"; }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
 <!--NEW VIEW-->
 <style>
 
@@ -23,27 +26,36 @@
         <h1>Burial Record Details for @Model.BurialId</h1>
 
         <p><i>This section contains the main data from the initial exhumation</i></p>
-
+        <hr />
         <div class="row">
-     
+
             <div class="col-md-6">
                 <h2>Record Created By: @Model.InitialsOfDataEntryChecker</h2>
             </div>
         </div>
-        <br />
 
-        <div class="row">
+        <hr />
 
-            <div class="col-md-6">
-                <h2>Date of Excavation</h2>
-                <h5>Year: @Model.YearExcav</h5>
-                <h5>Month: @Model.MonthExcavated</h5>
-                <h5>Day: @Model.DateExcavated</h5>
+        <div>
+            <h2>Date of Excavation</h2>
+            <div class="row">
+                
+                <div class="col-md-4">
+                    <h5>Year: @Model.YearExcav</h5>
+                </div>
+
+                <div class="col-md-4">
+                    <h5>Month: @Model.MonthExcavated</h5>
+                </div>
+
+                <div class="col-md-4">
+                    <h5>Day: @Model.DateExcavated</h5>
+                </div>
             </div>
 
         </div>
+        <hr />
 
-        <br />
         <h2>Burial ID</h2>
 
         <div class="row">
@@ -98,7 +110,7 @@
 
         </div>
 
-        <br />
+        <hr />
 
         <h2>Metrics</h2>
 
@@ -134,11 +146,14 @@
 
         </div>
 
-        <br />
+        <hr />
 
         <h2>Observations</h2>
 
         <div class="row">
+            <div class="col-md-4">
+                @Model.BurialPreservation
+            </div>
 
             <div class="col-md-6">
                 <h5>General Notes: <br /> <i>@Model.OtherNotes</i> </h5>
@@ -148,15 +163,11 @@
         </div>
         <div class="form-group text-left">
 
-                <a  class="text-center btn btn-primary col-md-2 m-2" asp-controller="BioSampleCrud" asp-action="RecordSpecificIndex" asp-route-id="@Model.BurialId">View Biological Samples</a>
-            
+            <a class="text-center btn btn-primary col-md-3 m-1" asp-controller="BioSampleCrud" asp-action="RecordSpecificIndex" asp-route-id="@Model.BurialId">View Biological Samples</a>
 
+            <a class="text-center btn btn-success col-md-3 m-1" asp-controller="CarbonDatingCrud" asp-action="RecordDetails" asp-route-id="@Model.BurialId">View Carbon Dating Data</a>
 
-            @*<form asp-controller="BioSampleCrud" asp-action="Index">
-            <input type="hidden" asp-for="@Model.BurialId" />
-            <input type="submit" value="View Biological Samples" class="btn btn-warning col-sm-1" />
-        </form>
-            *@
+           
         </div>
         <div class="form-group text-right">
 
