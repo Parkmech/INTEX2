@@ -104,12 +104,14 @@ namespace Intex2.Controllers
         }
 
         [HttpPost]
-        public IActionResult CustomCreate(BiologicalSample bio)
+        public IActionResult CustomCreate([Bind("BurialId,Rack,F3,Bag,LowNs,HighNs,NorthOrSouth,LowEw,HighEw,EastOrWest,Area,BurialNumber,ClusterNumber,Date,PreviouslySampled,Notes,Initials,Id")] BiologicalSample bio)
         {
             if (ModelState.IsValid)
             {
+              
                 _context.Add(bio);
                 _context.SaveChanges();
+
                 return View("RecordSpecificIndex", new BioSampleViewModel
                 {
                     biologicalSamples = _context.BiologicalSamples.Where(x => x.BurialId == bio.BurialId),
@@ -126,19 +128,12 @@ namespace Intex2.Controllers
         }
 
         // GET: BioSampleCrud/Edit/5
-        public async Task<IActionResult> Edit(string id, string initials, string notes)
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
         {
-            string newid = id.Replace("%2F", "/");
-            if (newid == null)
-            {
-                return NotFound();
-            }
 
             BiologicalSample biologicalSample = _context.BiologicalSamples
-                .Where(x => x.BurialId == newid)
-                .Where(n => n.Notes == notes)
-                .Where(i => i.Initials == initials)
-                .FirstOrDefault();
+                .Where(x => x.Id == id).FirstOrDefault();
 
             if (biologicalSample == null)
             {
@@ -147,23 +142,15 @@ namespace Intex2.Controllers
 
             return View(biologicalSample);
         }
-
-        // POST: BioSampleCrud/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //POST
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(BiologicalSample bio)
+        public IActionResult CustomEdit(BiologicalSample bio)
         {
-            bio.BurialId = bio.BurialId.Replace("%2F", "/");
-           
             if (ModelState.IsValid)
             {
-                {
-                    _context.Update(bio);
-                    _context.SaveChanges();
-                }
-            
+                _context.Update(bio);
+                _context.SaveChanges();
+
                 return View("RecordSpecificIndex", new BioSampleViewModel
                 {
                     biologicalSamples = _context.BiologicalSamples.Where(x => x.BurialId == bio.BurialId),
@@ -195,6 +182,7 @@ namespace Intex2.Controllers
             {
                 return NotFound();
             }
+            ViewBag.id = newid;
 
             return View(biologicalSample);
         }
