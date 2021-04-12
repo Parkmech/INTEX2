@@ -307,6 +307,7 @@ namespace Intex2.Controllers
             string bdirection = filterAtr.FilterItems.BDirection;
             string nors = filterAtr.FilterItems.NorS;
             string eorw = filterAtr.FilterItems.EorW;
+            string burialid = filterAtr.FilterItems.BurialId;
 
 
             if (sex == "ALL")
@@ -330,12 +331,12 @@ namespace Intex2.Controllers
                 eorw = "%";
             }
 
+            burialid = "%" + burialid + "%";
+
             return View(new BurialListViewModel
             {
                 Burials = _context.Burials
-                    //.Where(b => b.Sex == (string.IsNullOrEmpty(sex)))
-                    //IS NOT NULL
-                    .FromSqlInterpolated($"SELECT * FROM Burials WHERE Sex LIKE {sex} AND Square LIKE {area} AND Burial_Direction LIKE {bdirection} AND North_or_South LIKE {nors} AND East_or_West LIKE {eorw}")
+                    .FromSqlInterpolated($"SELECT * FROM Burials WHERE Gender_Code LIKE {sex} AND Square LIKE {area} AND Burial_Direction LIKE {bdirection} AND North_or_South LIKE {nors} AND East_or_West LIKE {eorw} AND BurialID LIKE {burialid}")
                     .Where(b => b.LengthM >= length)
                     .Where(b => b.BurialDepth >= depth)
                     .ToList()

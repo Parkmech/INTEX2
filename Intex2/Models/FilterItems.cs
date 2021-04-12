@@ -14,6 +14,7 @@ namespace Intex2.Models
         public string NorS { get; set; }
         public string EorW { get; set; }
         public string BDirection { get; set; }
+        public string BurialId { get; set; }
 
     }
 }
