@@ -3,23 +3,48 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 
-@model BurialListViewModel
-
 @{
-    ViewData["Title"] = "Filtered";
+    ViewBag.Photo = "https://elasticbeanstalk-us-east-1-503379183917.s3.amazonaws.com/Photos/notfound.png";
 }
 
+@model BurialListViewModel
 
-<div class="row">
-    <div class="col-sm-2">
-        <form asp-action="Filtered" method="post">
+<style>
+    body {
+        background-color: #E9ECEF;
+    }
+</style>
+<br />
 
-            <div class="form-group">
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <!--Bootstrap used to create a hidden item that is displayed when button is clicked-->
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#filter">Custom Filter:</button>
+        </div>
+        <div class="col-sm-6 pull-right">
+            <form asp-action="Search" method="post">
+                <div class="form-actions no-color">
+                    <p class="float-right">
+                        Search: <input type="text" name="SearchString" value="@ViewData["SearchFilter"]" />
+                        <input type="submit" value="" class="btn btn-default" /> @*|
+                            <a class="btn btn-block" asp-action="Index">&#8592; Back</a>*@
+                    </p>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container collapse" id="filter">
+    <form asp-action="Filtered" method="post" id="filterForm">
+        <div class="row">
+            <div class="form-group col-md-3">
                 <label asp-for="@Model.FilterItems.BurialId">Burial ID</label>
                 <input class="form-control" type="text" asp-for="@Model.FilterItems.BurialId" />
             </div>
 
-            <div class="form-group">
+            <div class="form-group col-md-3">
                 <label asp-for="@Model.FilterItems.Sex">Sex:</label>
                 <select asp-for="@Model.FilterItems.Sex" class="form-control">
                     <option value="ALL">All</option>
@@ -29,7 +54,7 @@
                 </select>
             </div>
 
-            <div class="form-group">
+            <div class="form-group col-md-3">
                 <label asp-for="@Model.FilterItems.Length">Length:</label>
                 <select asp-for="@Model.FilterItems.Length" class="form-control">
                     <option value="0.00">> 0 Meters</option>
@@ -39,7 +64,7 @@
                 </select>
             </div>
 
-            <div class="form-group">
+            <div class="form-group col-md-3">
                 <label asp-for="@Model.FilterItems.Depth">Depth:</label>
                 <select asp-for="@Model.FilterItems.Depth" class="form-control">
                     <option value="0.00">> 0 Meters</option>
@@ -48,8 +73,10 @@
                     <option value="1.50">> 1.5 Meters</option>
                 </select>
             </div>
+        </div>
 
-            <div class="form-group">
+        <div class="row">
+            <div class="form-group col-md-3">
                 <label asp-for="@Model.FilterItems.Area">Area:</label>
                 <select asp-for="@Model.FilterItems.Area" class="form-control">
                     <option value="ALL">All</option>
@@ -60,7 +87,7 @@
                 </select>
             </div>
 
-            <div class="form-group">
+            <div class="form-group col-md-3">
                 <label asp-for="@Model.FilterItems.BDirection">Burial Direction:</label>
                 <select asp-for="@Model.FilterItems.BDirection" class="form-control">
                     <option value="ALL">All</option>
@@ -69,7 +96,7 @@
                 </select>
             </div>
 
-            <div class="form-group">
+            <div class="form-group col-md-3">
                 <label asp-for="@Model.FilterItems.EorW">East or West:</label>
                 <select asp-for="@Model.FilterItems.EorW" class="form-control">
                     <option value="ALL">All</option>
@@ -78,7 +105,7 @@
                 </select>
             </div>
 
-            <div class="form-group">
+            <div class="form-group col-md-3">
                 <label asp-for="@Model.FilterItems.NorS">North or South:</label>
                 <select asp-for="@Model.FilterItems.NorS" class="form-control">
                     <option value="ALL">All</option>
@@ -86,68 +113,104 @@
                     <option value="S">South</option>
                 </select>
             </div>
+        </div>
 
-
-
-            <button type="submit" class="btn btn-primary">Filter</button>
-
-            <a asp-action="Index" asp-route-id="" class="btn btn-primary">Clear</a>
-
-        </form>
+        <button type="submit" class="btn btn-primary">Filter</button>
+    </form>
 </div>
+<br />
+<br />
+@foreach (var mummy in Model.Burials)
+{
+    foreach (var x in Model.Photos)
+    {
+        if (mummy.BurialId == x.BurialId)
+        {
+            ViewBag.Photo = "https://elasticbeanstalk-us-east-1-503379183917.s3.amazonaws.com/Photos/" + x.PhotoId;
+            break;
+        }
+    }
+    <div class="card shadow mb-3" style="max-width: auto">
+        <div class="row g-0">
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h2 class="card-title">@mummy.BurialId</h2>
 
-    <div class="col-sm-10">
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Sex</th>
+                                <th>Length</th>
+                                <th>Depth</th>
+                                <th>Area</th>
+                                <th>East/West</th>
+                                <th>North/South</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@mummy.GenderCode</td>
+                                <td>
+                                    @if (mummy.LengthM != null)
+                                    {
+                                        @Math.Round((decimal)mummy.LengthM, 2)
+                                    }
+                                </td>
+                                <td>
+                                    @if (mummy.BurialDepth != null)
+                                    {
+                                        @Math.Round((decimal)mummy.BurialDepth, 2)
+                                    }
+                                </td>
+                                <td>@mummy.Square</td>
+                                <td>@mummy.EastOrWest</td>
+                                <td>@mummy.NorthOrSouth</td>
+                            </tr>
+                        </tbody>
 
-        <table class="table table-bordered table-striped mt-2">
-
-            <thead>
-                <tr>
-                    <th>BurialId</th>
-                    <th>Sex</th>
-                    <th>Area</th>
-                    <th>Length</th>
-                    <th>Depth</th>
-                    <th>Direction</th>
-                    <th>East or West</th>
-                    <th>North or South</th>
-                    <th></th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach (var mummy in Model.Burials)
-                {
-
-                <tr>
-                    <td>@mummy.BurialId</td>
-                    <td>@mummy.GenderCode</td>
-                    <td>@mummy.Square</td>
-                    <td>@Math.Round((decimal)mummy.LengthM, 2)</td>
-                    <td>@Math.Round((decimal)mummy.BurialDepth, 2)</td>
-                    <td>@mummy.BurialDirection</td>
-                    <td>@mummy.EastOrWest</td>
-                    <td>@mummy.NorthOrSouth</td>
-                    <td>
-                        <a class="text-center btn btn-info" asp-area="" asp-route-id="@mummy.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
+                    </table>
+                    <div class="row">
+                        <a class="text-center btn btn-primary col-md-2 m-2" asp-area="" asp-route-id="@mummy.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
 
                         @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
                         {
-                            <a class="text-center btn btn-warning" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>
+                            <a class="text-center btn btn-secondary col-md-2 m-2" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>
                         }
 
                         @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
                         {
-                            <a class="text-center btn btn-danger" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@mummy.BurialId">Delete</a>
+                            <a class="text-center btn btn-danger col-md-2 m-2" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@mummy.BurialId">Delete</a>
                         }
-                    </td>
-                </tr>
-                }
-            </tbody>
+                    </div>
+                </div>
+            </div>
 
-
-        </table>
-
+            <div class="mx-auto m-2 p-1">
+                <img src="@ViewBag.Photo"
+                     alt="..."
+                     class="img-fluid"
+                     width="300">
+            </div>
+            @{
+                ViewBag.Photo = "https://elasticbeanstalk-us-east-1-503379183917.s3.amazonaws.com/Photos/notfound.png";
+            }
+        </div>
     </div>
+}
 
-
+<div page-model="@Model.PagingInfo" page-action="Filtered" page-classes-enabled="true" page-class="btn"
+     page-class-normal="btn-outline-dark"
+     page-class-selected="btn-info"
+     class="btn-group pull-right m-1" >
 </div>
+
+<script>
+    var form = document.getElementById("filterForm");
+
+
+    // 2. Get a reference to our preferred element (link/button, see below) and
+    //    add an event listener for the "click" event.
+    document.getElementsByName("pagingInfo").addEventListener("click", function () {
+        form.submit();
+    });
+</script>
