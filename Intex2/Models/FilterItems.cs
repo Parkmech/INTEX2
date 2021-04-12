@@ -11,6 +11,9 @@ namespace Intex2.Models
         public string Area { get; set; }
         public double Length { get; set; }
         public double Depth { get; set; }
+        public string NorS { get; set; }
+        public string EorW { get; set; }
+        public string BDirection { get; set; }
 
     }
 }

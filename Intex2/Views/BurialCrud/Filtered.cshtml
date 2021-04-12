@@ -55,13 +55,49 @@
                     <option value="1.50">> 1.5 Meters</option>
                 </select>
             </div>
+            <div class="form-group">
+                <label asp-for="@Model.FilterItems.BDirection">Burial Direction:</label>
+                <select asp-for="@Model.FilterItems.BDirection" class="form-control">
+                    <option value="ALL">All</option>
+                    <option value="E">East</option>
+                    <option value="W">West</option>
+                </select>
+            </div>
 
-            <button type="submit" class="btn btn-primary">Filter</button>
+            <div class="form-group">
+                <label asp-for="@Model.FilterItems.EorW">East or West:</label>
+                <select asp-for="@Model.FilterItems.EorW" class="form-control">
+                    <option value="ALL">All</option>
+                    <option value="E">East</option>
+                    <option value="W">West</option>
+                </select>
+            </div>
 
-            <a asp-action="Index" asp-route-id="" class="btn btn-primary">Clear</a>
+            <div class="form-group">
+                <label asp-for="@Model.FilterItems.NorS">North or South:</label>
+                <select asp-for="@Model.FilterItems.NorS" class="form-control">
+                    <option value="ALL">All</option>
+                    <option value="N">North</option>
+                    <option value="S">South</option>
+                </select>
+            </div>
 
-        </form>
-    </div>
+            <div class="form-group">
+                <label>Last Option:</label>
+                <select class="form-control">
+                    <option value="0.00">What</option>
+                    <option value="0.50">Shall</option>
+                    <option value="1.00">I</option>
+                    <option value="1.50">be?</option>
+                </select>
+            </div>
+
+        <button type="submit" class="btn btn-primary">Filter</button>
+
+        <a asp-action="Index" asp-route-id="" class="btn btn-primary">Clear</a>
+
+    </form>
+</div>
 
     <div class="col-sm-10">
 
@@ -74,6 +110,9 @@
                     <th>Area</th>
                     <th>Length</th>
                     <th>Depth</th>
+                    <th>Direction</th>
+                    <th>East or West</th>
+                    <th>North or South</th>
                     <th></th>
                 </tr>
             </thead>
@@ -82,26 +121,29 @@
                 @foreach (var mummy in Model.Burials)
                 {
 
-                    <tr>
-                        <td>@mummy.BurialId</td>
-                        <td>@mummy.Sex</td>
-                        <td>@mummy.Square</td>
-                        <td>@mummy.LengthM</td>
-                        <td>@mummy.BurialDepth</td>
-                        <td>
-                            <a class="text-center btn btn-info" asp-area="" asp-route-id="@mummy.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
+                <tr>
+                    <td>@mummy.BurialId</td>
+                    <td>@mummy.Sex</td>
+                    <td>@mummy.Square</td>
+                    <td>@mummy.LengthM</td>
+                    <td>@mummy.BurialDepth</td>
+                    <td>@mummy.BurialDirection</td>
+                    <td>@mummy.EastOrWest</td>
+                    <td>@mummy.NorthOrSouth</td>
+                    <td>
+                        <a class="text-center btn btn-info" asp-area="" asp-route-id="@mummy.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
 
-                            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-                            {
-                                <a class="text-center btn btn-warning" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>
-                            }
+                        @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                        {
+                            <a class="text-center btn btn-warning" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>
+                        }
 
-                            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-                            {
-                                <a class="text-center btn btn-danger" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@mummy.BurialId">Delete</a>
-                            }
-                        </td>
-                    </tr>
+                        @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                        {
+                            <a class="text-center btn btn-danger" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@mummy.BurialId">Delete</a>
+                        }
+                    </td>
+                </tr>
                 }
             </tbody>
 
