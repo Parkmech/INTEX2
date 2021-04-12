@@ -306,9 +306,9 @@
         <input type="radio" name="tabs" id="tabtwo">
         <label class="label" for="tabtwo">Body Details</label>
         <div class="tab">
-            <h1>Tab Two Content</h1>
+            <h1>Exhumed Body Details and Sample Information</h1>
 
-            <p><i>This is where we can write a short page description about stuff and such</i></p>
+            <p><i>This section contains data related to the exhumed body and samples taken</i></p>
 
             <h2>General Information</h2>
 
@@ -394,35 +394,55 @@
 
                 <div class="col-md-2">
                     <div class="form-group">
-                        <input asp-for="HairTaken" class="form-control" placeholder="Hair taken?" />
+                        <select asp-for="HairTaken" class="form-control" placeholder="Hair taken?">
+                            <option disabled selected class="text-muted" value="FALSE">--Select an option--</option>
+                            <option value="TRUE">Y - Yes</option>
+                            <option value="FALSE">N - NO</option>
+                        </select>
                         <span asp-validation-for="HairTaken" class="text-danger"></span>
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="form-group">
-                        <input asp-for="SoftTissueTaken" class="form-control" placeholder="Soft tissue taken?" />
-                        <span asp-validation-for="SoftTissueTaken" class="text-danger"></span>
+                        <select asp-for="SoftTissueTaken" class="form-control" placeholder="Soft tissue taken?">
+                            <option disabled selected class="text-muted" value="FALSE">--Select an option--</option>
+                            <option value="TRUE">Y - Yes</option>
+                            <option value="FALSE">N - NO</option>
+                            <span asp-validation-for="SoftTissueTaken" class="text-danger"></span>
+                        </select>
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="form-group">
-                        <input asp-for="BoneTaken" class="form-control" placeholder="Bone taken?" />
+                        <select asp-for="BoneTaken" class="form-control" placeholder="Bone taken?">
+                            <option disabled selected class="text-muted" value="FALSE">--Select an option--</option>
+                            <option value="TRUE">Y - Yes</option>
+                            <option value="FALSE">N - NO</option>
+                        </select>
                         <span asp-validation-for="BoneTaken" class="text-danger"></span>
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="form-group">
-                        <input asp-for="ToothTaken" class="form-control" placeholder="Tooth taken?" />
+                        <select asp-for="ToothTaken" class="form-control" placeholder="Tooth taken?">
+                            <option disabled selected class="text-muted" value="FALSE">--Select an option--</option>
+                            <option value="TRUE">Y - Yes</option>
+                            <option value="FALSE">N - NO</option>
+                        </select>
                         <span asp-validation-for="ToothTaken" class="text-danger"></span>
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="form-group">
-                        <input asp-for="TextileTaken" class="form-control" placeholder="Textile taken?" />
+                        <select asp-for="TextileTaken" class="form-control" placeholder="Textile taken?">
+                            <option disabled selected class="text-muted" value="FALSE">--Select an option--</option>
+                            <option value="TRUE">Y - Yes</option>
+                            <option value="FALSE">N - NO</option>
+                        </select>
                         <span asp-validation-for="TextileTaken" class="text-danger"></span>
                     </div>
                 </div>
