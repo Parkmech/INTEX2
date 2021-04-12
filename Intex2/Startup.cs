@@ -36,6 +36,13 @@ namespace Intex2
                 opts.UseSqlServer(Configuration[
                     "ConnectionStrings:EgyptConnection"]));
 
+            services.AddAuthentication().AddGoogle(options =>
+            {
+                options.ClientId = "545269694418-0aj3phfni9pv1mbpsstptmrbtg8qgj0l.apps.googleusercontent.com";
+                options.ClientSecret = "KI0GGc875Dw4uDUlepGFWAn-";
+                options.SignInScheme = IdentityConstants.ExternalScheme;
+            });
+
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Admins"));
@@ -60,7 +67,7 @@ namespace Intex2
                 opts.Password.RequireUppercase = false;
                 opts.Password.RequireDigit = false;
                 opts.User.RequireUniqueEmail = true;
-                opts.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ12345678890";
+                opts.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ12345678890@.";
             });
         }
 
