@@ -15,15 +15,13 @@
                 <div class="form-group">
                     <label>UserName:</label>
                     <input class="form-control" asp-for="UserName" />
-                </div>
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
+                    <br />
+                    <br />
+
                     <label>Password:</label>
                     <input asp-for="Password" type="password" class="form-control" />
+
                 </div>
             </div>
         </div>
@@ -37,6 +35,7 @@
 
 
 @functions {
+
     public class LoginModel : PageModel
     {
         private SignInManager<IdentityUser> signInManager;
@@ -55,7 +54,6 @@
         public string Password { get; set; }
 
         [BindProperty(SupportsGet = true)]
-
         public string ReturnUrl { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
