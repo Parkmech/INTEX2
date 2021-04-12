@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -7,6 +8,9 @@ namespace Intex2.Models
 {
     public partial class BiologicalSample
     {
+        [Key]
+        public int Id { get; set; }
+
         public string BurialId { get; set; }
         public double? Rack { get; set; }
         public string F3 { get; set; }
@@ -24,7 +28,8 @@ namespace Intex2.Models
         public string PreviouslySampled { get; set; }
         public string Notes { get; set; }
         public string Initials { get; set; }
-        public int Id { get; set; }
+
+
         //public byte[] SsmaTimeStamp { get; set; }
 
         public virtual Burial Burial { get; set; }

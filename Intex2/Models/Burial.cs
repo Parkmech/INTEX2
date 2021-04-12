@@ -15,7 +15,6 @@ namespace Intex2.Models
             FieldBooks = new HashSet<FieldBook>();
             Photos = new HashSet<Photo>();
         }
-
         //[Required]
         public string BurialId { get; set; }
 
