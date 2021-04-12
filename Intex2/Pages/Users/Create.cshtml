@@ -12,30 +12,27 @@
                 <div class="form-group">
                     <label>User Name</label>
                     <input name="UserName" class="form-control" value="@Model.UserName" />
-                    <span asp-validation-for="UserName" class="text-danger" ></span>
+                    <span asp-validation-for="UserName" class="text-danger"></span>
                 </div>
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-6">
                 <div class="form-group">
                     <label>Email</label>
                     <input name="Email" class="form-control" value="@Model.Email" />
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
+
+            </div>
+
+            <div class="col-md-6">
+                <a class="btn btn-info" asp-controller="Google" asp-action="GoogleLogin">Log In With Google</a>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>Password</label>
-                    <input name="Password" type="password" class="form-control" value="@Model.Password" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-            </div>
+            
         </div>
+
+   
 
         <button type="submit" class="btn btn-primary">Submit</button>
         <a class="btn btn-secondary" asp-page="list">Back</a>
@@ -54,10 +51,12 @@
         [BindProperty]
         [Required(ErrorMessage = "Enter a username")]
         public string UserName { get; set; }
+
         [BindProperty]
         [Required(ErrorMessage = "Enter a email")]
         [EmailAddress]
         public string Email { get; set; }
+
         [BindProperty]
         [Required(ErrorMessage = "Enter a password")]
         public string Password { get; set; }
@@ -67,8 +66,10 @@
             {
                 IdentityUser user =
                     new IdentityUser { UserName = UserName, Email = Email };
+
                 IdentityResult result =
                     await UserManager.CreateAsync(user, Password);
+
                 if (result.Succeeded)
                 {
                     return RedirectToPage("List");

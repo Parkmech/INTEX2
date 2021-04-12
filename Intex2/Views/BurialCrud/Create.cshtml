@@ -294,8 +294,11 @@
 
             </div>
 
+            <br />
+            
             <div class="form-group text-right">
-                <input type="submit" value="Create Burial" class="btn btn-primary" />
+                <button class="btn btn-danger p-2" asp-action="Index" asp-controller="Home">Cancel</button>
+                <input type="submit" value="Create Burial" class="btn btn-primary p-2" />
             </div>
 
         </div>
@@ -314,7 +317,13 @@
                 <div class="col-md-6">
                     <!-- Gender code (aka the sex) -->
                     <div class="shadow-sm form-group">
-                        <input asp-for="GenderCode" class="form-control" placeholder="Gender" />
+                        <label asp-for="GenderCode" class="control-label">Gender/Sex:</label>
+                        <select asp-for="GenderCode" class="form-control" placeholder="Gender">
+                            <option selected disabled class="text-muted" value="U">--Select an option--</option>
+                            <option value="F">F - Female</option>
+                            <option value="M">M - Male</option>
+                            <option value="U">U - Unknown</option>
+                        </select>
                         <span asp-validation-for="GenderCode" class="text-danger"></span>
                     </div>
                 </div>
@@ -322,7 +331,16 @@
                 <div class="col-md-6">
                     <!-- Hair Color -->
                     <div class="shadow-sm form-group">
-                        <input asp-for="HairColorCode" class="form-control" placeholder="Hair color" />
+                        <label asp-for="HairColorCode" class="control-label">Hair Color:</label>
+                        <select asp-for="HairColorCode" class="form-control" placeholder="Hair color">
+                            <option selected disabled class="text-muted" value="U">--Select an option--</option>
+                            <option value="B">B - Brown/Dark Brown/Lt Brown</option>
+                            <option value="K">K - Black</option>
+                            <option value="A">A - Brown and Red</option>
+                            <option value="R">R - Red</option>
+                            <option value="D">D - Blonde</option>
+                            <option value="U">U - Unknown</option>
+                        </select>
                         <span asp-validation-for="HairColorCode" class="text-danger"></span>
                     </div>
                 </div>
@@ -414,6 +432,7 @@
             </div>
 
             <div class="form-group text-right">
+                <button class="btn btn-danger p-2" asp-action="Index" asp-controller="Home">Cancel</button>
                 <input type="submit" value="Create Burial" class="btn btn-primary" />
             </div>
 
@@ -696,15 +715,12 @@
 
 
             <div class="form-group text-right">
+                <button class="btn btn-danger p-2" asp-action="Index" asp-controller="Home">Cancel</button>
                 <input type="submit" value="Create Burial" class="btn btn-primary" />
             </div>
         </div>
 
-
-
     </div>
-
-    <br /> <br /> <br /> <br />
 
 
 </form>
