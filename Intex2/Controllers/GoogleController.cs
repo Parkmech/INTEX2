@@ -44,7 +44,7 @@ namespace Intex2.Controllers
             var result = await signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, false);
             string[] userInfo = { info.Principal.FindFirst(ClaimTypes.Name).Value, info.Principal.FindFirst(ClaimTypes.Email).Value };
             if (result.Succeeded)
-                return View(userInfo);
+                return RedirectToAction("Index", "Home");
             else
             {
                 IdentityUser user = new IdentityUser
@@ -56,9 +56,14 @@ namespace Intex2.Controllers
                 IdentityResult identResult = await userManager.CreateAsync(user);
                 if (identResult.Succeeded)
                 {
-                    return RedirectToPage("~/Pages/Users/List");
+                    identResult = await userManager.AddLoginAsync(user, info);
+                    if (identResult.Succeeded)
+                    {
+                        await signInManager.SignInAsync(user, false);
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
-                return View("~Views/Home/Index.cshtml");
+                return RedirectToAction("Index", "Home");
             }
         }
 

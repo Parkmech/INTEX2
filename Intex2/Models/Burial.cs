@@ -16,7 +16,7 @@ namespace Intex2.Models
             Photos = new HashSet<Photo>();
         }
 
-        [Required]
+
         public string BurialId { get; set; }
 
         public double? BurialId2018 { get; set; }
