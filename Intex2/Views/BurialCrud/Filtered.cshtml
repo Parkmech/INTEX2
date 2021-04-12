@@ -12,7 +12,6 @@
 
 <div class="row">
     <div class="col-sm-2">
-
         <form asp-action="Filtered" method="post">
 
             <div class="form-group">
@@ -123,8 +122,8 @@
                     <td>@mummy.BurialId</td>
                     <td>@mummy.GenderCode</td>
                     <td>@mummy.Square</td>
-                    <td>@mummy.LengthM</td>
-                    <td>@mummy.BurialDepth</td>
+                    <td>@Math.Round((decimal)mummy.LengthM, 2)</td>
+                    <td>@Math.Round((decimal)mummy.BurialDepth, 2)</td>
                     <td>@mummy.BurialDirection</td>
                     <td>@mummy.EastOrWest</td>
                     <td>@mummy.NorthOrSouth</td>
