@@ -299,7 +299,7 @@ namespace Intex2.Controllers
             return View("Index", await mummies.AsNoTracking().ToListAsync());
         }
 
-        [HttpPost]
+        
         public IActionResult Filtered(BurialListViewModel filterAtr, int pageNum = 1)
         {
             int pageSize = 20;
@@ -338,6 +338,72 @@ namespace Intex2.Controllers
             burialid = "%" + burialid + "%";
             
             
+
+
+            return View(new BurialListViewModel
+            {
+                Burials = _context.Burials
+                    .FromSqlInterpolated($"SELECT * FROM Burials WHERE Gender_Code LIKE {sex} AND Square LIKE {area} AND Burial_Direction LIKE {bdirection} AND North_or_South LIKE {nors} AND East_or_West LIKE {eorw} AND BurialID LIKE {burialid}")
+                    .Where(b => b.LengthM >= length)
+                    .Where(b => b.BurialDepth >= depth)
+                    .OrderBy(b => b.BurialId)
+                    .Skip((pageNum - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList(),
+
+                PagingInfo = new PagingInfo
+                {
+                    ItemsPerPage = pageSize,
+                    CurrentPage = pageNum,
+                    TotalNumItems = _context.Burials
+                    .FromSqlInterpolated($"SELECT * FROM Burials WHERE Gender_Code LIKE {sex} AND Square LIKE {area} AND Burial_Direction LIKE {bdirection} AND North_or_South LIKE {nors} AND East_or_West LIKE {eorw} AND BurialID LIKE {burialid}")
+                    .Where(b => b.LengthM >= length)
+                    .Where(b => b.BurialDepth >= depth)
+                    //FOR THE PRESENTATION TO PRESENT CLEAN DATA .Where(x=> x.BurialSouthToFeet != null)
+                    .Count()
+                },
+                Photos = _context.Photos
+            });
+        }
+
+        public IActionResult AdvancedFiltering(BurialListViewModel filterAtr, int pageNum = 1)
+        {
+            int pageSize = 20;
+            string sex = filterAtr.FilterItems.Sex;
+            string area = filterAtr.FilterItems.Area;
+            double length = filterAtr.FilterItems.Length;
+            double depth = filterAtr.FilterItems.Depth;
+            string bdirection = filterAtr.FilterItems.BDirection;
+            string nors = filterAtr.FilterItems.NorS;
+            string eorw = filterAtr.FilterItems.EorW;
+            string burialid = filterAtr.FilterItems.BurialId;
+
+
+            if (sex == "ALL")
+            {
+                sex = "%";
+            }
+            if (area == "ALL")
+            {
+                area = "%";
+            }
+            if (bdirection == "ALL")
+            {
+                bdirection = "%";
+            }
+            if (nors == "ALL")
+            {
+                nors = "%";
+            }
+            if (eorw == "ALL")
+            {
+                eorw = "%";
+            }
+
+
+            burialid = "%" + burialid + "%";
+
+
 
 
             return View(new BurialListViewModel

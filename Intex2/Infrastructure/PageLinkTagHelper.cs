@@ -66,6 +66,7 @@ namespace Intex2.Infrastructure
                 int curPage = PageModel.CurrentPage + 1;
                 TagBuilder secondTag = new TagBuilder("a");
                 secondTag.Attributes["href"] = urlHelper.Action(PageAction, new { pageNum = curPage});
+                secondTag.Attributes["name"] = "pagingInfo";
 
                 if (PageClassesEnabled)
                 {
@@ -81,6 +82,7 @@ namespace Intex2.Infrastructure
                 int thirdPage = PageModel.CurrentPage + 2;
                 TagBuilder thirdTag = new TagBuilder("a");
                 thirdTag.Attributes["href"] = urlHelper.Action(PageAction, new { pageNum = thirdPage });
+                thirdTag.Attributes["name"] = "pagingInfo";
 
                 if (PageClassesEnabled)
                 {
@@ -102,6 +104,7 @@ namespace Intex2.Infrastructure
                 int curPage = PageModel.CurrentPage;
                 TagBuilder secondTag = new TagBuilder("a");
                 secondTag.Attributes["href"] = urlHelper.Action(PageAction, new { pageNum = curPage });
+                secondTag.Attributes["name"] = "pagingInfo";
 
                 if (PageClassesEnabled)
                 {
@@ -139,6 +142,7 @@ namespace Intex2.Infrastructure
                 int curPage = PageModel.CurrentPage - 1;
                 TagBuilder secondTag = new TagBuilder("a");
                 secondTag.Attributes["href"] = urlHelper.Action(PageAction, new { pageNum = curPage});
+                secondTag.Attributes["name"] = "pagingInfo";
 
                 if (PageClassesEnabled)
                 {
@@ -172,6 +176,7 @@ namespace Intex2.Infrastructure
                 int curPage = PageModel.CurrentPage -2;
                 TagBuilder secondTag = new TagBuilder("a");
                 secondTag.Attributes["href"] = urlHelper.Action(PageAction, new { pageNum = curPage});
+                secondTag.Attributes["name"] = "pagingInfo";
 
                 if (PageClassesEnabled)
                 {

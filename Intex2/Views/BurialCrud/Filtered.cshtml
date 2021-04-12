@@ -37,7 +37,7 @@
     </div>
 </div>
 <div class="container collapse" id="filter">
-    <form asp-action="Filtered" method="post">
+    <form asp-action="Filtered" method="post" id="filterForm">
         <div class="row">
             <div class="form-group col-md-3">
                 <label asp-for="@Model.FilterItems.BurialId">Burial ID</label>
@@ -201,5 +201,16 @@
 <div page-model="@Model.PagingInfo" page-action="Filtered" page-classes-enabled="true" page-class="btn"
      page-class-normal="btn-outline-dark"
      page-class-selected="btn-info"
-     class="btn-group pull-right m-1">
+     class="btn-group pull-right m-1" >
 </div>
+
+<script>
+    var form = document.getElementById("filterForm");
+
+
+    // 2. Get a reference to our preferred element (link/button, see below) and
+    //    add an event listener for the "click" event.
+    document.getElementsByName("pagingInfo").addEventListener("click", function () {
+        form.submit();
+    });
+</script>
