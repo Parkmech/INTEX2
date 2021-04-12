@@ -16,7 +16,7 @@ namespace Intex2.Models
             Photos = new HashSet<Photo>();
         }
 
-
+        //[Required]
         public string BurialId { get; set; }
 
         public double? BurialId2018 { get; set; }
@@ -71,28 +71,28 @@ namespace Intex2.Models
 
         public string Tomb { get; set; }
 
-        [Required]
+        //[Required]
         public double? NsLowPosition { get; set; }
 
-        [Required]
+        //[Required]
         public double? NsHighPosition { get; set; }
 
-        [Required]
+        //[Required]
         public string NorthOrSouth { get; set; }
 
-        [Required]
+        //[Required]
         public double? EwLowPosition { get; set; }
 
-        [Required]
+        //[Required]
         public double? EwHighPosition { get; set; }
 
-        [Required]
+        //[Required]
         public string EastOrWest { get; set; }
 
-        [Required]
+        //[Required]
         public string Square { get; set; }
 
-        [Required]
+        //[Required]
         public double? BurialNumber { get; set; }
 
         public double? BurialWestToHead { get; set; }
