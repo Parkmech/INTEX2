@@ -97,7 +97,6 @@ namespace Intex2.Controllers
             {
                 _context.Add(burials);
                 await _context.SaveChangesAsync();
-                string referenceId = burials.BurialId;
                 return View("Details", burials);
             }
             ViewData["AgeCodeSingle"] = new SelectList(_context.AgeCodes, "AgeCode1", "AgeCode1", burials.AgeCodeSingle);
