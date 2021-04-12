@@ -30,6 +30,6 @@ namespace Intex2.Models
         public string Haircolor { get; set; }
         public string Sample { get; set; }
         public int Id { get; set; }
-        public byte[] SsmaTimeStamp { get; set; }
+      //  public byte[] SsmaTimeStamp { get; set; }
     }
 }
