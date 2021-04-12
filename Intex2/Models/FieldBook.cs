@@ -13,7 +13,6 @@ namespace Intex2.Models
         public int Id { get; set; }
         //public byte[] SsmaTimeStamp { get; set; }
 
-
         public virtual Burial Burial { get; set; }
     }
 }

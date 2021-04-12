@@ -46,24 +46,6 @@ namespace Intex2.Controllers
             return View(await fagElGamousContext.ToListAsync());
         }
 
-        // GET: BioSampleCrud/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var biologicalSample = await _context.BiologicalSamples
-                .Include(b => b.Burial)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (biologicalSample == null)
-            {
-                return NotFound();
-            }
-
-            return View(biologicalSample);
-        }
 
         // GET: BioSampleCrud/Create
         public IActionResult Create(string id)
@@ -84,26 +66,13 @@ namespace Intex2.Controllers
 
         }
         
-
         // POST: BioSampleCrud/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BurialId,Rack,F3,Bag,LowNs,HighNs,NorthOrSouth,LowEw,HighEw,EastOrWest,Area,BurialNumber,ClusterNumber,Date,PreviouslySampled,Notes,Initials,Id,SsmaTimeStamp")] BiologicalSample biologicalSample)
-        {
-
-            if (ModelState.IsValid)
-            {
-                _context.Add(biologicalSample);
-                await _context.SaveChangesAsync();
-                return View("RecordSpecificIndex", _context.Burials.Where(x => x.BurialId == biologicalSample.BurialId).FirstOrDefaultAsync());
-            }
-            ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId", biologicalSample.BurialId);
-            return View("Index");
-        }
-
-        [HttpPost]
         public IActionResult CustomCreate([Bind("BurialId,Rack,F3,Bag,LowNs,HighNs,NorthOrSouth,LowEw,HighEw,EastOrWest,Area,BurialNumber,ClusterNumber,Date,PreviouslySampled,Notes,Initials,Id")] BiologicalSample bio)
         {
             if (ModelState.IsValid)
@@ -164,25 +133,18 @@ namespace Intex2.Controllers
         }
 
         // GET: BioSampleCrud/Delete/5
-        public async Task<IActionResult> Delete(string id, string initials, string notes)
+        public async Task<IActionResult> Delete(int id)
         {
-            string newid = id.Replace("%2F", "/");
-            if (newid == null)
-            {
-                return NotFound();
-            }
 
-            var biologicalSample = await _context.BiologicalSamples
+            var biologicalSample = _context.BiologicalSamples
                 .Include(b => b.Burial)
-                .Where(n => n.Notes == notes)
-                .Where(i => i.Initials == initials)
-                .FirstOrDefaultAsync(m => m.BurialId == newid);
+                .Where(x => x.Id == id).FirstOrDefault();
                 
             if (biologicalSample == null)
             {
                 return NotFound();
             }
-            ViewBag.id = newid;
+            ViewBag.id = id;
 
             return View(biologicalSample);
         }
@@ -190,23 +152,20 @@ namespace Intex2.Controllers
         // POST: BioSampleCrud/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string burialId, string Notes, string Initials )
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var biologicalSample = await _context.BiologicalSamples
-                .Where(b => b.BurialId == burialId)
-                .Where(n => n.Notes == Notes)
-                .Where(i => i.Initials == Initials)
-                .FirstOrDefaultAsync();
+            var biologicalSample = _context.BiologicalSamples
+                .Where(x => x.Id == id).FirstOrDefault();
 
             _context.BiologicalSamples.Remove(biologicalSample);
             await _context.SaveChangesAsync();
             return View("RecordSpecificIndex", new BioSampleViewModel()
             {
                 biologicalSamples = _context.BiologicalSamples
-                .Where(x => x.BurialId == burialId),
+                .Where(x => x.BurialId == biologicalSample.BurialId),
 
                 burial = _context.Burials
-                .Where(x => x.BurialId == burialId).FirstOrDefault()
+                .Where(x => x.BurialId == biologicalSample.BurialId).FirstOrDefault()
             });
         }
 

@@ -7,47 +7,64 @@
     string printId;
     if (Model.biologicalSamples.Count() > 0)
     {
-         printId = "Biological Samples for " + Model.burial.BurialId;
+        printId = "Biological Samples for " + Model.burial.BurialId;
 
     }
     else
     {
-         printId = "There are no samples for " + Model.burial.BurialId;
+        printId = "There are no samples for " + Model.burial.BurialId;
     }
 }
-
-<h1>@printId </h1>
-
-<div class="row">
-    @foreach (var sample in Model.biologicalSamples)
-    {
-<div class="card text-center shadow-sm col-md-3 m-1 p-1">
-    <div class="card-header">
-
-        <h5>Sample Rack: @sample.Rack</h5>
-        <h5>Sample Id: @sample.Id</h5>
-
+<br />
+    <div class="text-center">
+        <h1>@printId </h1>
     </div>
-    <div class="card-body">
-        <h5 class="card-title">
-            @sample.Notes
-        </h5>
-        <p class="card-text">
-            Initials: @sample.Initials
-        </p>
-        <div class="row text-center">
-            <a class="text-center btn btn-secondary" asp-controller="BioSampleCrud" asp-action="Edit" asp-route-id="@sample.Id">Edit</a>
+<hr />
+<div class="row justify-content-md-center">
+   @foreach (var sample in Model.biologicalSamples)
+   {
+        <div class="card text-center shadow-sm col-md-3 m-1 p-1">
+            <div class="card-header">
 
-            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-            {
-                <a class="text-center btn btn-danger " asp-controller="BioSampleCrud" asp-action="Delete" asp-route-id="@sample.BurialId" asp-route-notes="@sample.Notes" asp-route-initials="@sample.Initials" >Delete</a>}
+                <h5>Rack Number: @sample.Rack</h5>
+                <h5>Bag Number: @sample.Bag</h5>
+
+            </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                @sample.Notes
+            </h5>
+            <hr />
+            <p class="card-text">
+                Previously Sampled (Y/N): @sample.PreviouslySampled 
+                <hr />
+                Initials: @sample.Initials
+            </p>
+            <hr />
+            <div class="row justify-content-md-center">
+                @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                {
+
+                    <a class="col-md-4 m-1 p-1 btn btn-secondary" asp-controller="BioSampleCrud" asp-action="Edit" asp-route-id="@sample.Id">Edit</a>
+                }
+
+                @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                {
+                    <a class="col-md-4 m-1 p-1 btn btn-danger " asp-controller="BioSampleCrud" asp-action="Delete" asp-route-id="@sample.Id">Delete</a>
+                }
+            </div>
         </div>
-    </div>
-    <div class="card-footer text-muted">Date: @sample.Date </div>
-</div>
-                <br />}
+        <div class="card-footer text-muted">Year Sampled: @sample.Date </div>
+        </div>
+    }
 </div>
 
-<a class="btn btn-primary" asp-action="create" asp-route-id="@Model.burial.BurialId">Create a Sample</a>
+<hr />
+<div class="row">
+    <a class="btn btn-secondary m-1" asp-controller="BurialCrud" asp-action="Details" asp-route-id="@Model.burial.BurialId">Back to Burial Details</a>
 
-<br /><br /><br /><br />
+    <a class="btn btn-primary m-1" asp-action="create" asp-route-id="@Model.burial.BurialId">Create New Sample</a>
+</div>
+
+
+<br />
