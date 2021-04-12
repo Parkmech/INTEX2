@@ -258,6 +258,8 @@ namespace Intex2.Controllers
             ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
             ViewData["CurrentFilter"] = searchString;
             var mummies = from s in _context.Burials select s;
+            //var mummies = from s in _context.Burials.IsRequired(false) select s;
+
             if (!String.IsNullOrEmpty(searchString))
             {
                 mummies = mummies.Where(s => s.BurialId.Contains(searchString)
