@@ -11,7 +11,7 @@ namespace Intex2.Models
         public string FieldBook1 { get; set; }
         public double? FieldBookPageNumber { get; set; }
         public int Id { get; set; }
-        public byte[] SsmaTimeStamp { get; set; }
+        //public byte[] SsmaTimeStamp { get; set; }
 
         public virtual Burial Burial { get; set; }
     }

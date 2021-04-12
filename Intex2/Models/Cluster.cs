@@ -51,6 +51,6 @@ namespace Intex2.Models
         public double? F42 { get; set; }
         public double? F43 { get; set; }
         public int Id { get; set; }
-        public byte[] SsmaTimeStamp { get; set; }
+        //public byte[] SsmaTimeStamp { get; set; }
     }
 }
