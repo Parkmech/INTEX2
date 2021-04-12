@@ -28,7 +28,7 @@ namespace Intex2.Controllers
 
         [HttpGet]
         // GET: BurialCrud
-        public IActionResult Index(int pageNum = 6)
+        public IActionResult Index(int pageNum = 2)
         {
             int pageSize = 20;
 
@@ -50,7 +50,9 @@ namespace Intex2.Controllers
                     //FOR THE PRESENTATION TO PRESENT CLEAN DATA .Where(x=> x.BurialSouthToFeet != null)
                     .Count()
                 },
-                Photos = _context.Photos
+                Photos = _context.Photos,
+
+                FieldBooks = _context.FieldBooks
 
             }) ;
         }
