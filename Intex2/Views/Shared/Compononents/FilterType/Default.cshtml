@@ -1,0 +1,54 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model FilterItems
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<form asp-action="JeffsWay" method="post">
+
+    <div class="form-group">
+        <label asp-for="Sex">Sex:</label>
+        <select name="filter" class="form-control" asp-for="Sex">
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+            <option value="all">All</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Area">Area:</label>
+        <select name="filter" class="form-control" asp-for="Area">
+            <option value="NE">NE</option>
+            <option value="NW">NW</option>
+            <option value="SE">SE</option>
+            <option value="SW">SW</option>
+            <option value="all">All</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Length">Length:</label>
+        <select name="Length" class="form-control" asp-for="Length">
+            <option value="0.00">Lets See</option>
+            <option value="all">All</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Depth">Depth:</label>
+        <select name="filter" class="form-control" asp-for="Depth">
+            <option value="0.00">Lets See</option>
+            <option value="all">All</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Filter</button>
+    <a asp-action="Index" asp-route-id="" asp-controller="BurialCrud" class="btn btn-primary">Reset</a>
+</form>

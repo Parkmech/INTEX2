@@ -1,41 +1,37 @@
-@model IEnumerable<Intex2.Models.BiologicalSample>
-
+@model BiologicalSample
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    string burialId = Model.ToList()[0].BurialId;
 }
 
 <h1>Edit</h1>
-@foreach(var x in Model)
-    {
 <form asp-action="Edit">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group">
-        <label asp-for="@x.Rack" class="control-label"></label>
-        <input asp-for="@x.Rack" class="form-control" value="@x.Rack" />
-        <span asp-validation-for="@x.Rack" class="text-danger"></span>
+        <label asp-for="@Model.Rack" class="control-label"></label>
+        <input asp-for="@Model.Rack" class="form-control" value="@Model.Rack" />
+        <span asp-validation-for="@Model.Rack" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="@x.Notes" class="control-label"></label>
-        <input asp-for="@x.Notes" class="form-control" value="@x.Notes" />
-        <span asp-validation-for="@x.Notes" class="text-danger"></span>
+        <label asp-for="@Model.Notes" class="control-label"></label>
+        <input asp-for="@Model.Notes" class="form-control" value="@Model.Notes" />
+        <span asp-validation-for="@Model.Notes" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="@x.Initials" class="control-label"></label>
-        <input asp-for="@x.Initials" class="form-control" value="@x.Initials" />
-        <span asp-validation-for="@x.Initials" class="text-danger"></span>
+        <label asp-for="@Model.Initials" class="control-label"></label>
+        <input asp-for="@Model.Initials" class="form-control" value="@Model.Initials" />
+        <span asp-validation-for="@Model.Initials" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="@x.Date" class="control-label"></label>
-        <input asp-for="@x.Date" class="form-control" value="@x.Date" />
-        <span asp-validation-for="@x.Date" class="text-danger"></span>
+        <label asp-for="@Model.Date" class="control-label"></label>
+        <input asp-for="@Model.Date" class="form-control" value="@Model.Date" />
+        <span asp-validation-for="@Model.Date" class="text-danger"></span>
     </div>
 
-    <input type="hidden" asp-for="@x.BurialId" />
+    <input type="hidden" asp-for="@Model.BurialId" value="@Model.BurialId" />
 
     <div class="form-group">
         <input type="submit" value="Save" class="btn btn-primary" />
@@ -50,7 +46,7 @@
 </div>
 
 <div>
-    <a asp-action="RecordSpecificIndex" asp-route-id="@burialId">Back to Biological Samples</a>
+    <a asp-action="RecordSpecificIndex" asp-route-id="@Model.BurialId">Back to Biological Samples</a>
 </div>
 
 @section Scripts {

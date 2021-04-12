@@ -1,0 +1,154 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@model BurialListViewModel
+
+@{
+    ViewData["Title"] = "Filtered";
+}
+
+
+<div class="row">
+    <div class="col-sm-2">
+
+        <form asp-action="Filtered" method="post">
+
+            <div class="form-group">
+                <label asp-for="@Model.FilterItems.BurialId">Burial ID</label>
+                <input class="form-control" type="text" asp-for="@Model.FilterItems.BurialId" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="@Model.FilterItems.Sex">Sex:</label>
+                <select asp-for="@Model.FilterItems.Sex" class="form-control">
+                    <option value="ALL">All</option>
+                    <option value="F">Female (F)</option>
+                    <option value="M">Male (M)</option>
+                    <option value="U">Unknown (U)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="@Model.FilterItems.Length">Length:</label>
+                <select asp-for="@Model.FilterItems.Length" class="form-control">
+                    <option value="0.00">> 0 Meters</option>
+                    <option value="0.50">> 0.5 Meters</option>
+                    <option value="1.00">> 1 Meter</option>
+                    <option value="1.50">> 1.5 Meters</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="@Model.FilterItems.Depth">Depth:</label>
+                <select asp-for="@Model.FilterItems.Depth" class="form-control">
+                    <option value="0.00">> 0 Meters</option>
+                    <option value="0.50">> 0.5 Meters</option>
+                    <option value="1.00">> 1 Meter</option>
+                    <option value="1.50">> 1.5 Meters</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="@Model.FilterItems.Area">Area:</label>
+                <select asp-for="@Model.FilterItems.Area" class="form-control">
+                    <option value="ALL">All</option>
+                    <option value="NE">NE</option>
+                    <option value="NW">NW</option>
+                    <option value="SE">SE</option>
+                    <option value="SW">SW</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="@Model.FilterItems.BDirection">Burial Direction:</label>
+                <select asp-for="@Model.FilterItems.BDirection" class="form-control">
+                    <option value="ALL">All</option>
+                    <option value="E">East</option>
+                    <option value="W">West</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="@Model.FilterItems.EorW">East or West:</label>
+                <select asp-for="@Model.FilterItems.EorW" class="form-control">
+                    <option value="ALL">All</option>
+                    <option value="E">East</option>
+                    <option value="W">West</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="@Model.FilterItems.NorS">North or South:</label>
+                <select asp-for="@Model.FilterItems.NorS" class="form-control">
+                    <option value="ALL">All</option>
+                    <option value="N">North</option>
+                    <option value="S">South</option>
+                </select>
+            </div>
+
+
+
+            <button type="submit" class="btn btn-primary">Filter</button>
+
+            <a asp-action="Index" asp-route-id="" class="btn btn-primary">Clear</a>
+
+        </form>
+</div>
+
+    <div class="col-sm-10">
+
+        <table class="table table-bordered table-striped mt-2">
+
+            <thead>
+                <tr>
+                    <th>BurialId</th>
+                    <th>Sex</th>
+                    <th>Area</th>
+                    <th>Length</th>
+                    <th>Depth</th>
+                    <th>Direction</th>
+                    <th>East or West</th>
+                    <th>North or South</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var mummy in Model.Burials)
+                {
+
+                <tr>
+                    <td>@mummy.BurialId</td>
+                    <td>@mummy.GenderCode</td>
+                    <td>@mummy.Square</td>
+                    <td>@mummy.LengthM</td>
+                    <td>@mummy.BurialDepth</td>
+                    <td>@mummy.BurialDirection</td>
+                    <td>@mummy.EastOrWest</td>
+                    <td>@mummy.NorthOrSouth</td>
+                    <td>
+                        <a class="text-center btn btn-info" asp-area="" asp-route-id="@mummy.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
+
+                        @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                        {
+                            <a class="text-center btn btn-warning" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>
+                        }
+
+                        @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                        {
+                            <a class="text-center btn btn-danger" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@mummy.BurialId">Delete</a>
+                        }
+                    </td>
+                </tr>
+                }
+            </tbody>
+
+
+        </table>
+
+    </div>
+
+
+</div>

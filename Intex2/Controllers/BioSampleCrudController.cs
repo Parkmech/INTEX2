@@ -129,16 +129,16 @@ namespace Intex2.Controllers
         public async Task<IActionResult> Edit(string id, string initials, string notes)
         {
             string newid = id.Replace("%2F", "/");
-            string newNotes = notes.Replace("%2F", " ");
             if (newid == null)
             {
                 return NotFound();
             }
 
-            var biologicalSample = _context.BiologicalSamples
+            BiologicalSample biologicalSample = _context.BiologicalSamples
                 .Where(x => x.BurialId == newid)
                 .Where(n => n.Notes == notes)
-                .Where(i => i.Initials == initials);
+                .Where(i => i.Initials == initials)
+                .FirstOrDefault();
 
             if (biologicalSample == null)
             {
@@ -153,35 +153,27 @@ namespace Intex2.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BurialId,Rack,F3,Bag,LowNs,HighNs,NorthOrSouth,LowEw,HighEw,EastOrWest,Area,BurialNumber,ClusterNumber,Date,PreviouslySampled,Notes,Initials,Id,SsmaTimeStamp")] BiologicalSample biologicalSample)
+        public IActionResult Edit(BiologicalSample bio)
         {
-            if (id != biologicalSample.Id)
-            {
-                return NotFound();
-            }
-
+            bio.BurialId = bio.BurialId.Replace("%2F", "/");
+           
             if (ModelState.IsValid)
             {
-                try
                 {
-                    _context.Update(biologicalSample);
-                    await _context.SaveChangesAsync();
+                    _context.Update(bio);
+                    _context.SaveChanges();
                 }
-                catch (DbUpdateConcurrencyException)
+            
+                return View("RecordSpecificIndex", new BioSampleViewModel
                 {
-                    if (!BiologicalSampleExists(biologicalSample.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                    biologicalSamples = _context.BiologicalSamples.Where(x => x.BurialId == bio.BurialId),
+
+                    burial = _context.Burials.Where(x => x.BurialId == bio.BurialId).FirstOrDefault(),
+
+                    bioSample = bio
+                });
             }
-            ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId", biologicalSample.BurialId);
-            return View(biologicalSample);
+            return View(bio);
         }
 
         // GET: BioSampleCrud/Delete/5

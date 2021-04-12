@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Intex2.Models.Burial>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<form asp-action="Display" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by Id/Date: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="Display">Back to Full List</a>
+        </p>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Display" asp-route-sortOrder="@ViewData["IdSortParm"]">@Html.DisplayNameFor(model => model.BurialId)</a>
+            </th>
+            <th>
+                <a asp-action="Display" asp-route-sortOrder="@ViewData["DateSortParm"]">@Html.DisplayNameFor(model => model.YearExcav)</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var mummy in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => mummy.BurialId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => mummy.YearExcav)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
