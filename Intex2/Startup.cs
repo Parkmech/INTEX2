@@ -86,20 +86,20 @@ namespace Intex2
 
             app.UseAuthorization();
 
-            //Protects against Cross Site Scripting (Xss)
-            app.Use(async (context, next) =>
-            {
-                context.Response.Headers.Add("X-Xss-Protection", "1");
-                await next();
-            });
+            ////Protects against Cross Site Scripting (Xss)
+            //app.Use(async (context, next) =>
+            //{
+            //    context.Response.Headers.Add("X-Xss-Protection", "1");
+            //    await next();
+            //});
 
-            //Add Content Security Policy (CSP)
-            app.Use(async (ctx, next) =>
-            {
-                ctx.Response.Headers.Add("Content-Security-Policy",
-                "default-src 'self'");
-                await next();
-            });
+            ////Add Content Security Policy (CSP)
+            //app.Use(async (ctx, next) =>
+            //{
+            //    ctx.Response.Headers.Add("Content-Security-Policy",
+            //    "default-src 'self'");
+            //    await next();
+            //});
 
             app.UseEndpoints(endpoints =>
             {
