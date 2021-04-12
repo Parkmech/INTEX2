@@ -333,7 +333,11 @@ namespace Intex2.Controllers
                 eorw = "%";
             }
 
+            
             burialid = "%" + burialid + "%";
+            
+            
+
 
             return View(new BurialListViewModel
             {
