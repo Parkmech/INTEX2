@@ -22,18 +22,6 @@
             <!--Bootstrap used to create a hidden item that is displayed when button is clicked-->
             <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#filter">Custom Filter:</button>
         </div>
-        <div class="col-sm-6 pull-right">
-            <form asp-action="Search" method="post">
-                <div class="form-actions no-color">
-                    <p class="float-right">
-                        Search: <input type="text" name="SearchString" value="@ViewData["SearchFilter"]" />
-                        <input type="submit" value="" class="btn btn-default" /> @*|
-                            <a class="btn btn-block" asp-action="Index">&#8592; Back</a>*@
-                    </p>
-
-                </div>
-            </form>
-        </div>
     </div>
 </div>
 <div class="container collapse" id="filter">
@@ -181,28 +169,27 @@
                         {
                             <a class="text-center btn btn-danger col-md-2 m-2" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@mummy.BurialId">Delete</a>
                         }
-                
-
-                        <div class="mx-auto m-2 p-1">
-                        <img src="@ViewBag.Photo"
-                        alt="..."
-                        class="img-fluid"
-                        width="300">
-                        </div>
-                        @{
-                        ViewBag.Photo = "https://elasticbeanstalk-us-east-1-503379183917.s3.amazonaws.com/Photos/notfound.png";
-                        }
-                        </div>
                     </div>
                 </div>
             </div>
+
+            <div class="mx-auto m-2 p-1">
+                <img src="@ViewBag.Photo"
+                     alt="..."
+                     class="img-fluid"
+                     width="300">
+            </div>
+            @{
+                ViewBag.Photo = "https://elasticbeanstalk-us-east-1-503379183917.s3.amazonaws.com/Photos/notfound.png";
+            }
         </div>
+    </div>
 }
 
 <div page-model="@Model.PagingInfo" page-action="Filtered" page-classes-enabled="true" page-class="btn"
      page-class-normal="btn-outline-dark"
      page-class-selected="btn-info"
-     class="btn-group pull-right m-1" >
+     class="btn-group pull-right m-1">
 </div>
 
 <script>

@@ -310,9 +310,11 @@ namespace Intex2.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                mummies = mummies.Where(s => s.BurialId.Contains(searchString)
+                mummies = mummies.Where(s => s.BurialId.Contains(searchString) || s.DescriptionOfTaken.Contains(searchString)
                                        || s.GenderCode.Contains(searchString) || s.EastOrWest.Contains(searchString)
-                                       || s.NorthOrSouth.Contains(searchString) || s.BurialDirection.Contains(searchString));
+                                       || s.NorthOrSouth.Contains(searchString) || s.BurialDirection.Contains(searchString)
+                                       || s.OsteologyNotes.Contains(searchString) || s.OtherNotes.Contains(searchString)
+                                       || s.RackAndShelf.Contains(searchString) || s.BurialPreservation.Contains(searchString));
             }
             switch (sortOrder)
             {

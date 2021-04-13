@@ -106,13 +106,15 @@ namespace Intex2
                 await next();
             });
 
-            ////Add Content Security Policy (CSP)
+            ////Add Content Security Policy(CSP)
             //app.Use(async (ctx, next) =>
             //{
             //    ctx.Response.Headers.Add("Content-Security-Policy",
             //    "default-src 'self'");
             //    await next();
             //});
+
+
 
             app.UseEndpoints(endpoints =>
             {
