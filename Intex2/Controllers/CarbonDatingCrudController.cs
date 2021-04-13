@@ -19,12 +19,12 @@ namespace Intex2.Controllers
             _context = context;
         }
 
-        // GET: BioSampleCrud
+        // GET: CarbonDatingCrud
         public IActionResult RecordDetails(string id)
         {
 
             string newid = id.Replace("%2F", "/");
-            if(newid == null)
+            if (newid == null)
             {
                 return NotFound();
             }
@@ -37,10 +37,10 @@ namespace Intex2.Controllers
             {
                 carbDateSamples = carbDateSamples,
                 burial = burial
-            });   
+            });
         }
 
-        // GET: BioSampleCrud/Create
+        // GET: CarbonDatingCrud/Create
         public IActionResult Create(string id)
         {
 
@@ -52,20 +52,20 @@ namespace Intex2.Controllers
                 return NotFound();
             }
 
+
             ViewBag.id = newid;
 
             return View();
 
         }
-        
-        // POST: BioSampleCrud/Create
+   
+       
+        // POST: CarbonDatingCrud/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create( C14 carbDateSample)
+        public IActionResult CustomCreate(C14 carbDateSample)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +87,7 @@ namespace Intex2.Controllers
 
         }
 
-        // GET: BioSampleCrud/Edit/5
+        // GET: CarbonDatingCrud/Edit/5
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -104,14 +104,14 @@ namespace Intex2.Controllers
         }
         //POST
         [HttpPost]
-        public IActionResult Edit(C14 carbDateSample)
+        public IActionResult CustomEdit(C14 carbDateSample)
         {
             if (ModelState.IsValid)
             {
                 _context.Update(carbDateSample);
                 _context.SaveChanges();
 
-                return View("RecordSpecificIndex", new CarbonDatingViewModel
+                return View("RecordDetails", new CarbonDatingViewModel
                 {
                     carbDateSamples = _context.C14s.Where(x => x.BurialId == carbDateSample.BurialId),
 
@@ -123,11 +123,10 @@ namespace Intex2.Controllers
             return View(carbDateSample);
         }
 
-        // GET: BioSampleCrud/Delete/5
+        // GET: CarbonDatingCrud/Delete/5
         public IActionResult Delete(int id)
         {
             var carbDateSample = _context.C14s
-                .Include(b => b.Burial)
                 .Where(x => x.Id == id).FirstOrDefault();
                 
             if (carbDateSample == null)
@@ -139,7 +138,7 @@ namespace Intex2.Controllers
             return View(carbDateSample);
         }
 
-        // POST: BioSampleCrud/Delete/5
+        // POST: CarbonDatingCrud/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
