@@ -11,12 +11,13 @@
     }
     else
     {
-        printId = "ID " + Model.burial.BurialId + "has no cranial data";
-    } }
+        printId = "ID " + Model.burial.BurialId + " has no cranial data";
+    }
+}
 <br />
 
 <div class="text-center">
-    <h1>@printId </h1>
+    <h1> @printId </h1>
 </div>
 <hr />
 
@@ -26,42 +27,73 @@
         <div class="row g-0">
             <div class="col-md-8">
                 <div class="card-body">
-                    <h2 class="card-title">Burial ID: @sample.BurialId</h2>
-                    <h5 class="card-subtitle mb-2 text-muted">Sample #@sample.SampleNumber</h5>
+                    <h2 class="card-title">Burial ID: @Model.cranialSample.BurialId</h2>
+                    <h5 class="card-subtitle mb-2 text-muted">Sample #@Model.cranialSample.SampleNumber</h5>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item ">Maximum Cranial Length: @sample.MaximumCranialLength </li>
-                        <li class="list-group-item ">Maximum Cranial Breadth: @sample.MaximumCranialBreadth</li>
-                        <li class="list-group-item ">Basion-Bregma Height: @sample.BasionBregmaHeight</li>
-                        <li class="list-group-item ">Basion-Nasion: @sample.BasionNasion</li>
-                        <li class="list-group-item ">Basion-Prosthion Length: @sample.BasionProsthionLength</li>
-                        <li class="list-group-item ">Bizygomatic Diameter: @sample.BizygomaticDiameter</li>
-                        <li class="list-group-item ">Nasion-Prosthion: @sample.NasionProsthion</li>
-                        <li class="list-group-item ">Maximum Nasal Breadth: @sample.MaximumNasalBreadth</li>
-                        <li class="list-group-item ">Interorbital Breadth: @sample.InterorbitalBreadth</li>
+                        <li class="list-group-item ">Maximum Cranial Length: @Model.cranialSample.MaximumCranialLength </li>
+                        <li class="list-group-item ">Maximum Cranial Breadth: @Model.cranialSample.MaximumCranialBreadth</li>
+                        <li class="list-group-item ">Basion-Bregma Height: @Model.cranialSample.BasionBregmaHeight</li>
+                        <li class="list-group-item ">Basion-Nasion: @Model.cranialSample.BasionNasion</li>
+                        <li class="list-group-item ">Basion-Prosthion Length: @Model.cranialSample.BasionProsthionLength</li>
+                        <li class="list-group-item ">Bizygomatic Diameter: @Model.cranialSample.BizygomaticDiameter</li>
+                        <li class="list-group-item ">Nasion-Prosthion: @Model.cranialSample.NasionProsthion</li>
+                        <li class="list-group-item ">Maximum Nasal Breadth: @Model.cranialSample.MaximumNasalBreadth</li>
+                        <li class="list-group-item ">Interorbital Breadth: @Model.cranialSample.InterorbitalBreadth</li>
                     </ul>
 
                     <div class="row">
-                        <a class="text-center btn btn-primary col-md-2 m-2" asp-area="" asp-route-id="@sample.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
+                        <a class="text-center btn btn-primary col-md-2 m-2" asp-area="" asp-route-id="@Model.cranialSample.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
 
                         @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
                         {
-                            <a class="col-md-4 m-1 p-1 btn btn-secondary" asp-controller="CranialCrud" asp-action="CustomEdit" asp-route-sample="@sample.SampleNumber">Edit</a>}
+                            <a class="col-md-4 m-1 p-1 btn btn-secondary" asp-controller="CranialCrud" asp-action="Edit" asp-route-id="@Model.cranialSample.Id">Edit</a>}
 
                         @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
                         {
-                            <a class="text-center btn btn-danger col-md-2 m-2" asp-controller="CarbonDatingCrud" asp-action="Delete" asp-route-id="@sample.SampleNumber">Delete</a>}
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Delete</button>
+
+                            <div id="myModal" class="modal fade" role="dialog">
+
+                                <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="text-center">Delete Cranial Data</h4>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <p>Confirm deleting cranial data for the burial record.</p>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <a class="btn btn-danger" asp-action="CustomDelete" asp-controller="CranialCrud" asp-route-id="@Model.cranialSample.Id">Danger</a>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>                                        
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                
+                            </div>
+
+                            <br />
+                        }
                     </div>
                 </div>
             </div>
         </div>
-    </div>}
+    </div>
 
-<hr />
-<div class="row">
-    <a class="btn btn-secondary m-1" asp-controller="BurialCrud" asp-action="Details" asp-route-id="@Model.burial.BurialId">Back to Burial Details</a>
 
+    <hr />
+    <div class="row">
+    </div>
+
+}
+
+@if (Model.cranialSamples.Count() == 0)
+{
     <a class="btn btn-primary m-1" asp-action="Create" asp-route-id="@Model.burial.BurialId">Add Cranial Data</a>
-</div>
-
-
-<br />
+}
+<a class="btn btn-secondary m-1" asp-controller="BurialCrud" asp-action="Details" asp-route-id="@Model.burial.BurialId">Back to Burial Details</a>

@@ -839,9 +839,18 @@ namespace Intex2.Models
 
                 entity.Property(e => e.GilesGender).HasMaxLength(255);
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).ValueGeneratedOnAdd()
+                    .HasColumnName("id").Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+
+                //entity.Property(e => e.Id)
+                //    .ValueGeneratedOnAdd()
+                //    .HasColumnName("id")
+                //    .ValueGeneratedOnAddOrUpdate()
+                //    .Metadata
+                //    .SetAfterSaveBehavior(PropertySaveBehavior.Save);
+
+                //modelBuilder.Entity<Type>().Property(u => u.Property).Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+
 
                 entity.Property(e => e.InterorbitalBreadth).HasColumnName("Interorbital Breadth");
 

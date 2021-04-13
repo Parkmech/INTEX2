@@ -255,6 +255,7 @@ namespace Intex2.Controllers
 
             List<Photo> photos = new List<Photo>();
             List<BiologicalSample> bios = new List<BiologicalSample>();
+            List<FieldBook> fbook = new List<FieldBook>();
 
 
             photos.AddRange(_context.Photos.Where(p => p.BurialId == id).ToList());
@@ -273,10 +274,18 @@ namespace Intex2.Controllers
                 await _context.SaveChangesAsync();
             }
 
+            fbook.AddRange(_context.FieldBook.Where(p => p.BurialId == id).ToList());
 
-            //var cranial = await _context.Cranials.FindAsync(newid);
-            //_context.Cranials.Remove(cranial);
-            //await _context.SaveChangesAsync();
+            for (int i = 0; i < photos.Count(); i++)
+            {
+                _context.FieldBook.Remove(fbook.FirstOrDefault(p => p.Id == fbook[i].Id));
+                await _context.SaveChangesAsync();
+            }
+
+
+            var cranial = await _context.Cranials.FindAsync(newid);
+            _context.Cranials.Remove(cranial);
+            await _context.SaveChangesAsync();
 
             var burials = await _context.Burials.FindAsync(newid);
             _context.Burials.Remove(burials);
@@ -564,20 +573,7 @@ namespace Intex2.Controllers
                     .OrderBy(b => b.BurialId)
                     .Skip((pageNum - 1) * pageSize)
                     .Take(pageSize)
-                    .ToList(),
-
-                PagingInfo = new PagingInfo
-                {
-                    ItemsPerPage = pageSize,
-                    CurrentPage = pageNum,
-                    TotalNumItems = _context.Burials
-                    .FromSqlInterpolated($"SELECT * FROM Burials WHERE Gender_Code LIKE {sex} AND Square LIKE {area} AND Burial_Direction LIKE {bdirection} AND North_or_South LIKE {nors} AND East_or_West LIKE {eorw} AND BurialID LIKE {burialid}")
-                    .Where(b => b.LengthM >= length)
-                    .Where(b => b.BurialDepth >= depth)
-                    //FOR THE PRESENTATION TO PRESENT CLEAN DATA .Where(x=> x.BurialSouthToFeet != null)
-                    .Count()
-                },
-                Photos = _context.Photos
+                    .ToList()
             });
         }
 

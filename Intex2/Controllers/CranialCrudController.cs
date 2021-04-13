@@ -27,16 +27,20 @@ namespace Intex2.Controllers
             {
                 return NotFound();
             }
+
             Burial burial = _context.Burials.Where(x => x.BurialId == newid).FirstOrDefault();
 
-            IEnumerable<Cranial> cranialSamples = _context.Cranials.Where(x => x.BurialId == burial.BurialId);
+            Cranial cranialSample = _context.Cranials.Where(x => x.BurialId == burial.BurialId).FirstOrDefault();
+
+            IEnumerable<Cranial> cranials = _context.Cranials.Where(x => x.BurialId == burial.BurialId);
 
 
             return View(new CranialViewModel()
             {
-                cranialSamples= cranialSamples,
+                cranialSamples = cranials,
+                cranialSample = cranialSample,
                 burial = burial
-            });   
+            }) ;   
         }
 
         // GET: FieldNotesCrud/Create
@@ -62,6 +66,11 @@ namespace Intex2.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CustomCreate(Cranial cranialSample)
         {
+            if (_context.Cranials.Where(x => x.BurialId == cranialSample.BurialId).FirstOrDefault() != null)
+            {
+                return View("No");
+            }
+
             if (ModelState.IsValid)
             {
               
@@ -84,11 +93,11 @@ namespace Intex2.Controllers
 
         // GET: FieldNotesCrud/Edit/5
         [HttpGet]
-        public IActionResult CustomEdit(int sample)
+        public IActionResult Edit(int id)
         {
 
             Cranial cranialSample = _context.Cranials
-                .Where(x => x.SampleNumber == sample).FirstOrDefault();
+                .Where(x => x.Id == id).FirstOrDefault();
 
             if (cranialSample == null)
             {
@@ -99,7 +108,7 @@ namespace Intex2.Controllers
         }
         //POST
         [HttpPost]
-        public IActionResult Edit(Cranial cranialSample)
+        public IActionResult CustomEdit(Cranial cranialSample)
         {
             if (ModelState.IsValid)
             {
@@ -136,10 +145,17 @@ namespace Intex2.Controllers
         // POST: FieldNotesCrud/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
+            string newid = id.Replace("%2F", "/");
+
+            if (newid == null)
+            {
+                return NotFound();
+            }
+
             var cranialSample = _context.Cranials
-                .Where(x => x.Id == id).FirstOrDefault();
+                .Where(x => x.BurialId == newid).FirstOrDefault();
 
             _context.Cranials.Remove(cranialSample);
             await _context.SaveChangesAsync();
@@ -150,6 +166,24 @@ namespace Intex2.Controllers
 
                 burial = _context.Burials
                 .Where(x => x.BurialId == cranialSample.BurialId).FirstOrDefault()
+            });
+        }
+
+        public IActionResult CustomDelete(int id)
+        {
+
+            Cranial cranial = _context.Cranials.Where(x => x.Id == id).FirstOrDefault();
+
+            _context.Cranials.Remove(cranial);
+            _context.SaveChanges();
+
+            return View("RecordDetails", new CranialViewModel()
+            {
+                cranialSamples = _context.Cranials
+                .Where(x => x.BurialId == cranial.BurialId),
+
+                burial = _context.Burials
+                .Where(x => x.BurialId == cranial.BurialId).FirstOrDefault()
             });
         }
 
