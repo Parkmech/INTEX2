@@ -8,7 +8,6 @@ namespace Intex2.Models
 {
     public partial class BiologicalSample
     {
-        [Key]
         public int Id { get; set; }
 
         public string BurialId { get; set; }

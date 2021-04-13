@@ -3,3 +3,89 @@
 *@
 @{
 }
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    string id = (string)ViewBag.id;
+}
+
+@model Cranial
+
+
+<form asp-action="CustomCreate">
+
+    <h1>New Cranial Data for Burial ID: </h1>
+    <h5 class="text-muted"><i>Enter values in CM</i></h5>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="@Model.MaximumCranialLength" class="control-label"></label>
+                <input type="number" asp-for="@Model.MaximumCranialLength" class="form-control" value="@Model.MaximumCranialLength" required />
+                <span asp-validation-for="@Model.MaximumCranialLength" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="@Model.MaximumCranialBreadth" class="control-label"></label>
+                <input type="number" asp-for="@Model.MaximumCranialBreadth" class="form-control" value="@Model.MaximumCranialBreadth" required />
+                <span asp-validation-for="@Model.MaximumCranialBreadth" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="@Model.BasionBregmaHeight" class="control-label"></label>
+                <input type="number" asp-for="@Model.BasionBregmaHeight" class="form-control" value="@Model.BasionBregmaHeight" required />
+                <span asp-validation-for="@Model.BasionBregmaHeight" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="@Model.BasionNasion" class="control-label"></label>
+                <input type="number" asp-for="@Model.BasionNasion" class="form-control" value="@Model.BasionNasion" required />
+                <span asp-validation-for="@Model.BasionNasion" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="@Model.BasionProsthionLength" class="control-label"></label>
+                <input type="number" asp-for="@Model.BasionProsthionLength" class="form-control" value="@Model.BasionProsthionLength" required />
+                <span asp-validation-for="@Model.BasionProsthionLength" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="@Model.BizygomaticDiameter" class="control-label"></label>
+                <input type="number" asp-for="@Model.BizygomaticDiameter" class="form-control" value="@Model.BizygomaticDiameter" required />
+                <span asp-validation-for="@Model.BizygomaticDiameter" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="@Model.NasionProsthion" class="control-label"></label>
+                <input type="number" asp-for="@Model.NasionProsthion" class="form-control" value="@Model.NasionProsthion" required />
+                <span asp-validation-for="@Model.NasionProsthion" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="@Model.MaximumNasalBreadth" class="control-label"></label>
+                <input type="number" asp-for="@Model.MaximumNasalBreadth" class="form-control" value="@Model.MaximumNasalBreadth" required />
+                <span asp-validation-for="@Model.MaximumNasalBreadth" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="@Model.InterorbitalBreadth" class="control-label"></label>
+                <input type="number" asp-for="@Model.InterorbitalBreadth" class="form-control" value="@Model.InterorbitalBreadth" required />
+                <span asp-validation-for="@Model.InterorbitalBreadth" class="text-danger"></span>
+            </div>
+
+            <input type="hidden" asp-for="@Model.BurialId" />
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+</form>

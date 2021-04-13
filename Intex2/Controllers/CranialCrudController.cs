@@ -29,7 +29,7 @@ namespace Intex2.Controllers
             }
             Burial burial = _context.Burials.Where(x => x.BurialId == newid).FirstOrDefault();
 
-            var cranialSamples = _context.Cranials.Where(x => x.BurialId == burial.BurialId);
+            IEnumerable<Cranial> cranialSamples = _context.Cranials.Where(x => x.BurialId == burial.BurialId);
 
 
             return View(new CranialViewModel()
@@ -60,7 +60,7 @@ namespace Intex2.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Cranial cranialSample)
+        public IActionResult CustomCreate(Cranial cranialSample)
         {
             if (ModelState.IsValid)
             {
@@ -84,11 +84,11 @@ namespace Intex2.Controllers
 
         // GET: FieldNotesCrud/Edit/5
         [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult CustomEdit(int sample)
         {
 
             Cranial cranialSample = _context.Cranials
-                .Where(x => x.Id == id).FirstOrDefault();
+                .Where(x => x.SampleNumber == sample).FirstOrDefault();
 
             if (cranialSample == null)
             {
