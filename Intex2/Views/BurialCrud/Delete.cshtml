@@ -133,10 +133,11 @@
                 
                 @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
                 {
-                    <form asp-action="Delete">
-                    <input type="hidden" asp-for="BurialId" />
+                    <form asp-action="DeleteConf">
+                    <input type="hidden" asp-for="BurialId" name="id"/>
                     <input type="submit" value="Delete" class="btn btn-danger col-sm-2" />
-                </form>}
+                    </form>
+                 }
             </div>
         </div>
 

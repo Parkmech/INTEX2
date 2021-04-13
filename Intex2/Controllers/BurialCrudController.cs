@@ -216,6 +216,7 @@ namespace Intex2.Controllers
         }
 
         // GET: BurialCrud/Delete/5
+        [HttpGet]
         [Authorize(Roles = "Admins")]
         public async Task<IActionResult> Delete(string id)
         {
@@ -240,10 +241,10 @@ namespace Intex2.Controllers
         }
 
         // POST: BurialCrud/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("DeleteConf")]
         [Authorize(Roles = "Admins")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConf(string id)
         {
             string newid = id.Replace("%2F", "/");
 
@@ -251,6 +252,31 @@ namespace Intex2.Controllers
             {
                 return NotFound();
             }
+
+            List<Photo> photos = new List<Photo>();
+            List<BiologicalSample> bios = new List<BiologicalSample>();
+
+
+            photos.AddRange(_context.Photos.Where(p => p.BurialId == id).ToList());
+
+            for (int i = 0; i < photos.Count(); i++)
+            {
+                _context.Photos.Remove(photos.FirstOrDefault(p => p.Id == photos[i].Id));
+                await _context.SaveChangesAsync();
+            }
+
+            bios.AddRange(_context.BiologicalSamples.Where(p => p.BurialId == id).ToList());
+
+            for (int i = 0; i < bios.Count(); i++)
+            {
+                _context.BiologicalSamples.Remove(bios.FirstOrDefault(p => p.Id == bios[i].Id));
+                await _context.SaveChangesAsync();
+            }
+
+
+            //var cranial = await _context.Cranials.FindAsync(newid);
+            //_context.Cranials.Remove(cranial);
+            //await _context.SaveChangesAsync();
 
             var burials = await _context.Burials.FindAsync(newid);
             _context.Burials.Remove(burials);
