@@ -531,17 +531,28 @@ namespace Intex2.Controllers
         //    return View(blViewModel);
         //}
 
-        public IActionResult AdvancedFiltering(BurialListViewModel filterAtr, int pageNum = 1)
+        public IActionResult AdvancedFiltering(BurialListViewModel filterAtr)
         {
-            int pageSize = 20;
-            string sex = filterAtr.FilterItems.Sex;
-            string area = filterAtr.FilterItems.Area;
-            double length = filterAtr.FilterItems.Length;
-            double depth = filterAtr.FilterItems.Depth;
-            string bdirection = filterAtr.FilterItems.BDirection;
-            string nors = filterAtr.FilterItems.NorS;
-            string eorw = filterAtr.FilterItems.EorW;
-            string burialid = filterAtr.FilterItems.BurialId;
+            string sex = "%";
+            string area = "%";
+            double length = 0.00;
+            double depth = 0.00;
+            string bdirection = "%";
+            string nors = "%";
+            string eorw = "%";
+            string burialid = "%";
+
+            if (filterAtr.FilterItems != null)
+            {
+                sex = filterAtr.FilterItems.Sex;
+                area = filterAtr.FilterItems.Area;
+                length = filterAtr.FilterItems.Length;
+                depth = filterAtr.FilterItems.Depth;
+                bdirection = filterAtr.FilterItems.BDirection;
+                nors = filterAtr.FilterItems.NorS;
+                eorw = filterAtr.FilterItems.EorW;
+                burialid = filterAtr.FilterItems.BurialId;
+            }
 
 
             if (sex == "ALL")
@@ -565,11 +576,7 @@ namespace Intex2.Controllers
                 eorw = "%";
             }
 
-
             burialid = "%" + burialid + "%";
-
-
-
 
             return View(new BurialListViewModel
             {
@@ -578,9 +585,19 @@ namespace Intex2.Controllers
                     .Where(b => b.LengthM >= length)
                     .Where(b => b.BurialDepth >= depth)
                     .OrderBy(b => b.BurialId)
-                    .Skip((pageNum - 1) * pageSize)
-                    .Take(pageSize)
-                    .ToList()
+                    //.Skip((pageNum - 1) * pageSize)
+                    //.Take(pageSize)
+                    .ToList(),
+                //PagingInfo = new PagingInfo
+                //{
+                //    ItemsPerPage = pageSize,
+                //    CurrentPage = pageNum,
+                //    TotalNumItems = _context.Burials
+                //    .FromSqlInterpolated($"SELECT * FROM Burials WHERE Gender_Code LIKE {sex} AND Square LIKE {area} AND Burial_Direction LIKE {bdirection} AND North_or_South LIKE {nors} AND East_or_West LIKE {eorw} AND BurialID LIKE {burialid}")
+                //    .Where(b => b.LengthM >= length)
+                //    .Where(b => b.BurialDepth >= depth)
+                //    .Count()
+                //},
             });
         }
 
@@ -589,7 +606,7 @@ namespace Intex2.Controllers
             return _context.Burials.Any(e => e.BurialId == id);
         }
 
-        [Authorize(Roles = "Admins")]
+        [Authorize(Roles = "Researcher")]
         public IActionResult UploadPhoto(string id)
         {
             string newid = id.Replace("%2F", "/");
@@ -614,6 +631,7 @@ namespace Intex2.Controllers
             //var burials = _context.Photos.FirstOrDefaultAsync(x => x.BurialId == newid);
             return View(blvm);
         }
+
 
         public async Task<IActionResult> SavePhoto(BurialListViewModel photo)
         {
