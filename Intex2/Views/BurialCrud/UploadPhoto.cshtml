@@ -3,18 +3,9 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    string bid = "";
+    string bid = Model.burial.BurialId;
+    
 }
-    foreach (var burial in Model.Burials)
-    {
-        bid = burial.BurialId;
-    }
-
-
-
-
-
-
 <style>
     body {
         background-color: #E9ECEF;
@@ -36,8 +27,6 @@
                             <input class="form-group form-inline" type="file" asp-for="@Model.ImageUpload.file" />
                         </div>
                     </div>
-                    <label class="col-form-label form-group" asp-for="@Model.ImageUpload.PhotoName">NAME OF FILE</label>
-                    <input class="form-group" type="text" asp-for="@Model.ImageUpload.PhotoName" />
 
                     @*<label class="col-form-label form-group" asp-for="@Model.ImageUpload.BurialId">BURIAL ID</label>*@
                     <input hidden class="form-group" type="text" asp-for="@Model.ImageUpload.BurialId" value="@bid" />
@@ -51,8 +40,6 @@
         </div>
     </div>
 </div>
-
-
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

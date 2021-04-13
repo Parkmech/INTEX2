@@ -621,14 +621,6 @@ namespace Intex2.Controllers
                           
         };
 
-            //string newid = id.Replace("%2F", "/");
-
-            //if (newid == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //var burials = _context.Photos.FirstOrDefaultAsync(x => x.BurialId == newid);
             return View(blvm);
         }
 
