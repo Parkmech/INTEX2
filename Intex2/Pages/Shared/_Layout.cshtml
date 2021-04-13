@@ -7,13 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta name="google-signin-client_id" content="545269694418-0aj3phfni9pv1mbpsstptmrbtg8qgj0l.apps.googleusercontent.com">
+
     <title>@ViewData["Title"] - Intex2</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/scss/styles.scss" />
+    <script async src="https://cdn.byu.edu/byu-theme-components/2.x.x/byu-theme-components.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.byu.edu/byu-theme-components/2.x.x/byu-theme-components.min.css" media="all">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 
     <link rel="shortcut icon" type="image/png" href="~/pyramids.png" />
-
 
     <title>Heroic Features - Start Bootstrap Template</title>
 
@@ -27,25 +32,23 @@
 
 <body>
 
-    <!-- Navigation -->
+    <!-- Navigation bar in a partial view -->
 
-    <partial name="_NavBar.cshtml" />
-    <br />
+    <partial name="_NavBar" />
 
-    <div class="container">
+    <div class="container" id="content-wrap">
 
         @RenderBody()
 
     </div>
-    <br />
-    <br />
-    <br />
 
-    <footer class="border-top footer text-muted bg-dark" id="footer">
+    <footer class="border-top footer text-muted bg-dark">
         <div class="container text-white">
             &copy; 2021 - Intex2 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/smartwizard@5/dist/js/jquery.smartWizard.min.js" type="text/javascript"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
@@ -54,7 +57,6 @@
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
 
 </body>
 

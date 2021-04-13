@@ -10,6 +10,7 @@
 
     <title>@ViewData["Title"] - Intex2</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/scss/styles.scss" />
     <script async src="https://cdn.byu.edu/byu-theme-components/2.x.x/byu-theme-components.min.js"></script>
@@ -35,12 +36,10 @@
 
     <partial name="_NavBar" />
 
-    <div class="container" id="content-wrap">
+        @RenderBody()   
 
-        @RenderBody()
 
-    </div>
-
+    <br /><br />
     <footer class="border-top footer text-muted bg-dark">
         <div class="container text-white">
             &copy; 2021 - Intex2 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>

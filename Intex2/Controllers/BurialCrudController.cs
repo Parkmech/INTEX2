@@ -184,6 +184,13 @@ namespace Intex2.Controllers
         public async Task<IActionResult> Edit(string id, [Bind("BurialId,BurialId2018,YearOnSkull,MonthOnSkull,DateOnSkull,InitialsOfDataEntryExpert,InitialsOfDataEntryChecker,ByuSample,BodyAnalysis,SkullAtMagazine,PostcraniaAtMagazine,AgeSkull2018,RackAndShelf,ToBeConfirmed,SkullTrauma,PostcraniaTrauma,CribraOrbitala,PoroticHyperostosis,PoroticHyperostosisLocations,MetopicSuture,ButtonOsteoma,PostcraniaTrauma1,OsteologyUnknownComment,TemporalMandibularJointOsteoarthritisTmjOa,LinearHypoplasiaEnamel,AreaHillBurials,Tomb,NsLowPosition,NsHighPosition,NorthOrSouth,EwLowPosition,EwHighPosition,EastOrWest,Square,BurialNumber,BurialWestToHead,BurialWestToFeet,BurialSouthToHead,BurialSouthToFeet,BurialDepth,YearExcav,MonthExcavated,DateExcavated,BurialDirection,BurialPreservation,BurialWrapping,BurialAdultChild,Sex,GenderCode,BurialGenderMethod,AgeCodeSingle,BurialDirection1,NumericMinAge,NumericMaxAge,BurialAgeMethod,HairColorCode,BurialSampleTaken,LengthM,LengthCm,Goods,Cluster,FaceBundle,OsteologyNotes,OtherNotes,SampleNumber,GenderGe,GeFunctionTotal,GenderBodyCol,BasilarSuture,VentralArc,SubpubicAngle,SciaticNotch,PubicBone,PreaurSulcus,MedialIpRamus,DorsalPitting,ForemanMagnum,FemurHead,HumerusHead,Osteophytosis,PubicSymphysis,BoneLength,MedialClavicle,IliacCrest,FemurDiameter,Humerus,FemurLength,HumerusLength,TibiaLength,Robust,SupraorbitalRidges,OrbitEdge,ParietalBossing,Gonian,NuchalCrest,ZygomaticCrest,CranialSuture,MaximumCranialLength,MaximumCranialBreadth,BasionBregmaHeight,BasionNasion,BasionProsthionLength,BizygomaticDiameter,NasionProsthion,MaximumNasalBreadth,InterorbitalBreadth,ArtifactsDescription,PreservationIndex,HairTaken,SoftTissueTaken,BoneTaken,ToothTaken,TextileTaken,DescriptionOfTaken,ArtifactFound,EstimateLivingStature,ToothAttrition,ToothEruption,PathologyAnomalies,EpiphysealUnion,SsmaTimeStamp,PhotoTaken")] Burial burials)
         {
 
+            id = id.Replace("%2F", "/");
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
             if (id != burials.BurialId)
             {
                 return NotFound();
@@ -524,9 +531,8 @@ namespace Intex2.Controllers
         //    return View(blViewModel);
         //}
 
-        public IActionResult AdvancedFiltering(BurialListViewModel filterAtr, int pageNum = 1)
+        public IActionResult AdvancedFiltering(BurialListViewModel filterAtr)
         {
-            //int pageSize = 20;
             string sex = "%";
             string area = "%";
             double length = 0.00;
@@ -579,19 +585,8 @@ namespace Intex2.Controllers
                     .Where(b => b.LengthM >= length)
                     .Where(b => b.BurialDepth >= depth)
                     .OrderBy(b => b.BurialId)
-                    //.Skip((pageNum - 1) * pageSize)
-                    //.Take(pageSize)
+
                     .ToList(),
-                //PagingInfo = new PagingInfo
-                //{
-                //    ItemsPerPage = pageSize,
-                //    CurrentPage = pageNum,
-                //    TotalNumItems = _context.Burials
-                //    .FromSqlInterpolated($"SELECT * FROM Burials WHERE Gender_Code LIKE {sex} AND Square LIKE {area} AND Burial_Direction LIKE {bdirection} AND North_or_South LIKE {nors} AND East_or_West LIKE {eorw} AND BurialID LIKE {burialid}")
-                //    .Where(b => b.LengthM >= length)
-                //    .Where(b => b.BurialDepth >= depth)
-                //    .Count()
-                //},
             });
         }
 
@@ -610,19 +605,11 @@ namespace Intex2.Controllers
                 return NotFound();
             }
 
-            BurialListViewModel blvm = new BurialListViewModel{
-                Burials = _context.Burials.Where(x => x.BurialId == newid)
-                             
+            BurialListViewModel blvm = new BurialListViewModel {
+                burial = _context.Burials.Where(x => x.BurialId == newid).FirstOrDefault()
+                          
         };
 
-            //string newid = id.Replace("%2F", "/");
-
-            //if (newid == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //var burials = _context.Photos.FirstOrDefaultAsync(x => x.BurialId == newid);
             return View(blvm);
         }
 
@@ -637,6 +624,8 @@ namespace Intex2.Controllers
 
             string id = x.BurialId;
 
+            string fileName = x.file.FileName;
+
             if (ModelState.IsValid)
             {
                 // create new entity
@@ -646,7 +635,7 @@ namespace Intex2.Controllers
                 Photo PhotoTable = new Photo
                 {
                     BurialId = x.BurialId,
-                    PhotoId = x.PhotoName,
+                    PhotoId = fileName,
                     Burial = _context.Burials.Where(x => x.BurialId == x.BurialId).FirstOrDefault()
                 };
 
