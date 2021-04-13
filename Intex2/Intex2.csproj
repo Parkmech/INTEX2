@@ -8,6 +8,8 @@
     <Content Remove="mono_crash.11a6748113.0.json" />
     <Content Remove="Views\BurialCrud\ScaffoldCreate.cshtml" />
     <Content Remove="Views\BurialCrud\Success.cshtml" />
+    <Content Remove="Views\CranialCrud\No.cshtml" />
+    <Content Remove="Views\FieldNotesCrud\SingleRecord.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\" />
