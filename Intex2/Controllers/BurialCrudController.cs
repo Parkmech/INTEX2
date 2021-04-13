@@ -585,19 +585,8 @@ namespace Intex2.Controllers
                     .Where(b => b.LengthM >= length)
                     .Where(b => b.BurialDepth >= depth)
                     .OrderBy(b => b.BurialId)
-                    //.Skip((pageNum - 1) * pageSize)
-                    //.Take(pageSize)
+
                     .ToList(),
-                //PagingInfo = new PagingInfo
-                //{
-                //    ItemsPerPage = pageSize,
-                //    CurrentPage = pageNum,
-                //    TotalNumItems = _context.Burials
-                //    .FromSqlInterpolated($"SELECT * FROM Burials WHERE Gender_Code LIKE {sex} AND Square LIKE {area} AND Burial_Direction LIKE {bdirection} AND North_or_South LIKE {nors} AND East_or_West LIKE {eorw} AND BurialID LIKE {burialid}")
-                //    .Where(b => b.LengthM >= length)
-                //    .Where(b => b.BurialDepth >= depth)
-                //    .Count()
-                //},
             });
         }
 

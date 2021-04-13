@@ -3,11 +3,11 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 
-@model BurialListViewModel
-
 @{
-    ViewData["Title"] = "Advanced Filtering";
+    ViewBag.Photo = "https://elasticbeanstalk-us-east-1-891046424969.s3.amazonaws.com/Photos/notfound.png";
 }
+
+@model BurialListViewModel
 
 <style>
     body {
@@ -15,10 +15,11 @@
     }
 </style>
 <br />
+<h1 class="text-center">Burial Information</h1>
 
-<div class="row">
-    <div class="col-md-2">
-        <div class="m-2">
+<div class="row justify-content-md-center">
+    <div class="col-md-2 text-center">
+        <div class="ml-4 my-0 py-0">
             <form asp-action="AdvancedFiltering" method="post">
 
                 <div class="form-group">
@@ -104,64 +105,80 @@
             </form>
         </div>
     </div>
-    
+
     <div class="col-md-10">
-        <div class="card shadow mb-3" style="max-width: auto">
-            <div class="container m-3 p-2">
+        <div class="m-2">
+            <table class="table bg-white shadow rounded table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Burial ID</th>
+                        <th scope="col">Sex</th>
+                        <th scope="col">Length</th>
+                        <th scope="col">Depth</th>
+                        <th scope="col">Area</th>
+                        <th scope="col">Burial Direction</th>
+                        <th scope="col">East/West</th>
+                        <th scope="col">North/South</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
 
-                <table class="table table-responsive table-bordered table-striped table-responsive mt-2">
+                <tbody>
+                    @foreach (var mummy in Model.Burials)
+                    {
 
-                    <thead>
                         <tr>
-                            <th>BurialId</th>
-                            <th>Sex</th>
-                            <th>Area</th>
-                            <th>Length</th>
-                            <th>Depth</th>
-                            <th>Direction</th>
-                            <th>East or West</th>
-                            <th>North or South</th>
-                            <th></th>
+                            <td>@mummy.BurialId</td>
+                            <td>@mummy.GenderCode</td>
+                            <td>@mummy.Square</td>
+
+                            @{ if (mummy.LengthM != null)
+                                {
+                                    <td> @Math.Round((decimal)mummy.LengthM, 2)</td>
+                                }
+
+                                else
+                                {
+                                    <td></td>
+                                }
+
+                                if (mummy.BurialDepth != null)
+                                {
+                                    <td>@Math.Round((decimal)mummy.BurialDepth, 2)</td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
+                            }
+
+
+                            <td>@mummy.BurialDirection</td>
+                            <td>@mummy.EastOrWest</td>
+                            <td>@mummy.NorthOrSouth</td>
+                            <td>
+                                <a class="text-center btn btn-primary" asp-area="" asp-route-id="@mummy.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
+
+                                @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                                {
+                                    <a class="text-center btn btn-secondary" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>}
+
+                                @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                                {
+                                    <a class="text-center btn btn-danger" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@mummy.BurialId">Delete</a>}
+                            </td>
                         </tr>
-                    </thead>
-
-                    <tbody>
-                        @foreach (var mummy in Model.Burials)
-                        {
-
-                            <tr>
-                                <td>@mummy.BurialId</td>
-                                <td>@mummy.GenderCode</td>
-                                <td>@mummy.Square</td>
-                                <td>@Math.Round((decimal)mummy.LengthM, 2)</td>
-                                <td>@Math.Round((decimal)mummy.BurialDepth, 2)</td>
-                                <td>@mummy.BurialDirection</td>
-                                <td>@mummy.EastOrWest</td>
-                                <td>@mummy.NorthOrSouth</td>
-                                <td>
-                                    <a class="text-center btn btn-info" asp-area="" asp-route-id="@mummy.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
-
-                                    @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-                                    {
-                                        <a class="text-center btn btn-warning" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>
-                                    }
-
-                                    @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-                                    {
-                                        <a class="text-center btn btn-danger" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@mummy.BurialId">Delete</a>
-                                    }
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
+                    }
+                </tbody>
 
 
-                </table>
-
-            </div>
+            </table>
         </div>
 
     </div>
-
 </div>
-
+<br />
+<br />
+<br />
+<br />
+<br />
