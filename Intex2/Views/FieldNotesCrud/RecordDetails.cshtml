@@ -12,7 +12,7 @@
     }
     else
     {
-        printId = "There are no references for " + Model.burial.BurialId;
+        printId = "There are no field book references for " + Model.burial.BurialId;
     }
 
 }
@@ -25,7 +25,7 @@
 <div class="row justify-content-md-center">
     @foreach (var entry in Model.fieldNotes)
     {
-<div class="card text-center shadow-sm col-md-3 m-1 p-1">
+        <div class="card text-center shadow-sm col-md-3 m-1 p-1">
      <div class="card-header">
 
         <h5>Field Book: @entry.FieldBook1</h5>
@@ -49,11 +49,13 @@
             }
         </div>
      </div>
-</div>}
+</div>
+<hr />
+}
 </div>
 
-<hr />
-<div class="row">
+
+<div class="row justify-content-md-center">
     <a class="btn btn-secondary m-1" asp-controller="BurialCrud" asp-action="Details" asp-route-id="@Model.burial.BurialId">Back to Burial Details</a>
 
     <a class="btn btn-primary m-1" asp-action="create" asp-route-id="@Model.burial.BurialId">Add a Field Book Reference</a>

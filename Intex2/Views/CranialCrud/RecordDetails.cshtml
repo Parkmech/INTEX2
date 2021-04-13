@@ -11,7 +11,7 @@
     }
     else
     {
-        printId = "ID " + Model.burial.BurialId + " has no cranial data";
+        printId = "There is no cranial data for " + Model.burial.BurialId;
     }
 }
 <br />
@@ -20,12 +20,12 @@
     <h1> @printId </h1>
 </div>
 <hr />
+<div class="row justify-content-md-center">
 
-@foreach (var sample in Model.cranialSamples)
-{
-    <div class="card shadow mb-3" style="max-width: auto">
-        <div class="row g-0">
-            <div class="col-md-8">
+    @foreach (var sample in Model.cranialSamples)
+    {
+        <div class="card shadow mb-3 col-7">
+            <div class="row g-0">
                 <div class="card-body">
                     <h2 class="card-title">Burial ID: @Model.cranialSample.BurialId</h2>
                     <h5 class="card-subtitle mb-2 text-muted">Sample #@Model.cranialSample.SampleNumber</h5>
@@ -41,16 +41,17 @@
                         <li class="list-group-item ">Interorbital Breadth: @Model.cranialSample.InterorbitalBreadth</li>
                     </ul>
 
-                    <div class="row">
-                        <a class="text-center btn btn-primary col-md-2 m-2" asp-area="" asp-route-id="@Model.cranialSample.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
+                    <br />
+
+                    <div class="row justify-content-md-center">
+                        <a class="text-center btn btn-primary col-md-3 m-1 p-1" asp-area="" asp-route-id="@Model.cranialSample.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
+                        @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                        {
+                            <a class="col-md-3 btn btn-secondary m-1 p-1" asp-controller="CranialCrud" asp-action="Edit" asp-route-id="@Model.cranialSample.Id">Edit</a>}
 
                         @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
                         {
-                            <a class="col-md-4 m-1 p-1 btn btn-secondary" asp-controller="CranialCrud" asp-action="Edit" asp-route-id="@Model.cranialSample.Id">Edit</a>}
-
-                        @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-                        {
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Delete</button>
+                            <button type="button" class="btn btn-danger col-md-3 m-1 p-1" data-toggle="modal" data-target="#myModal">Delete</button>
 
                             <div id="myModal" class="modal fade" role="dialog">
 
@@ -68,13 +69,13 @@
 
                                         <div class="modal-footer">
                                             <a class="btn btn-danger" asp-action="CustomDelete" asp-controller="CranialCrud" asp-route-id="@Model.cranialSample.Id">Danger</a>
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>                                        
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                         </div>
 
                                     </div>
 
                                 </div>
-                                
+
                             </div>
 
                             <br />
@@ -83,17 +84,13 @@
                 </div>
             </div>
         </div>
-    </div>
+    }
+</div>
 
-
-    <hr />
-    <div class="row">
-    </div>
-
-}
-
-@if (Model.cranialSamples.Count() == 0)
-{
-    <a class="btn btn-primary m-1" asp-action="Create" asp-route-id="@Model.burial.BurialId">Add Cranial Data</a>
-}
-<a class="btn btn-secondary m-1" asp-controller="BurialCrud" asp-action="Details" asp-route-id="@Model.burial.BurialId">Back to Burial Details</a>
+<div class="row justify-content-md-center">
+    @if (Model.cranialSamples.Count() == 0)
+    {
+        <a class="btn btn-primary m-1" asp-action="Create" asp-route-id="@Model.burial.BurialId">Add Cranial Data</a>
+    }
+    <a class="btn btn-secondary m-1" asp-controller="BurialCrud" asp-action="Details" asp-route-id="@Model.burial.BurialId">Back to Burial Details</a>
+</div>

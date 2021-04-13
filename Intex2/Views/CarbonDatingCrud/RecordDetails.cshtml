@@ -7,12 +7,12 @@
     string printId;
     if (Model.carbDateSamples.Count() > 0)
     {
-        printId = "Carbon Dating Samples for " + Model.burial.BurialId;
+        printId = "Carbon Dating Data for " + Model.burial.BurialId;
 
     }
     else
     {
-        printId = "There are no Samples for " + Model.burial.BurialId;
+        printId = "There is no carbon dating data for " + Model.burial.BurialId;
     } }
 <br />
 
@@ -21,66 +21,50 @@
 </div>
 <hr />
 
-@foreach (var sample in Model.carbDateSamples)
-{
-<div class="card shadow mb-3" style="max-width: auto">
-    <div class="card header text-center">
-        <h3>Carbon Dating Data on Rack @sample.Rack</h3>
-    </div>
-    <div class="row justify-content-md-center">
 
-        <h5 class="m-1 p-1 col-md-3">Tube Number: @sample.Tube</h5>
-        <h5 class="m-1 p-1 col-md-3">Description: @sample.Description</h5>
-        <h5 class="m-1 p-1 col-md-3">Questions: @sample.QuestionS</h5>
+<div class="row justify-content-md-center">
 
-    </div>
+    @foreach (var sample in Model.carbDateSamples)
+    {
+        <div class="card shadow m-2 p-2 col-md-11">
+            <div class="card-body">
+                <h2 class="card-title">Rack Number: @sample.Rack</h2>
+                <div class="row">
+                    <div class="col-md-5 m-1 p-1">
+                        <h5>Tube Number: @sample.Tube</h5>                            <hr />
+                        <h5>Size(ml): @sample.SizeMl </h5><hr />
+                        <h5>Location: @sample.Location</h5>                            <hr />
+                        <h5>Description: @sample.Description</h5><hr />
+                        <h5>Category: @sample.Category</h5>                            <hr />
+                        <h5>Foci: @sample.Foci</h5><hr />
+                        <h5>Notes: @sample.Notes</h5>                            <hr />
+                    </div>
+                    <div class="col-md-5 m-1 p-1">
+                        <h5>C14 Sample 2017: @sample.C14Sample2017</h5><hr />
+                        <h5>Conventional 14C Age BP: @sample.Conventional14cAgeBp</h5>                            <hr />
+                        <h5>14C CalendarDate @sample._14cCalendarDate</h5><hr />
+                        <h5>Calibrated 95% Calendar Date(Max): @sample.Calibrated95CalendarDateMax</h5>                            <hr />
+                        <h5>Calibrated 95% Calendar Date(Min): @sample.Calibrated95CalendarDateMin</h5><hr />
+                        <h5>Calibrated 95% Calendar Date(Span): @sample.Calibrated95CalendarDateSpan</h5><hr />
+                        <h5>Calibrated 95% Calendar Date(Avg): @sample.Calibrated95CalendarDateAvg</h5><hr />
+                    </div>
+                </div>
 
-    <div class="row justify-content-md-center">
+            </div>
+            <div class="row justify-content-md-center">
+                @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                {
+                    <a class="col-md-3 btn btn-secondary m-1 p-1" asp-controller="CranialCrud" asp-action="Edit" asp-route-id="@sample.Id">Edit</a>}
 
-        <h5 class="m-1 p-1 col-md-3">Size (ml): @sample.SizeMl</h5>
-        <h5 class="m-1 p-1 col-md-3">Foci: @sample.Foci</h5>
-        <h5 class="m-1 p-1 col-md-3">C14 Sample 2017: @sample.C14Sample2017</h5>
-    </div>
-
-    <div class="row justify-content-md-center">
-
-        <h5 class="m-1 p-1 col-md-3">Location: @sample.Location</h5>
-        <h5 class="m-1 p-1 col-md-3">Conventional 14C age BP: @sample.Conventional14cAgeBp</h5>
-        <h5 class="m-1 p-1 col-md-3">14C Calendar Date: @sample._14cCalendarDate</h5>
-
-    </div>
-    <div class="row justify-content-md-center">
-
-        <h5 class="m-1 p-1 col-md-3">Calibrated 95% Calendar Date Max: @sample.Calibrated95CalendarDateMax</h5>
-        <h5 class="m-1 p-1 col-md-3">Calibrated 95% Calendar Date MIN: @sample.Calibrated95CalendarDateMin</h5>
-        <h5 class="m-1 p-1 col-md-3">Calibrated 95% Calendar Date SPAN: @sample.Calibrated95CalendarDateSpan</h5>
-
-    </div>
-
-    <div class="row justify-content-md-center">
-
-        <h5 class="m-1 p-1 col-md-3">Calibrated 95% Calendar Date AVG: @sample.Calibrated95CalendarDateAvg</h5>
-        <h5 class="m-1 p-1 col-md-3">Category: @sample.Category</h5>
-        <h5 class="m-1 p-1 col-md-3">Notes: @sample.Notes</h5>
-
-    </div>
-
-    <hr />
-    <div class="row justify-content-md-center">
-
-        @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-        {
-<a class="col-md-2 m-1 p-1 btn btn-secondary" asp-controller="CarbonDatingCrud" asp-action="Edit" asp-route-id="@sample.Id">Edit</a>}
-
-        @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-        {
-<a class="text-center btn btn-danger col-md-2 m-1 p-1" asp-controller="CarbonDatingCrud" asp-action="Delete" asp-route-id="@sample.Id">Delete</a>}
-
-    </div>
-    <br />
-
+                @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                {
+                    <button type="button" class="btn btn-danger col-md-3 m-1 p-1" data-toggle="modal" data-target="#myModal">Delete</button>}
+            </div>
+            <br />
+        </div>
+    }
 </div>
-}
+
 
 <div class="row justify-content-md-center">
     <a class="btn btn-secondary m-1" asp-controller="BurialCrud" asp-action="Details" asp-route-id="@Model.burial.BurialId">Back to Burial Details</a>
