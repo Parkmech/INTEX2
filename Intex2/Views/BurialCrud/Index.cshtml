@@ -37,7 +37,7 @@
     </div>
 </div>
 <div class="container collapse" id="filter">
-    <form asp-action="Filtered" method="post">
+    <form asp-action="AdvancedFiltering" method="post">
         <div class="row">
             <div class="form-group col-md-3">
                 <label asp-for="@Model.FilterItems.BurialId">Burial ID</label>
@@ -135,15 +135,40 @@
             <div class="col-md-8">
                 <div class="card-body">
                     <h2 class="card-title">@mummy.BurialId</h2>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item ">South to Head: @mummy.BurialSouthToHead</li>
-                        <li class="list-group-item ">South to Feet: @mummy.BurialSouthToFeet</li>
-                        <li class="list-group-item ">West to Head: @mummy.BurialWestToHead</li>
-                        <li class="list-group-item ">West to Feet: @mummy.BurialWestToFeet</li>
-                        <li class="list-group-item ">Length: @mummy.LengthM</li>
-                        <li class="list-group-item ">Depth: @mummy.BurialDepth</li>
-                    </ul>
+                
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Sex</th>
+                                <th>Length</th>
+                                <th>Depth</th>
+                                <th>Area</th>
+                                <th>East/West</th>
+                                <th>North/South</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@mummy.GenderCode</td>
+                                <td>
+                                    @if (mummy.LengthM != null)
+                                    {
+                                        @Math.Round((decimal)mummy.LengthM, 2)
+                                    }
+                                </td>
+                                <td>
+                                    @if (mummy.BurialDepth != null)
+                                    {
+                                        @Math.Round((decimal)mummy.BurialDepth, 2)
+                                    }                      
+                                </td>
+                                <td>@mummy.Square</td>
+                                <td>@mummy.EastOrWest</td>
+                                <td>@mummy.NorthOrSouth</td>
+                            </tr>
+                        </tbody>
 
+                    </table>
                     <div class="row">
                         <a class="text-center btn btn-primary col-md-2 m-2" asp-area="" asp-route-id="@mummy.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
 
@@ -160,11 +185,11 @@
                 </div>
             </div>
 
-            <div class=" mx-auto m-2 p-1">
-                <img src="@ViewBag.Photo" ;
+            <div class="mx-auto m-2 p-1">
+                <img src="@ViewBag.Photo"
                      alt="..."
                      class="img-fluid"
-                     width="300" />
+                     width="300" >
             </div>
             @{
                 ViewBag.Photo = "https://elasticbeanstalk-us-east-1-503379183917.s3.amazonaws.com/Photos/notfound.png";

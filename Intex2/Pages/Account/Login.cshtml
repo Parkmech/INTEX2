@@ -4,7 +4,7 @@
 
 <header class="jumbotron my-4 bg-white shadow-sm">
 
-    <h1 class="display-3">Login</h1>
+
 
     <form method="post">
 
@@ -12,23 +12,40 @@
 
         <div class="row">
             <div class="col-md-6">
+
+                <h1 class="display-3">Login</h1>
+
+                <hr />
+
                 <div class="form-group">
                     <label>UserName:</label>
                     <input class="form-control" asp-for="UserName" />
                 </div>
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-6">
+                <br />
+                <br />
+
                 <div class="form-group">
                     <label>Password:</label>
                     <input asp-for="Password" type="password" class="form-control" />
                 </div>
+
+                <br />
+                <hr />
+
+                <a class="btn btn-primary p-2 m-1" asp-controller="Google" asp-action="GoogleLogin">Log In With Google</a>
+               
+          
+            </div>
+            <div class="col-md-6">
+
+                <img src="~/img/login.png" class="img-fluid mx-auto text-center" width="200"/>
+
             </div>
         </div>
 
-        <button class="btn btn-primary" type="submit">Log In</button>
+
+        <button class="btn btn-primary p-2 m-1" type="submit">Log In</button>
 
     </form>
  
@@ -37,6 +54,7 @@
 
 
 @functions {
+
     public class LoginModel : PageModel
     {
         private SignInManager<IdentityUser> signInManager;
@@ -55,7 +73,6 @@
         public string Password { get; set; }
 
         [BindProperty(SupportsGet = true)]
-
         public string ReturnUrl { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
