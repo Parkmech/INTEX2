@@ -1,5 +1,36 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model Intex2.Models.FieldBook
+
+@{ ViewData["Title"] = "Delete";
+   Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<div class="text-center">
+    <h1>Delete Confirmation</h1>
+
+    <h3>Are you sure you want to delete this reference?</h3>
+</div>
+
+<hr />
+<div class="row justify-content-md-center">
+
+    <div class="card text-center  shadow-sm col-md-3 m-1 p-1">
+        <div class="card-header">
+            <h5>Field Book: @Model.FieldBook1</h5>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                Page Number: @Model.FieldBookPageNumber
+            </h5>
+           
+            <form asp-action="Delete">
+                <div class="row justify-content-md-center">
+                    <input type="submit" value="Delete" class="btn btn-danger m-1" />
+                    <a class="btn btn-secondary m-1" asp-action="RecordDetails" asp-route-id="@Model.BurialId">Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
