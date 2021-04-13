@@ -4,14 +4,14 @@
 @{
 }
 
-@model ImageUpload
+@model BurialListViewModel
 
 <form method="post"asp-action="SavePhoto" enctype="multipart/form-data">
-    <label asp-for="file">UPLOAD A PIC FOR ME</label>
-    <input type="file" asp-for="file" />
-    <label asp-for="PhotoName">NAME OF FILE</label>
-    <input type="text" asp-for="PhotoName" />
-    <label asp-for="BurialId">BURIAL ID</label>
-    <input type="text" asp-for="BurialId" />
+    <label asp-for="@Model.ImageUpload.file">UPLOAD A PIC FOR ME</label>
+    <input type="file" asp-for="@Model.ImageUpload.file" />
+    <label asp-for="@Model.ImageUpload.PhotoName">NAME OF FILE</label>
+    <input type="text" asp-for="@Model.ImageUpload.PhotoName" />
+    <label asp-for="@Model.ImageUpload.BurialId">BURIAL ID</label>
+    <input type="text" asp-for="@Model.ImageUpload.BurialId" />
     <button type="submit">SUBMIT</button>
 </form> 
