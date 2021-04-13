@@ -48,7 +48,7 @@
 
                 @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
                 {
-                    <dd><a class="btn btn-danger" asp-action="Delete" asp-route-id="@x.Id">Delete</a> </dd>
+                    <dd><a class="btn btn-danger" asp-action="Delete" asp-controller="PhotosCrud"asp-route-id="@x.Id">Delete</a> </dd>
                 }
 
             }
