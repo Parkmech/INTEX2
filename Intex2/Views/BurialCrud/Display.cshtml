@@ -4,15 +4,12 @@
     ViewData["Title"] = "Index";
 }
 
-
-
 <style>
     body {
         background-color: #E9ECEF;
     }
 </style>
 <br />
-
 
 <div class="card shadow mb-3" style="max-width: auto">
     <div class="container m-3 p-2">
@@ -85,20 +82,23 @@
                             @Html.DisplayFor(modelItem => mummy.NorthOrSouth)
                         </td>
                         <td>
-                            <a class="text-center btn btn-info" asp-area="" asp-route-id="@mummy.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
+                            <div class="row justify-content-md-center">
+                                <a class="text-center btn btn-info" asp-area="" asp-route-id="@mummy.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
 
-                            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-                            {
-                                <a class="text-center btn btn-warning" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>
-                            }
+                                @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                                {
+                                    <a class="text-center btn btn-warning" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>
+                                }
 
-                            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-                            {
-                                <a class="text-center btn btn-danger" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@mummy.BurialId">Delete</a>
-                            }
+                                @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                                {
+                                    <a class="text-center btn btn-danger" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@mummy.BurialId">Delete</a>
+                                }
+                            </div>
+  
                         </td>
                     </tr>
-                }
+                    }
             </tbody>
         </table>
 
