@@ -524,9 +524,8 @@ namespace Intex2.Controllers
         //    return View(blViewModel);
         //}
 
-        public IActionResult AdvancedFiltering(BurialListViewModel filterAtr, int pageNum = 1)
+        public IActionResult AdvancedFiltering(BurialListViewModel filterAtr)
         {
-            //int pageSize = 20;
             string sex = "%";
             string area = "%";
             double length = 0.00;
