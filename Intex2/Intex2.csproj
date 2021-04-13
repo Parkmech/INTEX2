@@ -15,7 +15,6 @@
     <Folder Include="Pages\Roles\" />
     <Folder Include="Pages\Account\" />
     <Folder Include="Pages\Shared\" />
-    <Folder Include="wwwroot\img\" />
     <Folder Include="Views\CarbonDatingCrud\" />
     <Folder Include="Views\CranialCrud\" />
     <Folder Include="Views\FieldNotesCrud\" />
