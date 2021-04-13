@@ -216,6 +216,7 @@ namespace Intex2.Controllers
         }
 
         // GET: BurialCrud/Delete/5
+        [HttpGet]
         [Authorize(Roles = "Admins")]
         public async Task<IActionResult> Delete(string id)
         {
@@ -240,10 +241,10 @@ namespace Intex2.Controllers
         }
 
         // POST: BurialCrud/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("DeleteConf")]
         [Authorize(Roles = "Admins")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConf(string id)
         {
             string newid = id.Replace("%2F", "/");
 
@@ -252,16 +253,57 @@ namespace Intex2.Controllers
                 return NotFound();
             }
 
+            List<Photo> photos = new List<Photo>();
+            List<BiologicalSample> bios = new List<BiologicalSample>();
+
+
+            photos.AddRange(_context.Photos.Where(p => p.BurialId == id).ToList());
+
+            for (int i = 0; i < photos.Count(); i++)
+            {
+                _context.Photos.Remove(photos.FirstOrDefault(p => p.Id == photos[i].Id));
+                await _context.SaveChangesAsync();
+            }
+
+            bios.AddRange(_context.BiologicalSamples.Where(p => p.BurialId == id).ToList());
+
+            for (int i = 0; i < bios.Count(); i++)
+            {
+                _context.BiologicalSamples.Remove(bios.FirstOrDefault(p => p.Id == bios[i].Id));
+                await _context.SaveChangesAsync();
+            }
+
+
+            //var cranial = await _context.Cranials.FindAsync(newid);
+            //_context.Cranials.Remove(cranial);
+            //await _context.SaveChangesAsync();
+
             var burials = await _context.Burials.FindAsync(newid);
             _context.Burials.Remove(burials);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> Display(string sortOrder, string searchString)
+        public async Task<IActionResult> Display(string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
             ViewData["IdSortParm"] = String.IsNullOrEmpty(sortOrder) ? "BurialId_Desc" : "";
-            ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
+            ViewData["SexSortParm"] = sortOrder == "sex_desc" ? "Sex" : "sex_desc";
+            ViewData["LengthSortParm"] = sortOrder == "length_desc" ? "Length" : "length_desc";
+            ViewData["DepthSortParm"] = sortOrder == "depth_desc" ? "Depth" : "depth_desc";
+            ViewData["SquareSortParm"] = sortOrder == "square_desc" ? "Square" : "square_desc";
+            ViewData["DirectionSortParm"] = sortOrder == "dir_desc" ? "Dir" : "dir_desc";
+            ViewData["EorWSortParm"] = sortOrder == "EorW_desc" ? "EorW" : "EorW_desc";
+            ViewData["NorSSortParm"] = sortOrder == "NorS_desc" ? "NorS" : "NorS_desc";
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
             ViewData["CurrentFilter"] = searchString;
             var mummies = from s in _context.Burials select s;
             //var mummies = from s in _context.Burials.IsRequired(false) select s;
@@ -269,24 +311,64 @@ namespace Intex2.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 mummies = mummies.Where(s => s.BurialId.Contains(searchString)
-                                       || s.Sex.Contains(searchString));
+                                       || s.GenderCode.Contains(searchString) || s.EastOrWest.Contains(searchString)
+                                       || s.NorthOrSouth.Contains(searchString) || s.BurialDirection.Contains(searchString));
             }
             switch (sortOrder)
             {
                 case "BurialId_Desc":
                     mummies = mummies.OrderByDescending(s => s.BurialId);
                     break;
-                case "Date":
-                    mummies = mummies.OrderBy(s => s.DateExcavated);
+                case "Sex":
+                    mummies = mummies.OrderBy(s => s.GenderCode);
                     break;
-                case "date_desc":
-                    mummies = mummies.OrderByDescending(s => s.DateExcavated);
+                case "sex_desc":
+                    mummies = mummies.OrderByDescending(s => s.GenderCode);
+                    break;
+                case "Length":
+                    mummies = mummies.OrderBy(s => s.LengthM);
+                    break;
+                case "length_desc":
+                    mummies = mummies.OrderByDescending(s => s.LengthM);
+                    break;
+                case "Depth":
+                    mummies = mummies.OrderBy(s => s.BurialDepth);
+                    break;
+                case "depth_desc":
+                    mummies = mummies.OrderByDescending(s => s.BurialDepth);
+                    break;
+                case "Dir":
+                    mummies = mummies.OrderBy(s => s.BurialDirection);
+                    break;
+                case "dir_desc":
+                    mummies = mummies.OrderByDescending(s => s.BurialDirection);
+                    break;
+                case "Square":
+                    mummies = mummies.OrderBy(s => s.Square);
+                    break;
+                case "square_desc":
+                    mummies = mummies.OrderByDescending(s => s.Square);
+                    break;
+                case "EorW":
+                    mummies = mummies.OrderBy(s => s.EastOrWest);
+                    break;
+                case "EorW_desc":
+                    mummies = mummies.OrderByDescending(s => s.EastOrWest);
+                    break;
+                case "NorS":
+                    mummies = mummies.OrderBy(s => s.NorthOrSouth);
+                    break;
+                case "NorS_desc":
+                    mummies = mummies.OrderByDescending(s => s.NorthOrSouth);
                     break;
                 default:
                     mummies = mummies.OrderBy(s => s.BurialId);
                     break;
             }
-            return View(await mummies.AsNoTracking().ToListAsync());
+
+            int pageSize = 20;
+            return View(await PaginatedList<Burial>.CreateAsync(mummies.AsNoTracking(), pageNumber ?? 1, pageSize));
+            //return View(await mummies.AsNoTracking().ToListAsync());
         }
 
         public async Task<IActionResult> Search(string searchString)
@@ -305,8 +387,8 @@ namespace Intex2.Controllers
             return View("Index", await mummies.AsNoTracking().ToListAsync());
         }
 
-        [HttpPost]
-        public IActionResult Filtered(BurialListViewModel filterAtr)
+        
+        public IActionResult Filtered(BurialListViewModel filterAtr, string searchString)
         {
             string sex = filterAtr.FilterItems.Sex;
             string area = filterAtr.FilterItems.Area;
@@ -342,13 +424,158 @@ namespace Intex2.Controllers
 
             burialid = "%" + burialid + "%";
 
+
+
+            ViewData["CurrentFilter"] = searchString;
+            var mummies = from s in _context.Burials select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                mummies = mummies.Where(s => s.BurialId.Contains(searchString)
+                                       || s.Sex.Contains(searchString));
+            }
+
             return View(new BurialListViewModel
             {
                 Burials = _context.Burials
                     .FromSqlInterpolated($"SELECT * FROM Burials WHERE Gender_Code LIKE {sex} AND Square LIKE {area} AND Burial_Direction LIKE {bdirection} AND North_or_South LIKE {nors} AND East_or_West LIKE {eorw} AND BurialID LIKE {burialid}")
                     .Where(b => b.LengthM >= length)
                     .Where(b => b.BurialDepth >= depth)
+                    .OrderBy(b => b.BurialId)
                     .ToList()
+            });
+        }
+
+        //public IActionResult Filtered(BurialListViewModel filterAtr, string searchString)
+        //{
+        //    string sex = filterAtr.FilterItems.Sex;
+        //    string area = filterAtr.FilterItems.Area;
+        //    double length = filterAtr.FilterItems.Length;
+        //    double depth = filterAtr.FilterItems.Depth;
+        //    string bdirection = filterAtr.FilterItems.BDirection;
+        //    string nors = filterAtr.FilterItems.NorS;
+        //    string eorw = filterAtr.FilterItems.EorW;
+        //    string burialid = filterAtr.FilterItems.BurialId;
+
+
+        //    if (sex == "ALL")
+        //    {
+        //        sex = "%";
+        //    }
+        //    if (area == "ALL")
+        //    {
+        //        area = "%";
+        //    }
+        //    if (bdirection == "ALL")
+        //    {
+        //        bdirection = "%";
+        //    }
+        //    if (nors == "ALL")
+        //    {
+        //        nors = "%";
+        //    }
+        //    if (eorw == "ALL")
+        //    {
+        //        eorw = "%";
+        //    }
+
+
+        //    burialid = "%" + burialid + "%";
+
+        //    ViewData["CurrentFilter"] = searchString;
+        //    var mummies = from s in _context.Burials select s;
+
+        //    if (!String.IsNullOrEmpty(searchString))
+        //    {
+        //        BurialListViewModel blViewModel = (new BurialListViewModel
+        //        {
+        //            Burials = mummies.Where(s => s.BurialId.Contains(searchString)
+        //                               || s.Sex.Contains(searchString))
+        //                    .OrderBy(b => b.BurialId)
+        //                    .ToList()
+        //        });
+        //    }
+        //    else
+        //    {
+        //        BurialListViewModel blViewModel = (new BurialListViewModel
+        //        {
+        //            Burials = _context.Burials
+        //            .FromSqlInterpolated($"SELECT * FROM Burials WHERE Gender_Code LIKE {sex} AND Square LIKE {area} AND Burial_Direction LIKE {bdirection} AND North_or_South LIKE {nors} AND East_or_West LIKE {eorw} AND BurialID LIKE {burialid}")
+        //            .Where(b => b.LengthM >= length)
+        //            .Where(b => b.BurialDepth >= depth)
+        //            .OrderBy(b => b.BurialId)
+        //            .ToList()
+        //        });
+        //    }
+
+
+
+        //    return View(blViewModel);
+        //}
+
+        public IActionResult AdvancedFiltering(BurialListViewModel filterAtr, int pageNum = 1)
+        {
+            int pageSize = 20;
+            string sex = filterAtr.FilterItems.Sex;
+            string area = filterAtr.FilterItems.Area;
+            double length = filterAtr.FilterItems.Length;
+            double depth = filterAtr.FilterItems.Depth;
+            string bdirection = filterAtr.FilterItems.BDirection;
+            string nors = filterAtr.FilterItems.NorS;
+            string eorw = filterAtr.FilterItems.EorW;
+            string burialid = filterAtr.FilterItems.BurialId;
+
+
+            if (sex == "ALL")
+            {
+                sex = "%";
+            }
+            if (area == "ALL")
+            {
+                area = "%";
+            }
+            if (bdirection == "ALL")
+            {
+                bdirection = "%";
+            }
+            if (nors == "ALL")
+            {
+                nors = "%";
+            }
+            if (eorw == "ALL")
+            {
+                eorw = "%";
+            }
+
+
+            burialid = "%" + burialid + "%";
+
+
+
+
+            return View(new BurialListViewModel
+            {
+                Burials = _context.Burials
+                    .FromSqlInterpolated($"SELECT * FROM Burials WHERE Gender_Code LIKE {sex} AND Square LIKE {area} AND Burial_Direction LIKE {bdirection} AND North_or_South LIKE {nors} AND East_or_West LIKE {eorw} AND BurialID LIKE {burialid}")
+                    .Where(b => b.LengthM >= length)
+                    .Where(b => b.BurialDepth >= depth)
+                    .OrderBy(b => b.BurialId)
+                    .Skip((pageNum - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList(),
+
+                PagingInfo = new PagingInfo
+                {
+                    ItemsPerPage = pageSize,
+                    CurrentPage = pageNum,
+                    TotalNumItems = _context.Burials
+                    .FromSqlInterpolated($"SELECT * FROM Burials WHERE Gender_Code LIKE {sex} AND Square LIKE {area} AND Burial_Direction LIKE {bdirection} AND North_or_South LIKE {nors} AND East_or_West LIKE {eorw} AND BurialID LIKE {burialid}")
+                    .Where(b => b.LengthM >= length)
+                    .Where(b => b.BurialDepth >= depth)
+                    //FOR THE PRESENTATION TO PRESENT CLEAN DATA .Where(x=> x.BurialSouthToFeet != null)
+                    .Count()
+                },
+                Photos = _context.Photos
             });
         }
 

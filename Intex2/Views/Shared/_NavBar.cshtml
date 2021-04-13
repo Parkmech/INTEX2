@@ -69,6 +69,16 @@
 
         <div class="my-2 my-lg-0">
             <ul class="navbar-nav">
+                <li class="nav-item">
+                    <form asp-controller="BurialCrud" asp-action="Display" method="get">
+                        <div class="form-actions no-color">
+                            <i class="fa fa-search"></i>
+                            <p class="nav-link text-light">
+                                Search: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                            </p>
+                        </div>
+                    </form>
+                </li>
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <li class="nav-item">
