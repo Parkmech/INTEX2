@@ -100,7 +100,7 @@ namespace Intex2.Controllers
 
         // POST: PhotosCrud/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         //NEED TO FIX THE DELETE CONFIRMED BUTTON DOWN BELOW, SO IT TAKES YOU BACK TO DETAILS APPROPRIATELY
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
