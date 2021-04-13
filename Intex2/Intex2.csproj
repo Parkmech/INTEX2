@@ -16,6 +16,7 @@
     <Folder Include="Pages\Account\" />
     <Folder Include="Pages\Shared\" />
     <Folder Include="wwwroot\img\" />
+    <Folder Include="Views\Google\" />
     <Folder Include="Views\CarbonDatingCrud\" />
     <Folder Include="Views\CranialCrud\" />
     <Folder Include="Views\FieldNotesCrud\" />
