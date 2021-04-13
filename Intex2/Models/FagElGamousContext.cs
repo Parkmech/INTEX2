@@ -25,7 +25,7 @@ namespace Intex2.Models
         public virtual DbSet<C14> C14s { get; set; }
         public virtual DbSet<Cluster> Clusters { get; set; }
         public virtual DbSet<Cranial> Cranials { get; set; }
-        public virtual DbSet<FieldBook> FieldBooks { get; set; }
+        public virtual DbSet<FieldBook> FieldBook { get; set; }
         public virtual DbSet<GenderCode> GenderCodes { get; set; }
         public virtual DbSet<HairCode> HairCodes { get; set; }
         public virtual DbSet<OracleGi> OracleGis { get; set; }
@@ -861,10 +861,11 @@ namespace Intex2.Models
                 //    .IsConcurrencyToken()
                 //    .HasColumnName("SSMA_TimeStamp");
             });
+            //FieldBook$FieldBook
 
             modelBuilder.Entity<FieldBook>(entity =>
             {
-                entity.HasIndex(e => e.BurialId).HasName("FieldBook$FieldBookBurialID");
+                entity.HasIndex(e => e.BurialId).HasName("BurialID");
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
