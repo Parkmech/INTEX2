@@ -42,6 +42,7 @@ namespace Intex2.Services
                 putObjectRequest.Key = ObjectKey;
                 putObjectRequest.InputStream = fileToUpload;
                 putObjectRequest.ContentType = file.ContentType;
+                putObjectRequest.CannedACL = S3CannedACL.PublicRead;
 
                 var response = await s3Client.PutObjectAsync(putObjectRequest);
 

@@ -155,7 +155,7 @@ namespace Intex2.Controllers
             var photo = await _context.Photos.FindAsync(id);
             _context.Photos.Remove(photo);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Details));
+            return RedirectToAction(nameof(Index));
         }
 
         private bool PhotoExists(int id)

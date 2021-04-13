@@ -571,10 +571,9 @@
 
             @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
             {
-        <form method="post" asp-action="UploadImage">
-            <button class="text-center btn btn-light" asp-controller="BurialCrud" asp-action="C" asp-route-id="@Model.BurialId">Add Photo</button>
-        </form>}
-        
+                <a class="text-center btn btn-dark col-md-4 m-2" asp-controller="BurialCrud" asp-action="UploadPhoto" asp-route-id="@Model.BurialId"> Add Photo</a>
+            }
+
             </div>
     </div>
 </div>

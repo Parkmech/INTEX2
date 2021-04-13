@@ -587,8 +587,20 @@ namespace Intex2.Controllers
         }
 
         [Authorize(Roles = "Admins")]
-        public IActionResult UploadPhoto()
+        public IActionResult UploadPhoto(string id)
         {
+            string newid = id.Replace("%2F", "/");
+
+            if (newid == null)
+            {
+                return NotFound();
+            }
+
+            BurialListViewModel blvm = new BurialListViewModel{
+                Burials = _context.Burials.Where(x => x.BurialId == newid)
+                             
+        };
+
             //string newid = id.Replace("%2F", "/");
 
             //if (newid == null)
@@ -597,42 +609,44 @@ namespace Intex2.Controllers
             //}
 
             //var burials = _context.Photos.FirstOrDefaultAsync(x => x.BurialId == newid);
-            return View();
+            return View(blvm);
         }
 
-        //public async Task<IActionResult> SavePhoto(BurialListViewModel photo)
-        //{
-        //    // magic happens here
-        //    // check if model is not empty
-        //    //Photo uploadPhoto = (Photo)photo.ImageUpload;
-        //    if (ModelState.IsValid)
-        //    {
-        //        // create new entity
-        //        await _s3Storage.AddItem(photo.ImageUpload.file, "ForFun");
-
-        //        //this adds creates the linking table? I think
-
-        //        //Photo PhotoTable = new Photo
-        //        //{
-        //        //    BurialId = photo.BurialId,
-        //        //    PhotoId = photo.PhotoName
-        //        //};
-
-        //        //_context.Photos.Add(PhotoTable);
-        //        //await _context.SaveChangesAsync();
-
-        //        return RedirectToAction("Create", "PhotosCrud", string id, );
-        //    }
-        //    else
-        //    {
-        //        return View("Home");
-        //    }
-   
-        //}
-        public IActionResult FieldBookView()
+        public async Task<IActionResult> SavePhoto(BurialListViewModel photo)
         {
-            FieldBook fb = _context.FieldBook.FirstOrDefault();
-            return View(fb);
+            // magic happens here
+            // check if model is not empty
+            //Photo uploadPhoto = (Photo)photo.ImageUpload;
+
+            var x = photo.ImageUpload;
+
+            string id = x.BurialId;
+
+            if (ModelState.IsValid)
+            {
+                // create new entity
+                await _s3Storage.AddItem(photo.ImageUpload.file, "ForFun");
+
+
+                Photo PhotoTable = new Photo
+                {
+                    BurialId = x.BurialId,
+                    PhotoId = x.PhotoName,
+                    Burial = _context.Burials.Where(x => x.BurialId == x.BurialId).FirstOrDefault()
+                };
+
+                Burial bur = _context.Burials.Where(x => x.BurialId == x.BurialId).FirstOrDefault();
+
+                _context.Photos.Add(PhotoTable);
+                await _context.SaveChangesAsync();
+
+                return View("Details", bur);
+            }
+            else
+            {
+                return View("Home");
+            }
+
         }
     }
 }
