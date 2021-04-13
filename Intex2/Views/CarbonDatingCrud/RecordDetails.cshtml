@@ -26,42 +26,43 @@
 
     @foreach (var sample in Model.carbDateSamples)
     {
-        <div class="card shadow m-2 p-2 col-md-11">
-            <div class="card-body">
-                <h2 class="card-title">Rack Number: @sample.Rack</h2>
-                <div class="row">
-                    <div class="col-md-5 m-1 p-1">
-                        <h5>Tube Number: @sample.Tube</h5>                            <hr />
-                        <h5>Size(ml): @sample.SizeMl </h5><hr />
-                        <h5>Location: @sample.Location</h5>                            <hr />
-                        <h5>Description: @sample.Description</h5><hr />
-                        <h5>Category: @sample.Category</h5>                            <hr />
-                        <h5>Foci: @sample.Foci</h5><hr />
-                        <h5>Notes: @sample.Notes</h5>                            <hr />
-                    </div>
-                    <div class="col-md-5 m-1 p-1">
-                        <h5>C14 Sample 2017: @sample.C14Sample2017</h5><hr />
-                        <h5>Conventional 14C Age BP: @sample.Conventional14cAgeBp</h5>                            <hr />
-                        <h5>14C CalendarDate @sample._14cCalendarDate</h5><hr />
-                        <h5>Calibrated 95% Calendar Date(Max): @sample.Calibrated95CalendarDateMax</h5>                            <hr />
-                        <h5>Calibrated 95% Calendar Date(Min): @sample.Calibrated95CalendarDateMin</h5><hr />
-                        <h5>Calibrated 95% Calendar Date(Span): @sample.Calibrated95CalendarDateSpan</h5><hr />
-                        <h5>Calibrated 95% Calendar Date(Avg): @sample.Calibrated95CalendarDateAvg</h5><hr />
-                    </div>
+    <div class="card shadow m-2 p-2 col-md-11">
+        <h2 class="card-header">Rack Number: @sample.Rack</h2>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-5 m-1 p-1">
+                    <h5>Tube Number: @sample.Tube</h5>                            <hr />
+                    <h5>Size(ml): @sample.SizeMl </h5><hr />
+                    <h5>Location: @sample.Location</h5>                            <hr />
+                    <h5>Description: @sample.Description</h5><hr />
+                    <h5>Category: @sample.Category</h5>                            <hr />
+                    <h5>Foci: @sample.Foci</h5><hr />
+                    <h5>Notes: @sample.Notes</h5>                            <hr />
                 </div>
-
+                <div class="col-md-5 m-1 p-1">
+                    <h5>C14 Sample 2017: @sample.C14Sample2017</h5><hr />
+                    <h5>Conventional 14C Age BP: @sample.Conventional14cAgeBp</h5>                            <hr />
+                    <h5>14C CalendarDate @sample._14cCalendarDate</h5><hr />
+                    <h5>Calibrated 95% Calendar Date(Max): @sample.Calibrated95CalendarDateMax</h5>                            <hr />
+                    <h5>Calibrated 95% Calendar Date(Min): @sample.Calibrated95CalendarDateMin</h5><hr />
+                    <h5>Calibrated 95% Calendar Date(Span): @sample.Calibrated95CalendarDateSpan</h5><hr />
+                    <h5>Calibrated 95% Calendar Date(Avg): @sample.Calibrated95CalendarDateAvg</h5><hr />
+                </div>
             </div>
-            <div class="row justify-content-md-center">
-                @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-                {
-                    <a class="col-md-3 btn btn-secondary m-1 p-1" asp-controller="CranialCrud" asp-action="Edit" asp-route-id="@sample.Id">Edit</a>}
 
-                @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-                {
-                    <button type="button" class="btn btn-danger col-md-3 m-1 p-1" data-toggle="modal" data-target="#myModal">Delete</button>}
-            </div>
-            <br />
         </div>
+        <div class="row justify-content-md-center">
+            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+            {
+    <a class="col-md-3 btn btn-secondary m-1 p-1" asp-controller="CranialCrud" asp-action="Edit" asp-route-id="@sample.Id">Edit</a>}
+
+            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+            {
+    <button type="button" class="btn btn-danger col-md-3 m-1 p-1" data-toggle="modal" data-target="#myModal">Delete</button>}
+        </div>
+        <br />
+    </div>
     }
 </div>
 
