@@ -35,7 +35,7 @@ namespace Intex2.Models
         public string Notes { get; set; }
         public string F27 { get; set; }
         public int Id { get; set; }
-        public byte[] SsmaTimeStamp { get; set; }
+        //public byte[] SsmaTimeStamp { get; set; }
 
         public virtual Burial BurialNavigation { get; set; }
     }
