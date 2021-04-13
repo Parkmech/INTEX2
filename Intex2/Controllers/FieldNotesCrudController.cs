@@ -21,7 +21,7 @@ namespace Intex2.Controllers
 
         public IActionResult SingleRecord()
         {
-            FieldBook Fieldnote = _context.FieldBooks.FirstOrDefault();
+            FieldBook Fieldnote = _context.FieldBook.FirstOrDefault();
 
             return View(Fieldnote);
         }
