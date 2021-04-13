@@ -9,6 +9,7 @@ using Intex2.Models;
 using Intex2.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Intex2.Services;
 
 namespace Intex2.Controllers
 {
@@ -16,19 +17,22 @@ namespace Intex2.Controllers
     {
         private readonly FagElGamousContext _context;
         private readonly FagElGamousContext _contextFiltered;
+        private readonly IS3Service _s3Storage;
+
         public int pageNum { get; set; } = 1;
 
         public string sex { get; set; }
 
-        public BurialCrudController(FagElGamousContext context)
+        public BurialCrudController(FagElGamousContext context, IS3Service s3)
         {
             _context = context;
             _contextFiltered = _context;
+            _s3Storage = s3;
         }
 
         [HttpGet]
         // GET: BurialCrud
-        public IActionResult Index(int pageNum = 1)
+        public IActionResult Index(int pageNum = 2)
         {
             int pageSize = 20;
 
@@ -50,9 +54,11 @@ namespace Intex2.Controllers
                     //FOR THE PRESENTATION TO PRESENT CLEAN DATA .Where(x=> x.BurialSouthToFeet != null)
                     .Count()
                 },
-                Photos = _context.Photos
+                Photos = _context.Photos,
 
-            }) ;
+                FieldBooks = _context.FieldBook
+
+            });
         }
 
 
@@ -66,7 +72,7 @@ namespace Intex2.Controllers
             string bdirection = filterAtr.FilterItems.BDirection;
             string nors = filterAtr.FilterItems.NorS;
             string eorw = filterAtr.FilterItems.EorW;
-            
+
 
 
             FilterItems filtered = new FilterItems
@@ -190,7 +196,7 @@ namespace Intex2.Controllers
                     _context.Update(burials);
                     await _context.SaveChangesAsync();
                 }
-                    catch (DbUpdateConcurrencyException)
+                catch (DbUpdateConcurrencyException)
                 {
                     if (!BurialsExists(burials.BurialId))
                     {
@@ -210,6 +216,7 @@ namespace Intex2.Controllers
         }
 
         // GET: BurialCrud/Delete/5
+        [HttpGet]
         [Authorize(Roles = "Admins")]
         public async Task<IActionResult> Delete(string id)
         {
@@ -234,10 +241,10 @@ namespace Intex2.Controllers
         }
 
         // POST: BurialCrud/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("DeleteConf")]
         [Authorize(Roles = "Admins")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConf(string id)
         {
             string newid = id.Replace("%2F", "/");
 
@@ -245,6 +252,31 @@ namespace Intex2.Controllers
             {
                 return NotFound();
             }
+
+            List<Photo> photos = new List<Photo>();
+            List<BiologicalSample> bios = new List<BiologicalSample>();
+
+
+            photos.AddRange(_context.Photos.Where(p => p.BurialId == id).ToList());
+
+            for (int i = 0; i < photos.Count(); i++)
+            {
+                _context.Photos.Remove(photos.FirstOrDefault(p => p.Id == photos[i].Id));
+                await _context.SaveChangesAsync();
+            }
+
+            bios.AddRange(_context.BiologicalSamples.Where(p => p.BurialId == id).ToList());
+
+            for (int i = 0; i < bios.Count(); i++)
+            {
+                _context.BiologicalSamples.Remove(bios.FirstOrDefault(p => p.Id == bios[i].Id));
+                await _context.SaveChangesAsync();
+            }
+
+
+            //var cranial = await _context.Cranials.FindAsync(newid);
+            //_context.Cranials.Remove(cranial);
+            //await _context.SaveChangesAsync();
 
             var burials = await _context.Burials.FindAsync(newid);
             _context.Burials.Remove(burials);
@@ -278,9 +310,11 @@ namespace Intex2.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                mummies = mummies.Where(s => s.BurialId.Contains(searchString)
+                mummies = mummies.Where(s => s.BurialId.Contains(searchString) || s.DescriptionOfTaken.Contains(searchString)
                                        || s.GenderCode.Contains(searchString) || s.EastOrWest.Contains(searchString)
-                                       || s.NorthOrSouth.Contains(searchString) || s.BurialDirection.Contains(searchString));
+                                       || s.NorthOrSouth.Contains(searchString) || s.BurialDirection.Contains(searchString)
+                                       || s.OsteologyNotes.Contains(searchString) || s.OtherNotes.Contains(searchString)
+                                       || s.RackAndShelf.Contains(searchString) || s.BurialPreservation.Contains(searchString));
             }
             switch (sortOrder)
             {
@@ -343,7 +377,7 @@ namespace Intex2.Controllers
         {
             ViewData["CurrentFilter"] = searchString;
             var mummies = from s in _context.Burials select s;
-  
+
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -351,7 +385,7 @@ namespace Intex2.Controllers
                                        || s.Sex.Contains(searchString));
             }
 
-            
+
             return View("Index", await mummies.AsNoTracking().ToListAsync());
         }
 
@@ -389,8 +423,10 @@ namespace Intex2.Controllers
                 eorw = "%";
             }
 
-            
+
             burialid = "%" + burialid + "%";
+
+
 
             ViewData["CurrentFilter"] = searchString;
             var mummies = from s in _context.Burials select s;
@@ -548,6 +584,69 @@ namespace Intex2.Controllers
         private bool BurialsExists(string id)
         {
             return _context.Burials.Any(e => e.BurialId == id);
+        }
+
+        [Authorize(Roles = "Admins")]
+        public IActionResult UploadPhoto(string id)
+        {
+            string newid = id.Replace("%2F", "/");
+
+            if (newid == null)
+            {
+                return NotFound();
+            }
+
+            BurialListViewModel blvm = new BurialListViewModel{
+                Burials = _context.Burials.Where(x => x.BurialId == newid)
+                             
+        };
+
+            //string newid = id.Replace("%2F", "/");
+
+            //if (newid == null)
+            //{
+            //    return NotFound();
+            //}
+
+            //var burials = _context.Photos.FirstOrDefaultAsync(x => x.BurialId == newid);
+            return View(blvm);
+        }
+
+        public async Task<IActionResult> SavePhoto(BurialListViewModel photo)
+        {
+            // magic happens here
+            // check if model is not empty
+            //Photo uploadPhoto = (Photo)photo.ImageUpload;
+
+            var x = photo.ImageUpload;
+
+            string id = x.BurialId;
+
+            if (ModelState.IsValid)
+            {
+                // create new entity
+                await _s3Storage.AddItem(photo.ImageUpload.file, "ForFun");
+
+
+                Photo PhotoTable = new Photo
+                {
+                    BurialId = x.BurialId,
+                    PhotoId = x.PhotoName,
+                    Burial = _context.Burials.Where(x => x.BurialId == x.BurialId).FirstOrDefault()
+                };
+
+                Burial bur = _context.Burials.Where(x => x.BurialId == x.BurialId).FirstOrDefault();
+
+                _context.Photos.Add(PhotoTable);
+                await _context.SaveChangesAsync();
+
+                return View("Details", bur);
+            }
+            else
+            {
+                return View("Home");
+            }
+
         }
     }
 }

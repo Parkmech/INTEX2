@@ -11,6 +11,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Intex2.Models;
 using Microsoft.EntityFrameworkCore;
+using Intex2.Services;
+using Amazon.S3;
 
 namespace Intex2
 {
@@ -27,6 +29,10 @@ namespace Intex2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddSingleton<IS3Service, S3Service>();
+
+            services.AddAWSService<IAmazonS3>();
 
             services.AddRazorPages();
 
@@ -93,20 +99,22 @@ namespace Intex2
 
             app.UseAuthorization();
 
-            ////Protects against Cross Site Scripting (Xss)
-            //app.Use(async (context, next) =>
-            //{
-            //    context.Response.Headers.Add("X-Xss-Protection", "1");
-            //    await next();
-            //});
+            //Protects against Cross Site Scripting (Xss)
+            app.Use(async (context, next) =>
+            {
+                context.Response.Headers.Add("X-Xss-Protection", "1");
+                await next();
+            });
 
-            ////Add Content Security Policy (CSP)
+            ////Add Content Security Policy(CSP)
             //app.Use(async (ctx, next) =>
             //{
             //    ctx.Response.Headers.Add("Content-Security-Policy",
             //    "default-src 'self'");
             //    await next();
             //});
+
+
 
             app.UseEndpoints(endpoints =>
             {

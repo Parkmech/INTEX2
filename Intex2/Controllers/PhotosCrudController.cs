@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Intex2.Models;
+using Intex2.Models.ViewModels;
 
 namespace Intex2.Controllers
 {
@@ -26,22 +27,27 @@ namespace Intex2.Controllers
         }
 
         // GET: PhotosCrud/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string id)
         {
-            if (id == null)
+            string newid = id.Replace("%2F", "/");
+            if (newid == null)
             {
                 return NotFound();
             }
 
-            var photo = await _context.Photos
-                .Include(p => p.Burial)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (photo == null)
+            Burial newBurial = _context.Burials.Where(x => x.BurialId == newid).FirstOrDefault();
+
+            var photos = _context.Photos.Where(x => x.BurialId == newBurial.BurialId);
+            if (photos == null)
             {
                 return NotFound();
             }
 
-            return View(photo);
+            return View(new PhotosViewModel()
+            {
+                Photos = photos,
+                Burial = newBurial
+            });
         }
 
         // GET: PhotosCrud/Create
@@ -143,6 +149,7 @@ namespace Intex2.Controllers
         // POST: PhotosCrud/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        //NEED TO FIX THE DELETE CONFIRMED BUTTON DOWN BELOW, SO IT TAKES YOU BACK TO DETAILS APPROPRIATELY
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var photo = await _context.Photos.FindAsync(id);
