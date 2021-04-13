@@ -205,10 +205,10 @@
 
                     @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
                     {
-        <a class="btn btn-secondary col-sm-1" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@Model.BurialId">Edit</a>}
+                        <a class="btn btn-secondary col-sm-1" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@Model.BurialId">Edit</a>}
                     @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
                     {
-        <a class="text-center btn btn-danger col-sm-1" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@Model.BurialId">Delete</a>}
+                    <a class="text-center btn btn-danger col-sm-1" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@Model.BurialId">Delete</a>}
 
                 </div>
             </div>

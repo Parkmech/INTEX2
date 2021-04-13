@@ -108,16 +108,18 @@ namespace Intex2.Controllers
 
             string newid = photo.BurialId;
 
-            PhotosViewModel pvm = new PhotosViewModel
-            {
-                Burial = _context.Burials.Where(x => x.BurialId == newid).FirstOrDefault()
-            };
-
             _context.Photos.Remove(photo);
             await _context.SaveChangesAsync();
 
 
-            return RedirectToAction("Index", "Home");
+            return View("Details", new PhotosViewModel()
+            {
+                Photos = _context.Photos
+                .Where(x => x.BurialId == photo.BurialId),
+
+                Burial = _context.Burials
+                .Where(x => x.BurialId == photo.BurialId).FirstOrDefault()
+            });
         }
 
         private bool PhotoExists(int id)
