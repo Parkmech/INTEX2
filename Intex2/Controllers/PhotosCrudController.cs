@@ -153,9 +153,19 @@ namespace Intex2.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var photo = await _context.Photos.FindAsync(id);
+
+            string newid = photo.BurialId;
+
+            PhotosViewModel pvm = new PhotosViewModel
+            {
+                Burial = _context.Burials.Where(x => x.BurialId == newid).FirstOrDefault()
+            };
+
             _context.Photos.Remove(photo);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+
+            return RedirectToAction("Index", "Home");
         }
 
         private bool PhotoExists(int id)

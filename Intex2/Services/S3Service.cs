@@ -23,7 +23,7 @@ namespace Intex2.Services
                 RegionEndpoint = RegionEndpoint.USEast1
             };
 
-            var myCreds = new BasicAWSCredentials("AKIA465UBOGE5PFOHK7R", "UptX7iCA+Ozax3Uq3OshiWAAYIVJFVqYZaQZvu6w");
+            var myCreds = new BasicAWSCredentials("AKIA465UBOGEVCEY5ZIC", "3CH/D5sR0HmyrQ/uXAQ7K2JRD222uLpRAoRR8kvO");
 
             AmazonS3Client S3Client = new AmazonS3Client(myCreds, s3Config);
 
@@ -49,18 +49,6 @@ namespace Intex2.Services
                 return fileName;
 
             }
-
-            //private string GenerratedPreSignedURL(string ObjectKey)
-            //{
-            //    var request = new GetPreSignedUrlRequest
-            //    {
-            //        BucketName = BUCKET_NAME,
-            //        Key = ObjectKey,
-            //        Verb = HttpVerb.GET,
-            //        Expires = DateTime.UtcNow.AddHours(DURATION)
-            //    };
-            //}
-
         }
     }
 }

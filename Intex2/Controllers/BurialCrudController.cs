@@ -599,9 +599,9 @@ namespace Intex2.Controllers
                 return NotFound();
             }
 
-            BurialListViewModel blvm = new BurialListViewModel{
-                Burials = _context.Burials.Where(x => x.BurialId == newid)
-                             
+            BurialListViewModel blvm = new BurialListViewModel {
+                burial = _context.Burials.Where(x => x.BurialId == newid).FirstOrDefault()
+                          
         };
 
             //string newid = id.Replace("%2F", "/");
@@ -625,6 +625,8 @@ namespace Intex2.Controllers
 
             string id = x.BurialId;
 
+            string fileName = x.file.FileName;
+
             if (ModelState.IsValid)
             {
                 // create new entity
@@ -634,7 +636,7 @@ namespace Intex2.Controllers
                 Photo PhotoTable = new Photo
                 {
                     BurialId = x.BurialId,
-                    PhotoId = x.PhotoName,
+                    PhotoId = fileName,
                     Burial = _context.Burials.Where(x => x.BurialId == x.BurialId).FirstOrDefault()
                 };
 
