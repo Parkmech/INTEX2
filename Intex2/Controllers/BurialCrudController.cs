@@ -600,7 +600,7 @@ namespace Intex2.Controllers
             return _context.Burials.Any(e => e.BurialId == id);
         }
 
-        [Authorize(Roles = "Admins")]
+        [Authorize(Roles = "Researcher")]
         public IActionResult UploadPhoto(string id)
         {
             string newid = id.Replace("%2F", "/");
@@ -625,6 +625,7 @@ namespace Intex2.Controllers
             //var burials = _context.Photos.FirstOrDefaultAsync(x => x.BurialId == newid);
             return View(blvm);
         }
+
 
         public async Task<IActionResult> SavePhoto(BurialListViewModel photo)
         {

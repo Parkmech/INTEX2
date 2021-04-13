@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Intex2.Models;
 using Intex2.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Intex2.Controllers
 {
@@ -50,6 +51,8 @@ namespace Intex2.Controllers
             });
         }
 
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admins")]
         // GET: PhotosCrud/Create
         public IActionResult Create()
         {
@@ -75,6 +78,8 @@ namespace Intex2.Controllers
         }
 
         // GET: PhotosCrud/Edit/5
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admins")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -128,6 +133,8 @@ namespace Intex2.Controllers
         }
 
         // GET: PhotosCrud/Delete/5
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admins")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
