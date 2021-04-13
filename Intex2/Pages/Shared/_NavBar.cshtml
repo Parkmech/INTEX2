@@ -2,7 +2,7 @@
 @inject IAuthorizationService AuthorizationService
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
-
+<!--
 <nav class="navbar navbar-expand navbar-dark bg-dark p-2">
 
     <div class="collapse navbar-collapse">
@@ -91,3 +91,39 @@
     </div>
 
 </nav>
+    -->
+
+<byu-header>
+    <span slot="site-title"><a href="#">Excavations</a></span>
+    <span slot="site-title" class="subtitle">Egypt</span>
+
+    <byu-menu slot="nav" collapsed>
+        <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+        <a asp-area="" asp-controller="BurialCrud" asp-action="Index">Burials</a>
+
+        @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+        {
+            <a asp-area="" asp-controller="BurialCrud" asp-action="Create">Add a Burial</a>
+            <a asp-page="/Roles/List">List Roles</a>
+        }
+
+        else if ((await AuthorizationService.AuthorizeAsync(User, "RequireResearcherRole")).Succeeded)
+        {
+            <a asp-area="" asp-controller="BurialCrud" asp-action="Create">Add a Burial</a>
+        }
+
+    </byu-menu>
+
+    <byu-search slot="search">
+        <form asp-controller="BurialCrud" asp-action="Display" method="get">
+            <input type="search" name="SearchString" value="@ViewData["CurrentFilter"]" />
+        </form>
+    </byu-search>
+
+    <byu-user-info slot="user">
+        <a slot="login" asp-area="Identity" asp-action="GoogleLogin" asp-controller="Google">Login</a>
+        <a slot="logout" asp-area="Identity" asp-page="/Account/Logout">Logout</a>
+        <span slot="user-name">@User.Identity.Name</span>
+    </byu-user-info>
+
+</byu-header>
