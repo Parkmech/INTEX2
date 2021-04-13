@@ -19,6 +19,13 @@ namespace Intex2.Controllers
             _context = context;
         }
 
+        public IActionResult SingleRecord()
+        {
+            FieldBook Fieldnote = _context.FieldBooks.FirstOrDefault();
+
+            return View(Fieldnote);
+        }
+
         // GET: FieldNotesCrud/RecordDetails
         public IActionResult RecordDetails(string id)
         {
