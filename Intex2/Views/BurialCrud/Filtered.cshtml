@@ -3,9 +3,9 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 
-@{
+@*@{
     ViewBag.Photo = "https://elasticbeanstalk-us-east-1-503379183917.s3.amazonaws.com/Photos/notfound.png";
-}
+}*@
 
 @model BurialListViewModel
 
@@ -110,14 +110,14 @@
 <br />
 @foreach (var mummy in Model.Burials)
 {
-    foreach (var x in Model.Photos)
-    {
-        if (mummy.BurialId == x.BurialId)
-        {
-            ViewBag.Photo = "https://elasticbeanstalk-us-east-1-503379183917.s3.amazonaws.com/Photos/" + x.PhotoId;
-            break;
-        }
-    }
+    //foreach (var x in Model.Photos)
+    //{
+    //    if (mummy.BurialId == x.BurialId)
+    //    {
+    //        ViewBag.Photo = "https://elasticbeanstalk-us-east-1-503379183917.s3.amazonaws.com/Photos/" + x.PhotoId;
+    //        break;
+    //    }
+    //}
     <div class="card shadow mb-3" style="max-width: auto">
         <div class="row g-0">
             <div class="col-md-8">
@@ -173,7 +173,7 @@
                 </div>
             </div>
 
-            <div class="mx-auto m-2 p-1">
+            @*<div class="mx-auto m-2 p-1">
                 <img src="@ViewBag.Photo"
                      alt="..."
                      class="img-fluid"
@@ -181,7 +181,7 @@
             </div>
             @{
                 ViewBag.Photo = "https://elasticbeanstalk-us-east-1-503379183917.s3.amazonaws.com/Photos/notfound.png";
-            }
+            }*@
         </div>
     </div>
 }
@@ -191,14 +191,3 @@
      page-class-selected="btn-info"
      class="btn-group pull-right m-1">
 </div>
-
-<script>
-    var form = document.getElementById("filterForm");
-
-
-    // 2. Get a reference to our preferred element (link/button, see below) and
-    //    add an event listener for the "click" event.
-    document.getElementsByName("pagingInfo").addEventListener("click", function () {
-        form.submit();
-    });
-</script>
