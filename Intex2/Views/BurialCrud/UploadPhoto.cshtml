@@ -3,18 +3,9 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    string bid = "";
+    string bid = Model.burial.BurialId;
+    
 }
-    foreach (var burial in Model.Burials)
-    {
-        bid = burial.BurialId;
-    }
-
-
-
-
-
-
 <style>
     body {
         background-color: #E9ECEF;
@@ -25,34 +16,30 @@
 
 <div class="card shadow mb-3" style="max-width: auto">
     <div class="container m-3 p-2">
-        <h4>Add a Photo for @bid</h4>
+        <h4>Add a Photo</h4>
         <hr />
         <div class="row">
             <div class="col-md-4">
-                <form method="post" asp-action="SavePhoto" enctype="multipart/form-data">
+                <form method="post" asp-action="UploadPhoto" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-md-6 form-inline">
                             <label class="col-form-label form-group form-inline" asp-for="@Model.ImageUpload.file">UPLOAD</label>
                             <input class="form-group form-inline" type="file" asp-for="@Model.ImageUpload.file" />
                         </div>
                     </div>
-                    <label class="col-form-label form-group" asp-for="@Model.ImageUpload.PhotoName">NAME OF FILE</label>
-                    <input class="form-group" type="text" asp-for="@Model.ImageUpload.PhotoName" />
 
-                    @*<label class="col-form-label form-group" asp-for="@Model.ImageUpload.BurialId">BURIAL ID</label>*@
-                    <input hidden class="form-group" type="text" asp-for="@Model.ImageUpload.BurialId" value="@bid" />
+                    <label class="col-form-label form-group" asp-for="@Model.ImageUpload.BurialId">BURIAL ID</label>
+                    <input hidden class="form-group" type="text" asp-for="@Model.ImageUpload.BurialId" />
                     <button class="btn btn-block btn-success" type="submit">SUBMIT</button>
                 </form>
                 <br />
                 <div>
-                    <a class="btn btn-sm btn-danger" asp-action="Details" asp-route-id="@bid">Cancel</a>
+                    <a class="btn btn-sm btn-danger" asp-action="Details">Cancel</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
