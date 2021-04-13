@@ -226,7 +226,13 @@
             {
                 <a class="text-center btn btn-danger col-sm-1" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@Model.BurialId">Delete</a>}
 
-        </div>
+            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+            {
+        <form method="post" asp-action="UploadImage">
+            <button class="text-center btn btn-light" asp-controller="BurialCrud" asp-action="C" asp-route-id="@Model.BurialId">Add Photo</button>
+        </form>}
+        
+            </div>
     </div>
 </div>
 
