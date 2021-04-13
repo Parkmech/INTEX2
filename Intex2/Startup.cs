@@ -49,6 +49,7 @@ namespace Intex2
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
             {
                 options.Cookie.SameSite = SameSiteMode.None;
+                options.Cookie.HttpOnly = true;
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                 options.Cookie.IsEssential = true;
             }).AddGoogle(options =>
@@ -106,6 +107,12 @@ namespace Intex2
             //    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             //    app.UseHsts();
             //}
+
+            app.UseCookiePolicy(
+            new CookiePolicyOptions
+            {
+                Secure = CookieSecurePolicy.Always
+            });
 
             app.UseHttpsRedirection();
 
