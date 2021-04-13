@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Intex2.Models;
-using Intex2.Models.ViewModels;
+using Intex2.Models.ViewdModels;
 
 namespace Intex2.Controllers
 {
@@ -23,20 +23,20 @@ namespace Intex2.Controllers
         public IActionResult RecordDetails(string id)
         {
             string newid = id.Replace("%2F", "/");
-            if(newid == null)
+            if (newid == null)
             {
                 return NotFound();
             }
             Burial burial = _context.Burials.Where(x => x.BurialId == newid).FirstOrDefault();
 
-            var fieldNotes = _context.FieldBooks.Where(x => x.BurialId == burial.BurialId);
+            var fieldNotes = _context.FieldBook.Where(x => x.BurialId == burial.BurialId);
 
 
             return View(new FieldNotesViewModel()
             {
                 fieldNotes = fieldNotes,
                 burial = burial
-            });   
+            });
         }
 
         // GET: FieldNotesCrud/Create
@@ -54,7 +54,7 @@ namespace Intex2.Controllers
             return View();
 
         }
-        
+
         // POST: FieldNotesCrud/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -64,13 +64,13 @@ namespace Intex2.Controllers
         {
             if (ModelState.IsValid)
             {
-              
+
                 _context.Add(fieldNote);
                 _context.SaveChanges();
 
                 return View("RecordDetails", new FieldNotesViewModel
                 {
-                    fieldNotes = _context.FieldBooks.Where(x => x.BurialId == fieldNote.BurialId),
+                    fieldNotes = _context.FieldBook.Where(x => x.BurialId == fieldNote.BurialId),
 
                     burial = _context.Burials.Where(x => x.BurialId == fieldNote.BurialId).FirstOrDefault(),
 
@@ -87,7 +87,7 @@ namespace Intex2.Controllers
         public IActionResult Edit(int id)
         {
 
-            FieldBook fieldNote = _context.FieldBooks
+            FieldBook fieldNote = _context.FieldBook
                 .Where(x => x.Id == id).FirstOrDefault();
 
             if (fieldNote == null)
@@ -108,7 +108,7 @@ namespace Intex2.Controllers
 
                 return View("RecordDetails", new FieldNotesViewModel
                 {
-                    fieldNotes = _context.FieldBooks.Where(x => x.BurialId == fieldNote.BurialId),
+                    fieldNotes = _context.FieldBook.Where(x => x.BurialId == fieldNote.BurialId),
 
                     burial = _context.Burials.Where(x => x.BurialId == fieldNote.BurialId).FirstOrDefault(),
 
@@ -121,10 +121,10 @@ namespace Intex2.Controllers
         // GET: FieldNotesCrud/Delete/5
         public IActionResult Delete(int id)
         {
-            var fieldNote = _context.FieldBooks
+            var fieldNote = _context.FieldBook
                 .Include(b => b.Burial)
                 .Where(x => x.Id == id).FirstOrDefault();
-                
+
             if (fieldNote == null)
             {
                 return NotFound();
@@ -139,14 +139,14 @@ namespace Intex2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var fieldNote = _context.FieldBooks
+            var fieldNote = _context.FieldBook
                 .Where(x => x.Id == id).FirstOrDefault();
 
-            _context.FieldBooks.Remove(fieldNote);
+            _context.FieldBook.Remove(fieldNote);
             await _context.SaveChangesAsync();
             return View("RecordDetails", new FieldNotesViewModel()
             {
-                fieldNotes = _context.FieldBooks
+                fieldNotes = _context.FieldBook
                 .Where(x => x.BurialId == fieldNote.BurialId),
 
                 burial = _context.Burials
@@ -156,7 +156,7 @@ namespace Intex2.Controllers
 
         private bool FieldNoteExists(int id)
         {
-            return _context.FieldBooks.Any(e => e.Id == id);
+            return _context.FieldBook.Any(e => e.Id == id);
         }
     }
 }

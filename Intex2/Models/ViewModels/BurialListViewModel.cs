@@ -13,5 +13,7 @@ namespace Intex2.Models
         public FilterItems FilterItems { get; set; }
         public PagingInfo PagingInfo { get; set; }
         public IEnumerable<Photo> Photos{ get; set; }
+        public IEnumerable<FieldBook> FieldBooks { get; set; }
+        public ImageUpload ImageUpload { get; set; }
     }
 }

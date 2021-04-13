@@ -102,6 +102,7 @@ namespace Intex2.Models
 
         public double? BurialSouthToFeet { get; set; }
 
+        //[Required]
         public double? BurialDepth { get; set; }
 
         public double? YearExcav { get; set; }
@@ -138,6 +139,7 @@ namespace Intex2.Models
 
         public bool? BurialSampleTaken { get; set; }
 
+        //[Required]
         public double? LengthM { get; set; }
 
         public double? LengthCm { get; set; }

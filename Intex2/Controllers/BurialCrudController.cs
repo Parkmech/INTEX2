@@ -9,6 +9,7 @@ using Intex2.Models;
 using Intex2.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Intex2.Services;
 
 namespace Intex2.Controllers
 {
@@ -16,19 +17,22 @@ namespace Intex2.Controllers
     {
         private readonly FagElGamousContext _context;
         private readonly FagElGamousContext _contextFiltered;
+        private readonly IS3Service _s3Storage;
+
         public int pageNum { get; set; } = 1;
 
         public string sex { get; set; }
 
-        public BurialCrudController(FagElGamousContext context)
+        public BurialCrudController(FagElGamousContext context, IS3Service s3)
         {
             _context = context;
             _contextFiltered = _context;
+            _s3Storage = s3;
         }
 
         [HttpGet]
         // GET: BurialCrud
-        public IActionResult Index(int pageNum = 1)
+        public IActionResult Index(int pageNum = 2)
         {
             int pageSize = 20;
 
@@ -50,9 +54,11 @@ namespace Intex2.Controllers
                     //FOR THE PRESENTATION TO PRESENT CLEAN DATA .Where(x=> x.BurialSouthToFeet != null)
                     .Count()
                 },
-                Photos = _context.Photos
+                Photos = _context.Photos,
 
-            }) ;
+                FieldBooks = _context.FieldBook
+
+            });
         }
 
 
@@ -66,7 +72,7 @@ namespace Intex2.Controllers
             string bdirection = filterAtr.FilterItems.BDirection;
             string nors = filterAtr.FilterItems.NorS;
             string eorw = filterAtr.FilterItems.EorW;
-            
+
 
 
             FilterItems filtered = new FilterItems
@@ -190,7 +196,7 @@ namespace Intex2.Controllers
                     _context.Update(burials);
                     await _context.SaveChangesAsync();
                 }
-                    catch (DbUpdateConcurrencyException)
+                catch (DbUpdateConcurrencyException)
                 {
                     if (!BurialsExists(burials.BurialId))
                     {
@@ -371,7 +377,7 @@ namespace Intex2.Controllers
         {
             ViewData["CurrentFilter"] = searchString;
             var mummies = from s in _context.Burials select s;
-  
+
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -379,7 +385,7 @@ namespace Intex2.Controllers
                                        || s.Sex.Contains(searchString));
             }
 
-            
+
             return View("Index", await mummies.AsNoTracking().ToListAsync());
         }
 
@@ -417,8 +423,10 @@ namespace Intex2.Controllers
                 eorw = "%";
             }
 
-            
+
             burialid = "%" + burialid + "%";
+
+
 
             ViewData["CurrentFilter"] = searchString;
             var mummies = from s in _context.Burials select s;
@@ -576,6 +584,55 @@ namespace Intex2.Controllers
         private bool BurialsExists(string id)
         {
             return _context.Burials.Any(e => e.BurialId == id);
+        }
+
+        [Authorize(Roles = "Admins")]
+        public IActionResult UploadPhoto()
+        {
+            //string newid = id.Replace("%2F", "/");
+
+            //if (newid == null)
+            //{
+            //    return NotFound();
+            //}
+
+            //var burials = _context.Photos.FirstOrDefaultAsync(x => x.BurialId == newid);
+            return View();
+        }
+
+        //public async Task<IActionResult> SavePhoto(BurialListViewModel photo)
+        //{
+        //    // magic happens here
+        //    // check if model is not empty
+        //    //Photo uploadPhoto = (Photo)photo.ImageUpload;
+        //    if (ModelState.IsValid)
+        //    {
+        //        // create new entity
+        //        await _s3Storage.AddItem(photo.ImageUpload.file, "ForFun");
+
+        //        //this adds creates the linking table? I think
+
+        //        //Photo PhotoTable = new Photo
+        //        //{
+        //        //    BurialId = photo.BurialId,
+        //        //    PhotoId = photo.PhotoName
+        //        //};
+
+        //        //_context.Photos.Add(PhotoTable);
+        //        //await _context.SaveChangesAsync();
+
+        //        return RedirectToAction("Create", "PhotosCrud", string id, );
+        //    }
+        //    else
+        //    {
+        //        return View("Home");
+        //    }
+   
+        //}
+        public IActionResult FieldBookView()
+        {
+            FieldBook fb = _context.FieldBook.FirstOrDefault();
+            return View(fb);
         }
     }
 }
