@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Intex2.Models;
-using Intex2.Models.ViewModels;
+using Intex2.Models.ViewdModels;
 
 namespace Intex2.Controllers
 {
