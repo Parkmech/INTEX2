@@ -5,13 +5,13 @@
 }
 
 @model BurialListViewModel
+@{ 
+    string id = Model.burial.BurialId;
+}
 
 <form method="post"asp-action="SavePhoto" enctype="multipart/form-data">
     <label asp-for="@Model.ImageUpload.file">UPLOAD A PIC FOR ME</label>
     <input type="file" asp-for="@Model.ImageUpload.file" />
-    <label asp-for="@Model.ImageUpload.PhotoName">NAME OF FILE</label>
-    <input type="text" asp-for="@Model.ImageUpload.PhotoName" />
-    <label asp-for="@Model.ImageUpload.BurialId">BURIAL ID</label>
-    <input type="text" asp-for="@Model.ImageUpload.BurialId" />
+    <input type="hidden" value="@id" asp-for="@Model.ImageUpload.BurialId"/>
     <button type="submit">SUBMIT</button>
 </form> 

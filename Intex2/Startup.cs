@@ -106,13 +106,13 @@ namespace Intex2
                 await next();
             });
 
-            ////Add Content Security Policy(CSP)
-            //app.Use(async (ctx, next) =>
-            //{
-            //    ctx.Response.Headers.Add("Content-Security-Policy",
-            //    "default-src 'self'");
-            //    await next();
-            //});
+            //Add Content Security Policy(CSP)
+            app.Use(async (ctx, next) =>
+            {
+                ctx.Response.Headers.Add("Content-Security-Policy",
+                "img-src data: https:; block-all-mixed-content; upgrade-insecure-requests;");
+                await next();
+            });   
 
 
 
