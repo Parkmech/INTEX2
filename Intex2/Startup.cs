@@ -13,6 +13,8 @@ using Intex2.Models;
 using Microsoft.EntityFrameworkCore;
 using Intex2.Services;
 using Amazon.S3;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 
 namespace Intex2
 {
@@ -28,6 +30,7 @@ namespace Intex2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddControllersWithViews();
 
             services.AddSingleton<IS3Service, S3Service>();
@@ -42,7 +45,14 @@ namespace Intex2
                 opts.UseSqlServer(Configuration[
                     "ConnectionStrings:EgyptConnection"]));
 
-            services.AddAuthentication().AddGoogle(options =>
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+            {
+                options.Cookie.SameSite = SameSiteMode.None;
+                options.Cookie.HttpOnly = true;
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                options.Cookie.IsEssential = true;
+            }).AddGoogle(options =>
             {
                 options.ClientId = "545269694418-0aj3phfni9pv1mbpsstptmrbtg8qgj0l.apps.googleusercontent.com";
                 options.ClientSecret = "KI0GGc875Dw4uDUlepGFWAn-";
@@ -54,6 +64,13 @@ namespace Intex2
                 options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Admins"));
 
                 options.AddPolicy("RequireResearcherRole", policy => policy.RequireRole("Researcher"));
+            });
+
+            services.AddSession(options =>
+            {
+                options.Cookie.SameSite = SameSiteMode.None;
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                options.Cookie.IsEssential = true;
             });
 
             services.AddDbContext<EgyptContext>(opts =>
@@ -90,7 +107,21 @@ namespace Intex2
             //    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             //    app.UseHsts();
             //}
+
+            app.UseCookiePolicy(
+            new CookiePolicyOptions
+            {
+                Secure = CookieSecurePolicy.Always
+            });
+
             app.UseHttpsRedirection();
+
+            app.UseForwardedHeaders(
+                new ForwardedHeadersOptions
+                {
+                    ForwardedHeaders = Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedFor | Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedProto
+                });
+
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -106,13 +137,13 @@ namespace Intex2
                 await next();
             });
 
-            ////Add Content Security Policy(CSP)
-            //app.Use(async (ctx, next) =>
-            //{
-            //    ctx.Response.Headers.Add("Content-Security-Policy",
-            //    "default-src 'self'");
-            //    await next();
-            //});
+            //Add Content Security Policy(CSP)
+            app.Use(async (ctx, next) =>
+            {
+                ctx.Response.Headers.Add("Content-Security-Policy",
+                "img-src data: https:; block-all-mixed-content; upgrade-insecure-requests;");
+                await next();
+            });   
 
 
 

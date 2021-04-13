@@ -14,7 +14,7 @@
 
             <h1>Create Burial Record</h1>
 
-            <p><i>This is where we can write a short page description about stuff and such</i></p>
+            <p><i>This section contains the main data from the initial exhumation</i></p>
 
             <hr />
             <br />
@@ -362,13 +362,13 @@
 
                 <div class="col-md-4">
                     <div class="shadow-sm form-group">
-                        age code
+                        <label asp-for="AgeCodeSingle" class="control-label">Age Code:</label>
                         <select asp-for="AgeCodeSingle" class="form-control">
                             <option class="text-muted" selected disabled value="U">--Select an option--</option>
-                            <option value="A">A - Adult</option>
-                            <option value="C">C - Child</option>
-                            <option value="I">I - Infant</option>
-                            <option value="N">N - New Born</option>
+                            <option value="A">A - Adult (15+)</option>
+                            <option value="C">C - Child (3-15)</option>
+                            <option value="I">I - Infant (1-3)</option>
+                            <option value="N">N - New Born (0-1)</option>
                             <option value="U">U - Unknown</option>
                         </select>
                     </div>
@@ -378,6 +378,7 @@
 
                 <div class="col-md-4">
                     <div class="shadow-sm form-group">
+                        <label asp-for="NumericMinAge" class="control-label">Enter Minimum Age Estimate:</label>
                         <input type="number" asp-for="NumericMinAge" class="form-control" placeholder="Minimum estimate of age" />
                         <span asp-validation-for="NumericMinAge" class="text-danger"></span>
                     </div>
@@ -385,6 +386,7 @@
 
                 <div class="col-md-4">
                     <div class="form-group">
+                        <label asp-for="NumericMaxAge" class="control-label">Enter Maximum Age Estimate:</label>
                         <input type="number" asp-for="NumericMaxAge" class="form-control" placeholder="Maximum estimate of age" />
                         <span asp-validation-for="NumericMaxAge" class="text-danger"></span>
                     </div>
@@ -399,13 +401,18 @@
             <!-- Second section of data on form -->
 
             <h2>Samples Taken</h2>
+            <i>Select yes or no for each sample group</i>
+
+            <br />
+            <br />
 
             <div class="row">
 
                 <div class="col-md-2">
                     <div class="form-group">
+                        <label asp-for="HairTaken" class="control-label">Hair</label>
                         <select asp-for="HairTaken" class="form-control" placeholder="Hair taken?">
-                            <option disabled selected class="text-muted" value="FALSE">--Select an option--</option>
+                            <option disabled selected class="text-muted" value="FALSE">--Select--</option>
                             <option value="TRUE">Y - Yes</option>
                             <option value="FALSE">N - NO</option>
                         </select>
@@ -415,19 +422,21 @@
 
                 <div class="col-md-2">
                     <div class="form-group">
+                        <label asp-for="SoftTissueTaken" class="control-label">Soft Tissue</label>
                         <select asp-for="SoftTissueTaken" class="form-control" placeholder="Soft tissue taken?">
-                            <option disabled selected class="text-muted" value="FALSE">--Select an option--</option>
+                            <option disabled selected class="text-muted" value="FALSE">--Select--</option>
                             <option value="TRUE">Y - Yes</option>
                             <option value="FALSE">N - NO</option>
-                            <span asp-validation-for="SoftTissueTaken" class="text-danger"></span>
                         </select>
+                        <span asp-validation-for="SoftTissueTaken" class="text-danger"></span>
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="form-group">
+                        <label asp-for="BoneTaken" class="control-label">Bone</label>
                         <select asp-for="BoneTaken" class="form-control" placeholder="Bone taken?">
-                            <option disabled selected class="text-muted" value="FALSE">--Select an option--</option>
+                            <option disabled selected class="text-muted" value="FALSE">--Select--</option>
                             <option value="TRUE">Y - Yes</option>
                             <option value="FALSE">N - NO</option>
                         </select>
@@ -437,8 +446,9 @@
 
                 <div class="col-md-2">
                     <div class="form-group">
+                        <label asp-for="ToothTaken" class="control-label">Tooth</label>
                         <select asp-for="ToothTaken" class="form-control" placeholder="Tooth taken?">
-                            <option disabled selected class="text-muted" value="FALSE">--Select an option--</option>
+                            <option disabled selected class="text-muted" value="FALSE">--Select--</option>
                             <option value="TRUE">Y - Yes</option>
                             <option value="FALSE">N - NO</option>
                         </select>
@@ -448,8 +458,9 @@
 
                 <div class="col-md-2">
                     <div class="form-group">
+                        <label asp-for="TextileTaken" class="control-label">Textile</label>
                         <select asp-for="TextileTaken" class="form-control" placeholder="Textile taken?">
-                            <option disabled selected class="text-muted" value="FALSE">--Select an option--</option>
+                            <option disabled selected class="text-muted" value="FALSE">--Select--</option>
                             <option value="TRUE">Y - Yes</option>
                             <option value="FALSE">N - NO</option>
                         </select>
@@ -462,6 +473,7 @@
             <div class="row">
                 <div class="col-md-10">
                     <div class="form-group">
+                        <label asp-for="DescriptionOfTaken" class="control-label">Description of Samples</label>
                         <textarea asp-for="DescriptionOfTaken" class="form-control" placeholder="Enter description of samples taken here..."></textarea>
                         <span asp-validation-for="DescriptionOfTaken" class="text-danger"></span>
                     </div>
