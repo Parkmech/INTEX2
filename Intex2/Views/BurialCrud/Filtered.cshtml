@@ -191,7 +191,11 @@
                      class="img-fluid"
                      width="300">
             </div>
+            @{
+                ViewBag.Photo = "https://elasticbeanstalk-us-east-1-503379183917.s3.amazonaws.com/Photos/notfound.png";
+            }
         </div>
+    </div>
 }
 
 <div page-model="@Model.PagingInfo" page-action="Filtered" page-classes-enabled="true" page-class="btn"
