@@ -4,7 +4,7 @@
 @inject SignInManager<IdentityUser> SignInManager
 
 @{
-    ViewBag.Photo = "https://elasticbeanstalk-us-east-1-503379183917.s3.amazonaws.com/Photos/notfound.png";
+    ViewBag.Photo = "https://elasticbeanstalk-us-east-1-891046424969.s3.amazonaws.com/Photos/notfound.png";
 }
 
 @model BurialListViewModel
@@ -114,7 +114,7 @@
     {
         if (mummy.BurialId == x.BurialId)
         {
-            ViewBag.Photo = "https://elasticbeanstalk-us-east-1-503379183917.s3.amazonaws.com/Photos/" + x.PhotoId;
+            ViewBag.Photo = "https://elasticbeanstalk-us-east-1-891046424969.s3.amazonaws.com/Photos/" + x.PhotoId;
             break;
         }
     }
@@ -181,7 +181,7 @@
                      width="300" >
             </div>
             @{
-                ViewBag.Photo = "https://elasticbeanstalk-us-east-1-503379183917.s3.amazonaws.com/Photos/notfound.png";
+                ViewBag.Photo = "https://elasticbeanstalk-us-east-1-891046424969.s3.amazonaws.com/Photos/notfound.png";
             }
         </div>
     </div>
