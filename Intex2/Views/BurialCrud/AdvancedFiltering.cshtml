@@ -16,98 +16,100 @@
 </style>
 <br />
 
+<div class="row">
+    <div class="col-md-2">
+        <div class="m-2">
+            <form asp-action="AdvancedFiltering" method="post">
 
-<div class="card shadow mb-3" style="max-width: auto">
-    <div class="container m-3 p-2">
-        <div class="row">
-            <div class="col-sm-2">
-                <form asp-action="AdvancedFiltering" method="post">
+                <div class="form-group">
+                    <label asp-for="@Model.FilterItems.BurialId">Burial ID</label>
+                    <input class="form-control" type="text" asp-for="@Model.FilterItems.BurialId" />
+                </div>
 
-                    <div class="form-group">
-                        <label asp-for="@Model.FilterItems.BurialId">Burial ID</label>
-                        <input class="form-control" type="text" asp-for="@Model.FilterItems.BurialId" />
-                    </div>
+                <div class="form-group">
+                    <label asp-for="@Model.FilterItems.Sex">Sex:</label>
+                    <select asp-for="@Model.FilterItems.Sex" class="form-control">
+                        <option value="ALL">All</option>
+                        <option value="F">Female (F)</option>
+                        <option value="M">Male (M)</option>
+                        <option value="U">Unknown (U)</option>
+                    </select>
+                </div>
 
-                    <div class="form-group">
-                        <label asp-for="@Model.FilterItems.Sex">Sex:</label>
-                        <select asp-for="@Model.FilterItems.Sex" class="form-control">
-                            <option value="ALL">All</option>
-                            <option value="F">Female (F)</option>
-                            <option value="M">Male (M)</option>
-                            <option value="U">Unknown (U)</option>
-                        </select>
-                    </div>
+                <div class="form-group">
+                    <label asp-for="@Model.FilterItems.Length">Length:</label>
+                    <select asp-for="@Model.FilterItems.Length" class="form-control">
+                        <option value="0.00">> 0 Meters</option>
+                        <option value="0.50">> 0.5 Meters</option>
+                        <option value="1.00">> 1 Meter</option>
+                        <option value="1.50">> 1.5 Meters</option>
+                    </select>
+                </div>
 
-                    <div class="form-group">
-                        <label asp-for="@Model.FilterItems.Length">Length:</label>
-                        <select asp-for="@Model.FilterItems.Length" class="form-control">
-                            <option value="0.00">> 0 Meters</option>
-                            <option value="0.50">> 0.5 Meters</option>
-                            <option value="1.00">> 1 Meter</option>
-                            <option value="1.50">> 1.5 Meters</option>
-                        </select>
-                    </div>
+                <div class="form-group">
+                    <label asp-for="@Model.FilterItems.Depth">Depth:</label>
+                    <select asp-for="@Model.FilterItems.Depth" class="form-control">
+                        <option value="0.00">> 0 Meters</option>
+                        <option value="0.50">> 0.5 Meters</option>
+                        <option value="1.00">> 1 Meter</option>
+                        <option value="1.50">> 1.5 Meters</option>
+                    </select>
+                </div>
 
-                    <div class="form-group">
-                        <label asp-for="@Model.FilterItems.Depth">Depth:</label>
-                        <select asp-for="@Model.FilterItems.Depth" class="form-control">
-                            <option value="0.00">> 0 Meters</option>
-                            <option value="0.50">> 0.5 Meters</option>
-                            <option value="1.00">> 1 Meter</option>
-                            <option value="1.50">> 1.5 Meters</option>
-                        </select>
-                    </div>
+                <div class="form-group">
+                    <label asp-for="@Model.FilterItems.Area">Area:</label>
+                    <select asp-for="@Model.FilterItems.Area" class="form-control">
+                        <option value="ALL">All</option>
+                        <option value="NE">NE</option>
+                        <option value="NW">NW</option>
+                        <option value="SE">SE</option>
+                        <option value="SW">SW</option>
+                    </select>
+                </div>
 
-                    <div class="form-group">
-                        <label asp-for="@Model.FilterItems.Area">Area:</label>
-                        <select asp-for="@Model.FilterItems.Area" class="form-control">
-                            <option value="ALL">All</option>
-                            <option value="NE">NE</option>
-                            <option value="NW">NW</option>
-                            <option value="SE">SE</option>
-                            <option value="SW">SW</option>
-                        </select>
-                    </div>
+                <div class="form-group">
+                    <label asp-for="@Model.FilterItems.BDirection">Burial Direction:</label>
+                    <select asp-for="@Model.FilterItems.BDirection" class="form-control">
+                        <option value="ALL">All</option>
+                        <option value="E">East</option>
+                        <option value="W">West</option>
+                    </select>
+                </div>
 
-                    <div class="form-group">
-                        <label asp-for="@Model.FilterItems.BDirection">Burial Direction:</label>
-                        <select asp-for="@Model.FilterItems.BDirection" class="form-control">
-                            <option value="ALL">All</option>
-                            <option value="E">East</option>
-                            <option value="W">West</option>
-                        </select>
-                    </div>
+                <div class="form-group">
+                    <label asp-for="@Model.FilterItems.EorW">East or West:</label>
+                    <select asp-for="@Model.FilterItems.EorW" class="form-control">
+                        <option value="ALL">All</option>
+                        <option value="E">East</option>
+                        <option value="W">West</option>
+                    </select>
+                </div>
 
-                    <div class="form-group">
-                        <label asp-for="@Model.FilterItems.EorW">East or West:</label>
-                        <select asp-for="@Model.FilterItems.EorW" class="form-control">
-                            <option value="ALL">All</option>
-                            <option value="E">East</option>
-                            <option value="W">West</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="@Model.FilterItems.NorS">North or South:</label>
-                        <select asp-for="@Model.FilterItems.NorS" class="form-control">
-                            <option value="ALL">All</option>
-                            <option value="N">North</option>
-                            <option value="S">South</option>
-                        </select>
-                    </div>
+                <div class="form-group">
+                    <label asp-for="@Model.FilterItems.NorS">North or South:</label>
+                    <select asp-for="@Model.FilterItems.NorS" class="form-control">
+                        <option value="ALL">All</option>
+                        <option value="N">North</option>
+                        <option value="S">South</option>
+                    </select>
+                </div>
 
 
 
-                    <button type="submit" class="btn btn-primary">Filter</button>
+                <button type="submit" class="btn btn-primary">Filter</button>
 
-                    <a asp-action="AdvancedFiltering" asp-route-id="" class="btn btn-primary">Clear</a>
+                <a asp-action="AdvancedFiltering" asp-route-id="" class="btn btn-primary">Clear</a>
+                <br />
 
-                </form>
-            </div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="col-md-10">
+        <div class="card shadow mb-3" style="max-width: auto">
+            <div class="container m-3 p-2">
 
-            <div class="col-md-10">
-
-                <table class="table table-bordered table-striped table-responsive mt-2">
+                <table class="table table-responsive table-bordered table-striped table-responsive mt-2">
 
                     <thead>
                         <tr>
