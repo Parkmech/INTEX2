@@ -13,111 +13,131 @@
 
 <h1>Create a new Carbon Dating Sample</h1>
 
-<h4>Sample for @id</h4>
+<h4>Sample for @Model.BurialId</h4>
 <hr />
 
-<form asp-action="CustomEdit">
+<form class="bg-white rounded shadow" asp-action="CustomEdit">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="@Model.Rack" class="control-label"></label>
-        <input asp-for="@Model.Rack" class="form-control" value="@Model.Rack" />
-        <span asp-validation-for="@Model.Rack" class="text-danger"></span>
+    <div class="row justify-content-md-center">
+        <div class="form-group col-md-3 m-1 p-1">
+            <label asp-for="@Model.Rack" class="control-label"></label>
+            <input asp-for="@Model.Rack" class="form-control" value="@Model.Rack" />
+            <span asp-validation-for="@Model.Rack" class="text-danger"></span>
+        </div>
+
+        <div class="form-group col-md-3 m-1 p-1">
+            <label asp-for="@Model.Tube" class="control-label"></label>
+            <input asp-for="@Model.Tube" class="form-control" value="@Model.Tube" />
+            <span asp-validation-for="@Model.Tube" class="text-danger"></span>
+        </div>
+
+        <div class="form-group col-md-3 m-1 p-1">
+            <label asp-for="@Model.SizeMl" class="control-label"></label>
+            <input asp-for="@Model.SizeMl" class="form-control" value="@Model.SizeMl" />
+            <span asp-validation-for="@Model.SizeMl" class="text-danger"></span>
+        </div>
     </div>
 
-    <div class="form-group">
-        <label asp-for="@Model.Tube" class="control-label"></label>
-        <input asp-for="@Model.Tube" class="form-control" value="@Model.Tube" />
-        <span asp-validation-for="@Model.Tube" class="text-danger"></span>
+    <div class="row justify-content-md-center">
+        <div class="form-group col-md-3 m-1 p-1">
+            <label asp-for="@Model.Foci" class="control-label"></label>
+            <input asp-for="@Model.Foci" class="form-control" value="@Model.Foci">
+            <span asp-validation-for="@Model.Foci" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-3 m-1 p-1">
+            <label asp-for="@Model.C14Sample2017" class="control-label"></label>
+            <input asp-for="@Model.C14Sample2017" class="form-control" value="@Model.C14Sample2017" />
+            <span asp-validation-for="@Model.C14Sample2017" class="text-danger"></span>
+        </div>
+
+        <div class="form-group col-md-3 m-1 p-1">
+            <label asp-for="@Model.Location" class="control-label"></label>
+            <input asp-for="@Model.Location" class="form-control" value="@Model.Location" />
+            <span asp-validation-for="@Model.Location" class="text-danger"></span>
+        </div>
     </div>
 
-    <div class="form-group">
-        <label asp-for="@Model.SizeMl" class="control-label"></label>
-        <input asp-for="@Model.SizeMl" class="form-control" value="@Model.SizeMl" />
-        <span asp-validation-for="@Model.SizeMl" class="text-danger"></span>
+    <div class="row justify-content-md-center">
+
+
+        <div class="form-group col-md-3 m-1 p-1">
+            <label asp-for="@Model.QuestionS" class="control-label"></label>
+            <input asp-for="@Model.QuestionS" class="form-control" value="@Model.QuestionS" />
+            <span asp-validation-for="@Model.QuestionS" class="text-danger"></span>
+        </div>
+
+        <div class="form-group col-md-3 m-1 p-1">
+            <label asp-for="@Model.Conventional14cAgeBp" class="control-label"></label>
+            <input asp-for="@Model.Conventional14cAgeBp" class="form-control" value="@Model.Conventional14cAgeBp" />
+            <span asp-validation-for="@Model.Conventional14cAgeBp" class="text-danger"></span>
+        </div>
+
+        <div class="form-group col-md-3 m-1 p-1">
+            <label asp-for="@Model._14cCalendarDate" class="control-label"></label>
+            <input asp-for="@Model._14cCalendarDate" class="form-control" value="@Model._14cCalendarDate" />
+            <span asp-validation-for="@Model._14cCalendarDate" class="text-danger"></span>
+        </div>
     </div>
 
-    <div class="form-group">
-        <label asp-for="@Model.Foci" class="control-label"></label>
-        <input asp-for="@Model.Foci" class="form-control" value="@Model.Foci">
-        <span asp-validation-for="@Model.Foci" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="@Model.C14Sample2017" class="control-label"></label>
-        <input asp-for="@Model.C14Sample2017" class="form-control" value="@Model.C14Sample2017" />
-        <span asp-validation-for="@Model.C14Sample2017" class="text-danger"></span>
+    <div class="row justify-content-md-center">
+
+        <div class="form-group col-md-3 m-1 p-1">
+            <label asp-for="@Model.Calibrated95CalendarDateMax" class="control-label"></label>
+            <input asp-for="@Model.Calibrated95CalendarDateMax" class="form-control" value="@Model.Calibrated95CalendarDateMax" />
+            <span asp-validation-for="@Model.Calibrated95CalendarDateMax" class="text-danger"></span>
+        </div>
+
+        <div class="form-group col-md-3 m-1 p-1">
+            <label asp-for="@Model.Calibrated95CalendarDateMin" class="control-label"></label>
+            <input asp-for="@Model.Calibrated95CalendarDateMin" class="form-control" value="@Model.Calibrated95CalendarDateMin" />
+            <span asp-validation-for="@Model.Calibrated95CalendarDateMin" class="text-danger"></span>
+        </div>
+
+        <div class="form-group col-md-3 m-1 p-1">
+            <label asp-for="@Model.Calibrated95CalendarDateSpan" class="control-label"></label>
+            <input asp-for="@Model.Calibrated95CalendarDateSpan" class="form-control" value="@Model.Calibrated95CalendarDateSpan" />
+            <span asp-validation-for="@Model.Calibrated95CalendarDateSpan" class="text-danger"></span>
+        </div>
     </div>
 
-    <div class="form-group">
-        <label asp-for="@Model.Location" class="control-label"></label>
-        <input asp-for="@Model.Location" class="form-control" value="@Model.Location" />
-        <span asp-validation-for="@Model.Location" class="text-danger"></span>
-    </div>
+    <div class="row justify-content-md-center">
+        <div class="form-group col-md-3 m-1 p-1">
+            <label asp-for="@Model.Calibrated95CalendarDateAvg" class="control-label"></label>
+            <input asp-for="@Model.Calibrated95CalendarDateAvg" class="form-control" value="@Model.Calibrated95CalendarDateAvg" />
+            <span asp-validation-for="@Model.Calibrated95CalendarDateAvg" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="@Model.QuestionS" class="control-label"></label>
-        <input asp-for="@Model.QuestionS" class="form-control" value="@Model.QuestionS" />
-        <span asp-validation-for="@Model.QuestionS" class="text-danger"></span>
-    </div>
+        <div class="form-group col-md-3 m-1 p-1">
+            <label asp-for="@Model.Category" class="control-label"></label>
+            <input asp-for="@Model.Category" class="form-control" value="@Model.Category" />
+            <span asp-validation-for="@Model.Category" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="@Model.Conventional14cAgeBp" class="control-label"></label>
-        <input asp-for="@Model.Conventional14cAgeBp" class="form-control" value="@Model.Conventional14cAgeBp" />
-        <span asp-validation-for="@Model.Conventional14cAgeBp" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="@Model._14cCalendarDate" class="control-label"></label>
-        <input asp-for="@Model._14cCalendarDate" class="form-control" value="@Model._14cCalendarDate" />
-        <span asp-validation-for="@Model._14cCalendarDate" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="@Model.Calibrated95CalendarDateMax" class="control-label"></label>
-        <input asp-for="@Model.Calibrated95CalendarDateMax" class="form-control" value="@Model.Calibrated95CalendarDateMax" />
-        <span asp-validation-for="@Model.Calibrated95CalendarDateMax" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="@Model.Calibrated95CalendarDateMin" class="control-label"></label>
-        <input asp-for="@Model.Calibrated95CalendarDateMin" class="form-control" value="@Model.Calibrated95CalendarDateMin" />
-        <span asp-validation-for="@Model.Calibrated95CalendarDateMin" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="@Model.Calibrated95CalendarDateSpan" class="control-label"></label>
-        <input asp-for="@Model.Calibrated95CalendarDateSpan" class="form-control" value="@Model.Calibrated95CalendarDateSpan" />
-        <span asp-validation-for="@Model.Calibrated95CalendarDateSpan" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="@Model.Calibrated95CalendarDateAvg" class="control-label"></label>
-        <input asp-for="@Model.Calibrated95CalendarDateAvg" class="form-control" value="@Model.Calibrated95CalendarDateAvg" />
-        <span asp-validation-for="@Model.Calibrated95CalendarDateAvg" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="@Model.Category" class="control-label"></label>
-        <input asp-for="@Model.Category" class="form-control" value="@Model.Category" />
-        <span asp-validation-for="@Model.Category" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="@Model.Notes" class="control-label"></label>
-        <input asp-for="@Model.Notes" class="form-control" value="@Model.Notes" />
-        <span asp-validation-for="@Model.Notes" class="text-danger"></span>
-    </div>
+        <div class="form-group col-md-3 m-1 p-1">
+            <label asp-for="@Model.Notes" class="control-label"></label>
+            <input asp-for="@Model.Notes" class="form-control" value="@Model.Notes" />
+            <span asp-validation-for="@Model.Notes" class="text-danger"></span>
+        </div>
+    </div>  
 
     <input type="hidden" asp-for="@Model.Id" value="@Model.Id" />
     <input type="hidden" asp-for="@Model.BurialId" value="@Model.BurialId" />
+    <hr />
 
-    <div class="form-group">
-        <input type="submit" value="Save" class="btn btn-primary" />
+    <div class="row justify-content-md-center">
+
+        <div>
+            <input type="submit" value="Save" class="btn btn-primary m-1 p-1" />
+        </div>
+
+        <div>
+            <a class="btn btn-secondary m-1 p-1" asp-action="RecordDetails" asp-route-id="@Model.BurialId">Back to Samples</a>
+        </div>
     </div>
+    <br />
 </form>
 
-<div>
-    <a class="btn btn-secondary" asp-action="RecordDetails" asp-route-id="@Model.BurialId">Back to Samples</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

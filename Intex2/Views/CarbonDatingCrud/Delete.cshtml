@@ -10,37 +10,61 @@
     <h3>Are you sure you want to delete this Model?</h3>
 </div>
 
+
 <div class="card shadow mb-3" style="max-width: auto">
-    <div class="row g-0">
-        <div class="col-md-8">
-            <div class="card-body">
-                <h2 class="card-title">Rack: @Model.Rack</h2>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item ">Tube Number: @Model.Tube</li>
-                    <li class="list-group-item ">Description: @Model.Description</li>
-                    <li class="list-group-item ">Size (ml): @Model.SizeMl</li>
-                    <li class="list-group-item ">Foci: @Model.Foci</li>
-                    <li class="list-group-item ">C14 Model 2017: @Model.C14Sample2017</li>
-                    <li class="list-group-item ">Location: @Model.Location</li>
-                    <li class="list-group-item ">Questions: @Model.QuestionS</li>
-                    <li class="list-group-item ">Conventional 14C age BP: @Model.Conventional14cAgeBp</li>
-                    <li class="list-group-item ">14C Calendar Date: @Model._14cCalendarDate</li>
-                    <li class="list-group-item ">Calibrated 95% Calendar Date Max: @Model.Calibrated95CalendarDateMax</li>
-                    <li class="list-group-item ">Calibrated 95% Calendar Date MIN: @Model.Calibrated95CalendarDateMin</li>
-                    <li class="list-group-item ">Calibrated 95% Calendar Date SPAN: @Model.Calibrated95CalendarDateSpan</li>
-                    <li class="list-group-item ">Calibrated 95% Calendar Date AVG: @Model.Calibrated95CalendarDateAvg</li>
-                    <li class="list-group-item ">Category: @Model.Category</li>
-                    <li class="list-group-item ">Notes: @Model.Notes</li>
-
-                </ul>
-
-                <form asp-action="Delete">
-                    <div class="row justify-content-md-center">
-                        <input type="submit" value="Delete" class="btn btn-danger m-1" />
-                        <a class="btn btn-secondary m-1" asp-action="RecordDetails" asp-route-id="@Model.BurialId">Back to List</a>
-                    </div>
-                </form>
-            </div>
-        </div>
+    <div class="card header text-center">
+        <h3>Carbon Dating Data on Rack @Model.Rack</h3>
     </div>
+    <div class="row justify-content-md-center">
+
+        <h5 class="m-1 p-1 col-md-3">Tube Number: @Model.Tube</h5>
+        <h5 class="m-1 p-1 col-md-3">Description: @Model.Description</h5>
+        <h5 class="m-1 p-1 col-md-3">Questions: @Model.QuestionS</h5>
+
+    </div>
+
+    <div class="row justify-content-md-center">
+
+        <h5 class="m-1 p-1 col-md-3">Size (ml): @Model.SizeMl</h5>
+        <h5 class="m-1 p-1 col-md-3">Foci: @Model.Foci</h5>
+        <h5 class="m-1 p-1 col-md-3">C14 Model 2017: @Model.C14Sample2017</h5>
+    </div>
+
+    <div class="row justify-content-md-center">
+
+        <h5 class="m-1 p-1 col-md-3">Location: @Model.Location</h5>
+        <h5 class="m-1 p-1 col-md-3">Conventional 14C age BP: @Model.Conventional14cAgeBp</h5>
+        <h5 class="m-1 p-1 col-md-3">14C Calendar Date: @Model._14cCalendarDate</h5>
+
+    </div>
+    <div class="row justify-content-md-center">
+
+        <h5 class="m-1 p-1 col-md-3">Calibrated 95% Calendar Date Max: @Model.Calibrated95CalendarDateMax</h5>
+        <h5 class="m-1 p-1 col-md-3">Calibrated 95% Calendar Date MIN: @Model.Calibrated95CalendarDateMin</h5>
+        <h5 class="m-1 p-1 col-md-3">Calibrated 95% Calendar Date SPAN: @Model.Calibrated95CalendarDateSpan</h5>
+
+    </div>
+
+    <div class="row justify-content-md-center">
+
+        <h5 class="m-1 p-1 col-md-3">Calibrated 95% Calendar Date AVG: @Model.Calibrated95CalendarDateAvg</h5>
+        <h5 class="m-1 p-1 col-md-3">Category: @Model.Category</h5>
+        <h5 class="m-1 p-1 col-md-3">Notes: @Model.Notes</h5>
+
+    </div>
+
+    <hr />
+    <div class="row justify-content-md-center">
+
+        <form asp-action="Delete">
+            <div class="row justify-content-md-center">
+                <input type="submit" value="Delete" class="btn btn-danger m-1" />
+                <a class="btn btn-secondary m-1" asp-action="RecordDetails" asp-route-id="@Model.BurialId">Back to List</a>
+            </div>
+        </form>
+    </div>
+    <br />
+
 </div>
+
+        

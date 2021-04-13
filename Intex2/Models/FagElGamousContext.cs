@@ -861,7 +861,7 @@ namespace Intex2.Models
                 //    .IsConcurrencyToken()
                 //    .HasColumnName("SSMA_TimeStamp");
             });
-            //FieldBook$FieldBook
+            //FieldBooks FieldBook
 
             modelBuilder.Entity<FieldBook>(entity =>
             {

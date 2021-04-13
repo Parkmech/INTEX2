@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Intex2.Models;
-using Intex2.Models.ViewdModels;
+using Intex2.Models.ViewModels;
 
 namespace Intex2.Controllers
 {
@@ -60,7 +60,7 @@ namespace Intex2.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(FieldBook fieldNote)
+        public IActionResult CustomCreate(FieldBook fieldNote)
         {
             if (ModelState.IsValid)
             {
@@ -99,7 +99,7 @@ namespace Intex2.Controllers
         }
         //POST
         [HttpPost]
-        public IActionResult Edit(FieldBook fieldNote)
+        public IActionResult CustomEdit(FieldBook fieldNote)
         {
             if (ModelState.IsValid)
             {

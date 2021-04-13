@@ -1,5 +1,45 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Intex2.Models.FieldBook
+
 @{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Add a Field Book Reference</h1>
+
+<h4>Reference for @Model.BurialId</h4>
+<hr />
+
+<form asp-action="CustomEdit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="@Model.FieldBook1" class="control-label"></label>
+        <input asp-for="@Model.FieldBook1" class="form-control" value="@Model.FieldBook1" />
+        <span asp-validation-for="@Model.FieldBook1" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.FieldBookPageNumber" class="control-label"></label>
+        <input asp-for="@Model.FieldBookPageNumber" class="form-control" value="@Model.FieldBookPageNumber" />
+        <span asp-validation-for="@Model.FieldBookPageNumber" class="text-danger"></span>
+    </div>
+
+    <input type="hidden" asp-for="@Model.Id" value="@Model.Id" />
+    <input type="hidden" asp-for="@Model.BurialId" value="@Model.BurialId" />
+
+    <div class="row">
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary m-1 p-1" />
+        </div>
+        <div>
+            <a class="btn btn-secondary m-1 p-1"  asp-action="RecordDetails" asp-route-id="@Model.BurialId">Back to References</a>
+        </div>
+    </div>
+
+</form>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
