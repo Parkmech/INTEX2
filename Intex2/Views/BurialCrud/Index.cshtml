@@ -3,9 +3,7 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 
-@{
-    ViewBag.Photo = "https://elasticbeanstalk-us-east-1-503379183917.s3.amazonaws.com/Photos/notfound.png";
-}
+@{ ViewBag.Photo = "https://elasticbeanstalk-us-east-1-503379183917.s3.amazonaws.com/Photos/notfound.png"; }
 
 @model BurialListViewModel
 
@@ -16,6 +14,69 @@
 </style>
 <br />
 
+<div class="m-2 p-2">
+    <table class="table bg-white table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Burial ID</th>
+                <th scope="col">Sex</th>
+                <th scope="col">Length</th>
+                <th scope="col">Depth</th>
+                <th scope="col">Area</th>
+                <th scope="col">East/West</th>
+                <th scope="col">North/South</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var mummy in Model.Burials)
+            {
+
+            <tr>
+                <td>@mummy.BurialId</td>
+                <td>@mummy.GenderCode</td>
+                <td>@mummy.Square</td>
+
+                @{ if (mummy.LengthM != null)
+                    { 
+                        <td> @Math.Round((decimal)mummy.LengthM, 2)</td>
+                    }
+
+                    else
+                    {
+                        <td></td>
+                    }
+
+                    if (mummy.BurialDepth != null)
+                    {
+                         <td>@Math.Round((decimal)mummy.BurialDepth, 2)</td>
+                    }
+                    else { <td></td>}
+                    }
+
+
+                <td>@mummy.BurialDirection</td>
+                <td>@mummy.EastOrWest</td>
+                <td>@mummy.NorthOrSouth</td>
+                <td>
+                    <a class="text-center btn btn-primary" asp-area="" asp-route-id="@mummy.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
+
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                    {
+                        <a class="text-center btn btn-secondary" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>}
+
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                    {
+                        <a class="text-center btn btn-danger" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@mummy.BurialId">Delete</a>}
+                </td>
+            </tr>}
+        </tbody>
+
+
+    </table>
+</div>
+
 <div class="container">
     <div class="row">
         <div class="col-sm-6">
@@ -24,6 +85,7 @@
         </div>
     </div>
 </div>
+
 <div class="container collapse" id="filter">
     <form asp-action="AdvancedFiltering" method="post">
         <div class="row">
@@ -108,87 +170,73 @@
 </div>
 <br />
 <br />
-@foreach (var mummy in Model.Burials)
-{
-    foreach (var x in Model.Photos)
+<div class="row justify-content-md-center">
+
+    @foreach (var mummy in Model.Burials)
     {
-        if (mummy.BurialId == x.BurialId)
+        foreach (var x in Model.Photos)
         {
-            ViewBag.Photo = "https://elasticbeanstalk-us-east-1-503379183917.s3.amazonaws.com/Photos/" + x.PhotoId;
-            break;
-        }
-    }
-    <div class="card shadow mb-3" style="max-width: auto">
-        <div class="row g-0">
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h2 class="card-title">@mummy.BurialId</h2>
-                
-                    <table class="table table-responsive">
-                        <thead>
-                            <tr>
-                                <th>Sex</th>
-                                <th>Length</th>
-                                <th>Depth</th>
-                                <th>Area</th>
-                                <th>East/West</th>
-                                <th>North/South</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>@mummy.GenderCode</td>
-                                <td>
-                                    @if (mummy.LengthM != null)
-                                    {
-                                        @Math.Round((decimal)mummy.LengthM, 2)
-                                    }
-                                </td>
-                                <td>
-                                    @if (mummy.BurialDepth != null)
-                                    {
-                                        @Math.Round((decimal)mummy.BurialDepth, 2)
-                                    }                      
-                                </td>
-                                <td>@mummy.Square</td>
-                                <td>@mummy.EastOrWest</td>
-                                <td>@mummy.NorthOrSouth</td>
-                            </tr>
-                        </tbody>
-
-                    </table>
-                    <div class="row">
-                        <a class="text-center btn btn-primary col-md-2 m-2" asp-area="" asp-route-id="@mummy.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
-
-                        @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-                        {
-                            <a class="text-center btn btn-secondary col-md-2 m-2" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>
-                        }
-
-                        @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-                        {
-                            <a class="text-center btn btn-danger col-md-2 m-2" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@mummy.BurialId">Delete</a>
-
-                        }
-                    </div>
-                </div>
-            </div>
-
-            <div class="mx-auto m-2 p-1">
-                <img src="@ViewBag.Photo"
-                     alt="..."
-                     class="img-fluid"
-                     width="300" >
-            </div>
-            @{
-                ViewBag.Photo = "https://elasticbeanstalk-us-east-1-503379183917.s3.amazonaws.com/Photos/notfound.png";
+            if (mummy.BurialId == x.BurialId)
+            {
+                ViewBag.Photo = "https://elasticbeanstalk-us-east-1-503379183917.s3.amazonaws.com/Photos/" + x.PhotoId;
+                break;
             }
+        }
+
+<div class="col-md-5 p-1 m-1 card shadow mb-3">
+    <h2 class="card-header text-center">@mummy.BurialId</h2>
+
+    <div class="card-body">
+
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>Sex</th>
+                    <th>Length</th>
+                    <th>Depth</th>
+                    <th>Area</th>
+                    <th>East/West</th>
+                    <th>North/South</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@mummy.GenderCode</td>
+                    <td>
+                        @if (mummy.LengthM != null)
+                        {
+        @Math.Round((decimal)mummy.LengthM, 2)}
+                    </td>
+                    <td>
+                        @if (mummy.BurialDepth != null)
+                        {
+        @Math.Round((decimal)mummy.BurialDepth, 2)}
+                    </td>
+                    <td>@mummy.Square</td>
+                    <td>@mummy.EastOrWest</td>
+                    <td>@mummy.NorthOrSouth</td>
+                </tr>
+            </tbody>
+
+        </table>
+        <div class="row">
+            <a class="text-center btn btn-primary col-md-2 m-2" asp-area="" asp-route-id="@mummy.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
+
+            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+            {
+<a class="text-center btn btn-secondary col-md-2 m-2" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>}
+
+            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+            {
+<a class="text-center btn btn-danger col-md-2 m-2" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@mummy.BurialId">Delete</a>}
         </div>
     </div>
-}
+</div>}
+</div>
 
 <div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true" page-class="btn"
      page-class-normal="btn-outline-dark"
      page-class-selected="btn-info"
      class="btn-group pull-right m-1">
 </div>
+<br /><br /><br />
