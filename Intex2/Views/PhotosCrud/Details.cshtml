@@ -23,25 +23,40 @@
 </head>
 <body>
 
-<div>
-    <h1>@printId</h1>
-    <hr />
-    <dl class="row">
-        @foreach (var x in Model.Photos)
-        {
 
-            ViewBag.PhotoId = "https://elasticbeanstalk-us-east-1-891046424969.s3.amazonaws.com/Photos/" + @x.PhotoId;
+<style>
+    body {
+        background-color: #E9ECEF;
+    }
+</style>
+<br />
 
-            <dt class="col-sm-10">
-                <img src="@ViewBag.PhotoId" width="500" />
-            </dt>
-            <br />
-            <dd><a class="btn btn-danger" asp-action="Delete" asp-route-id="@x.Id">Delete</a> </dd>
-        }
-    </dl>
-</div>
-<div>
-    <a class="btn btn-primary"asp-controller="BurialCrud"asp-action="Details"asp-route-id="@Model.Burial.BurialId">Back to Details</a>
+
+<div class="card shadow mb-3" style="max-width: auto">
+    <div class="container m-3 p-2">
+        <h1>@printId</h1>
+        <hr />
+        <dl class="row">
+            @foreach (var x in Model.Photos)
+            {
+
+                ViewBag.PhotoId = "https://elasticbeanstalk-us-east-1-891046424969.s3.amazonaws.com/Photos/" + @x.PhotoId;
+
+                <dt class="col-sm-10 p-3">
+                    <img src="@ViewBag.PhotoId" width="500" />
+                </dt>
+
+                @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                {
+                    <dd><a class="btn btn-danger" asp-action="Delete" asp-route-id="@x.Id">Delete</a> </dd>
+                }
+
+            }
+        </dl>
+        <div>
+            <a class="btn btn-primary" asp-controller="BurialCrud" asp-action="Details" asp-route-id="@Model.Burial.BurialId">Back to Details</a>
+        </div>
+    </div>
 </div>
 </body>
 </html>

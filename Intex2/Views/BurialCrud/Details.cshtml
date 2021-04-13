@@ -6,10 +6,7 @@
 
 
 @{ ViewData["Title"] = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-
-
-}
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
 <!--NEW VIEW-->
 <style>
 
@@ -18,252 +15,268 @@
     }
 </style>
 
-<div class="row">
 
-    <div class="tabs shadow">
-        <input type="radio" name="tabs" id="tabone" checked="checked">
-        <label class="label" for="tabone">Exhumation Data Entry</label>
-        <div class="tab">
+<div class="row m-1 p-1">
+  
+    <div class="col-md-2 m-1 p-1">
 
-            <h1>Burial Record Details for @Model.BurialId</h1>
+        <br /><br />
+        <h3>Related Data</h3>
+        <hr />
+        <a style="border-style: solid;
+        border-color: #002E5D; "class="text-center btn btn-hover btn-light col-md-10 p-2 m-2" asp-controller="BioSampleCrud" asp-action="RecordSpecificIndex" asp-route-id="@Model.BurialId">View Biological Samples</a>
+        <br />
+        <a style="border-style: solid;
+        border-color: #002E5D;" class="text-center  btn btn-hover btn-light col-md-10 p-2 m-2" asp-controller="CarbonDatingCrud" asp-action="RecordDetails" asp-route-id="@Model.BurialId">View Carbon Dating Data</a>
+        <br />
+        <a style="border-style: solid;
+        border-color: #002E5D;" class="text-center  btn btn-hover btn-light col-md-10 p-2 m-2" asp-controller="FieldNotesCrud" asp-action="RecordDetails" asp-route-id="@Model.BurialId">View Field Book References</a>
+        <br />
+        <a style="border-style: solid;
+        border-color: #002E5D;" class="text-center  btn btn-hover btn-light col-md-10 p-2 m-2" asp-controller="PhotosCrud" asp-action="Details" asp-route-id="@Model.BurialId">View Burial Photos</a>
+        <br />
+        <a style="border-style: solid;
+        border-color: #002E5D;" class="text-center  btn btn-hover btn-light col-md-10 p-2 m-2" asp-controller="BurialCrud" asp-action="UploadPhoto" asp-route-id="@Model.BurialId">UPLOAD TEST</a>
+        <br />
+        <a style="border-style: solid;
+        border-color: #002E5D;" class="text-center  btn btn-hover btn-light col-md-10 p-2 m-2" asp-controller="CranialCrud" asp-action="RecordDetails" asp-route-id="@Model.BurialId">View Cranial Sample Records</a>
 
-            <p><i>This section contains the main data from the initial exhumation</i></p>
-            <hr />
-            <div class="row">
+    </div>
 
-                <div class="col-md-6">
-                    <h2>Record Created By: @Model.InitialsOfDataEntryChecker</h2>
+    <div class="row  col-md-10">
+
+        <div class="tabs shadow">
+            <input type="radio" name="tabs" id="tabone" checked="checked">
+            <label class="label" for="tabone">Exhumation Data Entry</label>
+            <div class="tab">
+
+                <h1>Burial Record Details for @Model.BurialId</h1>
+
+                <p><i>This section contains the main data from the initial exhumation</i></p>
+                <hr />
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <h2 class="card-header">Record Created By: @Model.InitialsOfDataEntryChecker</h2>
+                    </div>
                 </div>
-            </div>
 
-            <hr />
+                <hr />
 
-            <div>
-                <h2>Date of Excavation</h2>
+                <div>
+                    <h2>Date of Excavation</h2>
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <h5>Year: @Model.YearExcav</h5>
+                        </div>
+
+                        <div class="col-md-4">
+                            <h5>Month: @Model.MonthExcavated</h5>
+                        </div>
+
+                        <div class="col-md-4">
+                            <h5>Day: @Model.DateExcavated</h5>
+                        </div>
+                    </div>
+
+                </div>
+                <hr />
+
+                <h2>Burial ID</h2>
+
                 <div class="row">
 
                     <div class="col-md-4">
-                        <h5>Year: @Model.YearExcav</h5>
+                        <!--North or South-->
+                        <h5>North or South: @Model.NorthOrSouth</h5>
                     </div>
 
                     <div class="col-md-4">
-                        <h5>Month: @Model.MonthExcavated</h5>
+                        <!--This is the NS Low ID (i.e. the 140 in 140/150-->
+                        <h5>NS Low Position: @Model.NsLowPosition</h5>
                     </div>
 
                     <div class="col-md-4">
-                        <h5>Day: @Model.DateExcavated</h5>
+                        <!--This is the NS High ID (i.e. the 150 in 140/150) this field will be hidden-->
+                        <h5>NS High Position: @Model.NsHighPosition</h5>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <!-- East or West -->
+                        <h5>East or West: @Model.EastOrWest</h5>
+                    </div>
+
+                    <div class="col-md-4">
+                        <!--This is the EW Low ID (i.e. the 40 in 40/50)-->
+                        <h5>EW Low Position: @Model.EwLowPosition</h5>
+                    </div>
+
+                    <div class="col-md-4">
+                        <!--This is the EW High ID (i.e. the 50 in 40/50)-->
+                        <h5>EW High Position: @Model.EwHighPosition</h5>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <!-- Area (NW, NE, SW, SE) -->
+                        <h5>Area: @Model.Square</h5>
+                    </div>
+
+                    <div class="col-md-6">
+                        <!-- Burial Number -->
+                        <h5>Burial Number: @Model.BurialNumber</h5>
+                    </div>
+
+                </div>
+
+                <hr />
+
+                <h2>Metrics</h2>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <h5>Burial South to Head: @Model.BurialSouthToHead</h5>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h5>Burial South to Feet: @Model.BurialSouthToFeet</h5>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h5>Burial Length (Meters): @Model.LengthM</h5>
                     </div>
                 </div>
 
-            </div>
-            <hr />
+                <div class="row">
 
-            <h2>Burial ID</h2>
+                    <div class="col-md-4">
+                        <h5>Burial West to Head: @Model.BurialWestToHead </h5>
+                    </div>
 
-            <div class="row">
+                    <div class="col-md-4">
+                        <h5>Burial West to Feet: @Model.BurialWestToFeet</h5>
+                    </div>
 
-                <div class="col-md-4">
-                    <!--North or South-->
-                    <h5>North or South: @Model.NorthOrSouth</h5>
+
+                    <div class="col-md-4">
+                        <h5>Burial Depth: @Model.BurialDepth</h5>
+                    </div>
+
                 </div>
 
-                <div class="col-md-4">
-                    <!--This is the NS Low ID (i.e. the 140 in 140/150-->
-                    <h5>NS Low Position: @Model.NsLowPosition</h5>
+                <hr />
+
+                <h2>Observations</h2>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        @Model.BurialPreservation
+                    </div>
+
+                    <div class="col-md-6">
+                        <h5>General Notes: <br /> <i>@Model.OtherNotes</i> </h5>
+                        <br />
+                        <h5>Osteology Notes: @Model.OsteologyNotes</h5>
+                    </div>
                 </div>
 
-                <div class="col-md-4">
-                    <!--This is the NS High ID (i.e. the 150 in 140/150) this field will be hidden-->
-                    <h5>NS High Position: @Model.NsHighPosition</h5>
+                <div class="form-group text-left">
+
+                    
                 </div>
+                <div class="form-group text-right">
 
-            </div>
+                    <a class="btn btn-primary" asp-controller="BurialCrud" asp-action="Index">Back to List</a>
 
-            <div class="row">
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                    {
+        <a class="btn btn-secondary col-sm-1" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@Model.BurialId">Edit</a>}
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                    {
+        <a class="text-center btn btn-danger col-sm-1" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@Model.BurialId">Delete</a>}
 
-                <div class="col-md-4">
-                    <!-- East or West -->
-                    <h5>East or West: @Model.EastOrWest</h5>
-                </div>
-
-                <div class="col-md-4">
-                    <!--This is the EW Low ID (i.e. the 40 in 40/50)-->
-                    <h5>EW Low Position: @Model.EwLowPosition</h5>
-                </div>
-
-                <div class="col-md-4">
-                    <!--This is the EW High ID (i.e. the 50 in 40/50)-->
-                    <h5>EW High Position: @Model.EwHighPosition</h5>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <!-- Area (NW, NE, SW, SE) -->
-                    <h5>Area: @Model.Square</h5>
-                </div>
-
-                <div class="col-md-6">
-                    <!-- Burial Number -->
-                    <h5>Burial Number: @Model.BurialNumber</h5>
-                </div>
-
-            </div>
-
-            <hr />
-
-            <h2>Metrics</h2>
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <h5>Burial South to Head: @Model.BurialSouthToHead</h5>
-                </div>
-
-                <div class="col-md-4">
-                    <h5>Burial South to Feet: @Model.BurialSouthToFeet</h5>
-                </div>
-
-                <div class="col-md-4">
-                    <h5>Burial Length (Meters): @Model.LengthM</h5>
                 </div>
             </div>
 
-            <div class="row">
+            <input type="radio" name="tabs" id="tabtwo">
+            <label class="label" for="tabtwo">Body Details</label>
+            <div class="tab">
+                <h1>Body Details for Record @Model.BurialId</h1>
 
-                <div class="col-md-4">
-                    <h5>Burial West to Head: @Model.BurialWestToHead </h5>
-                </div>
+                <p><i>This section contains data related to the exhumed body and samples taken</i></p>
 
-                <div class="col-md-4">
-                    <h5>Burial West to Feet: @Model.BurialWestToFeet</h5>
-                </div>
+                <hr />
 
+                <h2>General Information</h2>
 
-                <div class="col-md-4">
-                    <h5>Burial Depth: @Model.BurialDepth</h5>
-                </div>
+                <div class="row">
 
-            </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <h5>
+                                Age Description:
+                                @if (Model.AgeCodeSingle == "A")
+                                {<span>Adult</span>}
+                                else if (Model.AgeCodeSingle == "C")
+                                { <span>Child</span>}
+                                else if (Model.AgeCodeSingle == "I")
+                                { <span>Infant</span>}
+                                else if (Model.AgeCodeSingle == "N")
+                                { <span>Newborn</span>}
+                                else
+                                { <span>Unknown</span>}
+                            </h5>
+                        </div>
 
-            <hr />
+                        <div class="form-group">
+                            <h5>Estimated Minimum Age: @Model.NumericMinAge</h5>
+                        </div>
 
-            <h2>Observations</h2>
+                        <div class="form-group">
+                            <h5>Estimated Maximum Age: @Model.NumericMaxAge</h5>
+                        </div>
 
-            <div class="row">
-                <div class="col-md-4">
-                    @Model.BurialPreservation
-                </div>
-
-                <div class="col-md-6">
-                    <h5>General Notes: <br /> <i>@Model.OtherNotes</i> </h5>
-                    <br />
-                    <h5>Osteology Notes: @Model.OsteologyNotes</h5>
-                </div>
-            </div>
-            <div class="form-group text-left">
-
-                <a class="text-center btn btn-primary col-md-2 m-2" asp-controller="BioSampleCrud" asp-action="RecordSpecificIndex" asp-route-id="@Model.BurialId">View Biological Samples</a>
-
-
-                <a class="text-center btn btn-success col-md-3 m-1" asp-controller="CarbonDatingCrud" asp-action="RecordDetails" asp-route-id="@Model.BurialId">View Carbon Dating Data</a>
-
-                <a class="text-center text-center btn btn-warning col-md-3 m-1" asp-controller="FieldNotesCrud" asp-action="RecordDetails" asp-route-id="@Model.BurialId">View Field Book References</a>
-
-                <a class="text-center btn btn-dark col-md-3 m-1" asp-controller="PhotosCrud" asp-action="Details" asp-route-id="@Model.BurialId">View Photos</a>
-
-                <a class="text-center btn btn-dark col-md-3 m-1" asp-controller="BurialCrud" asp-action="UploadPhoto" asp-route-id="@Model.BurialId">UPLOAD TEST</a>
-
-                <a class="text-center btn btn-info col-md-3 m-1" asp-controller="CranialCrud" asp-action="RecordDetails" asp-route-id="@Model.BurialId">Cranial Records</a>
+                    </div>
 
 
-            </div>
-            <div class="form-group text-right">
+                    <div class="col-md-6">
+                        <!-- Gender code (aka the sex) -->
 
-                <a class="btn btn-primary" asp-controller="BurialCrud" asp-action="Index">Back to List</a>
+                        <div class="form-group">
+                            <h5>
+                                Gender/Sex:
 
-                @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                                @if (Model.GenderCode == "M")
+                                {
+                    <span>Male</span> }
+                else if (Model.GenderCode == "F")
                 {
-    <a class="btn btn-secondary col-sm-1" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@Model.BurialId">Edit</a>}
-                @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-                {
-    <a class="text-center btn btn-danger col-sm-1" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@Model.BurialId">Delete</a>}
-
-            </div>
-        </div>
-
-        <input type="radio" name="tabs" id="tabtwo">
-        <label class="label" for="tabtwo">Body Details</label>
-        <div class="tab">
-            <h1>Exhumed Body Details and Sample Information</h1>
-
-            <p><i>This section contains data related to the exhumed body and samples taken</i></p>
-
-            <hr />
-
-            <h2>General Information</h2>
-
-            <div class="row">
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <h5>
-                            Age Description:
-                            @if (Model.AgeCodeSingle == "A")
-                            {<span>Adult</span>}
-                            else if (Model.AgeCodeSingle == "C")
-                            { <span>Child</span>}
-                            else if (Model.AgeCodeSingle == "I")
-                            { <span>Infant</span>}
-                            else if (Model.AgeCodeSingle == "N")
-                            { <span>Newborn</span>}
-                            else
-                            { <span>Unknown</span>}
-                        </h5>
-                    </div>
-
-                    <div class="form-group">
-                        <h5>Estimated Minimum Age: @Model.NumericMinAge</h5>
-                    </div>
-
-                    <div class="form-group">
-                        <h5>Estimated Maximum Age: @Model.NumericMaxAge</h5>
-                    </div>
-
-                </div>
-
-
-                <div class="col-md-6">
-                    <!-- Gender code (aka the sex) -->
-
-                    <div class="form-group">
-                        <h5>
-                            Gender/Sex:
-
-                            @if (Model.GenderCode == "M")
-                            {
-                <span>Male</span> }
-            else if (Model.GenderCode == "F")
-            {
-<span>Female</span> }
+    <span>Female</span> }
 else
 {
 <span>Unknown</span>}
-                        </h5>
+                            </h5>
 
-                    </div>
+                        </div>
 
-                    <div class="form-group">
+                        <div class="form-group">
 
-                        <h5>
-                            Hair Color: @if (Model.HairColorCode == "B")
-                            {
-                <span>Brown/Dark Brown/Light Brown</span> }
-            else if (Model.HairColorCode == "K")
-            {
-<span>Black</span> }
+                            <h5>
+                                Hair Color: @if (Model.HairColorCode == "B")
+                                {
+                    <span>Brown/Dark Brown/Light Brown</span> }
+                else if (Model.HairColorCode == "K")
+                {
+    <span>Black</span> }
 else if (Model.HairColorCode == "A")
 {
 <span>Brown and Red (Auburn)</span> }
@@ -277,317 +290,320 @@ else
 {
 <span>Unknown</span>}
 
-                        </h5>
+                            </h5>
+
+                        </div>
 
                     </div>
 
                 </div>
 
+                <hr />
+
+                <!-- Second section of data on form -->
+
+                <h2>Samples Taken</h2>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <h5>
+                                Hair Taken:
+                                @if (Model.HairTaken == "TRUE")
+                                {<span>Yes</span>}
+                                else
+                                {<span>No</span>}
+                            </h5>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <h5>
+                                Soft Tissue Taken:
+                                @if (Model.SoftTissueTaken == "TRUE")
+                                {<span>Yes</span>}
+                                else
+                                {<span>No</span>}
+                            </h5>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <h5>
+                                Bone Taken:
+                                @if (Model.BoneTaken == "TRUE")
+                                {<span>Yes</span>}
+                                else
+                                {<span>No</span>}
+                            </h5>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <h5>
+                                Tooth Taken:
+                                @if (Model.ToothTaken == "TRUE")
+                                {<span>Yes</span>}
+                                else
+                                {<span>No</span>}
+                            </h5>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <h5>
+                                Textile Taken:
+                                @if (Model.TextileTaken == "TRUE")
+                                {<span>Yes</span>}
+                                else
+                                {<span>No</span>}
+                            </h5>
+                        </div>
+                    </div>
+
+                </div>
+
+                <br />
+
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <h5>Description of Taken Items:</h5>
+                            <p>@Model.DescriptionOfTaken</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group text-right">
+
+                    <a class="btn btn-primary" asp-controller="BurialCrud" asp-action="Index">Back to List</a>
+
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                    {
+        <a class="btn btn-secondary col-sm-1" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@Model.BurialId">Edit</a>}
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                    {
+        <a class="text-center btn btn-danger col-sm-1" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@Model.BurialId">Delete</a>}
+
+                </div>
             </div>
 
-            <hr />
+            <input type="radio" name="tabs" id="tabthree">
+            <label class="label" for="tabthree">Tab Three</label>
+            <div class="tab">
+                <h1>Osteological Records</h1>
+                <p>This section contains osteology data on exhumed bodes</p>
 
-            <!-- Second section of data on form -->
+                <hr />
 
-            <h2>Samples Taken</h2>
-
-            <div class="row">
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <h5>
-                            Hair Taken:
-                            @if (Model.HairTaken == "TRUE")
-                            {<span>Yes</span>}
-                            else
-                            {<span>No</span>}
-                        </h5>
-                    </div>
-
-
-
-                    <div class="form-group">
-                        <h5>
-                            Soft Tissue Taken:
-                            @if (Model.SoftTissueTaken == "TRUE")
-                            {<span>Yes</span>}
-                            else
-                            {<span>No</span>}
-                        </h5>
-                    </div>
-
-
-
-                    <div class="form-group">
-                        <h5>
-                            Bone Taken:
-                            @if (Model.BoneTaken == "TRUE")
-                            {<span>Yes</span>}
-                            else
-                            {<span>No</span>}
-                        </h5>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <h5>Osteology Notes:</h5>
+                            <p>@Model.OsteologyNotes</p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <h5>
-                            Tooth Taken:
-                            @if (Model.ToothTaken == "TRUE")
-                            {<span>Yes</span>}
-                            else
-                            {<span>No</span>}
-                        </h5>
+                <hr />
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <h5>Basilar Suture: @Model.BasilarSuture</h5>
                     </div>
 
+                    <div class="col-md-4">
+                        <h5>Ventral Arc: @Model.VentralArc</h5>
+                    </div>
 
+                    <div class="col-md-4">
+                        <h5>Subpubic Angle: @Model.SubpubicAngle</h5>
+                    </div>
 
-                    <div class="form-group">
-                        <h5>
-                            Textile Taken:
-                            @if (Model.TextileTaken == "TRUE")
-                            {<span>Yes</span>}
-                            else
-                            {<span>No</span>}
-                        </h5>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <h5>Sciatic Notch: @Model.SciaticNotch</h5>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h5>Pubic Bone: @Model.PubicBone</h5>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h5>Preaur Sulcus: @Model.PreaurSulcus</h5>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <h5>Medial IP Ramus: @Model.MedialIpRamus</h5>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h5>Dorsal Pitting: @Model.DorsalPitting</h5>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h5>Foreman Magnum: @Model.ForemanMagnum</h5>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <h5>Femur Head: @Model.FemurHead</h5>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h5>Humerus Head: @Model.HumerusHead</h5>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h5>Ostephytosis: @Model.Osteophytosis</h5>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <h5>Pubic Symphysis: @Model.PubicSymphysis</h5>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h5>Femur Length: @Model.FemurLength</h5>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h5>Humerus Length: @Model.HumerusLength</h5>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <h5>Tibia Length: @Model.TibiaLength</h5>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h5>Robust: @Model.Robust</h5>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h5>Supraorbital Ridges: @Model.SupraorbitalRidges</h5>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <h5>Orbit Edge: @Model.OrbitEdge</h5>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h5>Parietal Bossing: @Model.ParietalBossing</h5>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h5>Gonian: @Model.Gonian</h5>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <h5>Nuchal Crest: @Model.NuchalCrest</h5>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h5>Zygomatic Crest: @Model.ZygomaticCrest</h5>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h5>Cranial Suture: @Model.CranialSuture</h5>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <h5>Maximum Cranial Length: @Model.MaximumCranialLength</h5>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h5>Maximum Cranial Breadth: @Model.MaximumCranialBreadth</h5>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h5>Basion Bregma Heigth: @Model.BasionBregmaHeight</h5>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <h5>Basion Nasion: @Model.BasionNasion</h5>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h5>Basion Prosthion Length: @Model.BasionProsthionLength</h5>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h5>Bizygomatic Diameter: @Model.BizygomaticDiameter</h5>
                     </div>
                 </div>
 
-            </div>
-
-            <br />
-
-            <div class="row">
-                <div class="col-md-10">
-                    <div class="form-group">
-                        <h5>Description of Taken Items:</h5>
-                        <p>@Model.DescriptionOfTaken</p>
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>Nasion Prosthion: @Model.NasionProsthion</h5>
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group text-right">
 
-                <a class="btn btn-primary" asp-controller="BurialCrud" asp-action="Index">Back to List</a>
+                <div class="form-group text-right">
 
-                @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-                {
-    <a class="btn btn-secondary col-sm-1" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@Model.BurialId">Edit</a>}
-                @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-                {
-    <a class="text-center btn btn-danger col-sm-1" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@Model.BurialId">Delete</a>}
+                    <a class="btn btn-primary" asp-controller="BurialCrud" asp-action="Index">Back to List</a>
 
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                    {
+        <a class="btn btn-secondary col-sm-1" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@Model.BurialId">Edit</a>}
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                    {
+        <a class="text-center btn btn-danger col-sm-1" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@Model.BurialId">Delete</a>}
+
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                    {
+        <a class="text-center btn btn-dark col-md-4 m-2" asp-controller="BurialCrud" asp-action="UploadPhoto" asp-route-id="@Model.BurialId"> Add Photo</a>}
+
+                </div>
             </div>
         </div>
 
-        <input type="radio" name="tabs" id="tabthree">
-        <label class="label" for="tabthree">Osteological Information</label>
-        <div class="tab">
-            <h1>Osteology Records</h1>
-            <p>This section contains osteology data on exhumed bodies</p>
-
-            <hr />
-
-            <div class="row">
-                <div class="col-md-10">
-                    <div class="form-group">
-                        <h5>Osteology Notes:</h5>
-                        <p>@Model.OsteologyNotes</p>
-                    </div>
-                </div>
-            </div>
-
-            <hr />
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <h5>Basilar Suture: @Model.BasilarSuture</h5>
-                </div>
-
-                <div class="col-md-4">
-                    <h5>Ventral Arc: @Model.VentralArc</h5>
-                </div>
-
-                <div class="col-md-4">
-                    <h5>Subpubic Angle: @Model.SubpubicAngle</h5>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <h5>Sciatic Notch: @Model.SciaticNotch</h5>
-                </div>
-
-                <div class="col-md-4">
-                    <h5>Pubic Bone: @Model.PubicBone</h5>
-                </div>
-
-                <div class="col-md-4">
-                    <h5>Preaur Sulcus: @Model.PreaurSulcus</h5>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <h5>Medial IP Ramus: @Model.MedialIpRamus</h5>
-                </div>
-
-                <div class="col-md-4">
-                    <h5>Dorsal Pitting: @Model.DorsalPitting</h5>
-                </div>
-
-                <div class="col-md-4">
-                    <h5>Foreman Magnum: @Model.ForemanMagnum</h5>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <h5>Femur Head: @Model.FemurHead</h5>
-                </div>
-
-                <div class="col-md-4">
-                    <h5>Humerus Head: @Model.HumerusHead</h5>
-                </div>
-
-                <div class="col-md-4">
-                    <h5>Ostephytosis: @Model.Osteophytosis</h5>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <h5>Pubic Symphysis: @Model.PubicSymphysis</h5>
-                </div>
-
-                <div class="col-md-4">
-                    <h5>Femur Length: @Model.FemurLength</h5>
-                </div>
-
-                <div class="col-md-4">
-                    <h5>Humerus Length: @Model.HumerusLength</h5>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <h5>Tibia Length: @Model.TibiaLength</h5>
-                </div>
-
-                <div class="col-md-4">
-                    <h5>Robust: @Model.Robust</h5>
-                </div>
-
-                <div class="col-md-4">
-                    <h5>Supraorbital Ridges: @Model.SupraorbitalRidges</h5>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <h5>Orbit Edge: @Model.OrbitEdge</h5>
-                </div>
-
-                <div class="col-md-4">
-                    <h5>Parietal Bossing: @Model.ParietalBossing</h5>
-                </div>
-
-                <div class="col-md-4">
-                    <h5>Gonian: @Model.Gonian</h5>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <h5>Nuchal Crest: @Model.NuchalCrest</h5>
-                </div>
-
-                <div class="col-md-4">
-                    <h5>Zygomatic Crest: @Model.ZygomaticCrest</h5>
-                </div>
-
-                <div class="col-md-4">
-                    <h5>Cranial Suture: @Model.CranialSuture</h5>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <h5>Maximum Cranial Length: @Model.MaximumCranialLength</h5>
-                </div>
-
-                <div class="col-md-4">
-                    <h5>Maximum Cranial Breadth: @Model.MaximumCranialBreadth</h5>
-                </div>
-
-                <div class="col-md-4">
-                    <h5>Basion Bregma Heigth: @Model.BasionBregmaHeight</h5>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <h5>Basion Nasion: @Model.BasionNasion</h5>
-                </div>
-
-                <div class="col-md-4">
-                    <h5>Basion Prosthion Length: @Model.BasionProsthionLength</h5>
-                </div>
-
-                <div class="col-md-4">
-                    <h5>Bizygomatic Diameter: @Model.BizygomaticDiameter</h5>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-4">
-                    <h5>Nasion Prosthion: @Model.NasionProsthion</h5>
-                </div>
-            </div>
-
-
-            <div class="form-group text-right">
-
-                <a class="btn btn-primary" asp-controller="BurialCrud" asp-action="Index">Back to List</a>
-
-                @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-                {
-    <a class="btn btn-secondary col-sm-1" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@Model.BurialId">Edit</a>}
-                @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-                {
-    <a class="text-center btn btn-danger col-sm-1" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@Model.BurialId">Delete</a>}
-
-                @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-                {
-    <a class="text-center btn btn-dark col-md-4 m-2" asp-controller="BurialCrud" asp-action="UploadPhoto" asp-route-id="@Model.BurialId"> Add Photo</a>            }
-
-            </div>
-        </div>
     </div>
+
+    <br />
+
+
+
+    <br />
 
 </div>
 
-<br />
-
-
-
-<br />

@@ -12,7 +12,7 @@
     }
     else
     {
-        printId = "There are no samples for " + Model.burial.BurialId;
+        printId = "There are no biological samples for " + Model.burial.BurialId;
     }
 }
 <br />
@@ -56,11 +56,11 @@
         </div>
         <div class="card-footer text-muted">Year Sampled: @sample.Date </div>
         </div>
+        <hr />
     }
 </div>
 
-<hr />
-<div class="row">
+<div class="row justify-content-md-center">
     <a class="btn btn-secondary m-1" asp-controller="BurialCrud" asp-action="Details" asp-route-id="@Model.burial.BurialId">Back to Burial Details</a>
 
     <a class="btn btn-primary m-1" asp-action="create" asp-route-id="@Model.burial.BurialId">Create New Sample</a>
