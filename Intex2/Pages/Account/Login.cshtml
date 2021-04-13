@@ -33,19 +33,20 @@
                 <br />
                 <hr />
 
-                <a class="btn btn-primary p-2 m-1" asp-controller="Google" asp-action="GoogleLogin">Log In With Google</a>
-               
-          
+                <button class="btn btn-primary p-2 m-1" type="submit">Log In</button>
+
+
             </div>
             <div class="col-md-6">
 
-                <img src="~/img/login.png" class="img-fluid mx-auto text-center" width="200"/>
+                <img src="~/img/login.png" class="img-fluid mx-auto text-center" width="200" />
 
             </div>
         </div>
 
 
-        <button class="btn btn-primary p-2 m-1" type="submit">Log In</button>
+        <a class="btn btn-outline-warning p-2 m-1" asp-controller="Google" asp-action="GoogleLogin">Log In With Google</a>
+
 
     </form>
  
