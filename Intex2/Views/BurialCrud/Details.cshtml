@@ -174,7 +174,7 @@
 
                 <a class="text-center btn btn-dark col-md-3 m-1" asp-controller="PhotosCrud" asp-action="Details" asp-route-id="@Model.BurialId">View Photos</a>
 
-                <a class="text-center btn btn-dark col-md-3 m-1" asp-controller="BurialCrud" asp-action="UploadPhoto" asp-route-id="@Model.BurialId">UPLOAD TEST</a>
+            <a class="text-center btn btn-dark col-md-3 m-1" asp-controller="BurialCrud" asp-action="UploadPhoto" asp-route-id="@Model.BurialId">Upload Photo</a>
 
                 <a class="text-center btn btn-info col-md-3 m-1" asp-controller="CranialCrud" asp-action="RecordDetails" asp-route-id="@Model.BurialId">Cranial Records</a>
 
@@ -184,12 +184,14 @@
 
                 <a class="btn btn-primary" asp-controller="BurialCrud" asp-action="Index">Back to List</a>
 
-                @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-                {
-    <a class="btn btn-secondary col-sm-1" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@Model.BurialId">Edit</a>}
-                @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-                {
-    <a class="text-center btn btn-danger col-sm-1" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@Model.BurialId">Delete</a>}
+            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+            {
+                <a class="btn btn-secondary col-sm-1" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@Model.BurialId">Edit</a>
+            }
+            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+            {
+                <a class="text-center btn btn-danger col-sm-1" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@Model.BurialId">Delete</a>
+            }
 
             </div>
         </div>
