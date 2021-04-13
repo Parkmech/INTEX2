@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,7 +20,7 @@ namespace Intex2.Controllers
         private SignInManager<IdentityUser> signInManager;
 
 
-        public GoogleController(UserManager<IdentityUser> userMgr, SignInManager<IdentityUser> signinMgr)
+    public GoogleController(UserManager<IdentityUser> userMgr, SignInManager<IdentityUser> signinMgr)
         {
             userManager = userMgr;
             signInManager = signinMgr;
