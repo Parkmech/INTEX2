@@ -1,5 +1,67 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model CranialViewModel
+@{ ViewData["Title"] = "Index";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string printId;
+    if (Model.cranialSamples.Count() > 0)
+    {
+        printId = "Cranial Data for " + Model.burial.BurialId;
+
+    }
+    else
+    {
+        printId = "ID " + Model.burial.BurialId + "has no cranial data";
+    } }
+<br />
+
+<div class="text-center">
+    <h1>@printId </h1>
+</div>
+<hr />
+
+@foreach (var sample in Model.cranialSamples)
+{
+    <div class="card shadow mb-3" style="max-width: auto">
+        <div class="row g-0">
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h2 class="card-title">Burial ID: @sample.BurialId</h2>
+                    <h5 class="card-subtitle mb-2 text-muted">Sample #@sample.SampleNumber</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item ">Maximum Cranial Length: @sample.MaximumCranialLength </li>
+                        <li class="list-group-item ">Maximum Cranial Breadth: @sample.MaximumCranialBreadth</li>
+                        <li class="list-group-item ">Basion-Bregma Height: @sample.BasionBregmaHeight</li>
+                        <li class="list-group-item ">Basion-Nasion: @sample.BasionNasion</li>
+                        <li class="list-group-item ">Basion-Prosthion Length: @sample.BasionProsthionLength</li>
+                        <li class="list-group-item ">Bizygomatic Diameter: @sample.BizygomaticDiameter</li>
+                        <li class="list-group-item ">Nasion-Prosthion: @sample.NasionProsthion</li>
+                        <li class="list-group-item ">Maximum Nasal Breadth: @sample.MaximumNasalBreadth</li>
+                        <li class="list-group-item ">Interorbital Breadth: @sample.InterorbitalBreadth</li>
+                    </ul>
+
+                    <div class="row">
+                        <a class="text-center btn btn-primary col-md-2 m-2" asp-area="" asp-route-id="@sample.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
+
+                        @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                        {
+                            <a class="col-md-4 m-1 p-1 btn btn-secondary" asp-controller="CranialCrud" asp-action="CustomEdit" asp-route-sample="@sample.SampleNumber">Edit</a>}
+
+                        @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                        {
+                            <a class="text-center btn btn-danger col-md-2 m-2" asp-controller="CarbonDatingCrud" asp-action="Delete" asp-route-id="@sample.SampleNumber">Delete</a>}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>}
+
+<hr />
+<div class="row">
+    <a class="btn btn-secondary m-1" asp-controller="BurialCrud" asp-action="Details" asp-route-id="@Model.burial.BurialId">Back to Burial Details</a>
+
+    <a class="btn btn-primary m-1" asp-action="CustomCreate" asp-route-id="@Model.burial.BurialId">Add Cranial Data</a>
+</div>
+
+
+<br />

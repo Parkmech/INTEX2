@@ -29,7 +29,7 @@ namespace Intex2.Controllers
             }
             Burial burial = _context.Burials.Where(x => x.BurialId == newid).FirstOrDefault();
 
-            var cranialSamples = _context.Cranials.Where(x => x.BurialId == burial.BurialId);
+            IEnumerable<Cranial> cranialSamples = _context.Cranials.Where(x => x.BurialId == burial.BurialId);
 
 
             return View(new CranialViewModel()
