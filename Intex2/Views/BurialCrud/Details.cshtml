@@ -165,13 +165,15 @@
 
             <a class="text-center btn btn-primary col-md-2 m-2" asp-controller="BioSampleCrud" asp-action="RecordSpecificIndex" asp-route-id="@Model.BurialId">View Biological Samples</a>
 
-            <a class="text-center btn btn-primary col-md-2 m-2" asp-controller="PhotosCrud" asp-action="Details" asp-route-id="@Model.BurialId">View Photos</a>
-
-
 
             <a class="text-center btn btn-success col-md-3 m-1" asp-controller="CarbonDatingCrud" asp-action="RecordDetails" asp-route-id="@Model.BurialId">View Carbon Dating Data</a>
 
-           
+            <a class="text-center btn btn-dark col-md-4 m-2" asp-controller="PhotosCrud" asp-action="Details" asp-route-id="@Model.BurialId">View Photos</a>
+
+            <a class="text-center btn btn-dark col-md-4 m-2" asp-controller="BurialCrud" asp-action="UploadPhoto" asp-route-id="@Model.BurialId">UPLOAD TEST</a>
+
+
+
         </div>
         <div class="form-group text-right">
 

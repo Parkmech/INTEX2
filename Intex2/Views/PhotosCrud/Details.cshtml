@@ -3,7 +3,7 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     string printId;
-    if (Model.Photos.Count() > 0)
+    if (Model.Photos.Count() != 0)
     {
         printId = "Photos for " + Model.Burial.BurialId;
 
@@ -24,25 +24,24 @@
 <body>
 
 <div>
-    <h4>Photo</h4>
+    <h1>@printId</h1>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Photo.PhotoId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Photo.PhotoId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Burial.Sex)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Burial.BurialId)
-        </dd>
+        @foreach (var x in Model.Photos)
+        {
+
+            ViewBag.PhotoId = "https://elasticbeanstalk-us-east-1-891046424969.s3.amazonaws.com/Photos/" + @x.PhotoId;
+
+            <dt class="col-sm-10">
+                <img src="@ViewBag.PhotoId" width="500" />
+            </dt>
+            <br />
+            <dd><a class="btn btn-danger" asp-action="Delete" asp-route-id="@x.Id">Delete</a> </dd>
+        }
     </dl>
 </div>
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-primary"asp-controller="BurialCrud"asp-action="Details"asp-route-id="@Model.Burial.BurialId">Back to Details</a>
 </div>
 </body>
 </html>

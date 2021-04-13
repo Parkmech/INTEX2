@@ -11,6 +11,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Intex2.Models;
 using Microsoft.EntityFrameworkCore;
+using Intex2.Services;
+using Amazon.S3;
 
 namespace Intex2
 {
@@ -27,6 +29,10 @@ namespace Intex2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddSingleton<IS3Service, S3Service>();
+
+            services.AddAWSService<IAmazonS3>();
 
             services.AddRazorPages();
 
