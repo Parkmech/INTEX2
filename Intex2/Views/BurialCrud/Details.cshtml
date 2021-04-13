@@ -21,23 +21,29 @@
     <div class="col-md-2 m-1 p-1">
 
         <br /><br />
-        <h3>Related Data</h3>
+        <h3>More Data</h3>
+        <hr />
+        <h6>Biological Samples</h6>
         <hr />
         <a style="border-style: solid;
-        border-color: #002E5D; "class="text-center btn btn-hover btn-light col-md-10 p-2 m-2" asp-controller="BioSampleCrud" asp-action="RecordSpecificIndex" asp-route-id="@Model.BurialId">View Biological Samples</a>
-        <br />
+        border-color: #002E5D; " class="text-center btn btn-hover btn-light col-md-10 p-2 m-2" asp-controller="BioSampleCrud" asp-action="RecordSpecificIndex" asp-route-id="@Model.BurialId">View Biological Samples</a>
+        <h6>Carbon Dating</h6>
+        <hr />
         <a style="border-style: solid;
         border-color: #002E5D;" class="text-center  btn btn-hover btn-light col-md-10 p-2 m-2" asp-controller="CarbonDatingCrud" asp-action="RecordDetails" asp-route-id="@Model.BurialId">View Carbon Dating Data</a>
-        <br />
+        <h6>Field Book</h6>
+        <hr />
         <a style="border-style: solid;
         border-color: #002E5D;" class="text-center  btn btn-hover btn-light col-md-10 p-2 m-2" asp-controller="FieldNotesCrud" asp-action="RecordDetails" asp-route-id="@Model.BurialId">View Field Book References</a>
-        <br />
+        <h6>Photos</h6>
+        <hr />
         <a style="border-style: solid;
         border-color: #002E5D;" class="text-center  btn btn-hover btn-light col-md-10 p-2 m-2" asp-controller="PhotosCrud" asp-action="Details" asp-route-id="@Model.BurialId">View Burial Photos</a>
         <br />
         <a style="border-style: solid;
-        border-color: #002E5D;" class="text-center  btn btn-hover btn-light col-md-10 p-2 m-2" asp-controller="BurialCrud" asp-action="UploadPhoto" asp-route-id="@Model.BurialId">UPLOAD TEST</a>
-        <br />
+        border-color: #002E5D;" class="text-center  btn btn-hover btn-light col-md-10 p-2 m-2" asp-controller="BurialCrud" asp-action="UploadPhoto" asp-route-id="@Model.BurialId">Upload Photo</a>
+        <h6>Cranial Information</h6>
+        <hr />
         <a style="border-style: solid;
         border-color: #002E5D;" class="text-center  btn btn-hover btn-light col-md-10 p-2 m-2" asp-controller="CranialCrud" asp-action="RecordDetails" asp-route-id="@Model.BurialId">View Cranial Sample Records</a>
 
@@ -588,11 +594,7 @@ else
                     @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
                     {
         <a class="text-center btn btn-danger col-sm-1" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@Model.BurialId">Delete</a>}
-
-                    @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-                    {
-        <a class="text-center btn btn-dark col-md-4 m-2" asp-controller="BurialCrud" asp-action="UploadPhoto" asp-route-id="@Model.BurialId"> Add Photo</a>}
-
+                    
                 </div>
             </div>
         </div>
