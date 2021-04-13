@@ -48,15 +48,14 @@
                 </ul>
 
                 <div class="row">
-                    <a class="text-center btn btn-primary col-md-2 m-2" asp-area="" asp-route-id="@sample.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
 
                     @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
                     {
-    <a class="col-md-4 m-1 p-1 btn btn-secondary" asp-controller="CarbonDatingCrud" asp-action="Edit" asp-route-id="@sample.Id">Edit</a>}
+                        <a class="col-md-2 m-1 p-1 btn btn-secondary" asp-controller="CarbonDatingCrud" asp-action="Edit" asp-route-id="@sample.Id">Edit</a>}
 
                     @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
                     {
-    <a class="text-center btn btn-danger col-md-2 m-2" asp-controller="CarbonDatingCrud" asp-action="Delete" asp-route-id="@sample.Id">Delete</a>}
+                        <a class="text-center btn btn-danger col-md-2 m-1 p-1" asp-controller="CarbonDatingCrud" asp-action="Delete" asp-route-id="@sample.Id">Delete</a>}
                 </div>
             </div>
         </div>

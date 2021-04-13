@@ -1,5 +1,118 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Intex2.Models.C14
+
 @{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string id = (string)ViewBag.id;
+}
+
+<h1>Create a new Carbon Dating Sample</h1>
+
+<h4>Sample for @id</h4>
+<hr />
+
+<form asp-action="CustomCreate">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="@Model.Rack" class="control-label"></label>
+        <input asp-for="@Model.Rack" class="form-control" placeholder="Rack Number" />
+        <span asp-validation-for="@Model.Rack" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Tube" class="control-label"></label>
+        <input asp-for="@Model.Tube" class="form-control" placeholder="Tube Number (If applicable): " />
+        <span asp-validation-for="@Model.Tube" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.SizeMl" class="control-label"></label>
+        <input asp-for="@Model.SizeMl" class="form-control" placeholder="Size (ml)" />
+        <span asp-validation-for="@Model.SizeMl" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Foci" class="control-label"></label>
+        <input asp-for="@Model.Foci" class="form-control" placeholder="Foci">
+        <span asp-validation-for="@Model.Foci" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.C14Sample2017" class="control-label"></label>
+        <input asp-for="@Model.C14Sample2017" class="form-control" placeholder="C14 Sample 2017" />
+        <span asp-validation-for="@Model.C14Sample2017" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Location" class="control-label"></label>
+        <input asp-for="@Model.Location" class="form-control" placeholder="Location" />
+        <span asp-validation-for="@Model.Location" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.QuestionS" class="control-label"></label>
+        <input asp-for="@Model.QuestionS" class="form-control" placeholder="Questions about the sample" />
+        <span asp-validation-for="@Model.QuestionS" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Conventional14cAgeBp" class="control-label"></label>
+        <input asp-for="@Model.Conventional14cAgeBp" class="form-control" placeholder="Conventional 14C age BP" />
+        <span asp-validation-for="@Model.Conventional14cAgeBp" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model._14cCalendarDate" class="control-label"></label>
+        <input asp-for="@Model._14cCalendarDate" class="form-control" placeholder="14C Calendar Date" />
+        <span asp-validation-for="@Model._14cCalendarDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Calibrated95CalendarDateMax" class="control-label"></label>
+        <input asp-for="@Model.Calibrated95CalendarDateMax" class="form-control" placeholder="Calibrated 95% Calendar Date Min" />
+        <span asp-validation-for="@Model.Calibrated95CalendarDateMax" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Calibrated95CalendarDateMin" class="control-label"></label>
+        <input asp-for="@Model.Calibrated95CalendarDateMin" class="form-control" placeholder="Calibrated 95% Calendar Date Max" />
+        <span asp-validation-for="@Model.Calibrated95CalendarDateMin" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Calibrated95CalendarDateSpan" class="control-label"></label>
+        <input asp-for="@Model.Calibrated95CalendarDateSpan" class="form-control" placeholder="Calibrated 95% Calendar Date Span" />
+        <span asp-validation-for="@Model.Calibrated95CalendarDateSpan" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Calibrated95CalendarDateAvg" class="control-label"></label>
+        <input asp-for="@Model.Calibrated95CalendarDateAvg" class="form-control" placeholder="Calibrated 95% Calendar Date Avg" />
+        <span asp-validation-for="@Model.Calibrated95CalendarDateAvg" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Category" class="control-label"></label>
+        <input asp-for="@Model.Category" class="form-control" placeholder="Category" />
+        <span asp-validation-for="@Model.Category" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Notes" class="control-label"></label>
+        <input asp-for="@Model.Notes" class="form-control" placeholder="Any additional notes" />
+        <span asp-validation-for="@Model.Notes" class="text-danger"></span>
+    </div>
+
+    <input type="hidden" asp-for="@Model.BurialId" value="@id" />
+
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a asp-action="RecordSpecificIndex" asp-route-id="@id">Back to Samples</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
