@@ -10,52 +10,49 @@
     }
 </style>
 <br />
+<div class="m-2 p-2">
+    <h2>Search Results</h2>
+    <form asp-action="Display" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Search: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            </p>
+        </div>
+    </form>
 
-<div class="card shadow mb-3" style="max-width: auto">
-    <div class="container m-3 p-2">
-        <h2>Search Results</h2>
-
-        <form asp-action="Display" method="get">
-            <div class="form-actions no-color">
-                <p>
-                    Search: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
-                </p>
-            </div>
-        </form>
-
-        <table class="table bg-white shadow table-striped table-hover table-responsive-lg">
-            <thead class="thead-dark">
-                <tr>
-                    <th>
-                        <a class="text-white" style="display: inline;" asp-action="Display" asp-route-sortOrder="@ViewData["IdSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Burial Id <i class="fa fa-sort" aria-hidden="true"></i></a>
-                    </th>
-                    <th>
-                        <a class="text-white" style="display: inline;" asp-action="Display" asp-route-sortOrder="@ViewData["SexSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Sex <i class="fa fa-sort" aria-hidden="true"></i></a>
-                    </th>
-                    <th>
-                        <a class="text-white" style="display: inline;" asp-action="Display" asp-route-sortOrder="@ViewData["SquareSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Area <i class="fa fa-sort" aria-hidden="true"></i></a>
-                    </th>
-                    <th>
-                        <a class="text-white" style="display: inline;" asp-action="Display" asp-route-sortOrder="@ViewData["LengthSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Length <i class="fa fa-sort" aria-hidden="true"></i></a>
-                    </th>
-                    <th>
-                        <a class="text-white" style="display: inline;" asp-action="Display" asp-route-sortOrder="@ViewData["DepthSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Depth <i class="fa fa-sort" aria-hidden="true"></i></a>
-                    </th>
-                    <th>
-                        <a class="text-white" style="display: inline;" asp-action="Display" asp-route-sortOrder="@ViewData["DirectionSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Burial Direction <i class="fa fa-sort" aria-hidden="true"></i></a>
-                    </th>
-                    <th>
-                        <a class="text-white" style="display: inline;" asp-action="Display" asp-route-sortOrder="@ViewData["EorWSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">East or West <i class="fa fa-sort" aria-hidden="true"></i></a>
-                    </th>
-                    <th>
-                        <a class="text-white" style="display: inline;" asp-action="Display" asp-route-sortOrder="@ViewData["NorSSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">North or South <i class="fa fa-sort" aria-hidden="true"></i></a>
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var mummy in Model)
-                {
+    <table class="table bg-white shadow table-striped table-hover table-responsive-lg">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    <a class="text-white" style="display: inline;" asp-action="Display" asp-route-sortOrder="@ViewData["IdSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Burial Id <i class="fa fa-sort" aria-hidden="true"></i></a>
+                </th>
+                <th>
+                    <a class="text-white" style="display: inline;" asp-action="Display" asp-route-sortOrder="@ViewData["SexSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Sex <i class="fa fa-sort" aria-hidden="true"></i></a>
+                </th>
+                <th>
+                    <a class="text-white" style="display: inline;" asp-action="Display" asp-route-sortOrder="@ViewData["SquareSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Area <i class="fa fa-sort" aria-hidden="true"></i></a>
+                </th>
+                <th>
+                    <a class="text-white" style="display: inline;" asp-action="Display" asp-route-sortOrder="@ViewData["LengthSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Length <i class="fa fa-sort" aria-hidden="true"></i></a>
+                </th>
+                <th>
+                    <a class="text-white" style="display: inline;" asp-action="Display" asp-route-sortOrder="@ViewData["DepthSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Depth <i class="fa fa-sort" aria-hidden="true"></i></a>
+                </th>
+                <th>
+                    <a class="text-white" style="display: inline;" asp-action="Display" asp-route-sortOrder="@ViewData["DirectionSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Burial Direction <i class="fa fa-sort" aria-hidden="true"></i></a>
+                </th>
+                <th>
+                    <a class="text-white" style="display: inline;" asp-action="Display" asp-route-sortOrder="@ViewData["EorWSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">East or West <i class="fa fa-sort" aria-hidden="true"></i></a>
+                </th>
+                <th>
+                    <a class="text-white" style="display: inline;" asp-action="Display" asp-route-sortOrder="@ViewData["NorSSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">North or South <i class="fa fa-sort" aria-hidden="true"></i></a>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var mummy in Model)
+            {
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => mummy.BurialId)
@@ -96,11 +93,11 @@
                     </td>
                     <td>
                         <div class="row justify-content-md-center">
-                            <a class="text-center btn btn-info" asp-area="" asp-route-id="@mummy.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
+                            <a class="text-center btn btn-primary" asp-area="" asp-route-id="@mummy.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
 
                             @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
                             {
-                                <a class="text-center btn btn-warning" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>
+                                <a class="text-center btn btn-secondary" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>
                             }
 
                             @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
@@ -111,28 +108,27 @@
 
                     </td>
                 </tr>
-                    }
-            </tbody>
-        </table>
-
-        @{
-            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-        }
-
-        <a asp-action="Display"
-           asp-route-sortOrder="@ViewData["CurrentSort"]"
-           asp-route-pageNumber="@(Model.PageIndex - 1)"
-           asp-route-currentFilter="@ViewData["CurrentFilter"]"
-           class="btn btn-default @prevDisabled">
-            Previous
-        </a>
-        <a asp-action="Display"
-           asp-route-sortOrder="@ViewData["CurrentSort"]"
-           asp-route-pageNumber="@(Model.PageIndex + 1)"
-           asp-route-currentFilter="@ViewData["CurrentFilter"]"
-           class="btn btn-default @nextDisabled">
-            Next
-        </a>
-    </div>
+            }
+        </tbody>
+    </table>
 </div>
+            @{
+                var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+            }
+
+            <a asp-action="Display"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-pageNumber="@(Model.PageIndex - 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-default @prevDisabled">
+                Previous
+            </a>
+            <a asp-action="Display"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-pageNumber="@(Model.PageIndex + 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-default @nextDisabled">
+                Next
+            </a>
+        </div>

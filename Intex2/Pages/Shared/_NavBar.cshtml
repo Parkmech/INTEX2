@@ -100,6 +100,9 @@
     <byu-menu slot="nav" collapsed>
         <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
         <a asp-area="" asp-controller="BurialCrud" asp-action="Index">Burials</a>
+        <a asp-area="" asp-controller="CarbonDatingCrud" asp-action="FullTableDisplay">Carbon Dating</a>
+        <a asp-area="" asp-controller="CranialCrud" asp-action="FullTableDisplay">Cranial</a>
+        <a asp-area="" asp-controller="FieldNotesCrud" asp-action="FullTableDisplay">Field Notes</a>
 
         @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
         {
