@@ -62,22 +62,18 @@ html {
 
 body {
     /* Margin bottom by footer height */
-    margin-bottom: 60px;
-    background-color: #E9ECEF;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    position: relative;
-    min-height: 100%;
-    padding-bottom: 80px; /* same as footer's height */
+    margin-bottom: 80px;
 }
+
 .footer {
     position: absolute;
     bottom: 0;
     width: 100%;
     white-space: nowrap;
-    line-height: 60px;
-    /* Vertically center the text there */
+    line-height: 60px; /* Vertically center the text there */
 }
+
+
 /*Custom CSS For Side Navbar*/
 
 
@@ -146,16 +142,19 @@ body {
 }
 
 .tabs input[type="radio"] {
-    display: none;
+display: none;
 }
 
-        .tabs input[type="radio"]:checked + label {
-            background: #fff;
-        }
 
-            .tabs input[type="radio"]:checked + label + .tab {
-                display: block;
-            }
+.tabs input[type="radio"]:checked + label {
+background: #fff;
+}
+
+
+.tabs input[type="radio"]:checked + label + .tab {
+    display: block;
+}
+
 
 @media (max-width: 45em) {
     .tabs .tab,
@@ -191,41 +190,62 @@ body {
     height: 2.5rem; /* Footer height */
 }
 
-.carousel {
-    z-index: -99;
-}
-/* keeps this behind all content */
-.carousel .item {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    -webkit-transition: opacity 1s;
-    -moz-transition: opacity 1s;
-    -ms-transition: opacity 1s;
-    -o-transition: opacity 1s;
-    transition: opacity 1s;
+.carousel-item {
+    height: 100vh;
+    min-height: 350px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
-    .carousel .one {
-        background: url("https://elasticbeanstalk-us-east-1-891046424969.s3.amazonaws.com/Photos/IMG_0431.JPG");
-        background-size: cover;
-        -moz-background-size: cover;
+    /* Carousel styling */
+    #introCarousel,
+    .carousel-inner,
+    .carousel-item,
+    .carousel-item.active {
+        height: 100vh;
     }
 
-    .carousel .two {
-        background: url("https://elasticbeanstalk-us-east-1-891046424969.s3.amazonaws.com/Photos/DSCN3977.JPG");
+    .carousel-item:nth-child(1) {
+        background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg');
+        background-repeat: no-repeat;
         background-size: cover;
-        -moz-background-size: cover;
+        background-position: center center;
     }
 
-    .carousel .three {
-        background: url("https://elasticbeanstalk-us-east-1-891046424969.s3.amazonaws.com/Photos/65-front.JPG");
+    .carousel-item:nth-child(2) {
+        background-image: url('https://mdbootstrap.com/img/Photos/Others/images/77.jpg');
+        background-repeat: no-repeat;
         background-size: cover;
-        -moz-background-size: cover;
+        background-position: center center;
     }
 
-.carousel .active.left {
-    left: 0;
-    opacity: 0;
-    z-index: 2;
+    .carousel-item:nth-child(3) {
+        background-image: url('https://mdbootstrap.com/img/Photos/Others/images/78.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+    }
+
+/* Height for devices larger than 576px */
+@media (min-width: 992px) {
+    #introCarousel {
+        margin-top: -58.59px;
+    }
+
+    #introCarousel,
+    .carousel-inner,
+    .carousel-item,
+    .carousel-item.active {
+        height: 75vh;
+    }
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
