@@ -10,11 +10,12 @@
 @model BurialListViewModel
 
 <style>
-    body {
+    body 
+    {
         background-color: #E9ECEF;
     }
 </style>
-
+<br />
 <div class="row justify-content-md-center">
     <div class="col-md-2 text-center">
         <div class="ml-4 my-0 py-0">
@@ -34,6 +35,22 @@
                         <option value="F">Female (F)</option>
                         <option value="M">Male (M)</option>
                         <option value="U">Unknown (U)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="@Model.FilterItems.HairColorCode">Hair Color:</label>
+                    <select asp-for="@Model.FilterItems.HairColorCode" class="form-control">
+                        <option value="ALL">All</option>
+                        <option value="B">Brown (B)</option>
+                        <option value="K">Black (K)</option>
+                        <option value="A">Brown-Red (A)</option>
+                        <option value="R">Red/Red-BI (R)</option>
+                        <option value="D">Blond (D)</option>
+                        <option value="U">Unknown (U)</option>
+                        <option value="LB">Light Brown (LB)</option>
+                        <option value="DB">Dark Brown (DB)</option>
+
                     </select>
                 </div>
 
@@ -113,6 +130,7 @@
                     <tr>
                         <th scope="col">Burial ID</th>
                         <th scope="col">Sex</th>
+                        <th scope="col">Hair</th>
                         <th scope="col">Length</th>
                         <th scope="col">Depth</th>
                         <th scope="col">Area</th>
@@ -127,47 +145,48 @@
                     @foreach (var mummy in Model.Burials)
                     {
 
-                        <tr>
-                            <td>@mummy.BurialId</td>
-                            <td>@mummy.GenderCode</td>
-                            <td>@mummy.Square</td>
+                    <tr>
+                        <td>@mummy.BurialId</td>
+                        <td>@mummy.GenderCode</td>
+                        <td>@mummy.HairColorCode</td>
 
-                            @{ if (mummy.LengthM != null)
-                                {
-                                    <td> @Math.Round((decimal)mummy.LengthM, 2)</td>
-                                }
 
-                                else
-                                {
-                                    <td></td>
-                                }
-
-                                if (mummy.BurialDepth != null)
-                                {
-                                    <td>@Math.Round((decimal)mummy.BurialDepth, 2)</td>
-                                }
-                                else
-                                {
-                                    <td></td>
-                                }
+                        @{ if (mummy.LengthM != null)
+                            {
+                                <td> @Math.Round((decimal)mummy.LengthM, 2)</td>
                             }
 
+                            else
+                            {
+                                <td></td>
+                            }
 
-                            <td>@mummy.BurialDirection</td>
-                            <td>@mummy.EastOrWest</td>
-                            <td>@mummy.NorthOrSouth</td>
-                            <td>
-                                <a class="text-center btn btn-primary" asp-area="" asp-route-id="@mummy.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
+                            if (mummy.BurialDepth != null)
+                            {
+                                <td>@Math.Round((decimal)mummy.BurialDepth, 2)</td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+                        }
 
-                                @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-                                {
-                                    <a class="text-center btn btn-secondary" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>}
+                        <td>@mummy.Square</td>
+                        <td>@mummy.BurialDirection</td>
+                        <td>@mummy.EastOrWest</td>
+                        <td>@mummy.NorthOrSouth</td>
+                        <td>
+                            <a class="text-center btn btn-primary" asp-area="" asp-route-id="@mummy.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
 
-                                @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-                                {
-                                    <a class="text-center btn btn-danger" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@mummy.BurialId">Delete</a>}
-                            </td>
-                        </tr>
+                            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                            {
+                                <a class="text-center btn btn-secondary" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>}
+
+                            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                            {
+                                <a class="text-center btn btn-danger" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@mummy.BurialId">Delete</a>}
+                        </td>
+                    </tr>
                     }
                 </tbody>
 

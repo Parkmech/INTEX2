@@ -15,6 +15,7 @@ namespace Intex2.Models
         public string EorW { get; set; }
         public string BDirection { get; set; }
         public string BurialId { get; set; }
+        public string HairColorCode { get; set; }
 
     }
 }

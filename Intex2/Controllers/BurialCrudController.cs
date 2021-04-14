@@ -529,6 +529,7 @@ namespace Intex2.Controllers
             string nors = "%";
             string eorw = "%";
             string burialid = "%";
+            string haircolor = "%";
 
             //set variables if user used filters 
             if (filterAtr.FilterItems != null)
@@ -541,6 +542,8 @@ namespace Intex2.Controllers
                 nors = filterAtr.FilterItems.NorS;
                 eorw = filterAtr.FilterItems.EorW;
                 burialid = filterAtr.FilterItems.BurialId;
+                haircolor = filterAtr.FilterItems.HairColorCode;
+
             }
 
             //set % for ALL so it returns all values that arent null
@@ -564,6 +567,10 @@ namespace Intex2.Controllers
             {
                 eorw = "%";
             }
+            if (haircolor == "ALL")
+            {
+                eorw = "%";
+            }
 
             burialid = "%" + burialid + "%";
 
@@ -572,7 +579,7 @@ namespace Intex2.Controllers
                 //filter based off users selections
                 //users selection is passed through variable to prevent SQL injections 
                 Burials = _context.Burials
-                    .FromSqlInterpolated($"SELECT * FROM Burials WHERE Gender_Code LIKE {sex} AND Square LIKE {area} AND Burial_Direction LIKE {bdirection} AND North_or_South LIKE {nors} AND East_or_West LIKE {eorw} AND BurialID LIKE {burialid}")
+                    .FromSqlInterpolated($"SELECT * FROM Burials WHERE Gender_Code LIKE {sex} AND Square LIKE {area} AND Burial_Direction LIKE {bdirection} AND North_or_South LIKE {nors} AND East_or_West LIKE {eorw} AND BurialID LIKE {burialid} AND Hair_Color_Code LIKE {haircolor}")
                     .Where(b => b.LengthM >= length)
                     .Where(b => b.BurialDepth >= depth)
                     .OrderBy(b => b.BurialId)
