@@ -24,10 +24,11 @@
                                 <input type="hidden" name="Id" value="@role.Id" />
                                 <a class="btn btn-sm btn-warning" asp-page="Editor"
                                    asp-route-id="@role.Id" asp-route-mode="edit">Edit</a>
-                                <button type="submit" class="btn btn-sm btn-danger">
-                                    Delete
-                                </button>
-                            </form>
+                                @if(role.Name == "Admins")
+                                {
+                                   <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                }
+                                </form>
                         </td>
                     </tr>
                 }
