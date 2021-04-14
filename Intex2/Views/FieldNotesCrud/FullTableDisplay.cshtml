@@ -1,38 +1,47 @@
 ﻿
-@model IEnumerable<FieldBook>
+@model FieldNotesViewModel
 
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+    @{
+        ViewData["Title"] = "Index";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 
-<div class="m-2 p-2">
-    <table class="table bg-white shadow table-striped table-hover">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Burials Containing this Data</th>
-                <th scope="col">Burial Id</th>
-                <th scope="col">Field Book </th>
-                <th scope="col">Page Number </th>
-
-            </tr>
-        </thead>
-        <tbody>
-
-            @foreach (var item in Model)
-            {
+    <div class="m-2 p-2">
+        <table class="table bg-white shadow table-striped table-hover">
+            <thead class="thead-dark">
                 <tr>
-                    <td>
-                        <a class="btn btn-primary" asp-controller="BurialCrud" asp-action="Details" asp-route-id="@item.BurialId">Details</a>
-                    </td>
-                    <td>@item.BurialId</td>
-                    <td>@item.FieldBook1</td>
-                    <td>@item.FieldBookPageNumber</td>
+                    <th scope="col">Burials Containing this Data</th>
+                    <th scope="col">Burial Id</th>
+                    <th scope="col">Field Book </th>
+                    <th scope="col">Page Number </th>
 
                 </tr>
-            }
+            </thead>
+            <tbody>
 
-        </tbody>
+                @foreach (var item in Model.fieldNotes)
+                {
+                    <tr>
+                        <td>
+                            <a class="btn btn-primary" asp-controller="BurialCrud" asp-action="Details" asp-route-id="@item.BurialId">Details</a>
+                        </td>
+                        <td>@item.BurialId</td>
+                        <td>@item.FieldBook1</td>
+                        <td>@item.FieldBookPageNumber</td>
 
-    </table>
-</div>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+    </div>
+
+    <div page-model="@Model.PagingInfo" page-action="FullTableDisplay" page-classes-enabled="true" page-class="btn"
+         page-class-normal="btn-outline-dark"
+         page-class-selected="btn-primary"
+         class="btn-group pull-right m-1">
+    </div>
+    <br />
+    <br />
+    <br />
