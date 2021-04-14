@@ -160,7 +160,7 @@ namespace Intex2.Controllers
         }
 
         // GET: BioSampleCrud/Delete/5
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
 
             var biologicalSample = _context.BiologicalSamples
