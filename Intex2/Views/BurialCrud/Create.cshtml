@@ -239,8 +239,17 @@
                 <div class="row">
 
                     <div class="col-md-6">
-                        <p>This should be yes or no on photo</p>
+                        <div class="form-group">
+                            <label asp-for="PhotoTaken" class="control-label">Photo Taken?</label>
+                            <select asp-for="PhotoTaken" class="form-control" placeholder="Photo Taken?">
+                                <option disabled selected class="text-muted" value="false">--Select--</option>
+                                <option value="true">Y - Yes</option>
+                                <option value="false">N - NO</option>
+                            </select>
+                            <span asp-validation-for="PhotoTaken" class="text-danger"></span>
+                        </div>
                     </div>
+                
 
                     <div class="col-md-6">
                         <div class="form-group shadow-sm">

@@ -173,13 +173,21 @@
                         <td>
                             <a class="text-center btn btn-primary" asp-area="" asp-route-id="@mummy.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
 
-                            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-                            {
-                                <a class="text-center btn btn-secondary" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>}
+                        
+
 
                             @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
                             {
-                                <a class="text-center btn btn-danger" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@mummy.BurialId">Delete</a>}
+                        <a class="text-center btn btn-secondary" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>
+                            <a class="text-center btn btn-danger" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@mummy.BurialId">Delete</a>
+
+                            }
+                            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireResearcherRole")).Succeeded)
+                            {
+                        <a class="text-center btn btn-secondary" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>
+
+                            }
+
                         </td>
                     </tr>
 }

@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Intex2.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Intex2.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -18,12 +20,14 @@ namespace Intex2.Controllers
             _logger = logger;
         }
 
+        [AllowAnonymous]
         // Return index view
         public IActionResult Index()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

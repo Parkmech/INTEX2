@@ -56,13 +56,15 @@
             </div>
         </div>
         <div class="row justify-content-md-center">
-            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireResearcherRole")).Succeeded)
             {
-    <a class="col-md-3 btn btn-secondary m-1 p-1" asp-controller="CarbonDatingCrud" asp-action="Edit" asp-route-id="@sample.Id">Edit</a>}
+        <a class="col-md-3 btn btn-secondary m-1 p-1" asp-controller="CarbonDatingCrud" asp-action="Edit" asp-route-id="@sample.Id">Edit</a>}
 
             @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
             {
-    <a class="btn btn-danger col-md-3 m-1 p-1" asp-controller="CarbonDatingCrud" asp-action="Delete" asp-route-id ="@sample.Id">Delete</a>}
+        <a class="col-md-3 btn btn-secondary m-1 p-1" asp-controller="CarbonDatingCrud" asp-action="Edit" asp-route-id="@sample.Id">Edit</a>
+
+            <a class="btn btn-danger col-md-3 m-1 p-1" asp-controller="CarbonDatingCrud" asp-action="Delete" asp-route-id="@sample.Id">Delete</a>}
         </div>
         <br />
     </div>
@@ -73,7 +75,13 @@
 <div class="row justify-content-md-center">
     <a class="btn btn-secondary m-1" asp-controller="BurialCrud" asp-action="Details" asp-route-id="@Model.burial.BurialId">Back to Burial Details</a>
 
-    <a class="btn btn-primary m-1" asp-action="create" asp-route-id="@Model.burial.BurialId">Create New Sample</a>
+    @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+    {
+<a class="btn btn-primary m-1" asp-action="create" asp-route-id="@Model.burial.BurialId">Create New Sample</a>}
+
+    @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+    {<a class="btn btn-primary m-1" asp-action="create" asp-route-id="@Model.burial.BurialId">Create New Sample</a>
+    }
 
     <a class="btn btn-dark m-1" asp-controller="CarbonDatingCrud" asp-action="FullTableDisplay">View all Carbon Dating Samples</a>
 
