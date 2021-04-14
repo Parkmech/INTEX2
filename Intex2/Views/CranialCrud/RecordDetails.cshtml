@@ -97,7 +97,11 @@
     @if (Model.cranialSamples.Count() == 0)
     {
         @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-        { 
+        {
+            <a class="btn btn-primary m-1" asp-action="Create" asp-route-id="@Model.burial.BurialId">Add Cranial Data</a>
+        }
+        @if ((await AuthorizationService.AuthorizeAsync(User, "RequireResearcherRole")).Succeeded)
+        {
             <a class="btn btn-primary m-1" asp-action="Create" asp-route-id="@Model.burial.BurialId">Add Cranial Data</a>
         }
     }
