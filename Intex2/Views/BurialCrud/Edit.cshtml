@@ -354,6 +354,10 @@
                         </div>
                     </div>
 
+                </div>
+
+                <div class="row">
+
                     <!-- Age code (i.e. Adult, child, infant) -->
 
                     <div class="col-md-4">
@@ -762,9 +766,10 @@
 
                 <input type="hidden" asp-for="BurialId" value="@Model.BurialId" />
 
-            <div class="form-group text-right">
-                <button class="btn btn-danger p-2" asp-action="Index" asp-controller="Home">Cancel</button>
-                <input type="submit" value="Edit Burial" class="btn btn-primary" />
+                <div class="form-group text-right">
+                    <button class="btn btn-danger p-2" asp-action="Index" asp-controller="Home">Cancel</button>
+                    <input type="submit" value="Edit Burial" asp-route-id="@Model.BurialId" class="btn btn-primary" />
+                </div>
             </div>
 
         </div>
