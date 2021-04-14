@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Cranial>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="m-2 p-2">
+    <table class="table bg-white shadow table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Burials Containing this Data</th>
+                <th scope="col">Burial Id</th>
+                <th scope="col">Max Cranial Length</th>
+                <th scope="col">Max Cranial Breadth</th>
+                <th scope="col">Basion Bregma Height</th>
+                <th scope="col">Basion Nasion</th>
+                <th scope="col">Basion Prosthion Length</th>
+                <th scope="col">Bizogomatic Diameter</th>
+                <th scope="col">Nasion Prosthion</th>
+                <th scope="col">Maximum Nasal Breadth</th>
+                <th scope="col">Interorbital Breadth</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a class="btn btn-primary" asp-controller="BurialCrud" asp-action="Details" asp-route-id="@item.BurialId">Details</a>
+                    </td>
+                    <td>@item.BurialId</td>
+                    <td>@item.MaximumCranialLength</td>
+                    <td>@item.MaximumCranialBreadth</td>
+                    <td>@item.BasionBregmaHeight</td>
+                    <td>@item.BasionNasion</td>
+                    <td>@item.BasionProsthionLength</td>
+                    <td>@item.BizygomaticDiameter</td>
+                    <td>@item.NasionProsthion</td>
+                    <td>@item.MaximumNasalBreadth</td>
+                    <td>@item.InterorbitalBreadth</td>
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+</div>

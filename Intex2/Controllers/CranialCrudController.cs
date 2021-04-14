@@ -19,6 +19,15 @@ namespace Intex2.Controllers
             _context = context;
         }
 
+
+        public IActionResult FullTableDisplay()
+        {
+            var fagElGamousContext = _context.Cranials;
+
+            return View(fagElGamousContext.ToList());
+        }
+
+
         // GET: FieldNotesCrud/RecordDetails
         public IActionResult RecordDetails(string id)
         {
