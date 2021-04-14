@@ -3,14 +3,9 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    string bid = "";
+    string bid = Model.burial.BurialId;
 }
-    @foreach (var burial in Model.Burials)
-    {
-        bid = burial.BurialId;
-    }
-
-
+    
 <style>
     body {
         background-color: #E9ECEF;
@@ -33,8 +28,7 @@
                         </div>
                     </div>
 
-                    <label class="col-form-label form-group" asp-for="@Model.ImageUpload.BurialId">BURIAL ID</label>
-                    <input hidden class="form-group" type="text" asp-for="@Model.ImageUpload.BurialId" />
+                    <input hidden type="text" asp-for="@Model.ImageUpload.BurialId" value="@bid"/>
                     <button class="btn btn-block btn-success" type="submit">SUBMIT</button>
                 </form>
                 <br />

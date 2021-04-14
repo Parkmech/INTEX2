@@ -181,23 +181,10 @@ namespace Intex2.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         [Authorize(Roles = "Admins")]
-        public async Task<IActionResult> Edit(string id, [Bind("BurialId,BurialId2018,YearOnSkull,MonthOnSkull,DateOnSkull,InitialsOfDataEntryExpert,InitialsOfDataEntryChecker,ByuSample,BodyAnalysis,SkullAtMagazine,PostcraniaAtMagazine,AgeSkull2018,RackAndShelf,ToBeConfirmed,SkullTrauma,PostcraniaTrauma,CribraOrbitala,PoroticHyperostosis,PoroticHyperostosisLocations,MetopicSuture,ButtonOsteoma,PostcraniaTrauma1,OsteologyUnknownComment,TemporalMandibularJointOsteoarthritisTmjOa,LinearHypoplasiaEnamel,AreaHillBurials,Tomb,NsLowPosition,NsHighPosition,NorthOrSouth,EwLowPosition,EwHighPosition,EastOrWest,Square,BurialNumber,BurialWestToHead,BurialWestToFeet,BurialSouthToHead,BurialSouthToFeet,BurialDepth,YearExcav,MonthExcavated,DateExcavated,BurialDirection,BurialPreservation,BurialWrapping,BurialAdultChild,Sex,GenderCode,BurialGenderMethod,AgeCodeSingle,BurialDirection1,NumericMinAge,NumericMaxAge,BurialAgeMethod,HairColorCode,BurialSampleTaken,LengthM,LengthCm,Goods,Cluster,FaceBundle,OsteologyNotes,OtherNotes,SampleNumber,GenderGe,GeFunctionTotal,GenderBodyCol,BasilarSuture,VentralArc,SubpubicAngle,SciaticNotch,PubicBone,PreaurSulcus,MedialIpRamus,DorsalPitting,ForemanMagnum,FemurHead,HumerusHead,Osteophytosis,PubicSymphysis,BoneLength,MedialClavicle,IliacCrest,FemurDiameter,Humerus,FemurLength,HumerusLength,TibiaLength,Robust,SupraorbitalRidges,OrbitEdge,ParietalBossing,Gonian,NuchalCrest,ZygomaticCrest,CranialSuture,MaximumCranialLength,MaximumCranialBreadth,BasionBregmaHeight,BasionNasion,BasionProsthionLength,BizygomaticDiameter,NasionProsthion,MaximumNasalBreadth,InterorbitalBreadth,ArtifactsDescription,PreservationIndex,HairTaken,SoftTissueTaken,BoneTaken,ToothTaken,TextileTaken,DescriptionOfTaken,ArtifactFound,EstimateLivingStature,ToothAttrition,ToothEruption,PathologyAnomalies,EpiphysealUnion,SsmaTimeStamp,PhotoTaken")] Burial burials)
+        public async Task<IActionResult> Edit([Bind("BurialId,BurialId2018,YearOnSkull,MonthOnSkull,DateOnSkull,InitialsOfDataEntryExpert,InitialsOfDataEntryChecker,ByuSample,BodyAnalysis,SkullAtMagazine,PostcraniaAtMagazine,AgeSkull2018,RackAndShelf,ToBeConfirmed,SkullTrauma,PostcraniaTrauma,CribraOrbitala,PoroticHyperostosis,PoroticHyperostosisLocations,MetopicSuture,ButtonOsteoma,PostcraniaTrauma1,OsteologyUnknownComment,TemporalMandibularJointOsteoarthritisTmjOa,LinearHypoplasiaEnamel,AreaHillBurials,Tomb,NsLowPosition,NsHighPosition,NorthOrSouth,EwLowPosition,EwHighPosition,EastOrWest,Square,BurialNumber,BurialWestToHead,BurialWestToFeet,BurialSouthToHead,BurialSouthToFeet,BurialDepth,YearExcav,MonthExcavated,DateExcavated,BurialDirection,BurialPreservation,BurialWrapping,BurialAdultChild,Sex,GenderCode,BurialGenderMethod,AgeCodeSingle,BurialDirection1,NumericMinAge,NumericMaxAge,BurialAgeMethod,HairColorCode,BurialSampleTaken,LengthM,LengthCm,Goods,Cluster,FaceBundle,OsteologyNotes,OtherNotes,SampleNumber,GenderGe,GeFunctionTotal,GenderBodyCol,BasilarSuture,VentralArc,SubpubicAngle,SciaticNotch,PubicBone,PreaurSulcus,MedialIpRamus,DorsalPitting,ForemanMagnum,FemurHead,HumerusHead,Osteophytosis,PubicSymphysis,BoneLength,MedialClavicle,IliacCrest,FemurDiameter,Humerus,FemurLength,HumerusLength,TibiaLength,Robust,SupraorbitalRidges,OrbitEdge,ParietalBossing,Gonian,NuchalCrest,ZygomaticCrest,CranialSuture,MaximumCranialLength,MaximumCranialBreadth,BasionBregmaHeight,BasionNasion,BasionProsthionLength,BizygomaticDiameter,NasionProsthion,MaximumNasalBreadth,InterorbitalBreadth,ArtifactsDescription,PreservationIndex,HairTaken,SoftTissueTaken,BoneTaken,ToothTaken,TextileTaken,DescriptionOfTaken,ArtifactFound,EstimateLivingStature,ToothAttrition,ToothEruption,PathologyAnomalies,EpiphysealUnion,SsmaTimeStamp,PhotoTaken")] Burial burials)
         {
-
-            id = id.Replace("%2F", "/");
-
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            if (id != burials.BurialId)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
@@ -252,7 +239,7 @@ namespace Intex2.Controllers
         // POST: BurialCrud/Delete/5
         [HttpPost, ActionName("DeleteConf")]
         [Authorize(Roles = "Admins")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConf(string id)
         {
             string newid = id.Replace("%2F", "/");
@@ -277,36 +264,53 @@ namespace Intex2.Controllers
 
             photos.AddRange(_context.Photos.Where(p => p.BurialId == id).ToList());
 
-            for (int i = 0; i < photos.Count(); i++)
+            if (photos != null)
             {
-                _context.Photos.Remove(photos.FirstOrDefault(p => p.Id == photos[i].Id));
-                await _context.SaveChangesAsync();
+                for (int i = 0; i < photos.Count(); i++)
+                {
+                    _context.Photos.Remove(photos.FirstOrDefault(p => p.Id == photos[i].Id));
+                    await _context.SaveChangesAsync();
+                }
             }
+            
 
             bios.AddRange(_context.BiologicalSamples.Where(p => p.BurialId == id).ToList());
 
-            for (int i = 0; i < bios.Count(); i++)
+            if (bios != null)
             {
-                _context.BiologicalSamples.Remove(bios.FirstOrDefault(p => p.Id == bios[i].Id));
-                await _context.SaveChangesAsync();
+                for (int i = 0; i < bios.Count(); i++)
+                {
+                    _context.BiologicalSamples.Remove(bios.FirstOrDefault(p => p.Id == bios[i].Id));
+                    await _context.SaveChangesAsync();
+                }
             }
+            
 
             fbook.AddRange(_context.FieldBook.Where(p => p.BurialId == id).ToList());
 
-            for (int i = 0; i < photos.Count(); i++)
+            if (fbook != null)
             {
-                _context.FieldBook.Remove(fbook.FirstOrDefault(p => p.Id == fbook[i].Id));
-                await _context.SaveChangesAsync();
+                for (int i = 0; i < photos.Count(); i++)
+                {
+                    _context.FieldBook.Remove(fbook.FirstOrDefault(p => p.Id == fbook[i].Id));
+                    await _context.SaveChangesAsync();
+                }
             }
+            
 
 
             var cranial = await _context.Cranials.FindAsync(newid);
-            _context.Cranials.Remove(cranial);
-            await _context.SaveChangesAsync();
 
+            if (cranial != null)
+            {
+                _context.Cranials.Remove(cranial);
+                await _context.SaveChangesAsync();
+            }
+            
             var burials = await _context.Burials.FindAsync(newid);
             _context.Burials.Remove(burials);
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -340,7 +344,9 @@ namespace Intex2.Controllers
                                        || s.GenderCode.Contains(searchString) || s.EastOrWest.Contains(searchString)
                                        || s.NorthOrSouth.Contains(searchString) || s.BurialDirection.Contains(searchString)
                                        || s.OsteologyNotes.Contains(searchString) || s.OtherNotes.Contains(searchString)
-                                       || s.RackAndShelf.Contains(searchString) || s.BurialPreservation.Contains(searchString));
+                                       || s.RackAndShelf.Contains(searchString) || s.BurialPreservation.Contains(searchString) 
+                                       || s.InitialsOfDataEntryChecker.Contains(searchString) || s.InitialsOfDataEntryExpert.Contains(searchString)
+                                       || s.GenderGe.Contains(searchString));
             }
             switch (sortOrder)
             {

@@ -31,12 +31,10 @@
         <a style="border-style: solid;
         border-color: #002E5D;" class="text-center  btn btn-hover btn-light col-md-10 p-2 m-2" asp-controller="CarbonDatingCrud" asp-action="RecordDetails" asp-route-id="@Model.BurialId">View Carbon Dating Data</a>
         <hr />
-
         <h6>Field Book</h6>
         <a style="border-style: solid;
         border-color: #002E5D;" class="text-center  btn btn-hover btn-light col-md-10 p-2 m-2" asp-controller="FieldNotesCrud" asp-action="RecordDetails" asp-route-id="@Model.BurialId">View Field Book References</a>
         <hr />
-
         <h6>Photos</h6>
         <a style="border-style: solid;
         border-color: #002E5D;" class="text-center  btn btn-hover btn-light col-md-10 p-2 m-2" asp-controller="PhotosCrud" asp-action="Details" asp-route-id="@Model.BurialId">View Burial Photos</a>
@@ -44,7 +42,6 @@
         <a style="border-style: solid;
         border-color: #002E5D;" class="text-center  btn btn-hover btn-light col-md-10 p-2 m-2" asp-controller="BurialCrud" asp-action="UploadPhoto" asp-route-id="@Model.BurialId">Upload Photo</a>
         <hr />
-
         <h6>Cranial Information</h6>
         <a style="border-style: solid;
         border-color: #002E5D;" class="text-center  btn btn-hover btn-light col-md-10 p-2 m-2" asp-controller="CranialCrud" asp-action="RecordDetails" asp-route-id="@Model.BurialId">View Cranial Sample Records</a>
@@ -402,7 +399,7 @@ else
             </div>
 
             <input type="radio" name="tabs" id="tabthree">
-            <label class="label" for="tabthree">Tab Three</label>
+            <label class="label" for="tabthree">Osteological Records</label>
             <div class="tab">
                 <h1>Osteological Records</h1>
                 <p>This section contains osteology data on exhumed bodes</p>

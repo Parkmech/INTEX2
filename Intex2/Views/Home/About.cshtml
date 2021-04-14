@@ -1,0 +1,93 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<br />
+<div class="row justify-content-md-center ">
+    <div class="card  shadow col-md-10" style="max-width: auto">
+    <div class="row g-0">
+        <div class="col-md-10 text-md-left">
+            <br />
+            <h2 class="card-title mx-2">Professor Kerry Muhlestein</h2>
+            <div class="card-text mx-2"><i>Religios Education Professor, BYU</i></div>
+            <div class="card-body">
+                <div class="mx-auto">
+                    <img src="https://elasticbeanstalk-us-east-1-891046424969.s3.amazonaws.com/Photos/kerry.jpg" ;
+                         alt="..."
+                         class="img-fluid"
+                         width="400" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+        <div class="card-body text-center">MORE IN THE MIDDLE ON THE SAME ROW</div>
+    </div>
+</div>
+<br />
+<div class="row justify-content-md-center">
+    <div class="card shadow col-md-10" style="max-width: auto">
+        <div class="row g-0">
+            <div class="col-md-10">
+                <br />
+                <h2 class="card-title">Paul Evans</h2>
+                <div class="card-body">
+
+                    <div class=" mx-auto m-2 p-1">
+                        <img src="https://elasticbeanstalk-us-east-1-891046424969.s3.amazonaws.com/Photos/paul.jpg" ;
+                             alt="..."
+                             class="img-fluid"
+                             width="400" />
+                    </div>
+
+                    <div class="row">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+@*<div class="card shadow mb-3" style="max-width: auto">
+    <div class="row g-0">
+        <div class="col-md-8">
+            <div class="card-body">
+                <h2 class="card-title">@mummy.BurialId</h2>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item ">South to Head: @mummy.BurialSouthToHead</li>
+                    <li class="list-group-item ">South to Feet: @mummy.BurialSouthToFeet</li>
+                    <li class="list-group-item ">West to Head: @mummy.BurialWestToHead</li>
+                    <li class="list-group-item ">West to Feet: @mummy.BurialWestToFeet</li>
+                    <li class="list-group-item ">Length: @mummy.LengthM</li>
+                    <li class="list-group-item ">Depth: @mummy.BurialDepth</li>
+                </ul>
+
+                <div class="row">
+                    <a class="text-center btn btn-info col-md-2 m-2" asp-area="" asp-route-id="@mummy.BurialId" asp-controller="BurialCrud" asp-action="Details">Details</a>
+
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                    {
+                        <a class="text-center btn btn-warning col-md-2 m-2" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@mummy.BurialId">Edit</a>
+                    }
+
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                    {
+                        <a class="text-center btn btn-danger col-md-2 m-2" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@mummy.BurialId">Delete</a>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class=" mx-auto m-2 p-1">
+            <img src="@ViewBag.Photo" ;
+                 alt="..."
+                 class="img-fluid"
+                 width="300" />
+            @{
+                ViewBag.Photo = "https://elasticbeanstalk-us-east-1-503379183917.s3.amazonaws.com/Photos/notfound.png";
+            }
+        </div>
+    </div>
+</div>*@

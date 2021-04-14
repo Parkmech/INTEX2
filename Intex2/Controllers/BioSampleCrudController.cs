@@ -13,19 +13,39 @@ namespace Intex2.Controllers
     public class BioSampleCrudController : Controller
     {
         private readonly FagElGamousContext _context;
+        public int pageNum { get; set; } = 1;
 
         public BioSampleCrudController(FagElGamousContext context)
         {
             _context = context;
         }
 
-        public IActionResult FullTableDisplay()
+        public IActionResult FullTableDisplay(int pageNum = 1)
         {
+            int pageSize = 20;
             var fagElGamousContext  = _context.BiologicalSamples;
+
+
 
             //var y = (IEnumerable<string>)ctx.Burials.BurialId.ToList();
 
-            return View(fagElGamousContext.ToList());
+            return View(new BioSampleViewModel
+            {
+                biologicalSamples = _context.BiologicalSamples.OrderBy(b => b.BurialId)
+                    .Skip((pageNum - 1) * pageSize)
+                    .Take(pageSize)
+                    //FOR THE PRESENTATION TO PRESENT CLEAN DATA .Where(x => x.BurialSouthToFeet != null)
+                    .ToList(),
+
+                PagingInfo = new PagingInfo
+                {
+                    ItemsPerPage = pageSize,
+                    CurrentPage = pageNum,
+                    TotalNumItems = _context.BiologicalSamples
+                    //FOR THE PRESENTATION TO PRESENT CLEAN DATA .Where(x=> x.BurialSouthToFeet != null)
+                    .Count()
+                },
+            });
         }
 
         // GET: BioSampleCrud
