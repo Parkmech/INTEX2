@@ -61,7 +61,6 @@ namespace Intex2.Controllers
             });
         }
 
-
         [HttpPost]
         public IActionResult Index(BurialListViewModel filterAtr)
         {
@@ -72,8 +71,6 @@ namespace Intex2.Controllers
             string bdirection = filterAtr.FilterItems.BDirection;
             string nors = filterAtr.FilterItems.NorS;
             string eorw = filterAtr.FilterItems.EorW;
-
-
 
             FilterItems filtered = new FilterItems
             {

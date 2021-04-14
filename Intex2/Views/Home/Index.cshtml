@@ -4,7 +4,6 @@
 
 <div id="myCarousel" class="carousel container slide">
     <div class="carousel-inner">
-        <div class="active item one"></div>
         <div class="item two"></div>
         <div class="item three"></div>
     </div>
@@ -25,9 +24,13 @@
         <br />
         <img src="~/img/logo.jpg" class="img-fluid justify-content-center" />
         <a asp-controller="BurialCrud" asp-action="Index" class="btn btn-primary btn-lg">See the Mummies!</a>
-        
+        <a class="btn btn-danger" asp-controller="BioSampleCrud" asp-action="FullTableDisplay">See all bio samples</a>
+        <a class="btn btn-success" asp-controller="CarbonDatingCrud" asp-action="FullTableDisplay">See all carbon dating samples</a>
+        <a class="btn btn-warning" asp-controller="CranialCrud" asp-action="FullTableDisplay">See all cranial samples</a>
+        <a class="btn btn-secondary" asp-controller="FieldNotesCrud" asp-action="FullTableDisplay">See all Field Book References</a>
     </header>
 </div>
+
 
     <script type="text/javascript">
         $(document).ready(function () {

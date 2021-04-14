@@ -19,6 +19,14 @@ namespace Intex2.Controllers
             _context = context;
         }
 
+        public IActionResult FullTableDisplay()
+        {
+            var fagElGamousContext = _context.FieldBook;
+
+            return View(fagElGamousContext.ToList());
+        }
+
+
         public IActionResult SingleRecord()
         {
             FieldBook Fieldnote = _context.FieldBook.FirstOrDefault();
