@@ -106,12 +106,17 @@ namespace Intex2.Controllers
                 .Include(b => b.BurialAdultChildNavigation)
                 .Include(b => b.BurialWrappingNavigation)
                 .FirstOrDefaultAsync(m => m.BurialId == newid);
+
             if (burials == null)
             {
-                return NotFound();
+                return View("InvalidRecord");
             }
 
             return View(burials);
+        }
+        public IActionResult InvalidRecord()
+        {
+            return View();
         }
 
         [Authorize(Roles = "Admins")]
