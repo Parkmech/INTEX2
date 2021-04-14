@@ -79,7 +79,7 @@
     {
 <a class="btn btn-primary m-1" asp-action="create" asp-route-id="@Model.burial.BurialId">Create New Sample</a>}
 
-    @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+    @if ((await AuthorizationService.AuthorizeAsync(User, "RequireResearcherRole")).Succeeded)
     {<a class="btn btn-primary m-1" asp-action="create" asp-route-id="@Model.burial.BurialId">Create New Sample</a>
     }
 
