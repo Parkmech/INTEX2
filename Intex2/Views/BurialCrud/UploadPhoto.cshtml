@@ -13,32 +13,32 @@
 </style>
 <br />
 
+<div class="container m-3 p-3">
+    <div class="card col-md-6 shadow mb-3">
+            <h4>Add a Photo</h4>
+            <hr />
+            <div class="row">
 
-<div class="card shadow mb-3" style="max-width: auto">
-    <div class="container m-3 p-2">
-        <h4>Add a Photo</h4>
-        <hr />
-        <div class="row">
-            <div class="col-md-4">
-                <form method="post" asp-controller="PhotosCrud" asp-action="SavePhoto" enctype="multipart/form-data">
-                    <div class="row">
-                        <div class="col-md-6 form-inline">
-                            <label class="col-form-label form-group form-inline" asp-for="@Model.ImageUpload.file">UPLOAD</label>
-                            <input class="form-group form-inline" type="file" asp-for="@Model.ImageUpload.file" />
+                    <form method="post" asp-controller="PhotosCrud" asp-action="SavePhoto" enctype="multipart/form-data">
+                            <div class="col-md-6 form-inline">
+                                <label class="col-form-label form-group form-inline" asp-for="@Model.ImageUpload.file">UPLOAD</label>
+                                <input class="form-group form-inline" type="file" asp-for="@Model.ImageUpload.file" />
+                            </div>
+
+                        <input hidden type="text" asp-for="@Model.ImageUpload.BurialId" value="@bid" />
+
+                        <br />
+                        <div class="row justify-content-md-center">
+                                <button class="btn btn-primary m-1 p-1" type="submit">Submit</button>
+                                <a class="btn btn-secondary m-1 p-1" asp-controller="BurialCrud" asp-action="Details" asp-route-id="@bid">Return to Burial Details</a>
                         </div>
-                    </div>
-
-                    <input hidden type="text" asp-for="@Model.ImageUpload.BurialId" value="@bid"/>
-                    <button class="btn btn-block btn-success" type="submit">SUBMIT</button>
-                </form>
-                <br />
-                <div>
-                    <a class="btn btn-sm btn-danger" asp-controller="BurialCrud" asp-action="Details" asp-route-id="@bid">Cancel</a>
-                </div>
+                     
+                    </form>
+                    
             </div>
-        </div>
-    </div>
+     </div>
 </div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
