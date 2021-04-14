@@ -19,11 +19,30 @@ namespace Intex2.Controllers
             _context = context;
         }
 
-        public IActionResult FullTableDisplay()
+        public IActionResult FullTableDisplay(int pageNum = 1)
         {
-            var fagElGamousContext = _context.FieldBook;
+            int pageSize = 20;
 
-            return View(fagElGamousContext.ToList());
+            return View(new FieldNotesViewModel
+            {
+                fieldNotes = (_context.FieldBook
+                    .OrderBy(b => b.BurialId)
+                    .Skip((pageNum - 1) * pageSize)
+                    .Take(pageSize)
+                    //FOR THE PRESENTATION TO PRESENT CLEAN DATA .Where(x => x.BurialSouthToFeet != null)
+                    .ToList()
+                    ),
+
+                PagingInfo = new PagingInfo
+                {
+                    ItemsPerPage = pageSize,
+                    CurrentPage = pageNum,
+                    TotalNumItems = _context.FieldBook
+                    //FOR THE PRESENTATION TO PRESENT CLEAN DATA .Where(x=> x.BurialSouthToFeet != null)
+                    .Count()
+                },
+
+            });
         }
 
 
