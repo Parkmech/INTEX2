@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Intex2.Models;
 using Intex2.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Intex2.Controllers
 {
+    [Authorize]
     public class FieldNotesCrudController : Controller
     {
         private readonly FagElGamousContext _context;
@@ -19,6 +21,7 @@ namespace Intex2.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         public IActionResult FullTableDisplay(int pageNum = 1)
         {
             int pageSize = 20;
@@ -45,7 +48,7 @@ namespace Intex2.Controllers
             });
         }
 
-
+        [AllowAnonymous]
         public IActionResult SingleRecord()
         {
             FieldBook Fieldnote = _context.FieldBook.FirstOrDefault();
@@ -55,6 +58,7 @@ namespace Intex2.Controllers
 
         // GET: FieldNotesCrud/RecordDetails
         // Return all fieldnotes for a specific burial id
+        [AllowAnonymous]
         public IActionResult RecordDetails(string id)
         {
             string newid = id.Replace("%2F", "/");
@@ -76,6 +80,7 @@ namespace Intex2.Controllers
 
         // GET: FieldNotesCrud/Create
         // Return a view to create new fieldnote refeerence
+        [Authorize(Roles = "Admins,Researcher")]
         public IActionResult Create(string id)
         {
             string newid = id.Replace("%2F", "/");
@@ -97,6 +102,7 @@ namespace Intex2.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         // Create a new field notes record
+        [Authorize(Roles = "Admins,Researcher")]
         public IActionResult CustomCreate(FieldBook fieldNote)
         {
             if (ModelState.IsValid)
@@ -122,6 +128,7 @@ namespace Intex2.Controllers
         // GET: FieldNotesCrud/Edit/5
         [HttpGet]
         // Return a view to edit a fieldnote entry
+        [Authorize(Roles = "Admins,Researcher")]
         public IActionResult Edit(int id)
         {
 
@@ -138,6 +145,7 @@ namespace Intex2.Controllers
         //POST
         [HttpPost]
         // Edit a field note
+        [Authorize(Roles = "Admins,Researcher")]
         public IActionResult CustomEdit(FieldBook fieldNote)
         {
             if (ModelState.IsValid)
@@ -159,6 +167,7 @@ namespace Intex2.Controllers
 
         // GET: FieldNotesCrud/Delete/5
         // Return a view to delete fieldnote reference
+        [Authorize(Roles = "Admins")]
         public IActionResult Delete(int id)
         {
             var fieldNote = _context.FieldBook
@@ -178,6 +187,7 @@ namespace Intex2.Controllers
         // Delete a record of fieldnotes
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admins")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var fieldNote = _context.FieldBook

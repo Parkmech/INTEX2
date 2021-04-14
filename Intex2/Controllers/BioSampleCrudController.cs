@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Intex2.Models;
 using Intex2.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Intex2.Controllers
 {
+    [Authorize]
     public class BioSampleCrudController : Controller
     {
         private readonly FagElGamousContext _context;
@@ -20,6 +22,7 @@ namespace Intex2.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         public IActionResult FullTableDisplay(int pageNum = 1)
         {
             int pageSize = 20;
@@ -49,6 +52,7 @@ namespace Intex2.Controllers
         }
 
         // GET: BioSampleCrud
+        [AllowAnonymous]
         public IActionResult RecordSpecificIndex(string id)
         {
 
@@ -78,6 +82,7 @@ namespace Intex2.Controllers
 
         // GET: BioSampleCrud/Create
         // Returns a create form for Bio Sample
+        [Authorize(Roles = "Admins,Researcher")]
         public IActionResult Create(string id)
         {
 
@@ -99,6 +104,7 @@ namespace Intex2.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admins,Researcher")]
         public IActionResult CustomCreate([Bind("BurialId,Rack,F3,Bag,LowNs,HighNs,NorthOrSouth,LowEw,HighEw,EastOrWest,Area,BurialNumber,ClusterNumber,Date,PreviouslySampled,Notes,Initials,Id")] BiologicalSample bio)
         {
             if (ModelState.IsValid)
@@ -124,6 +130,7 @@ namespace Intex2.Controllers
 
         // GET: BioSampleCrud/Edit/5
         [HttpGet]
+        [Authorize(Roles = "Admins,Researcher")]
         // Return a form to edit Bio sample
         public IActionResult Edit(int id)
         {
@@ -140,6 +147,7 @@ namespace Intex2.Controllers
         }
         //POST
         [HttpPost]
+        [Authorize(Roles = "Admins,Researcher")]
         public IActionResult CustomEdit(BiologicalSample bio)
         {
             if (ModelState.IsValid)
@@ -160,6 +168,7 @@ namespace Intex2.Controllers
         }
 
         // GET: BioSampleCrud/Delete/5
+        [Authorize(Roles = "Admins")]
         public IActionResult Delete(int id)
         {
 
@@ -179,7 +188,7 @@ namespace Intex2.Controllers
         // POST: BioSampleCrud/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-
+        [Authorize(Roles = "Admins")]
         // Delete a specific bio sample related to a burial id
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

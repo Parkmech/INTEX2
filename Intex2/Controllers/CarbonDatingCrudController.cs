@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Intex2.Models;
 using Intex2.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Intex2.Controllers
 {
+    [Authorize]
     public class CarbonDatingCrudController : Controller
     {
         private readonly FagElGamousContext _context;
@@ -19,6 +21,7 @@ namespace Intex2.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         public IActionResult FullTableDisplay()
         {
             var fagElGamousContext = _context.C14s.Skip(4);
@@ -28,6 +31,7 @@ namespace Intex2.Controllers
 
         // GET: CarbonDatingCrud
         // Returns all carbon records associated with a specific burial id
+        [AllowAnonymous]
         public IActionResult RecordDetails(string id)
         {
 
@@ -50,6 +54,7 @@ namespace Intex2.Controllers
 
         // GET: CarbonDatingCrud/Create
         // Return a view to create a new carbon dating
+        [Authorize(Roles = "Admins,Researcher")]
         public IActionResult Create(string id)
         {
 
@@ -70,6 +75,7 @@ namespace Intex2.Controllers
   
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admins,Researcher")]
         // Create new carbon dating -- create is keyword with strange functions
         public IActionResult CustomCreate(C14 carbDateSample)
         {
@@ -95,6 +101,7 @@ namespace Intex2.Controllers
 
         // GET: CarbonDatingCrud/Edit/5
         [HttpGet]
+        [Authorize(Roles = "Admins,Researcher")]
         // Return a view to edit a carbon dating sample
         public IActionResult Edit(int id)
         {
@@ -111,6 +118,7 @@ namespace Intex2.Controllers
         }
         //POST
         [HttpPost]
+        [Authorize(Roles = "Admins")]
         // Edit value of carbon dating sample in database
         public IActionResult CustomEdit(C14 carbDateSample)
         {
@@ -133,6 +141,7 @@ namespace Intex2.Controllers
 
         // GET: CarbonDatingCrud/Delete/5
         // return view to delete a specific carbon sample
+        [Authorize(Roles = "Admins")]
         public IActionResult Delete(int id)
         {
             var carbDateSample = _context.C14s
@@ -150,6 +159,7 @@ namespace Intex2.Controllers
         // POST: CarbonDatingCrud/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admins")]
         // Delete a specific carbon sample record
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

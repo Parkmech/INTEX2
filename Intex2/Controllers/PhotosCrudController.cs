@@ -12,6 +12,7 @@ using Intex2.Services;
 
 namespace Intex2.Controllers
 {
+    [Authorize]
     public class PhotosCrudController : Controller
     {
         private readonly FagElGamousContext _context;
@@ -24,7 +25,7 @@ namespace Intex2.Controllers
             _s3Storage = s3;
         }
 
-
+        [AllowAnonymous]
         // GET: PhotosCrud/Details/5
         // Returns all photos for a specific burial id
         public IActionResult Details(string id)
@@ -50,7 +51,7 @@ namespace Intex2.Controllers
             });
         }
 
-
+        [Authorize(Roles = "Admins,Researcher")]
         public async Task<IActionResult> SavePhoto(BurialListViewModel photo)
         {
             // magic happens here
@@ -125,7 +126,7 @@ namespace Intex2.Controllers
             // GET: PhotosCrud/Delete/5
             //[ValidateAntiForgeryToken]
 
-            [Authorize(Roles = "Admins")]
+        [Authorize(Roles = "Admins")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -146,6 +147,7 @@ namespace Intex2.Controllers
 
         // POST: PhotosCrud/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Admins")]
         //[ValidateAntiForgeryToken]
         //NEED TO FIX THE DELETE CONFIRMED BUTTON DOWN BELOW, SO IT TAKES YOU BACK TO DETAILS APPROPRIATELY
         public async Task<IActionResult> DeleteConfirmed(int id)

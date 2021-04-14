@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Intex2.Models;
 using Intex2.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Intex2.Controllers
 {
+    [Authorize]
     public class CranialCrudController : Controller
     {
         private readonly FagElGamousContext _context;
@@ -19,7 +21,7 @@ namespace Intex2.Controllers
             _context = context;
         }
 
-
+        [AllowAnonymous]
         public IActionResult FullTableDisplay()
         {
             var fagElGamousContext = _context.Cranials;
@@ -30,6 +32,7 @@ namespace Intex2.Controllers
 
         // GET: FieldNotesCrud/RecordDetails
         // Return details for a cranial records
+        [AllowAnonymous]
         public IActionResult RecordDetails(string id)
         {
             string newid = id.Replace("%2F", "/");
@@ -55,6 +58,7 @@ namespace Intex2.Controllers
 
         // GET: FieldNotesCrud/Create
         // Return a view that can create data
+        [Authorize(Roles = "Admins,Researcher")]
         public IActionResult Create(string id)
         {
             string newid = id.Replace("%2F", "/");
@@ -74,6 +78,7 @@ namespace Intex2.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         // Create a new cranial record
+        [Authorize(Roles = "Admins,Researcher")]
         public IActionResult CustomCreate(Cranial cranialSample)
         {
             if (_context.Cranials.Where(x => x.BurialId == cranialSample.BurialId).FirstOrDefault() != null)
@@ -103,6 +108,7 @@ namespace Intex2.Controllers
 
         // GET: FieldNotesCrud/Edit/5
         [HttpGet]
+        [Authorize(Roles = "Admins,Researcher")]
         //return view to edit cranial data
         public IActionResult Edit(int id)
         {
@@ -119,6 +125,7 @@ namespace Intex2.Controllers
         }
         //POST
         [HttpPost]
+        [Authorize(Roles = "Admins,Researcher")]
         // Edit cranial data in database
         public IActionResult CustomEdit(Cranial cranialSample)
         {
@@ -141,6 +148,7 @@ namespace Intex2.Controllers
 
         // GET: FieldNotesCrud/Delete/5
         // Return a view to confirm delete of cranial data
+        [Authorize(Roles = "Admins")]
         public IActionResult Delete(int id)
         {
             var cranialSample = _context.Cranials
@@ -158,6 +166,7 @@ namespace Intex2.Controllers
         // POST: FieldNotesCrud/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admins")]
         // Delete speific cranial data
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
@@ -184,6 +193,7 @@ namespace Intex2.Controllers
         }
 
         // Delete a cranial record
+        [Authorize(Roles = "Admins")]
         public IActionResult CustomDelete(int id)
         {
 
