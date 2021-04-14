@@ -65,34 +65,6 @@ namespace Intex2.Controllers
         }
 
 
-        //filtering data was entered
-        [HttpPost]
-        [AllowAnonymous]
-        public IActionResult Index(BurialListViewModel filterAtr)
-        {
-            //convert data from BurialListViewModel to FilterItems to pass
-            string sex = filterAtr.FilterItems.Sex;
-            string area = filterAtr.FilterItems.Area;
-            double length = filterAtr.FilterItems.Length;
-            double depth = filterAtr.FilterItems.Depth;
-            string bdirection = filterAtr.FilterItems.BDirection;
-            string nors = filterAtr.FilterItems.NorS;
-            string eorw = filterAtr.FilterItems.EorW;
-
-            FilterItems filtered = new FilterItems
-            {
-                Sex = sex,
-                Area = area,
-                Length = length,
-                Depth = depth,
-                BDirection = bdirection,
-                NorS = nors,
-                EorW = eorw
-            };
-
-            return RedirectToAction("Filtered", filtered);
-        }
-
         [HttpGet]
         [AllowAnonymous]
         public IActionResult PagedIndex(BurialListViewModel blvm, int pagenum = 1)
@@ -446,82 +418,6 @@ namespace Intex2.Controllers
             return View(await PaginatedList<Burial>.CreateAsync(mummies.AsNoTracking(), pageNumber ?? 1, pageSize));
             //return View(await mummies.AsNoTracking().ToListAsync());
         }
-
-        //public async Task<IActionResult> Search(string searchString)
-        //{
-        //    ViewData["CurrentFilter"] = searchString;
-        //    var mummies = from s in _context.Burials select s;
-
-
-        //    if (!String.IsNullOrEmpty(searchString))
-        //    {
-        //        mummies = mummies.Where(s => s.BurialId.Contains(searchString)
-        //                               || s.Sex.Contains(searchString));
-        //    }
-
-
-        //    return View("Index", await mummies.AsNoTracking().ToListAsync());
-        //}
-
-        
-        
-        //public IActionResult Filtered(BurialListViewModel filterAtr, string searchString)
-        //{
-        //    string sex = filterAtr.FilterItems.Sex;
-        //    string area = filterAtr.FilterItems.Area;
-        //    double length = filterAtr.FilterItems.Length;
-        //    double depth = filterAtr.FilterItems.Depth;
-        //    string bdirection = filterAtr.FilterItems.BDirection;
-        //    string nors = filterAtr.FilterItems.NorS;
-        //    string eorw = filterAtr.FilterItems.EorW;
-        //    string burialid = filterAtr.FilterItems.BurialId;
-
-
-        //    if (sex == "ALL")
-        //    {
-        //        sex = "%";
-        //    }
-        //    if (area == "ALL")
-        //    {
-        //        area = "%";
-        //    }
-        //    if (bdirection == "ALL")
-        //    {
-        //        bdirection = "%";
-        //    }
-        //    if (nors == "ALL")
-        //    {
-        //        nors = "%";
-        //    }
-        //    if (eorw == "ALL")
-        //    {
-        //        eorw = "%";
-        //    }
-
-
-        //    burialid = "%" + burialid + "%";
-
-
-
-        //    ViewData["CurrentFilter"] = searchString;
-        //    var mummies = from s in _context.Burials select s;
-
-        //    if (!String.IsNullOrEmpty(searchString))
-        //    {
-        //        mummies = mummies.Where(s => s.BurialId.Contains(searchString)
-        //                               || s.Sex.Contains(searchString));
-        //    }
-
-        //    return View(new BurialListViewModel
-        //    {
-        //        Burials = _context.Burials
-        //            .FromSqlInterpolated($"SELECT * FROM Burials WHERE Gender_Code LIKE {sex} AND Square LIKE {area} AND Burial_Direction LIKE {bdirection} AND North_or_South LIKE {nors} AND East_or_West LIKE {eorw} AND BurialID LIKE {burialid}")
-        //            .Where(b => b.LengthM >= length)
-        //            .Where(b => b.BurialDepth >= depth)
-        //            .OrderBy(b => b.BurialId)
-        //            .ToList()
-        //    });
-        //}
 
         //filtering data by attributes
         [AllowAnonymous]
