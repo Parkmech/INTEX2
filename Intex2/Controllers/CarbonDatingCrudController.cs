@@ -20,6 +20,7 @@ namespace Intex2.Controllers
         }
 
         // GET: CarbonDatingCrud
+        // Returns all carbon records associated with a specific burial id
         public IActionResult RecordDetails(string id)
         {
 
@@ -41,6 +42,7 @@ namespace Intex2.Controllers
         }
 
         // GET: CarbonDatingCrud/Create
+        // Return a view to create a new carbon dating
         public IActionResult Create(string id)
         {
 
@@ -58,13 +60,10 @@ namespace Intex2.Controllers
             return View();
 
         }
-   
-       
-        // POST: CarbonDatingCrud/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+  
         [HttpPost]
         [ValidateAntiForgeryToken]
+        // Create new carbon dating -- create is keyword with strange functions
         public IActionResult CustomCreate(C14 carbDateSample)
         {
             if (ModelState.IsValid)
@@ -89,6 +88,7 @@ namespace Intex2.Controllers
 
         // GET: CarbonDatingCrud/Edit/5
         [HttpGet]
+        // Return a view to edit a carbon dating sample
         public IActionResult Edit(int id)
         {
 
@@ -104,6 +104,7 @@ namespace Intex2.Controllers
         }
         //POST
         [HttpPost]
+        // Edit value of carbon dating sample in database
         public IActionResult CustomEdit(C14 carbDateSample)
         {
             if (ModelState.IsValid)
@@ -124,6 +125,7 @@ namespace Intex2.Controllers
         }
 
         // GET: CarbonDatingCrud/Delete/5
+        // return view to delete a specific carbon sample
         public IActionResult Delete(int id)
         {
             var carbDateSample = _context.C14s
@@ -141,6 +143,7 @@ namespace Intex2.Controllers
         // POST: CarbonDatingCrud/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        // Delete a specific carbon sample record
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var carbDateSample = _context.C14s

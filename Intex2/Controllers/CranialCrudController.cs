@@ -20,6 +20,7 @@ namespace Intex2.Controllers
         }
 
         // GET: FieldNotesCrud/RecordDetails
+        // Return details for a cranial records
         public IActionResult RecordDetails(string id)
         {
             string newid = id.Replace("%2F", "/");
@@ -44,6 +45,7 @@ namespace Intex2.Controllers
         }
 
         // GET: FieldNotesCrud/Create
+        // Return a view that can create data
         public IActionResult Create(string id)
         {
             string newid = id.Replace("%2F", "/");
@@ -59,11 +61,10 @@ namespace Intex2.Controllers
 
         }
         
-        // POST: FieldNotesCrud/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
+        // Create a new cranial record
         public IActionResult CustomCreate(Cranial cranialSample)
         {
             if (_context.Cranials.Where(x => x.BurialId == cranialSample.BurialId).FirstOrDefault() != null)
@@ -93,6 +94,7 @@ namespace Intex2.Controllers
 
         // GET: FieldNotesCrud/Edit/5
         [HttpGet]
+        //return view to edit cranial data
         public IActionResult Edit(int id)
         {
 
@@ -108,6 +110,7 @@ namespace Intex2.Controllers
         }
         //POST
         [HttpPost]
+        // Edit cranial data in database
         public IActionResult CustomEdit(Cranial cranialSample)
         {
             if (ModelState.IsValid)
@@ -128,6 +131,7 @@ namespace Intex2.Controllers
         }
 
         // GET: FieldNotesCrud/Delete/5
+        // Return a view to confirm delete of cranial data
         public IActionResult Delete(int id)
         {
             var cranialSample = _context.Cranials
@@ -145,6 +149,7 @@ namespace Intex2.Controllers
         // POST: FieldNotesCrud/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        // Delete speific cranial data
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             string newid = id.Replace("%2F", "/");
@@ -169,6 +174,7 @@ namespace Intex2.Controllers
             });
         }
 
+        // Delete a cranial record
         public IActionResult CustomDelete(int id)
         {
 

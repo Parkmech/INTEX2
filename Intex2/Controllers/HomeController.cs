@@ -18,11 +18,13 @@ namespace Intex2.Controllers
             _logger = logger;
         }
 
+        // Return index view
         public IActionResult Index()
         {
             return View();
         }
 
+        // Return burials view
         public IActionResult Burials()
         {
             return View();

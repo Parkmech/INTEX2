@@ -20,6 +20,7 @@ namespace Intex2.Controllers
         }
 
         // GET: BioSampleCrud
+        // Returns all items for specific burial Id
         public IActionResult RecordSpecificIndex(string id)
         {
 
@@ -40,7 +41,8 @@ namespace Intex2.Controllers
             });   
         }
 
-            public async Task<IActionResult> Index()
+        // Scaffold index, unused
+        public async Task<IActionResult> Index()
         {
             var fagElGamousContext = _context.BiologicalSamples.Include(b => b.Burial);
             return View(await fagElGamousContext.ToListAsync());
@@ -48,6 +50,7 @@ namespace Intex2.Controllers
 
 
         // GET: BioSampleCrud/Create
+        // Returns a create form for Bio Sample
         public IActionResult Create(string id)
         {
 
@@ -65,14 +68,11 @@ namespace Intex2.Controllers
             return View();
 
         }
-        
-        // POST: BioSampleCrud/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        // Create a new BioSample for a specific Burial Id
         public IActionResult CustomCreate([Bind("BurialId,Rack,F3,Bag,LowNs,HighNs,NorthOrSouth,LowEw,HighEw,EastOrWest,Area,BurialNumber,ClusterNumber,Date,PreviouslySampled,Notes,Initials,Id")] BiologicalSample bio)
         {
             if (ModelState.IsValid)
@@ -98,7 +98,8 @@ namespace Intex2.Controllers
 
         // GET: BioSampleCrud/Edit/5
         [HttpGet]
-        public async Task<IActionResult> Edit(int id)
+        // Return a form to edit Bio sample
+        public IActionResult Edit(int id)
         {
 
             BiologicalSample biologicalSample = _context.BiologicalSamples
@@ -113,6 +114,7 @@ namespace Intex2.Controllers
         }
         //POST
         [HttpPost]
+        // Submit form to update Bio sample (edit is a keywork in ASP.net, functionality gets weirdddd)
         public IActionResult CustomEdit(BiologicalSample bio)
         {
             if (ModelState.IsValid)
@@ -133,7 +135,8 @@ namespace Intex2.Controllers
         }
 
         // GET: BioSampleCrud/Delete/5
-        public async Task<IActionResult> Delete(int id)
+        // Return a delete view for a bio sample related to a specific ID
+        public IActionResult Delete(int id)
         {
 
             var biologicalSample = _context.BiologicalSamples
@@ -152,6 +155,8 @@ namespace Intex2.Controllers
         // POST: BioSampleCrud/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+
+        // Delete a specific bio sample related to a burial id
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var biologicalSample = _context.BiologicalSamples

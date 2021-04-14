@@ -20,15 +20,10 @@ namespace Intex2.Controllers
             _context = context;
         }
 
-        // GET: PhotosCrud
-        //public async Task<IActionResult> Index()
-        //{
-        //    var fagElGamousContext = _context.Photos.Include(p => p.Burial);
-        //    return View(await fagElGamousContext.ToListAsync());
-        //}
 
         // GET: PhotosCrud/Details/5
-        public async Task<IActionResult> Details(string id)
+        // Returns all photos for a specific burial id
+        public IActionResult Details(string id)
         {
             string newid = id.Replace("%2F", "/");
             if (newid == null)
@@ -51,34 +46,9 @@ namespace Intex2.Controllers
             });
         }
 
-        ////[ValidateAntiForgeryToken]
-        //[Authorize(Roles = "Admins")]
-        //// GET: PhotosCrud/Create
-        //public IActionResult Create()
-        //{
-        //    ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId");
-        //    return View();
-        //}
-
-        //// POST: PhotosCrud/Create
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        //// more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        ////[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("BurialId,PhotoId,Id")] Photo photo)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(photo);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    ViewData["BurialId"] = new SelectList(_context.Burials, "BurialId", "BurialId", photo.BurialId);
-        //    return View(photo);
-        //}
-
         // GET: PhotosCrud/Delete/5
         //[ValidateAntiForgeryToken]
+        // Delete a photo
         [Authorize(Roles = "Admins")]
         public async Task<IActionResult> Delete(int? id)
         {

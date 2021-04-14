@@ -19,6 +19,7 @@ namespace Intex2.Controllers
             _context = context;
         }
 
+        // Return a single record from the field notes
         public IActionResult SingleRecord()
         {
             FieldBook Fieldnote = _context.FieldBook.FirstOrDefault();
@@ -27,6 +28,7 @@ namespace Intex2.Controllers
         }
 
         // GET: FieldNotesCrud/RecordDetails
+        // Return all fieldnotes for a specific burial id
         public IActionResult RecordDetails(string id)
         {
             string newid = id.Replace("%2F", "/");
@@ -47,6 +49,7 @@ namespace Intex2.Controllers
         }
 
         // GET: FieldNotesCrud/Create
+        // Return a view to create new fieldnote refeerence
         public IActionResult Create(string id)
         {
             string newid = id.Replace("%2F", "/");
@@ -67,6 +70,7 @@ namespace Intex2.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        // Create a new field notes record
         public IActionResult CustomCreate(FieldBook fieldNote)
         {
             if (ModelState.IsValid)
@@ -91,6 +95,7 @@ namespace Intex2.Controllers
 
         // GET: FieldNotesCrud/Edit/5
         [HttpGet]
+        // Return a view to edit a fieldnote entry
         public IActionResult Edit(int id)
         {
 
@@ -106,6 +111,7 @@ namespace Intex2.Controllers
         }
         //POST
         [HttpPost]
+        // Edit a field note
         public IActionResult CustomEdit(FieldBook fieldNote)
         {
             if (ModelState.IsValid)
@@ -126,6 +132,7 @@ namespace Intex2.Controllers
         }
 
         // GET: FieldNotesCrud/Delete/5
+        // Return a view to delete fieldnote reference
         public IActionResult Delete(int id)
         {
             var fieldNote = _context.FieldBook
@@ -142,6 +149,7 @@ namespace Intex2.Controllers
         }
 
         // POST: FieldNotesCrud/Delete/5
+        // Delete a record of fieldnotes
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

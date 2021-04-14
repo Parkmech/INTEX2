@@ -16,10 +16,11 @@ namespace Intex2.Controllers
     [Authorize]
     public class GoogleController : Controller
     {
+        // Necessary objects
         private UserManager<IdentityUser> userManager;
         private SignInManager<IdentityUser> signInManager;
 
-
+    // Constructor for controller
     public GoogleController(UserManager<IdentityUser> userMgr, SignInManager<IdentityUser> signinMgr)
         {
             userManager = userMgr;
@@ -27,6 +28,7 @@ namespace Intex2.Controllers
         }
 
         // GET: /<controller>/
+        // Sends us to google login
         [AllowAnonymous]
         public IActionResult GoogleLogin()
         {
@@ -36,6 +38,8 @@ namespace Intex2.Controllers
             return new ChallengeResult("Google", properties);
         }
 
+        // Returns login info from google. If they exsist in our database, they are signed in
+        // otherwise an account is created, added to the database, and the user is signed in
         [AllowAnonymous]
         public async Task<IActionResult> GoogleResponse()
         {

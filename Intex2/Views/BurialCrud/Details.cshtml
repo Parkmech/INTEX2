@@ -208,13 +208,16 @@
 
                         @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
                         {
-            <a class="btn btn-secondary col-sm-1" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@Model.BurialId">Edit</a>}
+                             <a class="btn btn-secondary col-sm-1" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@Model.BurialId">Edit</a>
+                        }
                         @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
                         {
-            <a class="text-center btn btn-danger col-sm-1" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@Model.BurialId">Delete</a>}
+                             <a class="text-center btn btn-danger col-sm-1" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@Model.BurialId">Delete</a>
+                         }
 
                     </div>
                 </div>
+
 
                 <input type="radio" name="tabs" id="tabtwo">
                 <label class="label" for="tabtwo">Body Details</label>
@@ -266,14 +269,16 @@
 
                                     @if (Model.GenderCode == "M")
                                     {
-                        <span>Male</span> }
-                    else if (Model.GenderCode == "F")
-                    {
-        <span>Female</span> }
-    else
-    {
-<span>Unknown</span>}
-                                </h5>
+                                           <span>Male</span>
+                                     }
+                                    else if (Model.GenderCode == "F")
+                                    {
+                                        <span>Female</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Unknown</span>
+                                    } </h5>
 
                             </div>
 
@@ -282,22 +287,22 @@
                                 <h5>
                                     Hair Color: @if (Model.HairColorCode == "B")
                                     {
-                        <span>Brown/Dark Brown/Light Brown</span> }
-                    else if (Model.HairColorCode == "K")
-                    {
-        <span>Black</span> }
-    else if (Model.HairColorCode == "A")
-    {
-<span>Brown and Red (Auburn)</span> }
-else if (Model.HairColorCode == "R")
-{
-<span>Red</span> }
-else if (Model.HairColorCode == "B")
-{
-<span>Black</span> }
-else
-{
-<span>Unknown</span>}
+                                        <span>Brown/Dark Brown/Light Brown</span> }
+                                    else if (Model.HairColorCode == "K")
+                                    {
+                                            <span>Black</span> }
+                                        else if (Model.HairColorCode == "A")
+                                        {
+                                    <span>Brown and Red (Auburn)</span> }
+                                    else if (Model.HairColorCode == "R")
+                                    {
+                                    <span>Red</span> }
+                                    else if (Model.HairColorCode == "B")
+                                    {
+                                    <span>Black</span> }
+                                    else
+                                    {
+                                    <span>Unknown</span>}
 
                                 </h5>
 
@@ -394,10 +399,12 @@ else
 
                         @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
                         {
-            <a class="btn btn-secondary col-sm-1" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@Model.BurialId">Edit</a>}
+                            <a class="btn btn-secondary col-sm-1" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@Model.BurialId">Edit</a>
+                        }
                         @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
                         {
-            <a class="text-center btn btn-danger col-sm-1" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@Model.BurialId">Delete</a>}
+                            <a class="text-center btn btn-danger col-sm-1" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@Model.BurialId">Delete</a>
+                        }
 
                     </div>
                 </div>
@@ -594,10 +601,12 @@ else
 
                         @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
                         {
-            <a class="btn btn-secondary col-sm-1" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@Model.BurialId">Edit</a>}
+                            <a class="btn btn-secondary col-sm-1" asp-controller="BurialCrud" asp-action="Edit" asp-route-id="@Model.BurialId">Edit</a>
+                        }
                         @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
                         {
-            <a class="text-center btn btn-danger col-sm-1" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@Model.BurialId">Delete</a>}
+                            <a class="text-center btn btn-danger col-sm-1" asp-controller="BurialCrud" asp-action="Delete" asp-route-id="@Model.BurialId">Delete</a>
+                        }
 
                     </div>
                 </div>
