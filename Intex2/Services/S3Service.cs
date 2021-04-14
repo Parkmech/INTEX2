@@ -23,7 +23,8 @@ namespace Intex2.Services
                 RegionEndpoint = RegionEndpoint.USEast1
             };
 
-            var myCreds = new BasicAWSCredentials("AKIA465UBOGEVCEY5ZIC", "3CH/D5sR0HmyrQ/uXAQ7K2JRD222uLpRAoRR8kvO");
+            //TA'S, FILL IN BELOW CODE WITH     ACCESS KEY first,    SECRET ACCESS KEY second (in the quotation marks) I SUBMITTED THE ACCESS KEY AND SECRET KEY IN THE TEXT BOX ON LEARNING SUITE
+            //var myCreds = new BasicAWSCredentials("", "");
 
             AmazonS3Client S3Client = new AmazonS3Client(myCreds, s3Config);
 
