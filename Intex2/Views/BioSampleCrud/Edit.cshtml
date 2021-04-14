@@ -5,103 +5,107 @@
     string id = (string)ViewBag.id;
 }
 
-<h1>Edit</h1>
+<div class="shadow container bg-light p-2 text-center">
 
-<form asp-action="CustomEdit">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <h1>Edit</h1>
+
+    <form asp-action="CustomEdit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="form-group m-2 p-2">
+                <label asp-for="@Model.Rack" class="control-label"></label>
+                <input asp-for="@Model.Rack" class="form-control" value="@Model.Rack" />
+                <span asp-validation-for="@Model.Rack" class="text-danger"></span>
+            </div>
+
+            <div class="form-group m-2 p-2">
+                <label asp-for="@Model.Bag" class="control-label"></label>
+                <input asp-for="@Model.Bag" class="form-control" value="@Model.Bag" />
+                <span asp-validation-for="@Model.Bag" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group m-2 p-2">
+                <label asp-for="@Model.Notes" class="control-label"></label>
+                <input asp-for="@Model.Notes" class="form-control" value="@Model.Notes" />
+                <span asp-validation-for="@Model.Notes" class="text-danger"></span>
+            </div>
+
+            <div class="form-group m-2 p-2">
+                <label asp-for="@Model.PreviouslySampled" class="control-label"></label>
+                <select asp-for="@Model.PreviouslySampled" class="form-control">
+                    <option value="">Select an Option</option>
+                    <option value="Y">Yes</option>
+                    <option value="N">No</option>
+                </select>        <span asp-validation-for="@Model.PreviouslySampled" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group m-2 p-2">
+                <label asp-for="@Model.Rack" class="control-label"></label>
+                <input asp-for="@Model.Rack" class="form-control" value="@Model.Rack" />
+                <span asp-validation-for="@Model.Rack" class="text-danger"></span>
+            </div>
+
+            <div class="form-group m-2 p-2">
+                <label asp-for="@Model.Bag" class="control-label"></label>
+                <input asp-for="@Model.Bag" class="form-control" value="@Model.Bag" />
+                <span asp-validation-for="@Model.Bag" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group m-2 p-2">
+                <label asp-for="@Model.Notes" class="control-label"></label>
+                <input asp-for="@Model.Notes" class="form-control" value="@Model.Notes" />
+                <span asp-validation-for="@Model.Notes" class="text-danger"></span>
+            </div>
+
+            <div class="form-group m-2 p-2">
+                <label asp-for="@Model.PreviouslySampled" class="control-label"></label>
+                <select asp-for="@Model.PreviouslySampled" class="form-control">
+                    <option value="">Select an Option</option>
+                    <option value="Y">Yes</option>
+                    <option value="N">No</option>
+                </select>        <span asp-validation-for="@Model.PreviouslySampled" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group m-2 p-2">
+                <label asp-for="@Model.Initials" class="control-label"></label>
+                <input asp-for="@Model.Initials" class="form-control" value="@Model.Initials" />
+                <span asp-validation-for="@Model.Initials" class="text-danger"></span>
+            </div>
+
+            <div class="form-group m-2 p-2">
+                <label asp-for="@Model.Date" class="control-label"></label>
+                <input asp-for="@Model.Date" class="form-control" value="@Model.Date" />
+                <span asp-validation-for="@Model.Date" class="text-danger"></span>
+            </div>
+        </div>
+
+
+        <input type="hidden" asp-for="@Model.BurialId" value="@Model.BurialId" />
+        <input type="hidden" asp-for="@Model.Id" value="@Model.Id" />
+
+        <div class="row">
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary m-1 p-1" />
+            </div>
+            <div>
+                <a class="btn btn-secondary m-1 p-1" asp-action="RecordSpecificIndex" asp-route-id="@Model.BurialId">Back to Biological Samples</a>
+            </div>
+        </div>
+
+    </form>
+
+    <hr />
     <div class="row">
-        <div class="form-group m-2 p-2">
-            <label asp-for="@Model.Rack" class="control-label"></label>
-            <input asp-for="@Model.Rack" class="form-control" value="@Model.Rack" />
-            <span asp-validation-for="@Model.Rack" class="text-danger"></span>
-        </div>
+        <div class="col-md-4">
 
-        <div class="form-group m-2 p-2">
-            <label asp-for="@Model.Bag" class="control-label"></label>
-            <input asp-for="@Model.Bag" class="form-control" value="@Model.Bag" />
-            <span asp-validation-for="@Model.Bag" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group m-2 p-2">
-            <label asp-for="@Model.Notes" class="control-label"></label>
-            <input asp-for="@Model.Notes" class="form-control" value="@Model.Notes" />
-            <span asp-validation-for="@Model.Notes" class="text-danger"></span>
-        </div>
-
-        <div class="form-group m-2 p-2">
-            <label asp-for="@Model.PreviouslySampled" class="control-label"></label>
-            <select asp-for="@Model.PreviouslySampled" class="form-control">
-                <option value="">Select an Option</option>
-                <option value="Y">Yes</option>
-                <option value="N">No</option>
-            </select>        <span asp-validation-for="@Model.PreviouslySampled" class="text-danger"></span>
         </div>
     </div>
 
-    <div class="row">
-        <div class="form-group m-2 p-2">
-            <label asp-for="@Model.Rack" class="control-label"></label>
-            <input asp-for="@Model.Rack" class="form-control" value="@Model.Rack" />
-            <span asp-validation-for="@Model.Rack" class="text-danger"></span>
-        </div>
-
-        <div class="form-group m-2 p-2">
-            <label asp-for="@Model.Bag" class="control-label"></label>
-            <input asp-for="@Model.Bag" class="form-control" value="@Model.Bag" />
-            <span asp-validation-for="@Model.Bag" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group m-2 p-2">
-            <label asp-for="@Model.Notes" class="control-label"></label>
-            <input asp-for="@Model.Notes" class="form-control" value="@Model.Notes" />
-            <span asp-validation-for="@Model.Notes" class="text-danger"></span>
-        </div>
-
-        <div class="form-group m-2 p-2">
-            <label asp-for="@Model.PreviouslySampled" class="control-label"></label>
-            <select asp-for="@Model.PreviouslySampled" class="form-control">
-                <option value="">Select an Option</option>
-                <option value="Y">Yes</option>
-                <option value="N">No</option>
-            </select>        <span asp-validation-for="@Model.PreviouslySampled" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group m-2 p-2">
-            <label asp-for="@Model.Initials" class="control-label"></label>
-            <input asp-for="@Model.Initials" class="form-control" value="@Model.Initials" />
-            <span asp-validation-for="@Model.Initials" class="text-danger"></span>
-        </div>
-
-        <div class="form-group m-2 p-2">
-            <label asp-for="@Model.Date" class="control-label"></label>
-            <input asp-for="@Model.Date" class="form-control" value="@Model.Date" />
-            <span asp-validation-for="@Model.Date" class="text-danger"></span>
-        </div>
-    </div>
-
-    
-    <input type="hidden" asp-for="@Model.BurialId" value="@Model.BurialId" />
-    <input type="hidden" asp-for="@Model.Id" value="@Model.Id" />
-
-    <div class="row">
-        <div class="form-group">
-            <input type="submit" value="Save" class="btn btn-primary m-1 p-1" />
-        </div>
-        <div>
-            <a class="btn btn-secondary m-1 p-1" asp-action="RecordSpecificIndex" asp-route-id="@Model.BurialId">Back to Biological Samples</a>
-        </div>
-    </div>
-
-</form>
-            
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        
-    </div>
 </div>
 
 

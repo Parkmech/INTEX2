@@ -6,63 +6,65 @@
     string id = (string)ViewBag.id;
 }
 
-<h1>Create</h1>
+<div class="shadow container p-2 bg-light">
+    <h1>Create</h1>
 
-<h4>BiologicalSample for @id</h4>
-<hr />
+    <h4>BiologicalSample for @id</h4>
+    <hr />
 
-<form asp-action="CustomCreate">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="@Model.Rack" class="control-label"></label>
-        <input asp-for="@Model.Rack" class="form-control" placeholder="Rack Number" />
-        <span asp-validation-for="@Model.Rack" class="text-danger"></span>
+    <form asp-action="CustomCreate">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="@Model.Rack" class="control-label"></label>
+            <input asp-for="@Model.Rack" class="form-control" placeholder="Rack Number" />
+            <span asp-validation-for="@Model.Rack" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Bag" class="control-label"></label>
+            <input asp-for="@Model.Bag" class="form-control" placeholder="Bag Number (If applicable): " />
+            <span asp-validation-for="@Model.Bag" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Notes" class="control-label"></label>
+            <input asp-for="@Model.Notes" class="form-control" placeholder="Notes" />
+            <span asp-validation-for="@Model.Notes" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.PreviouslySampled" class="control-label"></label>
+            <select asp-for="@Model.PreviouslySampled" class="form-control">
+                <option value="">Select an Option</option>
+                <option value="Y">Yes</option>
+                <option value="N">No</option>
+            </select>
+            <span asp-validation-for="@Model.PreviouslySampled" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.Initials" class="control-label"></label>
+            <input asp-for="@Model.Initials" class="form-control" placeholder="Initials" />
+            <span asp-validation-for="@Model.Initials" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Date" class="control-label"></label>
+            <input asp-for="@Model.Date" class="form-control" placeholder="Date" />
+            <span asp-validation-for="@Model.Date" class="text-danger"></span>
+        </div>
+
+        <input type="hidden" asp-for="@Model.BurialId" value="@id" />
+
+        <div class="form-group">
+            <a asp-action="RecordSpecificIndex" asp-route-id="@id" class="btn btn-secondary">Back to Samples</a>
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </form>
+
+    <div>
     </div>
 
-    <div class="form-group">
-        <label asp-for="@Model.Bag" class="control-label"></label>
-        <input asp-for="@Model.Bag" class="form-control" placeholder="Bag Number (If applicable): " />
-        <span asp-validation-for="@Model.Bag" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="@Model.Notes" class="control-label"></label>
-        <input asp-for="@Model.Notes" class="form-control" placeholder="Notes" />
-        <span asp-validation-for="@Model.Notes" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="@Model.PreviouslySampled" class="control-label"></label>
-        <select asp-for="@Model.PreviouslySampled" class="form-control" >
-            <option value="">Select an Option</option>
-            <option value="Y">Yes</option>
-            <option value="N">No</option>
-        </select>
-        <span asp-validation-for="@Model.PreviouslySampled" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="@Model.Initials" class="control-label"></label>
-        <input asp-for="@Model.Initials" class="form-control" placeholder="Initials" />
-        <span asp-validation-for="@Model.Initials" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="@Model.Date" class="control-label"></label>
-        <input asp-for="@Model.Date" class="form-control" placeholder="Date" />
-        <span asp-validation-for="@Model.Date" class="text-danger"></span>
-    </div>
-
-    <input type="hidden" asp-for="@Model.BurialId" value="@id" />
-
-    <div class="form-group">
-        <input type="submit" value="Save" class="btn btn-primary" />
-    </div>
-</form>
-
-<div>
-    <a asp-action="RecordSpecificIndex" asp-route-id="@id">Back to Samples</a>
 </div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -3,772 +3,776 @@
 @{ ViewData["Title"] = "Create";
                 Layout = "~/Views/Shared/_Layout.cshtml"; }
 
-<form asp-action="Edit">
+<div class="shadow container p-2 bg-light">
 
-    <div class="shadow tabs">
-        <input type="radio" name="tabs" id="tabone" checked="checked">
-        <label class="label" for="tabone">Exhumation Data Entry</label>
-        <div class="tab">
+    <form asp-action="Edit">
 
-            <h1>Edit Burial Record</h1>
+        <div class="shadow tabs">
+            <input type="radio" name="tabs" id="tabone" checked="checked">
+            <label class="label" for="tabone">Exhumation Data Entry</label>
+            <div class="tab">
 
-            <p><i>This section contains the main data from the initial exhumation</i></p>
+                <h1>Edit Burial Record</h1>
 
-            <hr />
-            <br />
+                <p><i>This section contains the main data from the initial exhumation</i></p>
 
-            <div class="row">
-                <div class="col-md-2">
-                    <label asp-for="@Model.InitialsOfDataEntryChecker" class="control-label">Form Created By: </label>
-                </div>
+                <hr />
+                <br />
 
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <input asp-for="InitialsOfDataEntryChecker" class="form-control" placeholder="Your Name Here" />
-                        <span asp-validation-for="InitialsOfDataEntryChecker" class="text-danger" value=""></span>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label asp-for="@Model.InitialsOfDataEntryChecker" class="control-label">Form Created By: </label>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input asp-for="InitialsOfDataEntryChecker" class="form-control" placeholder="Your Name Here" />
+                            <span asp-validation-for="InitialsOfDataEntryChecker" class="text-danger" value=""></span>
+                        </div>
                     </div>
                 </div>
+
+                <div class="row">
+
+                    <div class="col-md-2">
+                        <label asp-for="YearExcav" class="control-label">Date of Excavation:</label>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <input asp-for="YearExcav" class="form-control" placeholder="Year" />
+                            <span asp-validation-for="YearExcav" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <input asp-for="MonthExcavated" class="form-control" placeholder="Month" />
+                            <span asp-validation-for="MonthExcavated" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <input asp-for="DateExcavated" class="form-control" placeholder="Day" />
+                            <span asp-validation-for="DateExcavated" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <hr />
+
+                <h2>Burial ID</h2>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <!--North or South-->
+                        <div class="form-group shadow-sm">
+                            <label asp-for="NorthOrSouth" class="control-label">North or South Position:</label>
+                            <select asp-for="NorthOrSouth" class="form-control" placeholder="North or South">
+                                <option disabled selected> -- Select an option -- </option>
+                                <option value="N">N - North</option>
+                                <option value="S">S - South</option>
+                            </select>
+                            <span asp-validation-for="NorthOrSouth" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <!--This is the NS Low ID (i.e. the 140 in 140/150-->
+                        <div class="form-group shadow-sm">
+                            <label asp-for="NsLowPosition" class="control-label">N/S Low Position:</label>
+                            <input type="number" asp-for="NsLowPosition" class="form-control" placeholder="Low Position (N/S)" required />
+                            <span asp-validation-for="NsLowPosition" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <!--This is the NS High ID (i.e. the 150 in 140/150) this field will be hidden-->
+                        <div class="form-group shadow-sm">
+                            <label asp-for="NsHighPosition" class="control-label">N/S High Position</label>
+                            <input type="number" asp-for="NsHighPosition" class="form-control" placeholder="High Position (N/S)" required />
+                            <span asp-validation-for="NsHighPosition" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <!-- East or West -->
+                        <div class="form-group shadow-sm">
+                            <label asp-for="EastOrWest" class="control-label">East or West Position:</label>
+                            <select asp-for="EastOrWest" class="form-control" placeholder="East or West">
+                                <option class="text-muted" disabled selected> -- Select an option -- </option>
+                                <option value="E">E - East</option>
+                                <option value="W">W - West</option>
+                            </select>
+                            <span asp-validation-for="EastOrWest" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <!--This is the EW Low ID (i.e. the 40 in 40/50)-->
+                        <div class="form-group shadow-sm">
+                            <label asp-for="EwLowPosition" class="control-label">E/W Low Position:</label>
+                            <input type="number" asp-for="EwLowPosition" class="form-control" placeholder="Low Position (E/W)" required />
+                            <span asp-validation-for="EwLowPosition" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <!--This is the EW High ID (i.e. the 50 in 40/50)-->
+                        <div class="form-group shadow-sm">
+                            <label asp-for="NorthOrSouth" class="control-label">E/W High Position:</label>
+                            <input type="number" asp-for="EwHighPosition" class="form-control" placeholder="High Position (E/W)" required />
+                            <span asp-validation-for="EwHighPosition" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <!-- Area (NW, NE, SW, SE) -->
+                        <div class="form-group shadow-sm">
+                            <label asp-for="Square" class="control-label">Burial Area:</label>
+                            <select asp-for="Square" class="form-control" placeholder="Area">
+                                <option class="text-muted" disabled selected> -- Select an option -- </option>
+                                <option value="NE">NE - Northeast</option>
+                                <option value="NW">NW - Northwest</option>
+                                <option value="SE">SE - Southeast</option>
+                                <option value="SW">SW - Southwest</option>
+                            </select>
+                            <span asp-validation-for="Square" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <!-- Burial Number -->
+                        <div class="form-group shadow-sm">
+                            <label asp-for="BurialNumber" class="control-label">Burial Number:</label>
+                            <input type="number" asp-for="BurialNumber" class="form-control" placeholder="Burial Number" required />
+                            <span asp-validation-for="BurialNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <br />
+
+                <hr />
+
+                <h2>Metrics</h2>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group shadow-sm">
+                            <label asp-for="BurialSouthToHead" class="control-label">Burial: South to Head</label>
+                            <input type="number" asp-for="BurialSouthToHead" class="form-control" placeholder="Enter in meters" required />
+                            <span asp-validation-for="BurialSouthToHead" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group shadow-sm">
+                            <label asp-for="BurialSouthToFeet" class="control-label">Burial: South to Feet</label>
+                            <input type="number" asp-for="BurialSouthToFeet" class="form-control" placeholder="Enter in meters" required />
+                            <span asp-validation-for="BurialSouthToFeet" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group shadow-sm">
+                            <label asp-for="BurialWestToHead" class="control-label">Burial: West to Head</label>
+                            <input type="number" asp-for="BurialWestToHead" class="form-control" placeholder="Enter in meters" required />
+                            <span asp-validation-for="BurialWestToHead" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group shadow-sm">
+                            <label asp-for="BurialWestToFeet" class="control-label">Burial: West to Feet</label>
+                            <input type="number" asp-for="BurialWestToFeet" class="form-control" placeholder="Enter in meters" required />
+                            <span asp-validation-for="BurialWestToFeet" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group shadow-sm">
+                            <label asp-for="LengthM" class="control-label">Burial Length:</label>
+                            <input type="number" asp-for="LengthM" class="form-control" placeholder="Enter in meters" required />
+                            <span asp-validation-for="LengthM" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 ">
+                        <div class="form-group shadow-sm">
+                            <label asp-for="BurialDepth" class="control-label">Burial Depth:</label>
+                            <input type="number" asp-for="BurialDepth" class="form-control" placeholder="Enter in meters" required />
+                            <span asp-validation-for="BurialDepth" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <br />
+
+                <hr />
+
+                <h2>Observations</h2>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <p>This should be yes or no on photo</p>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group shadow-sm">
+                            <label asp-for="Goods" class="control-label">Artifacts found with Burial?:</label>
+                            <select asp-for="Goods" class="form-control" placeholder="Burial Goods">
+                                <option class="text-muted" disabled selected value="N">--Select an option--</option>
+                                <option value="Y">Y - Yes</option>
+                                <option value="N">N - No</option>
+                            </select>
+                            <span asp-validation-for="Goods" class="text-danger"></span>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="row">
+                    <!-- Additional burial information (opitonal when form is submitted) -->
+                    <!--This is on a scale of i-4 (preservation index on sheet) -->
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="BurialPreservation" class="control-label">Condition of Burial:</label>
+                            <select asp-for="BurialPreservation" class="form-control" placeholder="Burial preservation" required>
+                                <option class="text-muted" selected disabled>--Select an option--</option>
+                                <option value="1">1 - Only Bones</option>
+                                <option value="2">2 - 5-25% tissue and/or textiles</option>
+                                <option value="3">3 - 50% or less tissue and/or textiles</option>
+                                <option value="4">4 - 75% or less tissue and/or textiles</option>
+                            </select>
+                            <span asp-validation-for="BurialPreservation" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <!-- Head direction (e/w) -->
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="BurialDirection" class="control-label">Burial Direction:</label>
+                            <select asp-for="BurialDirection" class="form-control" placeholder="Burial direction:">
+                                <option class="text-muted" selected disabled>--Select an option--</option>
+                                <option value="E">E - Eastward Head Direction</option>
+                                <option value="W">W - Westward Head Direction</option>
+                            </select>
+                            <span asp-validation-for="BurialDirection" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-10">
+                        <label asp-for="OtherNotes" class="control-label">Burial Notes:</label>
+                        <textarea asp-for="OtherNotes" class="form-control" placeholder="Enter notes here..."></textarea>
+                        <span asp-validation-for="OtherNotes" class="text-danger"></span>
+
+                    </div>
+
+                </div>
+
+                <br />
+
+                <div class="form-group text-right">
+                    <button class="btn btn-danger p-2" asp-action="Index" asp-controller="Home">Cancel</button>
+                    <input type="submit" value="Edit Burial" class="btn btn-primary p-2" />
+                </div>
+
             </div>
 
-            <div class="row">
+            <input type="radio" name="tabs" id="tabtwo">
+            <label class="label" for="tabtwo">Body Details</label>
+            <div class="tab">
+                <h1>Exhumed Body Details and Sample Information</h1>
 
-                <div class="col-md-2">
-                    <label asp-for="YearExcav" class="control-label">Date of Excavation:</label>
+                <p><i>This section contains data related to the exhumed body and samples taken</i></p>
+
+                <hr />
+
+                <h2>General Information</h2>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <!-- Gender code (aka the sex) -->
+                        <div class="shadow-sm form-group">
+                            <label asp-for="GenderCode" class="control-label">Gender/Sex:</label>
+                            <select asp-for="GenderCode" class="form-control" placeholder="Gender">
+                                <option selected disabled class="text-muted" value="U">--Select an option--</option>
+                                <option value="F">F - Female</option>
+                                <option value="M">M - Male</option>
+                                <option value="U">U - Unknown</option>
+                            </select>
+                            <span asp-validation-for="GenderCode" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <!-- Hair Color -->
+                        <div class="shadow-sm form-group">
+                            <label asp-for="HairColorCode" class="control-label">Hair Color:</label>
+                            <select asp-for="HairColorCode" class="form-control" placeholder="Hair color">
+                                <option selected disabled class="text-muted" value="U">--Select an option--</option>
+                                <option value="B">B - Brown/Dark Brown/Lt Brown</option>
+                                <option value="K">K - Black</option>
+                                <option value="A">A - Brown and Red</option>
+                                <option value="R">R - Red</option>
+                                <option value="D">D - Blonde</option>
+                                <option value="U">U - Unknown</option>
+                            </select>
+                            <span asp-validation-for="HairColorCode" class="text-danger"></span>
+                        </div>
+                    </div>
+
                 </div>
 
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <input asp-for="YearExcav" class="form-control" placeholder="Year" />
-                        <span asp-validation-for="YearExcav" class="text-danger"></span>
+                <div class="row">
+
+                    <!-- Age code (i.e. Adult, child, infant) -->
+
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <label asp-for="AgeCodeSingle" class="control-label">Age Code:</label>
+                            <select asp-for="AgeCodeSingle" class="form-control">
+                                <option class="text-muted" selected disabled value="U">--Select an option--</option>
+                                <option value="A">A - Adult (15+)</option>
+                                <option value="C">C - Child (3-15)</option>
+                                <option value="I">I - Infant (1-3)</option>
+                                <option value="N">N - New Born (0-1)</option>
+                                <option value="U">U - Unknown</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Estimate of age range of da mummy -->
+
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <label asp-for="NumericMinAge" class="control-label">Enter Minimum Age Estimate:</label>
+                            <input type="number" asp-for="NumericMinAge" class="form-control" placeholder="Minimum estimate of age" />
+                            <span asp-validation-for="NumericMinAge" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="NumericMaxAge" class="control-label">Enter Maximum Age Estimate:</label>
+                            <input type="number" asp-for="NumericMaxAge" class="form-control" placeholder="Maximum estimate of age" />
+                            <span asp-validation-for="NumericMaxAge" class="text-danger"></span>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+                <hr />
+
+                <!-- Second section of data on form -->
+
+                <h2>Samples Taken</h2>
+                <i>Select yes or no for each sample group</i>
+                <br />
+                <br />
+                <div class="row">
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label asp-for="HairTaken" class="control-label">Hair</label>
+                            <select asp-for="HairTaken" class="form-control" placeholder="Hair taken?">
+                                <option disabled selected class="text-muted" value="FALSE">--Select--</option>
+                                <option value="TRUE">Y - Yes</option>
+                                <option value="FALSE">N - NO</option>
+                            </select>
+                            <span asp-validation-for="HairTaken" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label asp-for="SoftTissueTaken" class="control-label">Soft Tissue</label>
+                            <select asp-for="SoftTissueTaken" class="form-control" placeholder="Soft tissue taken?">
+                                <option disabled selected class="text-muted" value="FALSE">--Select--</option>
+                                <option value="TRUE">Y - Yes</option>
+                                <option value="FALSE">N - NO</option>
+                            </select>
+                            <span asp-validation-for="SoftTissueTaken" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label asp-for="BoneTaken" class="control-label">Bone</label>
+                            <select asp-for="BoneTaken" class="form-control" placeholder="Bone taken?">
+                                <option disabled selected class="text-muted" value="FALSE">--Select--</option>
+                                <option value="TRUE">Y - Yes</option>
+                                <option value="FALSE">N - NO</option>
+                            </select>
+                            <span asp-validation-for="BoneTaken" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label asp-for="ToothTaken" class="control-label">Tooth</label>
+                            <select asp-for="ToothTaken" class="form-control" placeholder="Tooth taken?">
+                                <option disabled selected class="text-muted" value="FALSE">--Select--</option>
+                                <option value="TRUE">Y - Yes</option>
+                                <option value="FALSE">N - NO</option>
+                            </select>
+                            <span asp-validation-for="ToothTaken" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label asp-for="TextileTaken" class="control-label">Textile</label>
+                            <select asp-for="TextileTaken" class="form-control" placeholder="Textile taken?">
+                                <option disabled selected class="text-muted" value="FALSE">--Select--</option>
+                                <option value="TRUE">Y - Yes</option>
+                                <option value="FALSE">N - NO</option>
+                            </select>
+                            <span asp-validation-for="TextileTaken" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label asp-for="DescriptionOfTaken" class="control-label">Description of Samples</label>
+                            <textarea asp-for="DescriptionOfTaken" class="form-control" placeholder="Enter description of samples taken here..."></textarea>
+                            <span asp-validation-for="DescriptionOfTaken" class="text-danger"></span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <input asp-for="MonthExcavated" class="form-control" placeholder="Month" />
-                        <span asp-validation-for="MonthExcavated" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <input asp-for="DateExcavated" class="form-control" placeholder="Day" />
-                        <span asp-validation-for="DateExcavated" class="text-danger"></span>
-                    </div>
+                <div class="form-group text-right">
+                    <button class="btn btn-danger p-2" asp-action="Index" asp-controller="Home">Cancel</button>
+                    <input type="submit" value="Edit Burial" class="btn btn-primary" />
                 </div>
 
             </div>
 
-            <hr />
+            <input type="radio" name="tabs" id="tabthree">
+            <label class="label" for="tabthree">Osteological Information</label>
+            <div class="tab">
+                <h1>Osteology Records</h1>
 
-            <h2>Burial ID</h2>
+                <p><i>This section contains osteology data on exhumed bodies</i></p>
 
-            <div class="row">
+                <hr />
 
-                <div class="col-md-4">
-                    <!--North or South-->
-                    <div class="form-group shadow-sm">
-                        <label asp-for="NorthOrSouth" class="control-label">North or South Position:</label>
-                        <select asp-for="NorthOrSouth" class="form-control" placeholder="North or South">
-                            <option disabled selected> -- Select an option -- </option>
-                            <option value="N">N - North</option>
-                            <option value="S">S - South</option>
-                        </select>
-                        <span asp-validation-for="NorthOrSouth" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <!--This is the NS Low ID (i.e. the 140 in 140/150-->
-                    <div class="form-group shadow-sm">
-                        <label asp-for="NsLowPosition" class="control-label">N/S Low Position:</label>
-                        <input type="number" asp-for="NsLowPosition" class="form-control" placeholder="Low Position (N/S)" required />
-                        <span asp-validation-for="NsLowPosition" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <!--This is the NS High ID (i.e. the 150 in 140/150) this field will be hidden-->
-                    <div class="form-group shadow-sm">
-                        <label asp-for="NsHighPosition" class="control-label">N/S High Position</label>
-                        <input type="number" asp-for="NsHighPosition" class="form-control" placeholder="High Position (N/S)" required />
-                        <span asp-validation-for="NsHighPosition" class="text-danger"></span>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <!-- East or West -->
-                    <div class="form-group shadow-sm">
-                        <label asp-for="EastOrWest" class="control-label">East or West Position:</label>
-                        <select asp-for="EastOrWest" class="form-control" placeholder="East or West">
-                            <option class="text-muted" disabled selected> -- Select an option -- </option>
-                            <option value="E">E - East</option>
-                            <option value="W">W - West</option>
-                        </select>
-                        <span asp-validation-for="EastOrWest" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <!--This is the EW Low ID (i.e. the 40 in 40/50)-->
-                    <div class="form-group shadow-sm">
-                        <label asp-for="EwLowPosition" class="control-label">E/W Low Position:</label>
-                        <input type="number" asp-for="EwLowPosition" class="form-control" placeholder="Low Position (E/W)" required />
-                        <span asp-validation-for="EwLowPosition" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <!--This is the EW High ID (i.e. the 50 in 40/50)-->
-                    <div class="form-group shadow-sm">
-                        <label asp-for="NorthOrSouth" class="control-label">E/W High Position:</label>
-                        <input type="number" asp-for="EwHighPosition" class="form-control" placeholder="High Position (E/W)" required />
-                        <span asp-validation-for="EwHighPosition" class="text-danger"></span>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-6">
-                    <!-- Area (NW, NE, SW, SE) -->
-                    <div class="form-group shadow-sm">
-                        <label asp-for="Square" class="control-label">Burial Area:</label>
-                        <select asp-for="Square" class="form-control" placeholder="Area">
-                            <option class="text-muted" disabled selected> -- Select an option -- </option>
-                            <option value="NE">NE - Northeast</option>
-                            <option value="NW">NW - Northwest</option>
-                            <option value="SE">SE - Southeast</option>
-                            <option value="SW">SW - Southwest</option>
-                        </select>
-                        <span asp-validation-for="Square" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <!-- Burial Number -->
-                    <div class="form-group shadow-sm">
-                        <label asp-for="BurialNumber" class="control-label">Burial Number:</label>
-                        <input type="number" asp-for="BurialNumber" class="form-control" placeholder="Burial Number" required />
-                        <span asp-validation-for="BurialNumber" class="text-danger"></span>
-                    </div>
-                </div>
-
-            </div>
-
-            <br />
-
-            <hr />
-
-            <h2>Metrics</h2>
-
-            <div class="row">
-
-                <div class="col-md-6">
-                    <div class="form-group shadow-sm">
-                        <label asp-for="BurialSouthToHead" class="control-label">Burial: South to Head</label>
-                        <input type="number" asp-for="BurialSouthToHead" class="form-control" placeholder="Enter in meters" required />
-                        <span asp-validation-for="BurialSouthToHead" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group shadow-sm">
-                        <label asp-for="BurialSouthToFeet" class="control-label">Burial: South to Feet</label>
-                        <input type="number" asp-for="BurialSouthToFeet" class="form-control" placeholder="Enter in meters" required />
-                        <span asp-validation-for="BurialSouthToFeet" class="text-danger"></span>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-6">
-                    <div class="form-group shadow-sm">
-                        <label asp-for="BurialWestToHead" class="control-label">Burial: West to Head</label>
-                        <input type="number" asp-for="BurialWestToHead" class="form-control" placeholder="Enter in meters" required />
-                        <span asp-validation-for="BurialWestToHead" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group shadow-sm">
-                        <label asp-for="BurialWestToFeet" class="control-label">Burial: West to Feet</label>
-                        <input type="number" asp-for="BurialWestToFeet" class="form-control" placeholder="Enter in meters" required />
-                        <span asp-validation-for="BurialWestToFeet" class="text-danger"></span>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-6">
-                    <div class="form-group shadow-sm">
-                        <label asp-for="LengthM" class="control-label">Burial Length:</label>
-                        <input type="number" asp-for="LengthM" class="form-control" placeholder="Enter in meters" required />
-                        <span asp-validation-for="LengthM" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-6 ">
-                    <div class="form-group shadow-sm">
-                        <label asp-for="BurialDepth" class="control-label">Burial Depth:</label>
-                        <input type="number" asp-for="BurialDepth" class="form-control" placeholder="Enter in meters" required />
-                        <span asp-validation-for="BurialDepth" class="text-danger"></span>
-                    </div>
-                </div>
-
-            </div>
-
-            <br />
-
-            <hr />
-
-            <h2>Observations</h2>
-
-            <div class="row">
-
-                <div class="col-md-6">
-                    <p>This should be yes or no on photo</p>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group shadow-sm">
-                        <label asp-for="Goods" class="control-label">Artifacts found with Burial?:</label>
-                        <select asp-for="Goods" class="form-control" placeholder="Burial Goods">
-                            <option class="text-muted" disabled selected value="N">--Select an option--</option>
-                            <option value="Y">Y - Yes</option>
-                            <option value="N">N - No</option>
-                        </select>
-                        <span asp-validation-for="Goods" class="text-danger"></span>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="shadow-sm form-group">
+                            <textarea asp-for="OsteologyNotes" class="form-control" placeholder="Enter osteology notes here..."></textarea>
+                            <span asp-validation-for="OsteologyNotes" class="text-danger"></span>
+                        </div>
                     </div>
                 </div>
 
 
-            </div>
+                <hr />
 
-            <div class="row">
-                <!-- Additional burial information (opitonal when form is submitted) -->
-                <!--This is on a scale of i-4 (preservation index on sheet) -->
+                <div class="row">
 
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="BurialPreservation" class="control-label">Condition of Burial:</label>
-                        <select asp-for="BurialPreservation" class="form-control" placeholder="Burial preservation" required>
-                            <option class="text-muted" selected disabled>--Select an option--</option>
-                            <option value="1">1 - Only Bones</option>
-                            <option value="2">2 - 5-25% tissue and/or textiles</option>
-                            <option value="3">3 - 50% or less tissue and/or textiles</option>
-                            <option value="4">4 - 75% or less tissue and/or textiles</option>
-                        </select>
-                        <span asp-validation-for="BurialPreservation" class="text-danger"></span>
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <input asp-for="BasilarSuture" class="form-control" placeholder="Basilar Suture" />
+                            <span asp-validation-for="BasilarSuture" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <input asp-for="VentralArc" class="form-control" placeholder="Ventral Arc" />
+                            <span asp-validation-for="VentralArc" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input asp-for="SubpubicAngle" class="form-control" placeholder="Subpubic Angle" />
+                            <span asp-validation-for="SubpubicAngle" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <input asp-for="SciaticNotch" class="form-control" placeholder="Sciatic Notch" />
+                            <span asp-validation-for="SciaticNotch" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <input asp-for="PubicBone" class="form-control" placeholder="Pubic Bone" />
+                            <span asp-validation-for="PubicBone" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <input asp-for="PreaurSulcus" class="form-control" placeholder="Preaur Sulcus" />
+                            <span asp-validation-for="PreaurSulcus" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <input asp-for="MedialIpRamus" class="form-control" placeholder="Medial IP Ramus" />
+                            <span asp-validation-for="MedialIpRamus" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <input asp-for="DorsalPitting" class="form-control" placeholder="Dorsal Pitting" />
+                            <span asp-validation-for="DorsalPitting" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <input asp-for="ForemanMagnum" class="form-control" placeholder="Foreman Magnum" />
+                            <span asp-validation-for="ForemanMagnum" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <input asp-for="FemurHead" class="form-control" placeholder="Femur Head" />
+                            <span asp-validation-for="FemurHead" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <input asp-for="HumerusHead" class="form-control" placeholder="Humerus Head" />
+                            <span asp-validation-for="HumerusHead" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <input asp-for="Osteophytosis" class="form-control" placeholder="Osteophystosis" />
+                            <span asp-validation-for="Osteophytosis" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <input asp-for="PubicSymphysis" class="form-control" placeholder="Pubic Symphysis" />
+                            <span asp-validation-for="PubicSymphysis" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <input asp-for="FemurLength" class="form-control" placeholder="Femur Length" />
+                            <span asp-validation-for="FemurLength" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input asp-for="HumerusLength" class="form-control" placeholder="Humerus Length" />
+                            <span asp-validation-for="HumerusLength" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <input asp-for="TibiaLength" class="form-control" placeholder="Tibial Length" />
+                            <span asp-validation-for="TibiaLength" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <input asp-for="Robust" class="form-control" placeholder="Robust" />
+                            <span asp-validation-for="Robust" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <input asp-for="SupraorbitalRidges" class="form-control" placeholder="Supraorbital Ridges" />
+                            <span asp-validation-for="SupraorbitalRidges" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <input asp-for="OrbitEdge" class="form-control" placeholder="Orbit Edge" />
+                            <span asp-validation-for="OrbitEdge" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <input asp-for="ParietalBossing" class="form-control" placeholder="Parietal Bossing" />
+                            <span asp-validation-for="ParietalBossing" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <input asp-for="Gonian" class="form-control" placeholder="Gonian" />
+                            <span asp-validation-for="Gonian" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <input asp-for="NuchalCrest" class="form-control" placeholder="Nuchal Crest" />
+                            <span asp-validation-for="NuchalCrest" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <input asp-for="ZygomaticCrest" class="form-control" placeholder="Zygomatic Crest" />
+                            <span asp-validation-for="ZygomaticCrest" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <input asp-for="CranialSuture" class="form-control" placeholder="Cranial Suture" />
+                            <span asp-validation-for="CranialSuture" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <input asp-for="MaximumCranialLength" class="form-control" placeholder="Maximum Cranial Length" />
+                            <span asp-validation-for="MaximumCranialLength" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <input asp-for="MaximumCranialBreadth" class="form-control" placeholder="Maximum Cranial Breadth" />
+                            <span asp-validation-for="MaximumCranialBreadth" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <input asp-for="BasionBregmaHeight" class="form-control" placeholder="Basion Bregma Height" />
+                            <span asp-validation-for="BasionBregmaHeight" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <input asp-for="BasionNasion" class="form-control" placeholder="Basion Nasion" />
+                            <span asp-validation-for="BasionNasion" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <input asp-for="BasionProsthionLength" class="form-control" placeholder="Basion Prosthion Length" />
+                            <span asp-validation-for="BasionProsthionLength" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input asp-for="BizygomaticDiameter" class="form-control" placeholder="Bizygomatic Diamter" />
+                            <span asp-validation-for="BizygomaticDiameter" class="text-danger"></span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Head direction (e/w) -->
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="BurialDirection" class="control-label">Burial Direction:</label>
-                        <select asp-for="BurialDirection" class="form-control" placeholder="Burial direction:">
-                            <option class="text-muted" selected disabled>--Select an option--</option>
-                            <option value="E">E - Eastward Head Direction</option>
-                            <option value="W">W - Westward Head Direction</option>
-                        </select>
-                        <span asp-validation-for="BurialDirection" class="text-danger"></span>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="shadow-sm form-group">
+                            <input asp-for="NasionProsthion" class="form-control" placeholder="Nasion Prosthion" />
+                            <span asp-validation-for="NasionProsthion" class="text-danger"></span>
+                        </div>
                     </div>
                 </div>
 
-            </div>
+                <input type="hidden" asp-for="BurialId" value="@Model.BurialId" />
 
-            <div class="row">
-
-                <div class="col-md-10">
-                    <label asp-for="OtherNotes" class="control-label">Burial Notes:</label>
-                    <textarea asp-for="OtherNotes" class="form-control" placeholder="Enter notes here..."></textarea>
-                    <span asp-validation-for="OtherNotes" class="text-danger"></span>
-
+                <div class="form-group text-right">
+                    <button class="btn btn-danger p-2" asp-action="Index" asp-controller="Home">Cancel</button>
+                    <input type="submit" value="Edit Burial" asp-route-id="@Model.BurialId" class="btn btn-primary" />
                 </div>
-
-            </div>
-
-            <br />
-
-            <div class="form-group text-right">
-                <button class="btn btn-danger p-2" asp-action="Index" asp-controller="Home">Cancel</button>
-                <input type="submit" value="Edit Burial" class="btn btn-primary p-2" />
             </div>
 
         </div>
+    </form>
 
-        <input type="radio" name="tabs" id="tabtwo">
-        <label class="label" for="tabtwo">Body Details</label>
-        <div class="tab">
-            <h1>Exhumed Body Details and Sample Information</h1>
-
-            <p><i>This section contains data related to the exhumed body and samples taken</i></p>
-
-            <hr />
-
-            <h2>General Information</h2>
-
-            <div class="row">
-
-                <div class="col-md-6">
-                    <!-- Gender code (aka the sex) -->
-                    <div class="shadow-sm form-group">
-                        <label asp-for="GenderCode" class="control-label">Gender/Sex:</label>
-                        <select asp-for="GenderCode" class="form-control" placeholder="Gender">
-                            <option selected disabled class="text-muted" value="U">--Select an option--</option>
-                            <option value="F">F - Female</option>
-                            <option value="M">M - Male</option>
-                            <option value="U">U - Unknown</option>
-                        </select>
-                        <span asp-validation-for="GenderCode" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <!-- Hair Color -->
-                    <div class="shadow-sm form-group">
-                        <label asp-for="HairColorCode" class="control-label">Hair Color:</label>
-                        <select asp-for="HairColorCode" class="form-control" placeholder="Hair color">
-                            <option selected disabled class="text-muted" value="U">--Select an option--</option>
-                            <option value="B">B - Brown/Dark Brown/Lt Brown</option>
-                            <option value="K">K - Black</option>
-                            <option value="A">A - Brown and Red</option>
-                            <option value="R">R - Red</option>
-                            <option value="D">D - Blonde</option>
-                            <option value="U">U - Unknown</option>
-                        </select>
-                        <span asp-validation-for="HairColorCode" class="text-danger"></span>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <!-- Age code (i.e. Adult, child, infant) -->
-
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <label asp-for="AgeCodeSingle" class="control-label">Age Code:</label>
-                        <select asp-for="AgeCodeSingle" class="form-control">
-                            <option class="text-muted" selected disabled value="U">--Select an option--</option>
-                            <option value="A">A - Adult (15+)</option>
-                            <option value="C">C - Child (3-15)</option>
-                            <option value="I">I - Infant (1-3)</option>
-                            <option value="N">N - New Born (0-1)</option>
-                            <option value="U">U - Unknown</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Estimate of age range of da mummy -->
-
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <label asp-for="NumericMinAge" class="control-label">Enter Minimum Age Estimate:</label>
-                        <input type="number" asp-for="NumericMinAge" class="form-control" placeholder="Minimum estimate of age" />
-                        <span asp-validation-for="NumericMinAge" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label asp-for="NumericMaxAge" class="control-label">Enter Maximum Age Estimate:</label>
-                        <input type="number" asp-for="NumericMaxAge" class="form-control" placeholder="Maximum estimate of age" />
-                        <span asp-validation-for="NumericMaxAge" class="text-danger"></span>
-                    </div>
-                </div>
-
-
-            </div>
-
-
-            <hr />
-
-            <!-- Second section of data on form -->
-
-            <h2>Samples Taken</h2>
-            <i>Select yes or no for each sample group</i>
-            <br />
-            <br />
-            <div class="row">
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label asp-for="HairTaken" class="control-label">Hair</label>
-                        <select asp-for="HairTaken" class="form-control" placeholder="Hair taken?">
-                            <option disabled selected class="text-muted" value="FALSE">--Select--</option>
-                            <option value="TRUE">Y - Yes</option>
-                            <option value="FALSE">N - NO</option>
-                        </select>
-                        <span asp-validation-for="HairTaken" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label asp-for="SoftTissueTaken" class="control-label">Soft Tissue</label>
-                        <select asp-for="SoftTissueTaken" class="form-control" placeholder="Soft tissue taken?">
-                            <option disabled selected class="text-muted" value="FALSE">--Select--</option>
-                            <option value="TRUE">Y - Yes</option>
-                            <option value="FALSE">N - NO</option>
-                        </select>
-                        <span asp-validation-for="SoftTissueTaken" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label asp-for="BoneTaken" class="control-label">Bone</label>
-                        <select asp-for="BoneTaken" class="form-control" placeholder="Bone taken?">
-                            <option disabled selected class="text-muted" value="FALSE">--Select--</option>
-                            <option value="TRUE">Y - Yes</option>
-                            <option value="FALSE">N - NO</option>
-                        </select>
-                        <span asp-validation-for="BoneTaken" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label asp-for="ToothTaken" class="control-label">Tooth</label>
-                        <select asp-for="ToothTaken" class="form-control" placeholder="Tooth taken?">
-                            <option disabled selected class="text-muted" value="FALSE">--Select--</option>
-                            <option value="TRUE">Y - Yes</option>
-                            <option value="FALSE">N - NO</option>
-                        </select>
-                        <span asp-validation-for="ToothTaken" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label asp-for="TextileTaken" class="control-label">Textile</label>
-                        <select asp-for="TextileTaken" class="form-control" placeholder="Textile taken?">
-                            <option disabled selected class="text-muted" value="FALSE">--Select--</option>
-                            <option value="TRUE">Y - Yes</option>
-                            <option value="FALSE">N - NO</option>
-                        </select>
-                        <span asp-validation-for="TextileTaken" class="text-danger"></span>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-                <div class="col-md-10">
-                    <div class="form-group">
-                        <label asp-for="DescriptionOfTaken" class="control-label">Description of Samples</label>
-                        <textarea asp-for="DescriptionOfTaken" class="form-control" placeholder="Enter description of samples taken here..."></textarea>
-                        <span asp-validation-for="DescriptionOfTaken" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group text-right">
-                <button class="btn btn-danger p-2" asp-action="Index" asp-controller="Home">Cancel</button>
-                <input type="submit" value="Edit Burial" class="btn btn-primary" />
-            </div>
-
-        </div>
-
-        <input type="radio" name="tabs" id="tabthree">
-        <label class="label" for="tabthree">Osteological Information</label>
-        <div class="tab">
-            <h1>Osteology Records</h1>
-
-            <p><i>This section contains osteology data on exhumed bodies</i></p>
-
-            <hr />
-
-            <div class="row">
-                <div class="col-md-10">
-                    <div class="shadow-sm form-group">
-                        <textarea asp-for="OsteologyNotes" class="form-control" placeholder="Enter osteology notes here..."></textarea>
-                        <span asp-validation-for="OsteologyNotes" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-
-
-            <hr />
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <input asp-for="BasilarSuture" class="form-control" placeholder="Basilar Suture" />
-                        <span asp-validation-for="BasilarSuture" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <input asp-for="VentralArc" class="form-control" placeholder="Ventral Arc" />
-                        <span asp-validation-for="VentralArc" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <input asp-for="SubpubicAngle" class="form-control" placeholder="Subpubic Angle" />
-                        <span asp-validation-for="SubpubicAngle" class="text-danger"></span>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <input asp-for="SciaticNotch" class="form-control" placeholder="Sciatic Notch" />
-                        <span asp-validation-for="SciaticNotch" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <input asp-for="PubicBone" class="form-control" placeholder="Pubic Bone" />
-                        <span asp-validation-for="PubicBone" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <input asp-for="PreaurSulcus" class="form-control" placeholder="Preaur Sulcus" />
-                        <span asp-validation-for="PreaurSulcus" class="text-danger"></span>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <input asp-for="MedialIpRamus" class="form-control" placeholder="Medial IP Ramus" />
-                        <span asp-validation-for="MedialIpRamus" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <input asp-for="DorsalPitting" class="form-control" placeholder="Dorsal Pitting" />
-                        <span asp-validation-for="DorsalPitting" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <input asp-for="ForemanMagnum" class="form-control" placeholder="Foreman Magnum" />
-                        <span asp-validation-for="ForemanMagnum" class="text-danger"></span>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <input asp-for="FemurHead" class="form-control" placeholder="Femur Head" />
-                        <span asp-validation-for="FemurHead" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <input asp-for="HumerusHead" class="form-control" placeholder="Humerus Head" />
-                        <span asp-validation-for="HumerusHead" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <input asp-for="Osteophytosis" class="form-control" placeholder="Osteophystosis" />
-                        <span asp-validation-for="Osteophytosis" class="text-danger"></span>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <input asp-for="PubicSymphysis" class="form-control" placeholder="Pubic Symphysis" />
-                        <span asp-validation-for="PubicSymphysis" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <input asp-for="FemurLength" class="form-control" placeholder="Femur Length" />
-                        <span asp-validation-for="FemurLength" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <input asp-for="HumerusLength" class="form-control" placeholder="Humerus Length" />
-                        <span asp-validation-for="HumerusLength" class="text-danger"></span>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <input asp-for="TibiaLength" class="form-control" placeholder="Tibial Length" />
-                        <span asp-validation-for="TibiaLength" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <input asp-for="Robust" class="form-control" placeholder="Robust" />
-                        <span asp-validation-for="Robust" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <input asp-for="SupraorbitalRidges" class="form-control" placeholder="Supraorbital Ridges" />
-                        <span asp-validation-for="SupraorbitalRidges" class="text-danger"></span>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <input asp-for="OrbitEdge" class="form-control" placeholder="Orbit Edge" />
-                        <span asp-validation-for="OrbitEdge" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <input asp-for="ParietalBossing" class="form-control" placeholder="Parietal Bossing" />
-                        <span asp-validation-for="ParietalBossing" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <input asp-for="Gonian" class="form-control" placeholder="Gonian" />
-                        <span asp-validation-for="Gonian" class="text-danger"></span>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <input asp-for="NuchalCrest" class="form-control" placeholder="Nuchal Crest" />
-                        <span asp-validation-for="NuchalCrest" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <input asp-for="ZygomaticCrest" class="form-control" placeholder="Zygomatic Crest" />
-                        <span asp-validation-for="ZygomaticCrest" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <input asp-for="CranialSuture" class="form-control" placeholder="Cranial Suture" />
-                        <span asp-validation-for="CranialSuture" class="text-danger"></span>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <input asp-for="MaximumCranialLength" class="form-control" placeholder="Maximum Cranial Length" />
-                        <span asp-validation-for="MaximumCranialLength" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <input asp-for="MaximumCranialBreadth" class="form-control" placeholder="Maximum Cranial Breadth" />
-                        <span asp-validation-for="MaximumCranialBreadth" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <input asp-for="BasionBregmaHeight" class="form-control" placeholder="Basion Bregma Height" />
-                        <span asp-validation-for="BasionBregmaHeight" class="text-danger"></span>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <input asp-for="BasionNasion" class="form-control" placeholder="Basion Nasion" />
-                        <span asp-validation-for="BasionNasion" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <input asp-for="BasionProsthionLength" class="form-control" placeholder="Basion Prosthion Length" />
-                        <span asp-validation-for="BasionProsthionLength" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <input asp-for="BizygomaticDiameter" class="form-control" placeholder="Bizygomatic Diamter" />
-                        <span asp-validation-for="BizygomaticDiameter" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="shadow-sm form-group">
-                        <input asp-for="NasionProsthion" class="form-control" placeholder="Nasion Prosthion" />
-                        <span asp-validation-for="NasionProsthion" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-
-            <input type="hidden" asp-for="BurialId" value="@Model.BurialId" />
-
-            <div class="form-group text-right">
-                <button class="btn btn-danger p-2" asp-action="Index" asp-controller="Home">Cancel</button>
-                <input type="submit" value="Edit Burial" asp-route-id="@Model.BurialId" class="btn btn-primary" />
-            </div>
-        </div>
-
-    </div>
-</form>
+</div>
