@@ -126,16 +126,15 @@
                     <h5>Osteology Notes: @Model.OsteologyNotes</h5>
                 </div>
             </div>
-            <div class="form-group text-right">
+            <div class="row justify-content-md-center">
 
-
-                <a class="btn btn-primary col-sm-2" asp-controller="BurialCrud" asp-action="Index">Back to List</a>
+                <a class="btn btn-primary" asp-controller="BurialCrud" asp-action="Index">Back to List</a>
                 
                 @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
                 {
                     <form asp-action="DeleteConf">
                     <input type="hidden" asp-for="BurialId" name="id"/>
-                    <input type="submit" value="Delete" class="btn btn-danger col-sm-2" />
+                    <input type="submit" value="Delete" class="btn btn-danger" />
                     </form>
                  }
             </div>

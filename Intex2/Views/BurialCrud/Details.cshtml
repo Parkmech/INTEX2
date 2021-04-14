@@ -24,26 +24,28 @@
         <h3>More Data</h3>
         <hr />
         <h6>Biological Samples</h6>
-        <hr />
         <a style="border-style: solid;
         border-color: #002E5D; " class="text-center btn btn-hover btn-light col-md-10 p-2 m-2" asp-controller="BioSampleCrud" asp-action="RecordSpecificIndex" asp-route-id="@Model.BurialId">View Biological Samples</a>
-        <h6>Carbon Dating</h6>
         <hr />
+        <h6>Carbon Dating</h6>
         <a style="border-style: solid;
         border-color: #002E5D;" class="text-center  btn btn-hover btn-light col-md-10 p-2 m-2" asp-controller="CarbonDatingCrud" asp-action="RecordDetails" asp-route-id="@Model.BurialId">View Carbon Dating Data</a>
-        <h6>Field Book</h6>
         <hr />
+
+        <h6>Field Book</h6>
         <a style="border-style: solid;
         border-color: #002E5D;" class="text-center  btn btn-hover btn-light col-md-10 p-2 m-2" asp-controller="FieldNotesCrud" asp-action="RecordDetails" asp-route-id="@Model.BurialId">View Field Book References</a>
-        <h6>Photos</h6>
         <hr />
+
+        <h6>Photos</h6>
         <a style="border-style: solid;
         border-color: #002E5D;" class="text-center  btn btn-hover btn-light col-md-10 p-2 m-2" asp-controller="PhotosCrud" asp-action="Details" asp-route-id="@Model.BurialId">View Burial Photos</a>
         <br />
         <a style="border-style: solid;
         border-color: #002E5D;" class="text-center  btn btn-hover btn-light col-md-10 p-2 m-2" asp-controller="BurialCrud" asp-action="UploadPhoto" asp-route-id="@Model.BurialId">Upload Photo</a>
-        <h6>Cranial Information</h6>
         <hr />
+
+        <h6>Cranial Information</h6>
         <a style="border-style: solid;
         border-color: #002E5D;" class="text-center  btn btn-hover btn-light col-md-10 p-2 m-2" asp-controller="CranialCrud" asp-action="RecordDetails" asp-route-id="@Model.BurialId">View Cranial Sample Records</a>
 
