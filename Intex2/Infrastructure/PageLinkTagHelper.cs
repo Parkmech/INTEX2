@@ -94,9 +94,7 @@ namespace Intex2.Infrastructure
                 thirdTag.InnerHtml.Append("3");
 
                 result.InnerHtml.AppendHtml(thirdTag);
-                result.InnerHtml.AppendHtml("...............");
-
-
+                result.InnerHtml.AppendHtml(".....");
             }
 
            else if(PageModel.CurrentPage == 2)
@@ -132,12 +130,12 @@ namespace Intex2.Infrastructure
 
                 result.InnerHtml.AppendHtml(thirdTag);
 
-                result.InnerHtml.AppendHtml("..............");
+                result.InnerHtml.AppendHtml("......");
 
             }
             else if(PageModel.CurrentPage == PageModel.TotalPages - 1)
             {
-                result.InnerHtml.AppendHtml("..............");
+                result.InnerHtml.AppendHtml(".......");
 
                 int curPage = PageModel.CurrentPage - 1;
                 TagBuilder secondTag = new TagBuilder("a");
@@ -172,7 +170,7 @@ namespace Intex2.Infrastructure
             }
             else if(PageModel.CurrentPage == PageModel.TotalPages)
             {
-                result.InnerHtml.AppendHtml("................");
+                result.InnerHtml.AppendHtml(".......");
                 int curPage = PageModel.CurrentPage -2;
                 TagBuilder secondTag = new TagBuilder("a");
                 secondTag.Attributes["href"] = urlHelper.Action(PageAction, new { pageNum = curPage});
@@ -206,7 +204,7 @@ namespace Intex2.Infrastructure
             }
             else
             {
-                result.InnerHtml.AppendHtml("...............");
+                result.InnerHtml.AppendHtml(".......");
                 //Create a tags for three current pages
                 for (int i = PageModel.CurrentPage - 1; i <= PageModel.CurrentPage + 1; i++)
                 {
@@ -225,7 +223,7 @@ namespace Intex2.Infrastructure
                     result.InnerHtml.AppendHtml(tag);
 
                 }
-                result.InnerHtml.AppendHtml("................");
+                result.InnerHtml.AppendHtml("......");
             }
 
             int lastPage = PageModel.TotalPages;
@@ -239,13 +237,9 @@ namespace Intex2.Infrastructure
                 lastTag.AddCssClass(PageModel.TotalPages == PageModel.CurrentPage ? PageClassSelected : PageClassNormal);
             }
 
-            lastTag.InnerHtml.Append(PageModel.TotalPages.ToString());
+            lastTag.InnerHtml.Append("Last (" + PageModel.TotalPages.ToString() + ")");
 
             result.InnerHtml.AppendHtml(lastTag);
-
-
-
-
 
             output.Content.AppendHtml(result.InnerHtml);
         }
