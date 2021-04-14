@@ -19,6 +19,15 @@ namespace Intex2.Controllers
             _context = context;
         }
 
+        public IActionResult FullTableDisplay()
+        {
+            var fagElGamousContext  = _context.BiologicalSamples;
+
+            //var y = (IEnumerable<string>)ctx.Burials.BurialId.ToList();
+
+            return View(fagElGamousContext.ToList());
+        }
+
         // GET: BioSampleCrud
         public IActionResult RecordSpecificIndex(string id)
         {
