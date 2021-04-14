@@ -13,6 +13,7 @@ using Intex2.Services;
 
 namespace Intex2.Controllers
 {
+    [Authorize]
     public class BurialCrudController : Controller
     {
         private readonly FagElGamousContext _context;
@@ -33,6 +34,7 @@ namespace Intex2.Controllers
 
         //Index display page with pagination
         [HttpGet]
+        [AllowAnonymous]
         // GET: BurialCrud
         public IActionResult Index(int pageNum = 2)
         {
@@ -65,6 +67,7 @@ namespace Intex2.Controllers
 
         //filtering data was entered
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult Index(BurialListViewModel filterAtr)
         {
             //convert data from BurialListViewModel to FilterItems to pass
@@ -91,6 +94,7 @@ namespace Intex2.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult PagedIndex(BurialListViewModel blvm, int pagenum = 1)
         {
             return View("Index", blvm);
@@ -99,6 +103,7 @@ namespace Intex2.Controllers
 
         //Display details for a specific burial based on burialid 
         // GET: BurialCrud/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(string id)
         {
             //burialid gets messed up when passed, convert back to proper format
@@ -138,7 +143,7 @@ namespace Intex2.Controllers
 
 
         //Only admins can have access to create 
-        [Authorize(Roles = "Admins")]
+        [Authorize(Roles = "Admins,Researcher")]
         // GET: BurialCrud/Create
         public IActionResult Create()
         {
@@ -153,7 +158,7 @@ namespace Intex2.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admins")]
+        [Authorize(Roles = "Admins,Researcher")]
         public async Task<IActionResult> Create([Bind("BurialId,BurialId2018,YearOnSkull,MonthOnSkull,DateOnSkull,InitialsOfDataEntryExpert,InitialsOfDataEntryChecker,ByuSample,BodyAnalysis,SkullAtMagazine,PostcraniaAtMagazine,AgeSkull2018,RackAndShelf,ToBeConfirmed,SkullTrauma,PostcraniaTrauma,CribraOrbitala,PoroticHyperostosis,PoroticHyperostosisLocations,MetopicSuture,ButtonOsteoma,PostcraniaTrauma1,OsteologyUnknownComment,TemporalMandibularJointOsteoarthritisTmjOa,LinearHypoplasiaEnamel,AreaHillBurials,Tomb,NsLowPosition,NsHighPosition,NorthOrSouth,EwLowPosition,EwHighPosition,EastOrWest,Square,BurialNumber,BurialWestToHead,BurialWestToFeet,BurialSouthToHead,BurialSouthToFeet,BurialDepth,YearExcav,MonthExcavated,DateExcavated,BurialDirection,BurialPreservation,BurialWrapping,BurialAdultChild,Sex,GenderCode,BurialGenderMethod,AgeCodeSingle,BurialDirection1,NumericMinAge,NumericMaxAge,BurialAgeMethod,HairColorCode,BurialSampleTaken,LengthM,LengthCm,Goods,Cluster,FaceBundle,OsteologyNotes,OtherNotes,SampleNumber,GenderGe,GeFunctionTotal,GenderBodyCol,BasilarSuture,VentralArc,SubpubicAngle,SciaticNotch,PubicBone,PreaurSulcus,MedialIpRamus,DorsalPitting,ForemanMagnum,FemurHead,HumerusHead,Osteophytosis,PubicSymphysis,BoneLength,MedialClavicle,IliacCrest,FemurDiameter,Humerus,FemurLength,HumerusLength,TibiaLength,Robust,SupraorbitalRidges,OrbitEdge,ParietalBossing,Gonian,NuchalCrest,ZygomaticCrest,CranialSuture,MaximumCranialLength,MaximumCranialBreadth,BasionBregmaHeight,BasionNasion,BasionProsthionLength,BizygomaticDiameter,NasionProsthion,MaximumNasalBreadth,InterorbitalBreadth,ArtifactsDescription,PreservationIndex,HairTaken,SoftTissueTaken,BoneTaken,ToothTaken,TextileTaken,DescriptionOfTaken,ArtifactFound,EstimateLivingStature,ToothAttrition,ToothEruption,PathologyAnomalies,EpiphysealUnion,SsmaTimeStamp")] Burial burials)
         {
             burials.BurialId = burials.NorthOrSouth + " " + burials.NsLowPosition + "/" +
@@ -175,7 +180,7 @@ namespace Intex2.Controllers
         }
 
         // GET: BurialCrud/Edit/5
-        [Authorize(Roles = "Admins")]
+        [Authorize(Roles = "Admins,Researcher")]
         public async Task<IActionResult> Edit(string id)
         {
             string newid = id.Replace("%2F", "/");
@@ -201,7 +206,7 @@ namespace Intex2.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admins")]
+        [Authorize(Roles = "Admins,Researcher")]
         public async Task<IActionResult> Edit([Bind("BurialId,BurialId2018,YearOnSkull,MonthOnSkull,DateOnSkull,InitialsOfDataEntryExpert,InitialsOfDataEntryChecker,ByuSample,BodyAnalysis,SkullAtMagazine,PostcraniaAtMagazine,AgeSkull2018,RackAndShelf,ToBeConfirmed,SkullTrauma,PostcraniaTrauma,CribraOrbitala,PoroticHyperostosis,PoroticHyperostosisLocations,MetopicSuture,ButtonOsteoma,PostcraniaTrauma1,OsteologyUnknownComment,TemporalMandibularJointOsteoarthritisTmjOa,LinearHypoplasiaEnamel,AreaHillBurials,Tomb,NsLowPosition,NsHighPosition,NorthOrSouth,EwLowPosition,EwHighPosition,EastOrWest,Square,BurialNumber,BurialWestToHead,BurialWestToFeet,BurialSouthToHead,BurialSouthToFeet,BurialDepth,YearExcav,MonthExcavated,DateExcavated,BurialDirection,BurialPreservation,BurialWrapping,BurialAdultChild,Sex,GenderCode,BurialGenderMethod,AgeCodeSingle,BurialDirection1,NumericMinAge,NumericMaxAge,BurialAgeMethod,HairColorCode,BurialSampleTaken,LengthM,LengthCm,Goods,Cluster,FaceBundle,OsteologyNotes,OtherNotes,SampleNumber,GenderGe,GeFunctionTotal,GenderBodyCol,BasilarSuture,VentralArc,SubpubicAngle,SciaticNotch,PubicBone,PreaurSulcus,MedialIpRamus,DorsalPitting,ForemanMagnum,FemurHead,HumerusHead,Osteophytosis,PubicSymphysis,BoneLength,MedialClavicle,IliacCrest,FemurDiameter,Humerus,FemurLength,HumerusLength,TibiaLength,Robust,SupraorbitalRidges,OrbitEdge,ParietalBossing,Gonian,NuchalCrest,ZygomaticCrest,CranialSuture,MaximumCranialLength,MaximumCranialBreadth,BasionBregmaHeight,BasionNasion,BasionProsthionLength,BizygomaticDiameter,NasionProsthion,MaximumNasalBreadth,InterorbitalBreadth,ArtifactsDescription,PreservationIndex,HairTaken,SoftTissueTaken,BoneTaken,ToothTaken,TextileTaken,DescriptionOfTaken,ArtifactFound,EstimateLivingStature,ToothAttrition,ToothEruption,PathologyAnomalies,EpiphysealUnion,SsmaTimeStamp,PhotoTaken")] Burial burials)
         {
             if (ModelState.IsValid)
@@ -345,6 +350,7 @@ namespace Intex2.Controllers
         }
 
         //Display page is used for sorting and filtering/searching
+        [AllowAnonymous]
         public async Task<IActionResult> Display(string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
             //sort by these attributes
@@ -518,6 +524,7 @@ namespace Intex2.Controllers
         //}
 
         //filtering data by attributes
+        [AllowAnonymous]
         public IActionResult AdvancedFiltering(BurialListViewModel filterAtr)
         {
             //default values for search 
@@ -594,7 +601,7 @@ namespace Intex2.Controllers
         }
 
         //need to be a researcher to upload a photo
-        [Authorize(Roles = "Researcher")]
+        [Authorize(Roles = "Admins,Researcher")]
         public IActionResult UploadPhoto(string id)
         {
             string newid = id.Replace("%2F", "/");
@@ -612,7 +619,7 @@ namespace Intex2.Controllers
             return View(blvm);
         }
 
-
+        [Authorize(Roles="Researcher,Admins")]
         public async Task<IActionResult> SavePhoto(BurialListViewModel photo)
         {
             // magic happens here

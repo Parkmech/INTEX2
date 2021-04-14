@@ -24,7 +24,7 @@
                                 <input type="hidden" name="Id" value="@role.Id" />
                                 <a class="btn btn-sm btn-warning" asp-page="Editor"
                                    asp-route-id="@role.Id" asp-route-mode="edit">Edit</a>
-                                @if(role.Name == "Admins" || role.Name == "Researchers")
+                                @if(role.Name != "Admins")
                                 {
                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                                 }
