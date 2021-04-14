@@ -263,7 +263,15 @@ namespace Intex2.Controllers
             List<Photo> photos = new List<Photo>();
             List<BiologicalSample> bios = new List<BiologicalSample>();
             List<FieldBook> fbook = new List<FieldBook>();
+            List<C14> carbSamples = new List<C14>();
 
+            carbSamples.AddRange(_context.C14s.Where(x => x.BurialId == id).ToList());
+
+            for (int i = 0; i < carbSamples.Count(); i++)
+            {
+                _context.C14s.Remove(carbSamples.FirstOrDefault(p => p.Id == carbSamples[i].Id));
+                await _context.SaveChangesAsync();
+            }
 
             photos.AddRange(_context.Photos.Where(p => p.BurialId == id).ToList());
 
@@ -655,10 +663,10 @@ namespace Intex2.Controllers
                 {
                     BurialId = x.BurialId,
                     PhotoId = fileName,
-                    Burial = _context.Burials.Where(x => x.BurialId == x.BurialId).FirstOrDefault()
+                    Burial = _context.Burials.Where(x => x.BurialId == id).FirstOrDefault()
                 };
 
-                Burial bur = _context.Burials.Where(x => x.BurialId == x.BurialId).FirstOrDefault();
+                Burial bur = _context.Burials.Where(x => x.BurialId == id).FirstOrDefault();
 
                 _context.Photos.Add(PhotoTable);
                 await _context.SaveChangesAsync();
