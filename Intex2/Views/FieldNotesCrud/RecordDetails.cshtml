@@ -16,9 +16,7 @@
     }
 
 }
-<div>
-    <h2 class="display-2">Field Book References</h2>
-</div>
+
 <br />
 <div class="text-center">
     <h1>@printId </h1>
@@ -52,8 +50,9 @@
         </div>
      </div>
 </div>
-<hr />
+    <br />
 }
+    <br />
 </div>
 
 
@@ -62,7 +61,7 @@
 
     <a class="btn btn-primary m-1" asp-action="create" asp-route-id="@Model.burial.BurialId">Add a Field Book Reference</a>
 
-    <a class="btn btn-dark m-1" asp-controller="FieldNotesCrud" asp-action="FullTableDisplay"></a>
+    <a class="btn btn-dark m-1" asp-controller="FieldNotesCrud" asp-action="FullTableDisplay">View All Field Book References</a>
 
 </div>
 
