@@ -3,105 +3,14 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 
-<!--
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse navbar-custom p-2" id="navbarColor02">
-        <ul class="navbar-nav flex-grow-1">
-
-            <li class="nav-item">
-                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link text-white" asp-area="" asp-controller="BurialCrud" asp-action="Index">Burials</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="About">About</a>
-            </li>
-
-            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-            {
-                <li class="nav-item dropdown">
-
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Researcher</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" asp-area="" asp-controller="BurialCrud" asp-action="Create">Add a Burial</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something Special</a>
-                    </div>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administrator</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" asp-page="/Users/List">List Users</a>
-                        <a class="dropdown-item" asp-page="/Users/Create">Create New Account</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" asp-page="/Roles/List">List Roles</a>
-                        <a class="dropdown-item" asp-page="/Roles/Editor/dc0f1ebe-2c82-4381-ac47-324878fd3373">Add Researchers</a>
-                    </div>
-                </li>
-            }
-
-            else if ((await AuthorizationService.AuthorizeAsync(User, "RequireResearcherRole")).Succeeded)
-            {
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Researcher</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Add Burial</a>
-                        <a class="dropdown-item" href="#">Upload Photo</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something Special</a>
-
-                    </div>
-                </li>
-            }
-        </ul>
-        <ul class="navbar-nav ml-auto m-2">
-
-            <li class="nav-item">
-                <form asp-controller="BurialCrud" asp-action="Display" method="get">
-                    <div class="form-actions no-color">
-                        <span class="nav-link text-light">
-                            Search:
-                            <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
-                        </span>
-                    </div>
-                </form>
-            </li>
-
-
-            @if (SignInManager.IsSignedIn(User))
-            {
-                <li class="nav-item">
-                    <a class="nav-link text-light" asp-page="/Account/Details" title="Manage">@User.Identity.Name</a>
-                </li>
-                <li class="nav-item ml-auto">
-                    <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Logout">Logout</a>
-                </li>
-            }
-            else
-            {
-                <li class="nav-item">
-                    <a class="nav-link text-light" asp-area="Identity" asp-action="GoogleLogin" asp-controller="Google">Login</a>
-                </li>
-            }
-
-        </ul>
-
-
-    </div>
-
-</nav>
-
-    -->
 
 <byu-header>
+
+    <byu-breadcrumbs slot="breadcrumbs">
+        <a href="http://54.71.38.62/Textiles/" target="_blank">Textiles</a>
+        <a href="https://byu.maps.arcgis.com/apps/CEWebViewer/viewer.html?3dWebScene=b97ad484af45498cacabc2bb9d43390b" target="_blank">Arc</a>
+    </byu-breadcrumbs>
+
     <span slot="site-title"><a href="#">Excavations</a></span>
     <span slot="site-title" class="subtitle">Egypt</span>
 
