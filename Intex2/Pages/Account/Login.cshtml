@@ -2,8 +2,11 @@
 @model LoginModel
 <div class="m-1 text-danger" asp-validation-summary="All"></div>
 
-<header class="jumbotron my-4 bg-white shadow-sm">
+<!-- This view became irrelevant becuase of google sign-in, but essentially users
+    can choose where they want to login from. We decided we would only use third party
+    authentication so we don't have to store passwords and stuff.-->
 
+<header class="jumbotron my-4 bg-white shadow-sm">
 
 
     <form method="post">
