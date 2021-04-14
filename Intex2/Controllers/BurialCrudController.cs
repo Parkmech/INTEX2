@@ -472,7 +472,7 @@ namespace Intex2.Controllers
             }
             if (haircolor == "ALL")
             {
-                eorw = "%";
+                haircolor = "%";
             }
 
             burialid = "%" + burialid + "%";
