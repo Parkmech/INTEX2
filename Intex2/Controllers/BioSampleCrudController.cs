@@ -13,14 +13,42 @@ namespace Intex2.Controllers
     public class BioSampleCrudController : Controller
     {
         private readonly FagElGamousContext _context;
+        public int pageNum { get; set; } = 1;
 
         public BioSampleCrudController(FagElGamousContext context)
         {
             _context = context;
         }
 
+        public IActionResult FullTableDisplay(int pageNum = 1)
+        {
+            int pageSize = 20;
+            var fagElGamousContext  = _context.BiologicalSamples;
+
+
+
+            //var y = (IEnumerable<string>)ctx.Burials.BurialId.ToList();
+
+            return View(new BioSampleViewModel
+            {
+                biologicalSamples = _context.BiologicalSamples.OrderBy(b => b.BurialId)
+                    .Skip((pageNum - 1) * pageSize)
+                    .Take(pageSize)
+                    //FOR THE PRESENTATION TO PRESENT CLEAN DATA .Where(x => x.BurialSouthToFeet != null)
+                    .ToList(),
+
+                PagingInfo = new PagingInfo
+                {
+                    ItemsPerPage = pageSize,
+                    CurrentPage = pageNum,
+                    TotalNumItems = _context.BiologicalSamples
+                    //FOR THE PRESENTATION TO PRESENT CLEAN DATA .Where(x=> x.BurialSouthToFeet != null)
+                    .Count()
+                },
+            });
+        }
+
         // GET: BioSampleCrud
-        // Returns all items for specific burial Id
         public IActionResult RecordSpecificIndex(string id)
         {
 
@@ -41,8 +69,7 @@ namespace Intex2.Controllers
             });   
         }
 
-        // Scaffold index, unused
-        public async Task<IActionResult> Index()
+            public async Task<IActionResult> Index()
         {
             var fagElGamousContext = _context.BiologicalSamples.Include(b => b.Burial);
             return View(await fagElGamousContext.ToListAsync());
@@ -72,7 +99,6 @@ namespace Intex2.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        // Create a new BioSample for a specific Burial Id
         public IActionResult CustomCreate([Bind("BurialId,Rack,F3,Bag,LowNs,HighNs,NorthOrSouth,LowEw,HighEw,EastOrWest,Area,BurialNumber,ClusterNumber,Date,PreviouslySampled,Notes,Initials,Id")] BiologicalSample bio)
         {
             if (ModelState.IsValid)
@@ -114,7 +140,6 @@ namespace Intex2.Controllers
         }
         //POST
         [HttpPost]
-        // Submit form to update Bio sample (edit is a keywork in ASP.net, functionality gets weirdddd)
         public IActionResult CustomEdit(BiologicalSample bio)
         {
             if (ModelState.IsValid)
@@ -135,8 +160,7 @@ namespace Intex2.Controllers
         }
 
         // GET: BioSampleCrud/Delete/5
-        // Return a delete view for a bio sample related to a specific ID
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
 
             var biologicalSample = _context.BiologicalSamples

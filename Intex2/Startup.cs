@@ -141,7 +141,7 @@ namespace Intex2
             app.Use(async (ctx, next) =>
             {
                 ctx.Response.Headers.Add("Content-Security-Policy",
-                "img-src data: https:; block-all-mixed-content; upgrade-insecure-requests;");
+                "img-src data: https:;");
                 await next();
             });   
 

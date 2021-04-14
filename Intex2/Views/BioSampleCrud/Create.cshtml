@@ -58,15 +58,18 @@
         <input type="hidden" asp-for="@Model.BurialId" value="@id" />
 
         <div class="form-group">
-            <a asp-action="RecordSpecificIndex" asp-route-id="@id" class="btn btn-secondary">Back to Samples</a>
             <input type="submit" value="Save" class="btn btn-primary" />
         </div>
     </form>
 
-    <div>
-    </div>
-
 </div>
+
+<br />
+<div>
+    <a class="btn btn-secondary m-2 p-2" asp-action="RecordSpecificIndex" asp-route-id="@id">Back to Samples</a>
+</div>
+<br />
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

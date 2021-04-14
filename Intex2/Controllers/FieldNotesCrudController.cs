@@ -19,7 +19,33 @@ namespace Intex2.Controllers
             _context = context;
         }
 
-        // Return a single record from the field notes
+        public IActionResult FullTableDisplay(int pageNum = 1)
+        {
+            int pageSize = 20;
+
+            return View(new FieldNotesViewModel
+            {
+                fieldNotes = (_context.FieldBook
+                    .OrderBy(b => b.BurialId)
+                    .Skip((pageNum - 1) * pageSize)
+                    .Take(pageSize)
+                    //FOR THE PRESENTATION TO PRESENT CLEAN DATA .Where(x => x.BurialSouthToFeet != null)
+                    .ToList()
+                    ),
+
+                PagingInfo = new PagingInfo
+                {
+                    ItemsPerPage = pageSize,
+                    CurrentPage = pageNum,
+                    TotalNumItems = _context.FieldBook
+                    //FOR THE PRESENTATION TO PRESENT CLEAN DATA .Where(x=> x.BurialSouthToFeet != null)
+                    .Count()
+                },
+
+            });
+        }
+
+
         public IActionResult SingleRecord()
         {
             FieldBook Fieldnote = _context.FieldBook.FirstOrDefault();

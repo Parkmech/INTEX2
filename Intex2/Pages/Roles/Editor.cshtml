@@ -1,20 +1,18 @@
 ﻿@page "{id}"
 @model EditorModel
 
-<!-- Can move users to different roles in the application. This is where admins can come to give permissions to users-->
-
-<h5 class="bg-primary text-white text-center p-2">Edit Role: @Model.Role.Name</h5>
+<h2 class="text-center p-2">Edit Role: @Model.Role.Name</h2>
 
 <form method="post">
     <input type="hidden" name="rolename" value="@Model.Role.Name" />
     <div asp-validation-summary="All" class="text-danger"></div>
-    <h5 class="bg-secondary text-white p-2">Members</h5>
+    <h3 class="p-2"><i>Members</i></h3>
     <table class="table table-sm table-striped table-bordered">
         <thead>
             <tr>
-                <th>User</th>
-                <th>Email</th>
-                <th></th>
+                <th class="text-center">User</th>
+                <th class="text-center">Email</th>
+                <th class="text-center">Switch</th>
             </tr>
         </thead>
         <tbody>
@@ -26,12 +24,12 @@
             @foreach (IdentityUser user in await Model.Members())
             {
                 <tr>
-                    <td>@user.UserName</td>
-                    <td>@user.Email</td>
-                    <td>
+                    <td class="text-center">@user.UserName</td>
+                    <td class="text-center">@user.Email</td>
+                    <td class="text-center">
                         <button asp-route-userid="@user.Id"
                                 class="btn btn-primary btn-sm" type="submit">
-                            Change
+                            Change Role to Non-Member
                         </button>
                     </td>
                 </tr>
@@ -39,9 +37,9 @@
         </tbody>
     </table>
 
-    <h5 class="bg-secondary text-white p-2">Non-Members</h5>
+    <h3 class="p-2"><i>Non-Members</i></h3>
     <table class="table table-sm table-striped table-bordered">
-        <thead><tr><th>User</th><th>Email</th><th></th></tr></thead>
+        <thead><tr><th class="text-center">User</th><th class="text-center">Email</th><th class="text-center">Switch</th></tr></thead>
         <tbody>
             @if ((await Model.NonMembers()).Count() == 0)
             {
@@ -50,12 +48,12 @@
             @foreach (IdentityUser user in await Model.NonMembers())
             {
                 <tr>
-                    <td>@user.UserName</td>
-                    <td>@user.Email</td>
-                    <td>
+                    <td class="text-center">@user.UserName</td>
+                    <td class="text-center">@user.Email</td>
+                    <td class="text-center">
                         <button asp-route-userid="@user.Id"
                                 class="btn btn-primary btn-sm" type="submit">
-                            Change
+                            Change Role to Member
                         </button>
                     </td>
                 </tr>

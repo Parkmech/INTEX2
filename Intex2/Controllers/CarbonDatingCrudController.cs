@@ -19,6 +19,13 @@ namespace Intex2.Controllers
             _context = context;
         }
 
+        public IActionResult FullTableDisplay()
+        {
+            var fagElGamousContext = _context.C14s.Skip(4);
+
+            return View(fagElGamousContext.ToList());
+        }
+
         // GET: CarbonDatingCrud
         // Returns all carbon records associated with a specific burial id
         public IActionResult RecordDetails(string id)

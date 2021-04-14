@@ -1,0 +1,57 @@
+﻿@model BioSampleViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="m-2 p-2">
+
+    <table class="table bg-white shadow table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Burial ID</th>
+                <th scope="col">Rack</th>
+                <th scope="col">Bag</th>
+                <th scope="col">Date</th>
+                <th scope="col">Previously Sampled</th>
+                <th scope="col">Notes</th>
+                <th scope="col">Initials</th>
+                <th scope="col">Burials Containing this Data</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.biologicalSamples)
+            {
+                <tr>
+                    <td>@item.BurialId</td>
+                    <td>@item.Rack</td>
+                    <td>@item.Bag</td>
+                    <td>@item.Date</td>
+                    <td>@item.PreviouslySampled</td>
+                    <td>@item.Notes</td>
+                    <td>@item.Initials</td>
+
+                    <td>
+                        <a class="btn btn-primary" asp-controller="BurialCrud" asp-action="Details" asp-route-id="@item.BurialId">Details</a>
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+
+</div>
+<div page-model="@Model.PagingInfo" page-action="FullTableDisplay" page-classes-enabled="true" page-class="btn"
+     page-class-normal="btn-outline-dark"
+     page-class-selected="btn-primary"
+     class="btn-group pull-right m-1">
+</div>
+<br />
+<br />
+<br />
+
+

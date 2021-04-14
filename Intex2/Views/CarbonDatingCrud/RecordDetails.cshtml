@@ -30,7 +30,7 @@
 
     @foreach (var sample in Model.carbDateSamples)
     {
-    <div class="card shadow m-2 p-2 col-md-11">
+    <div class="card shadow m-2 p-2 col-md-7">
         <h2 class="card-header">Rack Number: @sample.Rack</h2>
 
         <div class="card-body">
@@ -54,16 +54,15 @@
                     <h5>Calibrated 95% Calendar Date(Avg): @sample.Calibrated95CalendarDateAvg</h5><hr />
                 </div>
             </div>
-
         </div>
         <div class="row justify-content-md-center">
             @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
             {
-    <a class="col-md-3 btn btn-secondary m-1 p-1" asp-controller="CranialCrud" asp-action="Edit" asp-route-id="@sample.Id">Edit</a>}
+    <a class="col-md-3 btn btn-secondary m-1 p-1" asp-controller="CarbonDatingCrud" asp-action="Edit" asp-route-id="@sample.Id">Edit</a>}
 
             @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
             {
-    <button type="button" class="btn btn-danger col-md-3 m-1 p-1" data-toggle="modal" data-target="#myModal">Delete</button>}
+    <a class="btn btn-danger col-md-3 m-1 p-1" asp-controller="CarbonDatingCrud" asp-action="Delete" asp-route-id ="@sample.Id">Delete</a>}
         </div>
         <br />
     </div>
@@ -75,6 +74,9 @@
     <a class="btn btn-secondary m-1" asp-controller="BurialCrud" asp-action="Details" asp-route-id="@Model.burial.BurialId">Back to Burial Details</a>
 
     <a class="btn btn-primary m-1" asp-action="create" asp-route-id="@Model.burial.BurialId">Create New Sample</a>
+
+    <a class="btn btn-dark m-1" asp-controller="CarbonDatingCrud" asp-action="FullTableDisplay">View all Carbon Dating Samples</a>
+
 </div>
 
 

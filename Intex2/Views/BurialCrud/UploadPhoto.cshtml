@@ -4,8 +4,8 @@
 *@
 @{
     string bid = Model.burial.BurialId;
-    
 }
+    
 <style>
     body {
         background-color: #E9ECEF;
@@ -20,7 +20,7 @@
         <hr />
         <div class="row">
             <div class="col-md-4">
-                <form method="post" asp-action="UploadPhoto" enctype="multipart/form-data">
+                <form method="post" asp-controller="PhotosCrud" asp-action="SavePhoto" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-md-6 form-inline">
                             <label class="col-form-label form-group form-inline" asp-for="@Model.ImageUpload.file">UPLOAD</label>
@@ -28,13 +28,12 @@
                         </div>
                     </div>
 
-                    <label class="col-form-label form-group" asp-for="@Model.ImageUpload.BurialId">BURIAL ID</label>
-                    <input hidden class="form-group" type="text" asp-for="@Model.ImageUpload.BurialId" />
+                    <input hidden type="text" asp-for="@Model.ImageUpload.BurialId" value="@bid"/>
                     <button class="btn btn-block btn-success" type="submit">SUBMIT</button>
                 </form>
                 <br />
                 <div>
-                    <a class="btn btn-sm btn-danger" asp-action="Details">Cancel</a>
+                    <a class="btn btn-sm btn-danger" asp-controller="BurialCrud" asp-action="Details" asp-route-id="@bid">Cancel</a>
                 </div>
             </div>
         </div>

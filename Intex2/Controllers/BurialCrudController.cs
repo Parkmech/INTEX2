@@ -30,6 +30,8 @@ namespace Intex2.Controllers
             _s3Storage = s3;
         }
 
+
+        //Index display page with pagination
         [HttpGet]
         // GET: BurialCrud
         public IActionResult Index(int pageNum = 2)
@@ -38,11 +40,11 @@ namespace Intex2.Controllers
 
             return View(new BurialListViewModel
             {
+                //get burial details 
                 Burials = (_context.Burials
                     .OrderBy(b => b.BurialId)
                     .Skip((pageNum - 1) * pageSize)
                     .Take(pageSize)
-                    //FOR THE PRESENTATION TO PRESENT CLEAN DATA .Where(x => x.BurialSouthToFeet != null)
                     .ToList()
                     ),
 
@@ -51,7 +53,6 @@ namespace Intex2.Controllers
                     ItemsPerPage = pageSize,
                     CurrentPage = pageNum,
                     TotalNumItems = _context.Burials
-                    //FOR THE PRESENTATION TO PRESENT CLEAN DATA .Where(x=> x.BurialSouthToFeet != null)
                     .Count()
                 },
                 Photos = _context.Photos,
@@ -62,9 +63,11 @@ namespace Intex2.Controllers
         }
 
 
+        //filtering data was entered
         [HttpPost]
         public IActionResult Index(BurialListViewModel filterAtr)
         {
+            //convert data from BurialListViewModel to FilterItems to pass
             string sex = filterAtr.FilterItems.Sex;
             string area = filterAtr.FilterItems.Area;
             double length = filterAtr.FilterItems.Length;
@@ -72,8 +75,6 @@ namespace Intex2.Controllers
             string bdirection = filterAtr.FilterItems.BDirection;
             string nors = filterAtr.FilterItems.NorS;
             string eorw = filterAtr.FilterItems.EorW;
-
-
 
             FilterItems filtered = new FilterItems
             {
@@ -95,28 +96,48 @@ namespace Intex2.Controllers
             return View("Index", blvm);
         }
 
+
+        //Display details for a specific burial based on burialid 
         // GET: BurialCrud/Details/5
         public async Task<IActionResult> Details(string id)
         {
+            //burialid gets messed up when passed, convert back to proper format
             string newid = id.Replace("%2F", "/");
             if (newid == null)
             {
+                //burialid not found
+                //PANIC!   JK we planned for this
                 return NotFound();
             }
 
+            //get burial information for one burial based off burialid
+            //link with AgeCode, BurialAdultChild, and BurialWrapping
             var burials = await _context.Burials
                 .Include(b => b.AgeCodeSingleNavigation)
                 .Include(b => b.BurialAdultChildNavigation)
                 .Include(b => b.BurialWrappingNavigation)
                 .FirstOrDefaultAsync(m => m.BurialId == newid);
+
+
+            //validate data
             if (burials == null)
             {
-                return NotFound();
+                //Secondary precaution if data is bad
+                return View("InvalidRecord");
             }
 
+            //return ONE burial to details page 
             return View(burials);
         }
 
+        //Display Invalid record page 
+        public IActionResult InvalidRecord()
+        {
+            return View();
+        }
+
+
+        //Only admins can have access to create 
         [Authorize(Roles = "Admins")]
         // GET: BurialCrud/Create
         public IActionResult Create()
@@ -179,23 +200,10 @@ namespace Intex2.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         [Authorize(Roles = "Admins")]
-        public async Task<IActionResult> Edit(string id, [Bind("BurialId,BurialId2018,YearOnSkull,MonthOnSkull,DateOnSkull,InitialsOfDataEntryExpert,InitialsOfDataEntryChecker,ByuSample,BodyAnalysis,SkullAtMagazine,PostcraniaAtMagazine,AgeSkull2018,RackAndShelf,ToBeConfirmed,SkullTrauma,PostcraniaTrauma,CribraOrbitala,PoroticHyperostosis,PoroticHyperostosisLocations,MetopicSuture,ButtonOsteoma,PostcraniaTrauma1,OsteologyUnknownComment,TemporalMandibularJointOsteoarthritisTmjOa,LinearHypoplasiaEnamel,AreaHillBurials,Tomb,NsLowPosition,NsHighPosition,NorthOrSouth,EwLowPosition,EwHighPosition,EastOrWest,Square,BurialNumber,BurialWestToHead,BurialWestToFeet,BurialSouthToHead,BurialSouthToFeet,BurialDepth,YearExcav,MonthExcavated,DateExcavated,BurialDirection,BurialPreservation,BurialWrapping,BurialAdultChild,Sex,GenderCode,BurialGenderMethod,AgeCodeSingle,BurialDirection1,NumericMinAge,NumericMaxAge,BurialAgeMethod,HairColorCode,BurialSampleTaken,LengthM,LengthCm,Goods,Cluster,FaceBundle,OsteologyNotes,OtherNotes,SampleNumber,GenderGe,GeFunctionTotal,GenderBodyCol,BasilarSuture,VentralArc,SubpubicAngle,SciaticNotch,PubicBone,PreaurSulcus,MedialIpRamus,DorsalPitting,ForemanMagnum,FemurHead,HumerusHead,Osteophytosis,PubicSymphysis,BoneLength,MedialClavicle,IliacCrest,FemurDiameter,Humerus,FemurLength,HumerusLength,TibiaLength,Robust,SupraorbitalRidges,OrbitEdge,ParietalBossing,Gonian,NuchalCrest,ZygomaticCrest,CranialSuture,MaximumCranialLength,MaximumCranialBreadth,BasionBregmaHeight,BasionNasion,BasionProsthionLength,BizygomaticDiameter,NasionProsthion,MaximumNasalBreadth,InterorbitalBreadth,ArtifactsDescription,PreservationIndex,HairTaken,SoftTissueTaken,BoneTaken,ToothTaken,TextileTaken,DescriptionOfTaken,ArtifactFound,EstimateLivingStature,ToothAttrition,ToothEruption,PathologyAnomalies,EpiphysealUnion,SsmaTimeStamp,PhotoTaken")] Burial burials)
+        public async Task<IActionResult> Edit([Bind("BurialId,BurialId2018,YearOnSkull,MonthOnSkull,DateOnSkull,InitialsOfDataEntryExpert,InitialsOfDataEntryChecker,ByuSample,BodyAnalysis,SkullAtMagazine,PostcraniaAtMagazine,AgeSkull2018,RackAndShelf,ToBeConfirmed,SkullTrauma,PostcraniaTrauma,CribraOrbitala,PoroticHyperostosis,PoroticHyperostosisLocations,MetopicSuture,ButtonOsteoma,PostcraniaTrauma1,OsteologyUnknownComment,TemporalMandibularJointOsteoarthritisTmjOa,LinearHypoplasiaEnamel,AreaHillBurials,Tomb,NsLowPosition,NsHighPosition,NorthOrSouth,EwLowPosition,EwHighPosition,EastOrWest,Square,BurialNumber,BurialWestToHead,BurialWestToFeet,BurialSouthToHead,BurialSouthToFeet,BurialDepth,YearExcav,MonthExcavated,DateExcavated,BurialDirection,BurialPreservation,BurialWrapping,BurialAdultChild,Sex,GenderCode,BurialGenderMethod,AgeCodeSingle,BurialDirection1,NumericMinAge,NumericMaxAge,BurialAgeMethod,HairColorCode,BurialSampleTaken,LengthM,LengthCm,Goods,Cluster,FaceBundle,OsteologyNotes,OtherNotes,SampleNumber,GenderGe,GeFunctionTotal,GenderBodyCol,BasilarSuture,VentralArc,SubpubicAngle,SciaticNotch,PubicBone,PreaurSulcus,MedialIpRamus,DorsalPitting,ForemanMagnum,FemurHead,HumerusHead,Osteophytosis,PubicSymphysis,BoneLength,MedialClavicle,IliacCrest,FemurDiameter,Humerus,FemurLength,HumerusLength,TibiaLength,Robust,SupraorbitalRidges,OrbitEdge,ParietalBossing,Gonian,NuchalCrest,ZygomaticCrest,CranialSuture,MaximumCranialLength,MaximumCranialBreadth,BasionBregmaHeight,BasionNasion,BasionProsthionLength,BizygomaticDiameter,NasionProsthion,MaximumNasalBreadth,InterorbitalBreadth,ArtifactsDescription,PreservationIndex,HairTaken,SoftTissueTaken,BoneTaken,ToothTaken,TextileTaken,DescriptionOfTaken,ArtifactFound,EstimateLivingStature,ToothAttrition,ToothEruption,PathologyAnomalies,EpiphysealUnion,SsmaTimeStamp,PhotoTaken")] Burial burials)
         {
-
-            id = id.Replace("%2F", "/");
-
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            if (id != burials.BurialId)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
@@ -247,12 +255,15 @@ namespace Intex2.Controllers
             return View(burials);
         }
 
+
+        
         // POST: BurialCrud/Delete/5
         [HttpPost, ActionName("DeleteConf")]
-        [Authorize(Roles = "Admins")]
-        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admins")] //Only admins can delete
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConf(string id)
         {
+            //burialid gets messed up when passed, convert back to proper format
             string newid = id.Replace("%2F", "/");
 
             if (newid == null)
@@ -260,48 +271,83 @@ namespace Intex2.Controllers
                 return NotFound();
             }
 
+
+            //create lists to populate for tables with a one to many relationship with burials 
             List<Photo> photos = new List<Photo>();
             List<BiologicalSample> bios = new List<BiologicalSample>();
             List<FieldBook> fbook = new List<FieldBook>();
+            List<C14> carbSamples = new List<C14>();
 
+            //if ids match, add to list 
+            carbSamples.AddRange(_context.C14s.Where(x => x.BurialId == id).ToList());
+
+            if (carbSamples != null)
+            {
+                //for each item in list remove from database and save changes 
+                for (int i = 0; i < carbSamples.Count(); i++)
+                {
+                    _context.C14s.Remove(carbSamples.FirstOrDefault(p => p.Id == carbSamples[i].Id));
+                    await _context.SaveChangesAsync();
+                }
+            }
 
             photos.AddRange(_context.Photos.Where(p => p.BurialId == id).ToList());
 
-            for (int i = 0; i < photos.Count(); i++)
+            if (photos != null)
             {
-                _context.Photos.Remove(photos.FirstOrDefault(p => p.Id == photos[i].Id));
-                await _context.SaveChangesAsync();
+                for (int i = 0; i < photos.Count(); i++)
+                {
+                    _context.Photos.Remove(photos.FirstOrDefault(p => p.Id == photos[i].Id));
+                    await _context.SaveChangesAsync();
+                }
             }
+            
 
             bios.AddRange(_context.BiologicalSamples.Where(p => p.BurialId == id).ToList());
 
-            for (int i = 0; i < bios.Count(); i++)
+            if (bios != null)
             {
-                _context.BiologicalSamples.Remove(bios.FirstOrDefault(p => p.Id == bios[i].Id));
-                await _context.SaveChangesAsync();
+                for (int i = 0; i < bios.Count(); i++)
+                {
+                    _context.BiologicalSamples.Remove(bios.FirstOrDefault(p => p.Id == bios[i].Id));
+                    await _context.SaveChangesAsync();
+                }
             }
+            
 
             fbook.AddRange(_context.FieldBook.Where(p => p.BurialId == id).ToList());
 
-            for (int i = 0; i < photos.Count(); i++)
+            if (fbook != null)
             {
-                _context.FieldBook.Remove(fbook.FirstOrDefault(p => p.Id == fbook[i].Id));
-                await _context.SaveChangesAsync();
+                for (int i = 0; i < photos.Count(); i++)
+                {
+                    _context.FieldBook.Remove(fbook.FirstOrDefault(p => p.Id == fbook[i].Id));
+                    await _context.SaveChangesAsync();
+                }
             }
+            
 
 
             var cranial = await _context.Cranials.FindAsync(newid);
-            _context.Cranials.Remove(cranial);
-            await _context.SaveChangesAsync();
 
+            if (cranial != null)
+            {
+                _context.Cranials.Remove(cranial);
+                await _context.SaveChangesAsync();
+            }
+            
+            //after all of te linking tables are removed, remove burial 
             var burials = await _context.Burials.FindAsync(newid);
             _context.Burials.Remove(burials);
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 
+        //Display page is used for sorting and filtering/searching
         public async Task<IActionResult> Display(string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
+            //sort by these attributes
             ViewData["IdSortParm"] = String.IsNullOrEmpty(sortOrder) ? "BurialId_Desc" : "";
             ViewData["SexSortParm"] = sortOrder == "sex_desc" ? "Sex" : "sex_desc";
             ViewData["LengthSortParm"] = sortOrder == "length_desc" ? "Length" : "length_desc";
@@ -324,14 +370,20 @@ namespace Intex2.Controllers
             var mummies = from s in _context.Burials select s;
             //var mummies = from s in _context.Burials.IsRequired(false) select s;
 
+            //if user searched for an item, search these fields if they contain it
             if (!String.IsNullOrEmpty(searchString))
             {
                 mummies = mummies.Where(s => s.BurialId.Contains(searchString) || s.DescriptionOfTaken.Contains(searchString)
                                        || s.GenderCode.Contains(searchString) || s.EastOrWest.Contains(searchString)
                                        || s.NorthOrSouth.Contains(searchString) || s.BurialDirection.Contains(searchString)
                                        || s.OsteologyNotes.Contains(searchString) || s.OtherNotes.Contains(searchString)
-                                       || s.RackAndShelf.Contains(searchString) || s.BurialPreservation.Contains(searchString));
+                                       || s.RackAndShelf.Contains(searchString) || s.BurialPreservation.Contains(searchString)
+                                       || s.InitialsOfDataEntryChecker.Contains(searchString) || s.InitialsOfDataEntryExpert.Contains(searchString)
+                                       || s.GenderGe.Contains(searchString) || s.HairColorCode.Contains(searchString)
+                                       || s.HairTaken.Contains(searchString));
             }
+
+            //determine sort order 
             switch (sortOrder)
             {
                 case "BurialId_Desc":
@@ -389,81 +441,24 @@ namespace Intex2.Controllers
             //return View(await mummies.AsNoTracking().ToListAsync());
         }
 
-        public async Task<IActionResult> Search(string searchString)
-        {
-            ViewData["CurrentFilter"] = searchString;
-            var mummies = from s in _context.Burials select s;
+        //public async Task<IActionResult> Search(string searchString)
+        //{
+        //    ViewData["CurrentFilter"] = searchString;
+        //    var mummies = from s in _context.Burials select s;
 
 
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                mummies = mummies.Where(s => s.BurialId.Contains(searchString)
-                                       || s.Sex.Contains(searchString));
-            }
+        //    if (!String.IsNullOrEmpty(searchString))
+        //    {
+        //        mummies = mummies.Where(s => s.BurialId.Contains(searchString)
+        //                               || s.Sex.Contains(searchString));
+        //    }
 
 
-            return View("Index", await mummies.AsNoTracking().ToListAsync());
-        }
+        //    return View("Index", await mummies.AsNoTracking().ToListAsync());
+        //}
 
         
-        public IActionResult Filtered(BurialListViewModel filterAtr, string searchString)
-        {
-            string sex = filterAtr.FilterItems.Sex;
-            string area = filterAtr.FilterItems.Area;
-            double length = filterAtr.FilterItems.Length;
-            double depth = filterAtr.FilterItems.Depth;
-            string bdirection = filterAtr.FilterItems.BDirection;
-            string nors = filterAtr.FilterItems.NorS;
-            string eorw = filterAtr.FilterItems.EorW;
-            string burialid = filterAtr.FilterItems.BurialId;
-
-
-            if (sex == "ALL")
-            {
-                sex = "%";
-            }
-            if (area == "ALL")
-            {
-                area = "%";
-            }
-            if (bdirection == "ALL")
-            {
-                bdirection = "%";
-            }
-            if (nors == "ALL")
-            {
-                nors = "%";
-            }
-            if (eorw == "ALL")
-            {
-                eorw = "%";
-            }
-
-
-            burialid = "%" + burialid + "%";
-
-
-
-            ViewData["CurrentFilter"] = searchString;
-            var mummies = from s in _context.Burials select s;
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                mummies = mummies.Where(s => s.BurialId.Contains(searchString)
-                                       || s.Sex.Contains(searchString));
-            }
-
-            return View(new BurialListViewModel
-            {
-                Burials = _context.Burials
-                    .FromSqlInterpolated($"SELECT * FROM Burials WHERE Gender_Code LIKE {sex} AND Square LIKE {area} AND Burial_Direction LIKE {bdirection} AND North_or_South LIKE {nors} AND East_or_West LIKE {eorw} AND BurialID LIKE {burialid}")
-                    .Where(b => b.LengthM >= length)
-                    .Where(b => b.BurialDepth >= depth)
-                    .OrderBy(b => b.BurialId)
-                    .ToList()
-            });
-        }
-
+        
         //public IActionResult Filtered(BurialListViewModel filterAtr, string searchString)
         //{
         //    string sex = filterAtr.FilterItems.Sex;
@@ -500,39 +495,32 @@ namespace Intex2.Controllers
 
         //    burialid = "%" + burialid + "%";
 
+
+
         //    ViewData["CurrentFilter"] = searchString;
         //    var mummies = from s in _context.Burials select s;
 
         //    if (!String.IsNullOrEmpty(searchString))
         //    {
-        //        BurialListViewModel blViewModel = (new BurialListViewModel
-        //        {
-        //            Burials = mummies.Where(s => s.BurialId.Contains(searchString)
-        //                               || s.Sex.Contains(searchString))
-        //                    .OrderBy(b => b.BurialId)
-        //                    .ToList()
-        //        });
+        //        mummies = mummies.Where(s => s.BurialId.Contains(searchString)
+        //                               || s.Sex.Contains(searchString));
         //    }
-        //    else
+
+        //    return View(new BurialListViewModel
         //    {
-        //        BurialListViewModel blViewModel = (new BurialListViewModel
-        //        {
-        //            Burials = _context.Burials
+        //        Burials = _context.Burials
         //            .FromSqlInterpolated($"SELECT * FROM Burials WHERE Gender_Code LIKE {sex} AND Square LIKE {area} AND Burial_Direction LIKE {bdirection} AND North_or_South LIKE {nors} AND East_or_West LIKE {eorw} AND BurialID LIKE {burialid}")
         //            .Where(b => b.LengthM >= length)
         //            .Where(b => b.BurialDepth >= depth)
         //            .OrderBy(b => b.BurialId)
         //            .ToList()
-        //        });
-        //    }
-
-
-
-        //    return View(blViewModel);
+        //    });
         //}
 
+        //filtering data by attributes
         public IActionResult AdvancedFiltering(BurialListViewModel filterAtr)
         {
+            //default values for search 
             string sex = "%";
             string area = "%";
             double length = 0.00;
@@ -541,7 +529,9 @@ namespace Intex2.Controllers
             string nors = "%";
             string eorw = "%";
             string burialid = "%";
+            string haircolor = "%";
 
+            //set variables if user used filters 
             if (filterAtr.FilterItems != null)
             {
                 sex = filterAtr.FilterItems.Sex;
@@ -552,9 +542,11 @@ namespace Intex2.Controllers
                 nors = filterAtr.FilterItems.NorS;
                 eorw = filterAtr.FilterItems.EorW;
                 burialid = filterAtr.FilterItems.BurialId;
+                haircolor = filterAtr.FilterItems.HairColorCode;
+
             }
 
-
+            //set % for ALL so it returns all values that arent null
             if (sex == "ALL")
             {
                 sex = "%";
@@ -575,13 +567,19 @@ namespace Intex2.Controllers
             {
                 eorw = "%";
             }
+            if (haircolor == "ALL")
+            {
+                eorw = "%";
+            }
 
             burialid = "%" + burialid + "%";
 
             return View(new BurialListViewModel
             {
+                //filter based off users selections
+                //users selection is passed through variable to prevent SQL injections 
                 Burials = _context.Burials
-                    .FromSqlInterpolated($"SELECT * FROM Burials WHERE Gender_Code LIKE {sex} AND Square LIKE {area} AND Burial_Direction LIKE {bdirection} AND North_or_South LIKE {nors} AND East_or_West LIKE {eorw} AND BurialID LIKE {burialid}")
+                    .FromSqlInterpolated($"SELECT * FROM Burials WHERE Gender_Code LIKE {sex} AND Square LIKE {area} AND Burial_Direction LIKE {bdirection} AND North_or_South LIKE {nors} AND East_or_West LIKE {eorw} AND BurialID LIKE {burialid} AND Hair_Color_Code LIKE {haircolor}")
                     .Where(b => b.LengthM >= length)
                     .Where(b => b.BurialDepth >= depth)
                     .OrderBy(b => b.BurialId)
@@ -595,6 +593,7 @@ namespace Intex2.Controllers
             return _context.Burials.Any(e => e.BurialId == id);
         }
 
+        //need to be a researcher to upload a photo
         [Authorize(Roles = "Researcher")]
         public IActionResult UploadPhoto(string id)
         {
@@ -626,6 +625,7 @@ namespace Intex2.Controllers
 
             string fileName = x.file.FileName;
 
+            //if model is valid, add to AWS S3 and add data to database 
             if (ModelState.IsValid)
             {
                 // create new entity
@@ -636,10 +636,10 @@ namespace Intex2.Controllers
                 {
                     BurialId = x.BurialId,
                     PhotoId = fileName,
-                    Burial = _context.Burials.Where(x => x.BurialId == x.BurialId).FirstOrDefault()
+                    Burial = _context.Burials.Where(x => x.BurialId == id).FirstOrDefault()
                 };
 
-                Burial bur = _context.Burials.Where(x => x.BurialId == x.BurialId).FirstOrDefault();
+                Burial bur = _context.Burials.Where(x => x.BurialId == id).FirstOrDefault();
 
                 _context.Photos.Add(PhotoTable);
                 await _context.SaveChangesAsync();

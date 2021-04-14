@@ -55,8 +55,9 @@
 
             }
         </dl>
-        <div>
-            <a class="btn btn-primary" asp-controller="BurialCrud" asp-action="Details" asp-route-id="@Model.Burial.BurialId">Back to Details</a>
+        <div class="row">
+            <a class="btn btn-primary m-1 p-1" asp-controller="BurialCrud" asp-action="Details" asp-route-id="@Model.Burial.BurialId">Back to Details</a>
+            <a class="btn btn-secondary m-1 p-1" asp-controller="BurialCrud" asp-action="UploadPhoto" asp-route-id="@Model.Burial.BurialId">Upload a Photo</a>
         </div>
     </div>
 </div>
