@@ -38,23 +38,28 @@
     <div class="container m-3 p-2">
         <h1>@printId</h1>
         <hr />
-        <dl class="row">
+        <div class="row">
             @foreach (var x in Model.Photos)
             {
 
                 ViewBag.PhotoId = "https://elasticbeanstalk-us-east-1-891046424969.s3.amazonaws.com/Photos/" + @x.PhotoId;
 
-                <dt class="col-sm-10 p-3">
-                    <img src="@ViewBag.PhotoId" width="500" />
-                </dt>
-
-                @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-                {
-                    <dd><a class="btn btn-danger" asp-action="Delete" asp-controller="PhotosCrud"asp-route-id="@x.Id">Delete</a> </dd>
-                }
+                <div class="col-sm-6 p-3">
+                    <img class="img-fluid" src="@ViewBag.PhotoId" width="500" />
+                    <br />
+                    <br />
+                    <div class="text-center">
+                        @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+                        {
+                            <a class="btn btn-danger" asp-action="Delete" asp-controller="PhotosCrud" asp-route-id="@x.Id">Delete</a>
+                        }
+                    </div>
+                    <br />
+                    <br />
+                </div>
 
             }
-        </dl>
+        </div>
         <div class="row">
             <a class="btn btn-primary m-1 p-1" asp-controller="BurialCrud" asp-action="Details" asp-route-id="@Model.Burial.BurialId">Back to Details</a>
             <a class="btn btn-secondary m-1 p-1" asp-controller="BurialCrud" asp-action="UploadPhoto" asp-route-id="@Model.Burial.BurialId">Upload a Photo</a>
