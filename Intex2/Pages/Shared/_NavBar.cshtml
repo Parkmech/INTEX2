@@ -19,7 +19,7 @@
         @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
         {
             <a asp-area="" asp-controller="BurialCrud" asp-action="Create">Add a Burial</a>
-            <a asp-page="/Roles/List">List Roles</a>
+            <a asp-page="/Users/List">User List</a>
             <a asp-page="/Roles/List">List Roles</a>
 
         }
