@@ -267,36 +267,53 @@ namespace Intex2.Controllers
 
             photos.AddRange(_context.Photos.Where(p => p.BurialId == id).ToList());
 
-            for (int i = 0; i < photos.Count(); i++)
+            if (photos != null)
             {
-                _context.Photos.Remove(photos.FirstOrDefault(p => p.Id == photos[i].Id));
-                await _context.SaveChangesAsync();
+                for (int i = 0; i < photos.Count(); i++)
+                {
+                    _context.Photos.Remove(photos.FirstOrDefault(p => p.Id == photos[i].Id));
+                    await _context.SaveChangesAsync();
+                }
             }
+            
 
             bios.AddRange(_context.BiologicalSamples.Where(p => p.BurialId == id).ToList());
 
-            for (int i = 0; i < bios.Count(); i++)
+            if (bios != null)
             {
-                _context.BiologicalSamples.Remove(bios.FirstOrDefault(p => p.Id == bios[i].Id));
-                await _context.SaveChangesAsync();
+                for (int i = 0; i < bios.Count(); i++)
+                {
+                    _context.BiologicalSamples.Remove(bios.FirstOrDefault(p => p.Id == bios[i].Id));
+                    await _context.SaveChangesAsync();
+                }
             }
+            
 
             fbook.AddRange(_context.FieldBook.Where(p => p.BurialId == id).ToList());
 
-            for (int i = 0; i < photos.Count(); i++)
+            if (fbook != null)
             {
-                _context.FieldBook.Remove(fbook.FirstOrDefault(p => p.Id == fbook[i].Id));
-                await _context.SaveChangesAsync();
+                for (int i = 0; i < photos.Count(); i++)
+                {
+                    _context.FieldBook.Remove(fbook.FirstOrDefault(p => p.Id == fbook[i].Id));
+                    await _context.SaveChangesAsync();
+                }
             }
+            
 
 
             var cranial = await _context.Cranials.FindAsync(newid);
-            _context.Cranials.Remove(cranial);
-            await _context.SaveChangesAsync();
 
+            if (cranial != null)
+            {
+                _context.Cranials.Remove(cranial);
+                await _context.SaveChangesAsync();
+            }
+            
             var burials = await _context.Burials.FindAsync(newid);
             _context.Burials.Remove(burials);
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -330,7 +347,9 @@ namespace Intex2.Controllers
                                        || s.GenderCode.Contains(searchString) || s.EastOrWest.Contains(searchString)
                                        || s.NorthOrSouth.Contains(searchString) || s.BurialDirection.Contains(searchString)
                                        || s.OsteologyNotes.Contains(searchString) || s.OtherNotes.Contains(searchString)
-                                       || s.RackAndShelf.Contains(searchString) || s.BurialPreservation.Contains(searchString));
+                                       || s.RackAndShelf.Contains(searchString) || s.BurialPreservation.Contains(searchString) 
+                                       || s.InitialsOfDataEntryChecker.Contains(searchString) || s.InitialsOfDataEntryExpert.Contains(searchString)
+                                       || s.GenderGe.Contains(searchString));
             }
             switch (sortOrder)
             {
