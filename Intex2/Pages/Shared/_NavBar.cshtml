@@ -5,7 +5,7 @@
 
 
 <byu-header>
-    <span slot="site-title"><a href="#">Excavations</a></span>
+    <span slot="site-title"><a asp-controller="Home" asp-action="Index">Excavations</a></span>
     <span slot="site-title" class="subtitle">Egypt</span>
 
     <byu-menu slot="nav" collapsed>
@@ -19,7 +19,7 @@
         @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
         {
             <a asp-area="" asp-controller="BurialCrud" asp-action="Create">Add a Burial</a>
-            <a asp-page="/Users/List">User List</a>
+            <a asp-page="/Users/List">All Users</a>
             <a asp-page="/Roles/List">List Roles</a>
 
         }
